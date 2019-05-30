@@ -1,9 +1,9 @@
-import React, { Component } from 'react'
+import React, { useEffect, useRef } from 'react'
+import { useAppDispatch } from '../state-context'
 import styled from 'styled-components'
 import CodeMirror from 'codemirror'
 
 import '../lib/CodeMirror/codemirror.css'
-import '../lib/CodeMirror/prism.css'
 import '../lib/CodeMirror/one-dark.css'
 
 import 'codemirror/mode/javascript/javascript'
@@ -39,15 +39,12 @@ const CodeEditor = styled.div`
   }
 `
 
-export default class Editor extends Component {
-  editor = React.createRef()
+function Editor(props) {
+  const editor = useRef(null)
+  const dispatch = useAppDispatch()
 
-  state = {
-    editorCode: ''
-  }
-
-  componentDidMount() {
-    this.codemirror = CodeMirror.fromTextArea(this.editor.current, {
+  useEffect(() => {
+    CodeMirror.fromTextArea(editor.current, {
       lineNumbers: false,
       mode: 'htmlmixed',
       theme: 'one-dark',
@@ -55,19 +52,19 @@ export default class Editor extends Component {
       autoCloseTags: true,
       tabSize: 1,
       keyMap: 'sublime'
-    })
-    this.codemirror.on('change', instance => {
+    }).on('change', instance => {
       let value = instance.getValue()
-      this.setState({ editorCode: value })
+      dispatch({ type: 'editorCode', payload: value })
     })
-  }
 
-  render() {
-    return (
-      <CodeEditor>
-        <textarea
-          ref={this.editor}
-          defaultValue={`<style>
+    dispatch({ type: 'editorCode', payload: editor.current.value })
+  })
+
+  return (
+    <CodeEditor>
+      <textarea
+        ref={editor}
+        defaultValue={`<style>
   .title1, .title3, .subtitle1, .subtitle3, .container .button{
     text-transform: none;
   }
@@ -87,8 +84,9 @@ export default class Editor extends Component {
     }
   }
 </style>`}
-        />
-      </CodeEditor>
-    )
-  }
+      />
+    </CodeEditor>
+  )
 }
+
+export default Editor
