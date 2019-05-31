@@ -11,16 +11,24 @@ import ActionIcons from './Components/ActionIcons'
 const AppContainer = styled.div`
   display: grid;
   grid-template-columns: 400px 1fr;
-  grid-template-rows: 350px 1fr;
+`
+
+const Left = styled.div`
+  height: 100vh;
+  background: #2e3235;
+  overflow: scroll;
+  -webkit-overflow-scrolling: touch;
 `
 
 function App() {
   return (
     <AppContainer className="App">
-      <Editor />
+      <Left>
+        <Editor />
+        <Content />
+      </Left>
       <Preview />
       <ActionIcons />
-      <Content />
     </AppContainer>
   )
 }

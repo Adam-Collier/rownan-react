@@ -1,6 +1,7 @@
 import React from 'react'
 
 // https://kentcdodds.com/blog/how-to-use-react-context-effectively
+// https://daveceddia.com/react-redux-immutability-guide/
 const StateContext = React.createContext()
 const DispatchContext = React.createContext()
 
@@ -12,18 +13,61 @@ function stateReducer(state, action) {
     case 'switch': {
       return { ...state, contentView: !state.contentView }
     }
+    case 'addBlock': {
+      return {
+        ...state,
+        contentBlocks: [...state.contentBlocks, { type: 'select' }]
+      }
+    }
+    case 'removeBlock': {
+      let newArr = state.contentBlocks.filter(
+        (block, index) => index !== action.payload
+      )
+      return { ...state, contentBlocks: newArr }
+    }
+    case 'editBlock': {
+      return {
+        ...state,
+        contentBlocks: state.contentBlocks.map((item, index) => {
+          if (index !== action.index) {
+            return item
+          }
+          return { type: action.payload }
+        })
+      }
+    }
+
+    case 'addBlockContent': {
+      return {
+        ...state,
+        contentBlocks: state.contentBlocks.map((item, index) => {
+          if (index !== action.index) return item
+          return {
+            ...item,
+            content: {
+              ...item.content,
+              [action.name]: action.payload
+            }
+          }
+        })
+      }
+    }
+
     default: {
       throw new Error(`Unhandled action type: ${action.type}`)
     }
   }
 }
 
+let initialState = {
+  content: 'currently no content',
+  codePreview: 'currently no code preview',
+  contentView: true,
+  contentBlocks: []
+}
+
 function StateProvider({ children }) {
-  const [state, setState] = React.useReducer(stateReducer, {
-    content: 'currently no content',
-    codePreview: 'currently no code preview',
-    contentView: true
-  })
+  const [state, setState] = React.useReducer(stateReducer, initialState)
   return (
     <StateContext.Provider value={state}>
       <DispatchContext.Provider value={setState}>
