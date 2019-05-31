@@ -8,6 +8,7 @@ const Icons = styled.div`
   position: absolute;
   bottom: 20px;
   right: 20px;
+  cursor: pointer;
   svg {
     width: 30px;
     fill: #a0a0a0;
