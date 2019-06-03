@@ -16,7 +16,7 @@ function stateReducer(state, action) {
     case 'addBlock': {
       return {
         ...state,
-        contentBlocks: [...state.contentBlocks, { type: 'select' }]
+        contentBlocks: [...state.contentBlocks, { type: 'select', content: {} }]
       }
     }
     case 'removeBlock': {
@@ -32,7 +32,7 @@ function stateReducer(state, action) {
           if (index !== action.index) {
             return item
           }
-          return { type: action.payload }
+          return { type: action.payload, content: action.initial }
         })
       }
     }
@@ -63,7 +63,8 @@ let initialState = {
   content: 'currently no content',
   codePreview: 'currently no code preview',
   contentView: true,
-  contentBlocks: []
+  contentBlocks: [],
+  editorCode: ''
 }
 
 function StateProvider({ children }) {
