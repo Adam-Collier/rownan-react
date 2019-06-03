@@ -1,27 +1,66 @@
 import React from 'react'
+import { useAppDispatch } from '../state-context'
 
 import { Form } from './styles/Form'
 
 const LowerForm = props => {
+  const { index } = props
+  const dispatch = useAppDispatch()
+
+  const handleChange = e => {
+    console.log(e.target.name)
+    dispatch({
+      type: 'addBlockContent',
+      payload: e.target.value,
+      name: e.target.name,
+      index
+    })
+  }
+
   return (
     <Form>
-      <div class="inline">
+      <div className="inline">
         <div>
           <label>URL</label>
-          <input type="text" class="url" />
+          <input
+            type="text"
+            name="url"
+            className="url"
+            onChange={handleChange}
+          />
         </div>
         <div>
           <label>CTA</label>
-          <input type="text" class="cta" />
+          <input
+            type="text"
+            name="cta"
+            className="cta"
+            onChange={handleChange}
+          />
         </div>
       </div>
       <label>Image</label>
       <span>../image/upload/q_70</span>
-      <input type="text" class="image" />
+      <input
+        type="text"
+        name="image"
+        className="image"
+        onChange={handleChange}
+      />
       <label>Title</label>
-      <input type="text" class="title" />
+      <input
+        type="text"
+        name="title"
+        className="title"
+        onChange={handleChange}
+      />
       <label>Subtitle</label>
-      <input type="text" class="subtitle" />
+      <input
+        type="text"
+        name="subtitle"
+        className="subtitle"
+        onChange={handleChange}
+      />
     </Form>
   )
 }
