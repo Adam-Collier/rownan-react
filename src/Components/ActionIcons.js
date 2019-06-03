@@ -5,10 +5,11 @@ import styled from 'styled-components'
 import { useAppDispatch } from '../state-context'
 
 const Icons = styled.div`
-  position: absolute;
+  position: fixed;
   bottom: 20px;
   right: 20px;
   cursor: pointer;
+  z-index: 2;
   svg {
     width: 30px;
     fill: #a0a0a0;
