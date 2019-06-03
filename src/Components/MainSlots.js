@@ -111,6 +111,6 @@ const MainSlots = blocks =>
       </a>
     </div>`
     )
-    .join('\n    ')
+    .join('')
 
 export default MainSlots

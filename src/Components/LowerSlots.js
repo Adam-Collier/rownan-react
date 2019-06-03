@@ -27,7 +27,7 @@ const LowerSlots = blocks => {
       </a>
     </div>`
       )
-      .join('\n    ')}`
+      .join('')}`
 }
 
 export default LowerSlots
