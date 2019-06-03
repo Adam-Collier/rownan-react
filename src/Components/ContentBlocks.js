@@ -59,7 +59,27 @@ const Remove = styled.p`
 const ContentBlocks = props => {
   const dispatch = useAppDispatch()
   const { contentBlocks } = useAppState()
-  console.log(contentBlocks)
+
+  let lowerInitial = {
+    cta: '',
+    image: '',
+    subtitle: '',
+    title: '',
+    utl: ''
+  }
+
+  let mainInitial = {
+    image: '',
+    mobile: '',
+    primaryCta: '',
+    primaryUrl: '',
+    secondaryCta: '',
+    secondaryUrl: '',
+    subtitle: '',
+    svg: '',
+    title: ''
+  }
+
   return (
     <div>
       {contentBlocks.map((block, index) => (
@@ -71,7 +91,9 @@ const ContentBlocks = props => {
                 dispatch({
                   type: 'editBlock',
                   payload: e.target.value,
-                  index
+                  index,
+                  initial:
+                    e.target.value === 'main' ? mainInitial : lowerInitial
                 })
               }
             >
