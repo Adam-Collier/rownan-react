@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import { useAppState, useAppDispatch } from '../state-context'
+import { useAppDispatch } from '../state-context'
 import ContentBlocks from './ContentBlocks'
 
 const ContentContainer = styled.div`
