@@ -87,7 +87,7 @@ const ContentBlocks = props => {
           <DropDown>
             <select
               value={block.type}
-              onChange={e =>
+              onChange={e => {
                 dispatch({
                   type: 'editBlock',
                   payload: e.target.value,
@@ -95,14 +95,18 @@ const ContentBlocks = props => {
                   initial:
                     e.target.value === 'main' ? mainInitial : lowerInitial
                 })
-              }
+                dispatch({ type: 'updateHTML' })
+              }}
             >
               <option value="select">Please Select</option>
               <option value="main">Home Slider</option>
               <option value="lower">Three Slider</option>
             </select>
             <Remove
-              onClick={() => dispatch({ type: 'removeBlock', payload: index })}
+              onClick={() => {
+                dispatch({ type: 'removeBlock', payload: index })
+                dispatch({ type: 'updateHTML' })
+              }}
             >
               Remove
             </Remove>
