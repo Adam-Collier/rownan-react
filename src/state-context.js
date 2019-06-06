@@ -1,4 +1,8 @@
 import React from 'react'
+import MainSlots from './Components/MainSlots'
+import LowerSlots from './Components/LowerSlots'
+
+import contentPreviewUpdate from './lib/contentPreviewUpdate'
 
 // https://kentcdodds.com/blog/how-to-use-react-context-effectively
 // https://daveceddia.com/react-redux-immutability-guide/
@@ -53,18 +57,79 @@ function stateReducer(state, action) {
       }
     }
 
+    case 'updateHTML': {
+      let mainBlocks = [],
+        lowerBlocks = []
+
+      state.contentBlocks.map(block => {
+        if (block.type === 'main') mainBlocks.push(block.content)
+        if (block.type === 'lower') lowerBlocks.push(block.content)
+        return null
+      })
+      let outputHTML = () => {
+        return `
+<div class="container">
+  <div id="homeSlider">
+    ${MainSlots(mainBlocks)}
+  </div>
+  <div class="slick-three">
+    ${LowerSlots(lowerBlocks)}
+  </div>
+</div>
+  `
+      }
+      return { ...state, outputHTML: outputHTML() }
+    }
+
+    case 'updateContentPreview': {
+      contentPreviewUpdate(state.editorCode + state.outputHTML)
+      return { ...state }
+    }
+
     default: {
       throw new Error(`Unhandled action type: ${action.type}`)
     }
   }
 }
 
+let defaultEditorCode = `<style>
+  .title1, .title3, .subtitle1, .subtitle3, .container .button{
+    text-transform: none;
+  }
+  @media (min-width:768px){
+    .row1 .title1,
+    .row2 .title1,
+    .row3 .title1{
+      display: none;
+    }
+    .row .subtitle1{
+      margin-top: 20px;
+    }
+  }
+  @media (max-width: 767px){
+    .row svg{
+      display: none;
+    }
+  }
+</style>`
+
 let initialState = {
   content: 'currently no content',
   codePreview: 'currently no code preview',
   contentView: true,
   contentBlocks: [],
-  editorCode: ''
+  editorCode: '',
+  outputHTML: `
+<div class="container">
+  <div id="homeSlider">
+
+  </div>
+  <div class="slick-three">
+    <div class="blocker"></div>
+    
+  </div>
+</div>
+  `
 }
 
 function StateProvider({ children }) {
@@ -94,4 +159,4 @@ function useAppDispatch() {
   return context
 }
 
-export { StateProvider, useAppState, useAppDispatch }
+export { StateProvider, useAppState, useAppDispatch, defaultEditorCode }
