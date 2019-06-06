@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from 'react'
-import { useAppDispatch } from '../state-context'
+import { useAppDispatch, defaultEditorCode } from '../state-context'
 import styled from 'styled-components'
 import CodeMirror from 'codemirror'
 
@@ -55,36 +55,14 @@ function Editor(props) {
     }).on('change', instance => {
       let value = instance.getValue()
       dispatch({ type: 'editorCode', payload: value })
+      dispatch({ type: 'updateHTML' })
     })
-
     dispatch({ type: 'editorCode', payload: editor.current.value })
   })
 
   return (
     <CodeEditor>
-      <textarea
-        ref={editor}
-        defaultValue={`<style>
-  .title1, .title3, .subtitle1, .subtitle3, .container .button{
-    text-transform: none;
-  }
-  @media (min-width:768px){
-    .row1 .title1,
-    .row2 .title1,
-    .row3 .title1{
-      display: none;
-    }
-    .row .subtitle1{
-      margin-top: 20px;
-    }
-  }
-  @media (max-width: 767px){
-    .row svg{
-      display: none;
-    }
-  }
-</style>`}
-      />
+      <textarea ref={editor} defaultValue={defaultEditorCode} />
     </CodeEditor>
   )
 }
