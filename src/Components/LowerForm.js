@@ -8,13 +8,13 @@ const LowerForm = props => {
   const dispatch = useAppDispatch()
 
   const handleChange = e => {
-    console.log(e.target.name)
     dispatch({
       type: 'addBlockContent',
       payload: e.target.value,
       name: e.target.name,
       index
     })
+    dispatch({ type: 'updateHTML' })
   }
 
   return (
