@@ -5,6 +5,7 @@ import { Form } from './styles/Form'
 
 const HomeForm = props => {
   const { index } = props
+
   const dispatch = useAppDispatch()
 
   const handleChange = e => {
@@ -14,6 +15,7 @@ const HomeForm = props => {
       name: e.target.name,
       index
     })
+    dispatch({ type: 'updateHTML' })
   }
 
   return (

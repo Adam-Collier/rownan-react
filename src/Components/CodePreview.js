@@ -1,5 +1,5 @@
 import React from 'react'
-import Output from './Output'
+import { useAppState } from '../state-context'
 import styled from 'styled-components'
 
 import CodeMirror from 'codemirror'
@@ -31,10 +31,12 @@ const CodeEditor = styled.div`
 `
 
 const CodePreview = props => {
+  const { editorCode, outputHTML } = useAppState()
+
   return (
     <CodeEditor className="CodeMirror">
       <Highlight
-        value={Output()}
+        value={editorCode + outputHTML}
         language="htmlmixed"
         codeMirror={CodeMirror}
         theme="solarized"

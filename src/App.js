@@ -2,11 +2,14 @@ import React from 'react'
 // import logo from './logo.svg'
 import './App.css'
 import styled from 'styled-components'
-
 import Editor from './Components/Editor'
 import Content from './Components/Content'
 import Preview from './Components/Preview'
 import ActionIcons from './Components/ActionIcons'
+
+import { useAppDispatch } from './state-context'
+
+const ipcRenderer = window.require('electron').ipcRenderer
 
 const AppContainer = styled.div`
   display: grid;
@@ -21,6 +24,26 @@ const Left = styled.div`
 `
 
 function App() {
+  const dispatch = useAppDispatch()
+
+  ipcRenderer.on('generate', function() {
+    console.log('generate')
+  })
+  ipcRenderer.on('images', function() {
+    dispatch({ type: 'updateContentPreview' })
+  })
+  ipcRenderer.on('save', function() {
+    console.log('save')
+  })
+  ipcRenderer.on('preview', function() {
+    console.log('preview')
+  })
+  ipcRenderer.on('mobileView', function() {
+    console.log('mobileView')
+  })
+  ipcRenderer.on('openFile', function() {
+    console.log('openFile')
+  })
   return (
     <AppContainer className="App">
       <Left>

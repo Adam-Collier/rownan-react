@@ -1,5 +1,9 @@
 // Modules to control application life and create native browser window
 const { app, BrowserWindow } = require('electron')
+const fs = require('fs-extra')
+
+const appPath = require('electron').app.getAppPath()
+const tempDirPath = require('electron').app.getPath('temp')
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
@@ -15,6 +19,9 @@ const installExtensions = async () => {
   ).catch(console.log)
 }
 
+fs.copySync(`${appPath}/public/template`, `${tempDirPath}/template`)
+console.log('success!')
+
 function createWindow() {
   // Create the browser window.
   mainWindow = new BrowserWindow({
@@ -24,7 +31,11 @@ function createWindow() {
     backgroundColor: '#2E3235',
     minWidth: 750,
     minHeight: 300,
-    useContentSize: false
+    useContentSize: false,
+    webPreferences: {
+      nodeIntegration: true,
+      webSecurity: false
+    }
   })
 
   // and load the index.html of the app.
@@ -40,6 +51,9 @@ function createWindow() {
 
   // Open the DevTools.
   // mainWindow.webContents.openDevTools()
+
+  // Add the menu
+  require('./lib/menu')
 
   // Emitted when the window is closed.
   mainWindow.on('closed', function() {
