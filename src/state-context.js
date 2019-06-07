@@ -146,6 +146,7 @@ let defaultEditorCode = `<style>
 </style>`
 
 let initialState = {
+  categories: ['', '', '', '', ''],
   codePreview: 'currently no code preview',
   content: 'currently no content',
   contentBlocks: [],
