@@ -23,11 +23,7 @@ function PromoBlocks() {
   const { promoBlocks } = useAppState()
   const dispatch = useAppDispatch()
 
-  console.log(promoBlocks)
-
   const handleChange = (index, e) => {
-    console.log(index)
-    console.log(e)
     dispatch({
       type: 'addPromoContent',
       payload: e.target.value,
@@ -45,18 +41,22 @@ function PromoBlocks() {
             <input
               type="text"
               name="url"
+              value={block.url}
               placeholder="url"
               onChange={e => handleChange(index, e)}
             />
             <input
               type="text"
               name="title"
+              value={block.title}
               placeholder="title"
               onChange={e => handleChange(index, e)}
             />
           </div>
           <CloseIcon
-            onClick={() => dispatch({ type: 'removePromoBlock', index: index })}
+            onClick={() =>
+              dispatch({ type: 'removePromoBlock', payload: index })
+            }
           />
         </PromoBlock>
       ))}
