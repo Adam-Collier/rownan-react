@@ -1,4 +1,5 @@
 import React from 'react'
+import PromoSlot from './Components/PromoSlot'
 import MainSlots from './Components/MainSlots'
 import LowerSlots from './Components/LowerSlots'
 
@@ -17,18 +18,35 @@ function stateReducer(state, action) {
     case 'switch': {
       return { ...state, contentView: !state.contentView }
     }
+
     case 'addBlock': {
       return {
         ...state,
         contentBlocks: [...state.contentBlocks, { type: 'select', content: {} }]
       }
     }
+
+    case 'addPromoBlock': {
+      return {
+        ...state,
+        promoBlocks: [...state.promoBlocks, { url: '', title: '' }]
+      }
+    }
+
+    case 'removePromoBlock': {
+      let newArr = state.promoBlocks.filter(
+        (block, index) => index !== action.index
+      )
+      return { ...state, promoBlocks: newArr }
+    }
+
     case 'removeBlock': {
       let newArr = state.contentBlocks.filter(
         (block, index) => index !== action.payload
       )
       return { ...state, contentBlocks: newArr }
     }
+
     case 'editBlock': {
       return {
         ...state,
@@ -57,6 +75,19 @@ function stateReducer(state, action) {
       }
     }
 
+    case 'addPromoContent': {
+      return {
+        ...state,
+        promoBlocks: state.promoBlocks.map((item, index) => {
+          if (index !== action.index) return item
+          return {
+            ...item,
+            [action.name]: action.payload
+          }
+        })
+      }
+    }
+
     case 'updateHTML': {
       let mainBlocks = [],
         lowerBlocks = []
@@ -72,6 +103,7 @@ function stateReducer(state, action) {
   <div id="homeSlider">
     ${MainSlots(mainBlocks)}
   </div>
+  ${PromoSlot(state.promoBlocks)}
   <div class="slick-three">
     ${LowerSlots(lowerBlocks)}
   </div>
@@ -114,10 +146,10 @@ let defaultEditorCode = `<style>
 </style>`
 
 let initialState = {
-  content: 'currently no content',
   codePreview: 'currently no code preview',
-  contentView: true,
+  content: 'currently no content',
   contentBlocks: [],
+  contentView: true,
   editorCode: '',
   outputHTML: `
 <div class="container">
@@ -129,7 +161,8 @@ let initialState = {
     
   </div>
 </div>
-  `
+  `,
+  promoBlocks: []
 }
 
 function StateProvider({ children }) {

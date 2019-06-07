@@ -4,7 +4,7 @@ import styled from 'styled-components'
 
 import chevron from '../icons/chevron.svg'
 import { ReactComponent as DragIcon } from '../icons/dragIcon.svg'
-import HomeForm from './HomeForm'
+import MainForm from './MainForm'
 import LowerForm from './LowerForm'
 
 const DropDown = styled.div`
@@ -112,7 +112,7 @@ const ContentBlocks = props => {
             </Remove>
             <DragIcon />
           </DropDown>
-          {block.type === 'main' && <HomeForm index={index} />}
+          {block.type === 'main' && <MainForm index={index} />}
           {block.type === 'lower' && <LowerForm index={index} />}
         </Fragment>
       ))}

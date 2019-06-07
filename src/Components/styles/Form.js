@@ -1,6 +1,7 @@
 import styled from 'styled-components'
 
 export const Form = styled.div`
+  color: #ffffff;
   animation-duration: 700ms;
   transition-timing-function: ease-in-out;
   padding: 0px 20px 20px 20px;

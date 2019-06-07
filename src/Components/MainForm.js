@@ -3,7 +3,7 @@ import { useAppDispatch } from '../state-context'
 
 import { Form } from './styles/Form'
 
-const HomeForm = props => {
+const MainForm = props => {
   const { index } = props
 
   const dispatch = useAppDispatch()
@@ -96,4 +96,4 @@ const HomeForm = props => {
   )
 }
 
-export default HomeForm
+export default MainForm
