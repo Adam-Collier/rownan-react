@@ -4,7 +4,7 @@ import { useAppDispatch } from '../state-context'
 import { Form } from './styles/Form'
 
 const MainForm = props => {
-  const { index } = props
+  const { index, block } = props
 
   const dispatch = useAppDispatch()
 
@@ -26,6 +26,7 @@ const MainForm = props => {
           <input
             type="text"
             name="primaryUrl"
+            value={block.content.primaryUrl}
             className="primary-url"
             onChange={handleChange}
           />
@@ -35,6 +36,7 @@ const MainForm = props => {
           <input
             type="text"
             name="secondaryUrl"
+            value={block.content.secondaryUrl}
             className="secondary-url"
             onChange={handleChange}
           />
@@ -45,6 +47,7 @@ const MainForm = props => {
       <input
         type="text"
         name="image"
+        value={block.content.image}
         className="image"
         onChange={handleChange}
       />
@@ -53,15 +56,23 @@ const MainForm = props => {
       <input
         type="text"
         name="mobile"
+        value={block.content.mobile}
         className="mobile"
         onChange={handleChange}
       />
       <label>SVG</label>
-      <input type="text" name="svg" className="svg" onChange={handleChange} />
+      <input
+        type="text"
+        name="svg"
+        value={block.content.svg}
+        className="svg"
+        onChange={handleChange}
+      />
       <label>Title</label>
       <input
         type="text"
         name="title"
+        value={block.content.title}
         className="title"
         onChange={handleChange}
       />
@@ -69,6 +80,7 @@ const MainForm = props => {
       <input
         type="text"
         name="subtitle"
+        value={block.content.subtitle}
         className="subtitle"
         onChange={handleChange}
       />
@@ -78,6 +90,7 @@ const MainForm = props => {
           <input
             type="text"
             name="primaryCta"
+            value={block.content.primaryCta}
             className="primary-cta"
             onChange={handleChange}
           />
@@ -87,6 +100,7 @@ const MainForm = props => {
           <input
             type="text"
             name="secondaryCta"
+            value={block.content.secondaryCta}
             className="secondary-cta"
             onChange={handleChange}
           />

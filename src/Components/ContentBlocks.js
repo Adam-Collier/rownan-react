@@ -112,8 +112,8 @@ const ContentBlocks = props => {
             </Remove>
             <DragIcon />
           </DropDown>
-          {block.type === 'main' && <MainForm index={index} />}
-          {block.type === 'lower' && <LowerForm index={index} />}
+          {block.type === 'main' && <MainForm index={index} block={block} />}
+          {block.type === 'lower' && <LowerForm index={index} block={block} />}
         </Fragment>
       ))}
     </div>

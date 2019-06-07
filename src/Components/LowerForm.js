@@ -4,7 +4,7 @@ import { useAppDispatch } from '../state-context'
 import { Form } from './styles/Form'
 
 const LowerForm = props => {
-  const { index } = props
+  const { index, block } = props
   const dispatch = useAppDispatch()
 
   const handleChange = e => {
@@ -25,6 +25,7 @@ const LowerForm = props => {
           <input
             type="text"
             name="url"
+            value={block.content.url}
             className="url"
             onChange={handleChange}
           />
@@ -34,6 +35,7 @@ const LowerForm = props => {
           <input
             type="text"
             name="cta"
+            value={block.content.cta}
             className="cta"
             onChange={handleChange}
           />
@@ -44,6 +46,7 @@ const LowerForm = props => {
       <input
         type="text"
         name="image"
+        value={block.content.image}
         className="image"
         onChange={handleChange}
       />
@@ -51,6 +54,7 @@ const LowerForm = props => {
       <input
         type="text"
         name="title"
+        value={block.content.title}
         className="title"
         onChange={handleChange}
       />
@@ -58,6 +62,7 @@ const LowerForm = props => {
       <input
         type="text"
         name="subtitle"
+        value={block.content.subtitle}
         className="subtitle"
         onChange={handleChange}
       />
