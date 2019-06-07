@@ -28,7 +28,7 @@ function PromoStrip() {
   return (
     <Form>
       <PromoHeader>
-        <h2>Promo Strip</h2>
+        <h3>Promo Strip</h3>
         <PromoButton
           type="button"
           value="+"
