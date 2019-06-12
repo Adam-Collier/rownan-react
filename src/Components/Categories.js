@@ -17,44 +17,41 @@ const CategoryForm = styled(Form)`
 `
 
 const Categories = props => {
-  // const { index, block } = props
   const { categories } = useAppState()
   const dispatch = useAppDispatch()
 
-  const handleChange = e => {
-    // dispatch({
-    //   type: 'addBlockContent',
-    //   payload: e.target.value,
-    //   name: e.target.name,
-    //   index
-    // })
-    // dispatch({ type: 'updateHTML' })
+  const handleChange = (index, e) => {
+    dispatch({
+      type: 'addCategoryContent',
+      payload: e.target.value,
+      name: e.target.name,
+      index
+    })
+    dispatch({ type: 'updateHTML' })
   }
 
   return (
     <CategoryForm>
       <h3>Categories</h3>
-      {categories.map(category => (
-        <div>
+      {categories.map((category, index) => (
+        <div key={index}>
           <div className="inline">
             <div>
               <label>URL</label>
               <input
                 type="text"
-                name="primaryCta"
-                // value={block.content.primaryCta}
-                className="primary-cta"
-                onChange={handleChange}
+                name="url"
+                value={category.url}
+                onChange={e => handleChange(index, e)}
               />
             </div>
             <div>
               <label>Title</label>
               <input
                 type="text"
-                name="secondaryCta"
-                // value={block.content.secondaryCta}
-                className="secondary-cta"
-                onChange={handleChange}
+                name="title"
+                value={category.title}
+                onChange={e => handleChange(index, e)}
               />
             </div>
           </div>
@@ -63,9 +60,9 @@ const Categories = props => {
           <input
             type="text"
             name="image"
-            // value={block.content.image}
+            value={category.image}
             className="image"
-            onChange={handleChange}
+            onChange={e => handleChange(index, e)}
           />
         </div>
       ))}
