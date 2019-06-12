@@ -31,12 +31,12 @@ const CodeEditor = styled.div`
 `
 
 const CodePreview = props => {
-  const { editorCode, outputHTML } = useAppState()
+  const { outputHTML } = useAppState()
 
   return (
     <CodeEditor className="CodeMirror">
       <Highlight
-        value={editorCode + outputHTML}
+        value={outputHTML}
         language="htmlmixed"
         codeMirror={CodeMirror}
         theme="solarized"
