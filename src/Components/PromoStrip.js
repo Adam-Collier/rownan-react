@@ -4,7 +4,6 @@ import { useAppDispatch } from '../state-context'
 import { Form } from './styles/Form'
 
 import styled from 'styled-components'
-import { FormButton } from './styles/FormButton'
 
 const PromoButton = styled.input`
   background: none;
