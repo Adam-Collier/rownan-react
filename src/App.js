@@ -33,7 +33,7 @@ function App() {
     dispatch({ type: 'updateContentPreview' })
   })
   ipcRenderer.on('save', function() {
-    console.log('save')
+    dispatch({ type: 'saveFile' })
   })
   ipcRenderer.on('preview', function() {
     console.log('preview')
