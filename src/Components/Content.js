@@ -3,6 +3,7 @@ import styled from 'styled-components'
 import { useAppDispatch } from '../state-context'
 import ContentBlocks from './ContentBlocks'
 import PromoStrip from './PromoStrip'
+import Categories from './Categories'
 
 import { FormButton } from './styles/FormButton'
 
@@ -17,6 +18,7 @@ const Content = props => {
   return (
     <ContentContainer>
       <PromoStrip />
+      <Categories />
       <ContentBlocks />
       <FormButton
         type="button"

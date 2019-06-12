@@ -54,9 +54,7 @@ function PromoBlocks() {
             />
           </div>
           <CloseIcon
-            onClick={() =>
-              dispatch({ type: 'removePromoBlock', payload: index })
-            }
+            onClick={() => dispatch({ type: 'removePromoBlock', index })}
           />
         </PromoBlock>
       ))}

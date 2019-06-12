@@ -2,6 +2,7 @@ import React from 'react'
 import PromoSlot from './Components/PromoSlot'
 import MainSlots from './Components/MainSlots'
 import LowerSlots from './Components/LowerSlots'
+import CategorySlot from './Components/CategorySlot'
 
 import contentPreviewUpdate from './lib/contentPreviewUpdate'
 
@@ -10,11 +11,23 @@ import contentPreviewUpdate from './lib/contentPreviewUpdate'
 const StateContext = React.createContext()
 const DispatchContext = React.createContext()
 
+const hasContent = array => {
+  let arr = array.filter(object => {
+    return Object.keys(object).every(function(key) {
+      return object[key] === ''
+    })
+      ? false
+      : true
+  })
+  return arr.length ? true : false
+}
+
 function stateReducer(state, action) {
   switch (action.type) {
     case 'editorCode': {
       return { ...state, editorCode: action.payload }
     }
+
     case 'switch': {
       return { ...state, contentView: !state.contentView }
     }
@@ -55,6 +68,21 @@ function stateReducer(state, action) {
             return item
           }
           return { type: action.payload, content: action.initial }
+        })
+      }
+    }
+
+    case 'addCategoryContent': {
+      return {
+        ...state,
+        categories: state.categories.map((category, index) => {
+          if (index !== action.index) {
+            return category
+          }
+          return {
+            ...category,
+            [action.name]: action.payload
+          }
         })
       }
     }
@@ -103,7 +131,8 @@ function stateReducer(state, action) {
   <div id="homeSlider">
     ${MainSlots(mainBlocks)}
   </div>
-  ${PromoSlot(state.promoBlocks)}
+  ${hasContent(state.promoBlocks) ? PromoSlot(state.promoBlocks) : ''}
+  ${hasContent(state.categories) ? CategorySlot(state.categories) : ''}
   <div class="slick-three">
     ${LowerSlots(lowerBlocks)}
   </div>
@@ -146,6 +175,7 @@ let defaultEditorCode = `<style>
 </style>`
 
 let initialState = {
+  categories: Array(5).fill({ url: '', title: '', image: '' }),
   codePreview: 'currently no code preview',
   content: 'currently no content',
   contentBlocks: [],

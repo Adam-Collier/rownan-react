@@ -4,7 +4,6 @@ import { useAppDispatch } from '../state-context'
 import { Form } from './styles/Form'
 
 import styled from 'styled-components'
-import { FormButton } from './styles/FormButton'
 
 const PromoButton = styled.input`
   background: none;
@@ -28,7 +27,7 @@ function PromoStrip() {
   return (
     <Form>
       <PromoHeader>
-        <h2>Promo Strip</h2>
+        <h3>Promo Strip</h3>
         <PromoButton
           type="button"
           value="+"
