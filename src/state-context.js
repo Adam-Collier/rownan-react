@@ -4,6 +4,7 @@ import MainSlots from './Components/MainSlots'
 import LowerSlots from './Components/LowerSlots'
 import CategorySlot from './Components/CategorySlot'
 
+import saveFile from './lib/saveFile'
 import contentPreviewUpdate from './lib/contentPreviewUpdate'
 
 // https://kentcdodds.com/blog/how-to-use-react-context-effectively
@@ -127,6 +128,7 @@ function stateReducer(state, action) {
       })
       let outputHTML = () => {
         return `
+${state.editorCode}
 <div class="container">
   <div id="homeSlider">
     ${MainSlots(mainBlocks)}
@@ -143,7 +145,12 @@ function stateReducer(state, action) {
     }
 
     case 'updateContentPreview': {
-      contentPreviewUpdate(state.editorCode + state.outputHTML)
+      contentPreviewUpdate(state.outputHTML)
+      return { ...state }
+    }
+
+    case 'saveFile': {
+      saveFile(state)
       return { ...state }
     }
 
@@ -176,12 +183,11 @@ let defaultEditorCode = `<style>
 
 let initialState = {
   categories: Array(5).fill({ url: '', title: '', image: '' }),
-  codePreview: 'currently no code preview',
-  content: 'currently no content',
   contentBlocks: [],
   contentView: true,
-  editorCode: '',
+  editorCode: ``,
   outputHTML: `
+${defaultEditorCode}
 <div class="container">
   <div id="homeSlider">
 
