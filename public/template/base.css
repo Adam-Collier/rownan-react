@@ -12398,7 +12398,7 @@ img {
   }
 }
 
-@media screen and (max-width:600px) {
+@media screen and (600px:max-width) {
   .category-intro__amount {
     padding-left: .75rem
   }

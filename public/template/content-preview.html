@@ -1,7 +1,8 @@
 <html>
-  <body>
+  <head>
+    <meta charset="utf-8" />
+    <title>Homepage</title>
     <link rel="stylesheet" href="./base.css" />
-    <link rel="stylesheet" href="./homepage.css" />
     <link
       rel="stylesheet"
       type="text/css"
@@ -15,7 +16,9 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.4/lodash.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/jquery.slick/1.6.0/slick.min.js"></script>
+  </head>
 
+  <body style="padding-bottom: 80px">
     <style>
       body {
         background: #fef5f0;
@@ -144,6 +147,7 @@
         }
         .banner_content {
           left: 0;
+          top: 0;
           height: auto;
           background: transparent;
           -webkit-transform: none;
@@ -568,7 +572,32 @@
         transition: opacity 800ms;
       }
     </style>
-    <div class="preview-wrapper"></div>
+    <div class="preview-wrapper">
+      <style>
+        .title1,
+        .title3,
+        .subtitle1,
+        .subtitle3,
+        .container .button {
+          text-transform: none;
+        }
+        @media (min-width: 768px) {
+          .row1 .title1,
+          .row2 .title1,
+          .row3 .title1 {
+            display: none;
+          }
+          .row .subtitle1 {
+            margin-top: 20px;
+          }
+        }
+        @media (max-width: 767px) {
+          .row svg {
+            display: none;
+          }
+        }
+      </style>
+    </div>
     <script src="https://cdn.jsdelivr.net/jquery.slick/1.6.0/slick.min.js"></script>
     <script
       src="https://cdnjs.cloudflare.com/ajax/libs/lazysizes/4.0.1/lazysizes.min.js "
