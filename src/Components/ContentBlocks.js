@@ -1,11 +1,16 @@
-import React, { Fragment } from 'react'
+import React from 'react'
 import { useAppState, useAppDispatch } from '../state-context'
 import styled from 'styled-components'
+import { Droppable, Draggable } from 'react-beautiful-dnd'
 
 import chevron from '../icons/chevron.svg'
 import { ReactComponent as DragIcon } from '../icons/dragIcon.svg'
 import MainForm from './MainForm'
 import LowerForm from './LowerForm'
+
+const Block = styled.div`
+  background: #2e3235;
+`
 
 const DropDown = styled.div`
   padding: 20px 20px 20px 20px;
@@ -81,42 +86,65 @@ const ContentBlocks = props => {
   }
 
   return (
-    <div>
-      {contentBlocks.map((block, index) => (
-        <Fragment key={index}>
-          <DropDown>
-            <select
-              value={block.type}
-              onChange={e => {
-                dispatch({
-                  type: 'editBlock',
-                  payload: e.target.value,
-                  index,
-                  initial:
-                    e.target.value === 'main' ? mainInitial : lowerInitial
-                })
-                dispatch({ type: 'updateHTML' })
-              }}
+    <Droppable droppableId="droppable">
+      {provided => (
+        <div ref={provided.innerRef} {...provided.droppableProps}>
+          {contentBlocks.map((block, index) => (
+            <Draggable
+              key={index}
+              draggableId={`item${index + 1}`}
+              index={index}
             >
-              <option value="select">Please Select</option>
-              <option value="main">Home Slider</option>
-              <option value="lower">Three Slider</option>
-            </select>
-            <Remove
-              onClick={() => {
-                dispatch({ type: 'removeBlock', payload: index })
-                dispatch({ type: 'updateHTML' })
-              }}
-            >
-              Remove
-            </Remove>
-            <DragIcon />
-          </DropDown>
-          {block.type === 'main' && <MainForm index={index} block={block} />}
-          {block.type === 'lower' && <LowerForm index={index} block={block} />}
-        </Fragment>
-      ))}
-    </div>
+              {provided => (
+                <Block
+                  {...provided.draggableProps}
+                  ref={provided.innerRef}
+                  {...provided.dragHandleProps}
+                >
+                  <DropDown>
+                    <select
+                      value={block.type}
+                      onChange={e => {
+                        dispatch({
+                          type: 'editBlock',
+                          payload: e.target.value,
+                          index,
+                          initial:
+                            e.target.value === 'main'
+                              ? mainInitial
+                              : lowerInitial
+                        })
+                        dispatch({ type: 'updateHTML' })
+                      }}
+                    >
+                      <option value="select">Please Select</option>
+                      <option value="main">Home Slider</option>
+                      <option value="lower">Three Slider</option>
+                    </select>
+                    <Remove
+                      onClick={() => {
+                        dispatch({ type: 'removeBlock', payload: index })
+                        dispatch({ type: 'updateHTML' })
+                      }}
+                    >
+                      Remove
+                    </Remove>
+                    <DragIcon />
+                  </DropDown>
+                  {block.type === 'main' && (
+                    <MainForm index={index} block={block} />
+                  )}
+                  {block.type === 'lower' && (
+                    <LowerForm index={index} block={block} />
+                  )}
+                </Block>
+              )}
+            </Draggable>
+          ))}
+          {provided.placeholder}
+        </div>
+      )}
+    </Droppable>
   )
 }
 
