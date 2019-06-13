@@ -10,6 +10,8 @@ import ActionIcons from './Components/ActionIcons'
 import { useAppDispatch } from './state-context'
 
 const ipcRenderer = window.require('electron').ipcRenderer
+const { dialog } = window.require('electron').remote
+const fs = window.require('fs')
 
 const AppContainer = styled.div`
   display: grid;
@@ -42,7 +44,15 @@ function App() {
     console.log('mobileView')
   })
   ipcRenderer.on('openFile', function() {
-    console.log('openFile')
+    dialog.showOpenDialog({ filters: [{ extensions: ['json'] }] }, function(
+      filePaths
+    ) {
+      if (filePaths)
+        dispatch({
+          type: 'openFile',
+          savedState: fs.readFileSync(filePaths[0], 'utf8')
+        })
+    })
   })
   return (
     <AppContainer className="App">
