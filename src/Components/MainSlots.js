@@ -3,8 +3,8 @@ import removeEmptyLines from '../lib/removeEmptyLines'
 const MainSlots = blocks =>
   blocks
     .map(
-      (block, index) =>
-        removeEmptyLines`<div class="row fullwidth row${index + 1}">
+      (block, index) => removeEmptyLines`<div class="row fullwidth row${index +
+        1}">
       <a href="${block.primaryUrl}">
         ${block.image &&
           `<picture>
@@ -55,6 +55,7 @@ const MainSlots = blocks =>
           }" alt="backup">
         </picture>`}
         <div class="banner_content center">
+          ${block.svg && `${block.svg}`}
           ${block.title && `<h2 class="title1 white">${block.title}</h2>`}
           ${block.subtitle &&
             `<h4 class="subtitle1 white">${block.subtitle}</h4>`}

@@ -65,7 +65,7 @@ const ContentBlocks = props => {
     image: '',
     subtitle: '',
     title: '',
-    utl: ''
+    url: ''
   }
 
   let mainInitial = {

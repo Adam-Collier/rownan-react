@@ -154,6 +154,11 @@ ${state.editorCode}
       return { ...state }
     }
 
+    case 'openFile': {
+      let savedState = JSON.parse(action.savedState)
+      return { ...savedState }
+    }
+
     default: {
       throw new Error(`Unhandled action type: ${action.type}`)
     }
