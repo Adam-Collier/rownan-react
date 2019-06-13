@@ -73,6 +73,13 @@ function stateReducer(state, action) {
       }
     }
 
+    case 'reorderBlocks': {
+      return {
+        ...state,
+        contentBlocks: [...action.reorderedBlocks]
+      }
+    }
+
     case 'addCategoryContent': {
       return {
         ...state,
