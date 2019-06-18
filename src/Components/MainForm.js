@@ -2,6 +2,7 @@ import React from 'react'
 import { useAppDispatch } from '../state-context'
 
 import { Form } from './styles/Form'
+import { placeholderImage } from '../lib/placeholderImage'
 
 const MainForm = props => {
   const { index, block } = props
@@ -9,6 +10,19 @@ const MainForm = props => {
   const dispatch = useAppDispatch()
 
   const handleChange = e => {
+    if (e.target.name === 'image' || e.target.name === 'mobile') {
+      e.persist()
+
+      placeholderImage(e.target.value).then(placeholder => {
+        dispatch({
+          type: 'placeholderImage',
+          name: e.target.name,
+          index,
+          payload: placeholder
+        })
+      })
+    }
+
     dispatch({
       type: 'addBlockContent',
       payload: e.target.value,
