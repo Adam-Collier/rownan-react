@@ -1,6 +1,6 @@
 import removeEmptyLines from '../lib/removeEmptyLines'
 
-const MainSlots = blocks =>
+const MainTemplate = blocks =>
   blocks
     .map(
       (block, index) => removeEmptyLines`<div class="row fullwidth row${index +
@@ -73,4 +73,4 @@ const MainSlots = blocks =>
     )
     .join('')
 
-export default MainSlots
+export default MainTemplate

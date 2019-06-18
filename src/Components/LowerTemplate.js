@@ -1,6 +1,6 @@
 import removeEmptyLines from '../lib/removeEmptyLines'
 
-const LowerSlots = blocks => {
+const LowerTemplate = blocks => {
   return `<div class="blocker"></div>
     ${blocks
       .map(
@@ -30,4 +30,4 @@ const LowerSlots = blocks => {
       .join('')}`
 }
 
-export default LowerSlots
+export default LowerTemplate
