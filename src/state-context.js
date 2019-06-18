@@ -1,8 +1,8 @@
 import React from 'react'
-import PromoSlot from './Components/PromoSlot'
-import MainSlots from './Components/MainSlots'
-import LowerSlots from './Components/LowerSlots'
-import CategorySlot from './Components/CategorySlot'
+import PromoTemplate from './Components/PromoTemplate'
+import MainTemplate from './Components/MainTemplate'
+import LowerTemplate from './Components/LowerTemplate'
+import CategoryTemplate from './Components/CategoryTemplate'
 
 import saveFile from './lib/saveFile'
 import contentPreviewUpdate from './lib/contentPreviewUpdate'
@@ -111,6 +111,24 @@ function stateReducer(state, action) {
       }
     }
 
+    case 'placeholderImage': {
+      let name = `placeholder${action.name.charAt(0).toUpperCase() +
+        action.name.slice(1)}`
+      return {
+        ...state,
+        contentBlocks: state.contentBlocks.map((item, index) => {
+          if (index !== action.index) return item
+          return {
+            ...item,
+            content: {
+              ...item.content,
+              [name]: action.payload
+            }
+          }
+        })
+      }
+    }
+
     case 'addPromoContent': {
       return {
         ...state,
@@ -138,12 +156,12 @@ function stateReducer(state, action) {
 ${state.editorCode}
 <div class="container">
   <div id="homeSlider">
-    ${MainSlots(mainBlocks)}
+    ${MainTemplate(mainBlocks)}
   </div>
-  ${hasContent(state.promoBlocks) ? PromoSlot(state.promoBlocks) : ''}
-  ${hasContent(state.categories) ? CategorySlot(state.categories) : ''}
+  ${hasContent(state.promoBlocks) ? PromoTemplate(state.promoBlocks) : ''}
+  ${hasContent(state.categories) ? CategoryTemplate(state.categories) : ''}
   <div class="slick-three">
-    ${LowerSlots(lowerBlocks)}
+    ${LowerTemplate(lowerBlocks)}
   </div>
 </div>
   `
