@@ -11,6 +11,13 @@
     "react-beautiful-dnd": "^11.0.4",
     "react-dom": "^16.8.6",
     "react-scripts": "3.0.1",
+    "request-promise-native": "^1.0.7",
+    "shortid": "^2.2.14",
+    "sqip": "^1.0.0-alpha.26",
+    "sqip-plugin-blur": "^1.0.0-alpha.22",
+    "sqip-plugin-data-uri": "^1.0.0-alpha.27",
+    "sqip-plugin-primitive": "^1.0.0-alpha.27",
+    "sqip-plugin-svgo": "^1.0.0-alpha.27",
     "styled-components": "^4.2.0"
   },
   "scripts": {
@@ -19,7 +26,8 @@
     "electron": "electron .",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "npm-rebuild": "electron-rebuild"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -39,6 +47,7 @@
   "devDependencies": {
     "electron": "^5.0.2",
     "electron-devtools-installer": "^2.2.4",
+    "electron-rebuild": "^1.8.5",
     "foreman": "^3.0.1"
   }
 }
