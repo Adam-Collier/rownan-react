@@ -47,11 +47,15 @@ function App() {
     dialog.showOpenDialog({ filters: [{ extensions: ['json'] }] }, function(
       filePaths
     ) {
-      if (filePaths)
+      if (filePaths) {
         dispatch({
           type: 'openFile',
           savedState: fs.readFileSync(filePaths[0], 'utf8')
         })
+        dispatch({
+          type: 'updateHTML'
+        })
+      }
     })
   })
   return (
