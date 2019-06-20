@@ -32,6 +32,7 @@ function App() {
     console.log('generate')
   })
   ipcRenderer.on('images', function() {
+    dispatch({ type: 'updateHTML' })
     dispatch({ type: 'updateContentPreview' })
   })
   ipcRenderer.on('save', function() {
