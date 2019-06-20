@@ -12,7 +12,6 @@ const MainForm = props => {
   const handleChange = e => {
     if (e.target.name === 'image' || e.target.name === 'mobile') {
       e.persist()
-
       placeholderImage(e.target.value).then(placeholder => {
         dispatch({
           type: 'placeholderImage',
@@ -20,6 +19,7 @@ const MainForm = props => {
           index,
           payload: placeholder
         })
+        dispatch({ type: 'updateHTML' })
       })
     }
 
@@ -29,6 +29,7 @@ const MainForm = props => {
       name: e.target.name,
       index
     })
+
     dispatch({ type: 'updateHTML' })
   }
 
