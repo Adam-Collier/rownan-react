@@ -3,6 +3,7 @@ import PromoTemplate from './Components/PromoTemplate'
 import MainTemplate from './Components/MainTemplate'
 import LowerTemplate from './Components/LowerTemplate'
 import CategoryTemplate from './Components/CategoryTemplate'
+import addPlaceholderImageCSS from './lib/addPlaceholderImageCSS'
 
 import saveFile from './lib/saveFile'
 import contentPreviewUpdate from './lib/contentPreviewUpdate'
@@ -151,9 +152,12 @@ function stateReducer(state, action) {
         if (block.type === 'lower') lowerBlocks.push(block.content)
         return null
       })
+
+      let styles = addPlaceholderImageCSS(state.editorCode, state.contentBlocks)
+
       let outputHTML = () => {
         return `
-${state.editorCode}
+${styles}
 <div class="container">
   <div id="homeSlider">
     ${MainTemplate(mainBlocks)}
@@ -163,9 +167,9 @@ ${state.editorCode}
   <div class="slick-three">
     ${LowerTemplate(lowerBlocks)}
   </div>
-</div>
-  `
+</div>`
       }
+
       return { ...state, outputHTML: outputHTML() }
     }
 
