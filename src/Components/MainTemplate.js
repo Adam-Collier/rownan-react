@@ -50,8 +50,12 @@ const MainTemplate = blocks =>
           } 1920w" alt="image failed">
             <img class="lazyload" data-expand="-50" data-src="https://media.missguided.co.uk/image/upload/w_1920,q_70${
               block.image
-            }" src="https://media.missguided.co.uk/image/upload/w_1920,q_70${
-            block.image
+            }" src="${
+            block.placeholderImage
+              ? block.placeholderImage
+              : `https://media.missguided.co.uk/image/upload/w_1920,q_70${
+                  block.image
+                }`
           }" alt="backup">
         </picture>`}
         <div class="banner_content center">
