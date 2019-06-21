@@ -49,9 +49,15 @@ function App() {
       filePaths
     ) {
       if (filePaths) {
+        let savedState = JSON.parse(fs.readFileSync(filePaths[0], 'utf8'))
+
+        document
+          .querySelector('.CodeMirror')
+          .CodeMirror.setValue(savedState.editorCode)
+
         dispatch({
           type: 'openFile',
-          savedState: fs.readFileSync(filePaths[0], 'utf8')
+          savedState
         })
         dispatch({
           type: 'updateHTML'
