@@ -27,7 +27,6 @@ const Categories = props => {
       name: e.target.name,
       index
     })
-    dispatch({ type: 'updateHTML' })
   }
 
   return (
