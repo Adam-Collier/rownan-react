@@ -1,6 +1,6 @@
 import removeEmptyLines from '../lib/removeEmptyLines'
 
-const MainSlots = blocks =>
+const MainTemplate = blocks =>
   blocks
     .map(
       (block, index) => removeEmptyLines`<div class="row fullwidth row${index +
@@ -50,8 +50,12 @@ const MainSlots = blocks =>
           } 1920w" alt="image failed">
             <img class="lazyload" data-expand="-50" data-src="https://media.missguided.co.uk/image/upload/w_1920,q_70${
               block.image
-            }" src="https://media.missguided.co.uk/image/upload/w_1920,q_70${
-            block.image
+            }" src="${
+            block.placeholderImage
+              ? block.placeholderImage
+              : `https://media.missguided.co.uk/image/upload/w_1920,q_70${
+                  block.image
+                }`
           }" alt="backup">
         </picture>`}
         <div class="banner_content center">
@@ -73,4 +77,4 @@ const MainSlots = blocks =>
     )
     .join('')
 
-export default MainSlots
+export default MainTemplate

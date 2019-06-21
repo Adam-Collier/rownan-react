@@ -1,6 +1,6 @@
 import removeEmptyLines from '../lib/removeEmptyLines'
 
-const LowerSlots = blocks => {
+const LowerTemplate = blocks => {
   return `<div class="blocker"></div>
     ${blocks
       .map(
@@ -13,8 +13,12 @@ const LowerSlots = blocks => {
             data-src="https://media.missguided.co.uk/image/upload/w_600,q_70${
               block.image
             }"
-            src="https://media.missguided.co.uk/image/upload/c_scale,w_600,q_70${
-              block.image
+            src="${
+              block.placeholderImage
+                ? block.placeholderImage
+                : `https://media.missguided.co.uk/image/upload/w_600,q_70${
+                    block.image
+                  }`
             }"
             alt="backup_img"
           />
@@ -30,4 +34,4 @@ const LowerSlots = blocks => {
       .join('')}`
 }
 
-export default LowerSlots
+export default LowerTemplate

@@ -32,6 +32,7 @@ function App() {
     console.log('generate')
   })
   ipcRenderer.on('images', function() {
+    dispatch({ type: 'updateHTML' })
     dispatch({ type: 'updateContentPreview' })
   })
   ipcRenderer.on('save', function() {
@@ -47,11 +48,15 @@ function App() {
     dialog.showOpenDialog({ filters: [{ extensions: ['json'] }] }, function(
       filePaths
     ) {
-      if (filePaths)
+      if (filePaths) {
         dispatch({
           type: 'openFile',
           savedState: fs.readFileSync(filePaths[0], 'utf8')
         })
+        dispatch({
+          type: 'updateHTML'
+        })
+      }
     })
   })
   return (

@@ -1,4 +1,4 @@
-const CategorySlot = categories => {
+const CategoryTemplate = categories => {
   return `
   <style>
     .categories-container--mobile {
@@ -117,4 +117,4 @@ const CategorySlot = categories => {
   </div>`
 }
 
-export default CategorySlot
+export default CategoryTemplate

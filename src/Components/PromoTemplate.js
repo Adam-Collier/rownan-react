@@ -1,4 +1,4 @@
-const PromoSlot = blocks => {
+const PromoTemplate = blocks => {
   return `
   <style>
     .info-strip {
@@ -83,4 +83,4 @@ const PromoSlot = blocks => {
   </script>`
 }
 
-export default PromoSlot
+export default PromoTemplate

@@ -35,6 +35,9 @@ const Content = props => {
       type: 'reorderBlocks',
       reorderedBlocks: blocks
     })
+    dispatch({
+      type: 'updateHTML'
+    })
     return
   }
 

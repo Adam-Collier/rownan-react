@@ -55,7 +55,6 @@ function Editor(props) {
     }).on('change', instance => {
       let value = instance.getValue()
       dispatch({ type: 'editorCode', payload: value })
-      dispatch({ type: 'updateHTML' })
     })
     dispatch({ type: 'editorCode', payload: editor.current.value })
   })
