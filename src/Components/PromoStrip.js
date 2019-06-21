@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { memo } from 'react'
 import PromoBlocks from './PromoBlocks'
 import { useAppDispatch } from '../state-context'
 import { Form } from './styles/Form'
@@ -39,4 +39,4 @@ function PromoStrip() {
   )
 }
 
-export default PromoStrip
+export default memo(PromoStrip)
