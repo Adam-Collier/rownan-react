@@ -12,6 +12,7 @@
     "react-beautiful-dnd": "^11.0.4",
     "react-dom": "^16.8.6",
     "react-scripts": "3.0.1",
+    "react-syntax-highlighter": "^10.3.0",
     "request-promise-native": "^1.0.7",
     "shortid": "^2.2.14",
     "sqip": "^1.0.0-alpha.26",

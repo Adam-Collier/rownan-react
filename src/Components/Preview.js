@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { memo } from 'react'
 import { useAppState } from '../state-context'
 import styled from 'styled-components'
 
@@ -22,4 +22,4 @@ const Preview = props => {
   )
 }
 
-export default Preview
+export default memo(Preview)

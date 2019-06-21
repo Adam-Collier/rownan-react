@@ -1,7 +1,6 @@
 import React, { useEffect, useRef } from 'react'
-import { useAppDispatch, defaultEditorCode } from '../state-context'
+import { useAppDispatch, useAppState } from '../state-context'
 import styled from 'styled-components'
-import CodeMirror from 'codemirror'
 
 import '../lib/CodeMirror/codemirror.css'
 import '../lib/CodeMirror/one-dark.css'
@@ -41,10 +40,11 @@ const CodeEditor = styled.div`
 
 function Editor(props) {
   const editor = useRef(null)
+  const { editorCode } = useAppState()
   const dispatch = useAppDispatch()
 
   useEffect(() => {
-    CodeMirror.fromTextArea(editor.current, {
+    let options = {
       lineNumbers: false,
       mode: 'htmlmixed',
       theme: 'one-dark',
@@ -52,16 +52,25 @@ function Editor(props) {
       autoCloseTags: true,
       tabSize: 1,
       keyMap: 'sublime'
-    }).on('change', instance => {
+    }
+
+    let codeMirrorInstance = require('codemirror').fromTextArea(
+      editor.current,
+      options
+    )
+
+    codeMirrorInstance.on('change', instance => {
+      console.log('changed')
       let value = instance.getValue()
       dispatch({ type: 'editorCode', payload: value })
     })
-    dispatch({ type: 'editorCode', payload: editor.current.value })
-  })
+    codeMirrorInstance.setValue(editorCode)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
 
   return (
     <CodeEditor>
-      <textarea ref={editor} defaultValue={defaultEditorCode} />
+      <textarea ref={editor} />
     </CodeEditor>
   )
 }

@@ -192,8 +192,7 @@ ${styles}
     }
 
     case 'openFile': {
-      let savedState = JSON.parse(action.savedState)
-      return { ...savedState }
+      return { ...action.savedState }
     }
 
     default: {
@@ -203,21 +202,25 @@ ${styles}
 }
 
 let defaultEditorCode = `<style>
-  .title1, .title3, .subtitle1, .subtitle3, .container .button{
+  .title1,
+  .title3,
+  .subtitle1,
+  .subtitle3,
+  .container .button {
     text-transform: none;
   }
-  @media (min-width:768px){
+  @media (min-width: 768px) {
     .row1 .title1,
     .row2 .title1,
-    .row3 .title1{
+    .row3 .title1 {
       display: none;
     }
-    .row .subtitle1{
+    .row .subtitle1 {
       margin-top: 20px;
     }
   }
-  @media (max-width: 767px){
-    .row svg{
+  @media (max-width: 767px) {
+    .row svg {
       display: none;
     }
   }
@@ -227,9 +230,8 @@ let initialState = {
   categories: Array(5).fill({ url: '', title: '', image: '' }),
   contentBlocks: [],
   contentView: true,
-  editorCode: ``,
-  outputHTML: `
-${defaultEditorCode}
+  editorCode: defaultEditorCode,
+  outputHTML: `${defaultEditorCode}
 <div class="container">
   <div id="homeSlider">
 

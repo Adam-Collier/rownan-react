@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { memo } from 'react'
 import styled from 'styled-components'
 import { useAppDispatch, useAppState } from '../state-context'
 import ContentBlocks from './ContentBlocks'
@@ -57,4 +57,4 @@ const Content = props => {
   )
 }
 
-export default Content
+export default memo(Content)

@@ -30,7 +30,6 @@ function PromoBlocks() {
       name: e.target.name,
       index
     })
-    dispatch({ type: 'updateHTML' })
   }
 
   return (

@@ -29,8 +29,6 @@ const MainForm = props => {
       name: e.target.name,
       index
     })
-
-    dispatch({ type: 'updateHTML' })
   }
 
   return (

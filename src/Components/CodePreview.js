@@ -1,20 +1,10 @@
-import React from 'react'
+import React, { memo } from 'react'
 import { useAppState } from '../state-context'
 import styled from 'styled-components'
 
-import CodeMirror from 'codemirror'
-
-import '../lib/CodeMirror/codemirror.css'
-import 'codemirror/theme/solarized.css'
-
-import 'codemirror/addon/runmode/runmode'
-import 'codemirror/mode/meta'
-import 'codemirror/mode/javascript/javascript'
-import 'codemirror/mode/xml/xml'
-import 'codemirror/mode/css/css'
-import 'codemirror/mode/htmlmixed/htmlmixed'
-
-import Highlight from './Highlight'
+import { Light as SyntaxHighlighter } from 'react-syntax-highlighter'
+import { githubGist } from 'react-syntax-highlighter/dist/esm/styles/hljs'
+import html from 'react-syntax-highlighter/dist/esm/languages/hljs/htmlbars'
 
 const CodeEditor = styled.div`
   overflow: scroll;
@@ -30,19 +20,18 @@ const CodeEditor = styled.div`
   }
 `
 
-const CodePreview = props => {
+const CodePreview = () => {
   const { outputHTML } = useAppState()
+
+  SyntaxHighlighter.registerLanguage('html', html)
 
   return (
     <CodeEditor className="CodeMirror">
-      <Highlight
-        value={outputHTML}
-        language="htmlmixed"
-        codeMirror={CodeMirror}
-        theme="solarized"
-      />
+      <SyntaxHighlighter language="html" style={githubGist}>
+        {outputHTML}
+      </SyntaxHighlighter>
     </CodeEditor>
   )
 }
 
-export default CodePreview
+export default memo(CodePreview)
