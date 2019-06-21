@@ -1,4 +1,7 @@
 import React from 'react'
+import prettier from 'prettier/standalone'
+import html from 'prettier/parser-html'
+import css from 'prettier/parser-postcss'
 import PromoTemplate from './Components/PromoTemplate'
 import MainTemplate from './Components/MainTemplate'
 import LowerTemplate from './Components/LowerTemplate'
@@ -170,7 +173,12 @@ ${styles}
 </div>`
       }
 
-      return { ...state, outputHTML: outputHTML() }
+      let output = prettier.format(outputHTML(), {
+        parser: 'html',
+        plugins: [html, css]
+      })
+
+      return { ...state, outputHTML: output }
     }
 
     case 'updateContentPreview': {
