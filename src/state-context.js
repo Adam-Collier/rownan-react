@@ -196,7 +196,13 @@ ${styles}
     }
 
     case 'territory': {
-      return { ...state, territory: action.payload }
+      return {
+        ...state,
+        territory: {
+          identifier: action.identifier,
+          url: action.url
+        }
+      }
     }
 
     default: {
@@ -247,7 +253,10 @@ let initialState = {
 </div>
   `,
   promoBlocks: [],
-  territory: 'UK'
+  territory: {
+    identifier: 'UK',
+    url: 'https://www.missguided.co.uk/'
+  }
 }
 
 function StateProvider({ children }) {

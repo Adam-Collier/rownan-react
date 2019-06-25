@@ -25,14 +25,55 @@ let Territories = styled.ul`
   }
 `
 
-let territories = ['AU', 'DE', 'ES', 'EU', 'FR', 'IE', 'PL', 'UK', 'US']
+let territories = [
+  {
+    identifier: 'AU',
+    url: 'https://www.missguidedau.com'
+  },
+  {
+    identifier: 'DE',
+    url: 'https://www.missguided.com/de'
+  },
+  {
+    identifier: 'ES',
+    url: 'https://www.missguided.com/es'
+  },
+  {
+    identifier: 'EU',
+    url: 'https://www.missguided.eu'
+  },
+  {
+    identifier: 'FR',
+    url: 'https://www.missguidedfr.fr'
+  },
+  {
+    identifier: 'IE',
+    url: 'https://www.missguided.com/ie'
+  },
+  {
+    identifier: 'PL',
+    url: 'https://www.missguided.com/pl'
+  },
+  {
+    identifier: 'UK',
+    url: 'https://www.missguided.co.uk/'
+  },
+  {
+    identifier: 'US',
+    url: 'https://www.missguidedus.com'
+  }
+]
 
 const TerritorySelection = () => {
   const dispatch = useAppDispatch()
   const { territory: territoryState } = useAppState()
 
-  const handleChange = e => {
-    dispatch({ type: 'territory', payload: e.target.value })
+  const handleChange = (e, url) => {
+    dispatch({
+      type: 'territory',
+      identifier: e.target.value,
+      url: e.target.dataset.url
+    })
   }
 
   return (
@@ -40,16 +81,21 @@ const TerritorySelection = () => {
       {territories.map((territory, index) => (
         <Fragment key={index}>
           <label
-            className={territoryState === territory ? 'checked' : ''}
-            htmlFor={territory}
+            className={
+              territoryState.identifier === territory.identifier
+                ? 'checked'
+                : ''
+            }
+            htmlFor={territory.identifier}
           >
-            {territory}
+            {territory.identifier}
           </label>
           <input
             type="radio"
             name="territory"
-            id={territory}
-            value={territory}
+            id={territory.identifier}
+            value={territory.identifier}
+            data-url={territory.url}
           />
         </Fragment>
       ))}
