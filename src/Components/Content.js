@@ -1,12 +1,13 @@
 import React, { memo } from 'react'
 import styled from 'styled-components'
 import { useAppDispatch, useAppState } from '../state-context'
+
+import Categories from './Categories'
 import ContentBlocks from './ContentBlocks'
 import PromoStrip from './PromoStrip'
-import Categories from './Categories'
+import TerritorySelection from "./TerritorySelection"
 
 import { DragDropContext } from 'react-beautiful-dnd'
-
 import { FormButton } from './styles/FormButton'
 
 const ContentContainer = styled.div`
@@ -43,6 +44,7 @@ const Content = props => {
 
   return (
     <ContentContainer>
+      <TerritorySelection/>
       <PromoStrip />
       <Categories />
       <DragDropContext onDragEnd={onDragEnd}>
