@@ -195,6 +195,10 @@ ${styles}
       return { ...action.savedState }
     }
 
+    case 'territory': {
+      return { ...state, territory: action.payload }
+    }
+
     default: {
       throw new Error(`Unhandled action type: ${action.type}`)
     }
@@ -242,7 +246,8 @@ let initialState = {
   </div>
 </div>
   `,
-  promoBlocks: []
+  promoBlocks: [],
+  territory: 'UK'
 }
 
 function StateProvider({ children }) {
