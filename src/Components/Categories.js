@@ -2,17 +2,21 @@ import React from 'react'
 import { Form } from './styles/Form'
 import { useAppState, useAppDispatch } from '../state-context'
 import styled from 'styled-components'
+import AutoFillIcon from './AutoFillCategories'
 
 const CategoryForm = styled(Form)`
   padding: 0;
-  h3 {
-    padding: 0px 20px;
-  }
   > div {
     padding: 10px 20px;
   }
   > div:nth-child(even) {
     background-color: #292d2f;
+  }
+  > section {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
   }
 `
 
@@ -31,7 +35,10 @@ const Categories = props => {
 
   return (
     <CategoryForm>
-      <h3>Categories</h3>
+      <section>
+        <h3>Categories</h3>
+        <AutoFillIcon />
+      </section>
       {categories.map((category, index) => (
         <div key={index}>
           <div className="inline">
