@@ -220,6 +220,13 @@ ${styles}
       }
     }
 
+    case 'autoFillCategories': {
+      return {
+        ...state,
+        categories: [...action.payload]
+      }
+    }
+
     default: {
       throw new Error(`Unhandled action type: ${action.type}`)
     }
