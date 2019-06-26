@@ -80,7 +80,7 @@ function stateReducer(state, action) {
     case 'reorderBlocks': {
       return {
         ...state,
-        contentBlocks: [...action.reorderedBlocks]
+        [action.blockType]: [...action.reorderedBlocks]
       }
     }
 
