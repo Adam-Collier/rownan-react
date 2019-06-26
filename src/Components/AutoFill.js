@@ -5,6 +5,8 @@ import axios from 'axios'
 import styled from 'styled-components'
 import { useAppState, useAppDispatch } from '../state-context'
 
+import { placeholderImage } from '../lib/placeholderImage'
+
 const Icon = styled.div`
   > select {
     appearance: none;
@@ -60,7 +62,19 @@ const AutoFill = ({ index, type }) => {
       title: title ? title.textContent : ''
     }
 
-    dispatch({ type: 'autoFill', payload: block, index: index })
+    dispatch({ type: 'autoFill', payload: block, index })
+    ;[image, mobileImage].forEach((x, i) => {
+      placeholderImage(x).then(placeholder => {
+        dispatch({
+          type: 'placeholderImage',
+          name: i === 0 ? 'image' : 'mobile',
+          index,
+          payload: placeholder
+        })
+      })
+    })
+
+    dispatch({ type: 'updateHTML' })
   }
 
   let lowerPopulate = async (territory, index, e) => {
