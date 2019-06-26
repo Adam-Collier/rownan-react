@@ -5,7 +5,7 @@ import { useAppDispatch, useAppState } from '../state-context'
 import Categories from './Categories'
 import ContentBlocks from './ContentBlocks'
 import PromoStrip from './PromoStrip'
-import TerritorySelection from "./TerritorySelection"
+import TerritorySelection from './TerritorySelection'
 
 import { DragDropContext } from 'react-beautiful-dnd'
 import { FormButton } from './styles/FormButton'
@@ -17,9 +17,9 @@ const ContentContainer = styled.div`
 
 const Content = props => {
   const dispatch = useAppDispatch()
-  const { contentBlocks } = useAppState()
+  const { contentBlocks, categories } = useAppState()
 
-  const onDragEnd = result => {
+  const onDragEnd = (result, blockType) => {
     const { destination, source } = result
     if (
       destination.droppableID === source.droppableID &&
@@ -28,13 +28,14 @@ const Content = props => {
       return
     }
 
-    const blocks = contentBlocks
+    const blocks = blockType
     const [removed] = blocks.splice(source.index, 1)
     blocks.splice(destination.index, 0, removed)
 
     dispatch({
       type: 'reorderBlocks',
-      reorderedBlocks: blocks
+      reorderedBlocks: blocks,
+      blockType
     })
     dispatch({
       type: 'updateHTML'
@@ -44,10 +45,12 @@ const Content = props => {
 
   return (
     <ContentContainer>
-      <TerritorySelection/>
+      <TerritorySelection />
       <PromoStrip />
-      <Categories />
-      <DragDropContext onDragEnd={onDragEnd}>
+      <DragDropContext onDragEnd={e => onDragEnd(e, categories)}>
+        <Categories />
+      </DragDropContext>
+      <DragDropContext onDragEnd={e => onDragEnd(e, contentBlocks)}>
         <ContentBlocks />
       </DragDropContext>
       <FormButton
