@@ -205,6 +205,21 @@ ${styles}
       }
     }
 
+    case 'autoFill': {
+      return {
+        ...state,
+        contentBlocks: state.contentBlocks.map((item, index) => {
+          if (index !== action.index) return item
+          return {
+            ...item,
+            content: {
+              ...action.payload
+            }
+          }
+        })
+      }
+    }
+
     default: {
       throw new Error(`Unhandled action type: ${action.type}`)
     }
