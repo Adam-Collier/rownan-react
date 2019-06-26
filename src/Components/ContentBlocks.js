@@ -1,65 +1,13 @@
 import React from 'react'
 import { useAppState, useAppDispatch } from '../state-context'
-import styled from 'styled-components'
 import { Droppable, Draggable } from 'react-beautiful-dnd'
 
-import chevron from '../icons/chevron.svg'
 import { ReactComponent as DragIcon } from '../icons/dragIcon.svg'
+
+import AutoFill from './AutoFill'
 import MainForm from './MainForm'
 import LowerForm from './LowerForm'
-
-const Block = styled.div`
-  background: #2e3235;
-`
-
-const DropDown = styled.div`
-  padding: 20px 20px 20px 20px;
-  position: relative;
-  -webkit-app-region: no-drag;
-
-  &:nth-child(even) {
-    background-color: #292d2f;
-  }
-
-  select {
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    appearance: none;
-    background: url(${chevron}) no-repeat 93% 48%;
-    background-size: 16px 16px;
-    color: #ffffff;
-    border: none;
-    border: 1px solid white;
-    border-radius: 3px;
-    box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.3);
-    font-weight: 500;
-    font-size: 16px;
-    letter-spacing: 0.6px;
-    padding: 8px 35px 6px 16px;
-    cursor: pointer;
-  }
-
-  .handle {
-    width: 8px;
-    position: absolute;
-    right: 25px;
-    top: 28px;
-    -webkit-app-region: no-drag;
-    cursor: -webkit-grab;
-    padding: 0 10px;
-  }
-`
-
-const Remove = styled.p`
-  display: inline-block;
-  cursor: pointer;
-  font-size: 12px;
-  color: #ffffff;
-  text-decoration: none;
-  padding-left: 15px;
-  padding-top: 3px;
-  font-weight: 400;
-`
+import { DropDown, Block, Remove } from './styles/ContentBlocks'
 
 const ContentBlocks = props => {
   const dispatch = useAppDispatch()
@@ -129,6 +77,7 @@ const ContentBlocks = props => {
                     >
                       Remove
                     </Remove>
+                    <AutoFill index={index} type={block.type} />
                     <DragIcon />
                   </DropDown>
                   {block.type === 'main' && (
