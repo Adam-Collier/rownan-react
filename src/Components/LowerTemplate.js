@@ -1,24 +1,23 @@
 import removeEmptyLines from '../lib/removeEmptyLines'
+import addImageTransformations from '../lib/addImageTransformations'
 
 const LowerTemplate = blocks => {
   return `<div class="blocker"></div>
     ${blocks
-      .map(
-        block => removeEmptyLines`<div>
+      .map(block => {
+        let transformedImage = addImageTransformations(block.image, 'lower')
+
+        return removeEmptyLines`<div>
       <a href="${block.url}" class="tracking">
         <div class="imgContainer">
           <img
             class="lazyload"
             data-expand="-50"
-            data-src="https://media.missguided.co.uk/image/upload/w_600,q_70${
-              block.image
-            }"
+            data-src="https://media.missguided.co.uk/image/upload/${transformedImage}"
             src="${
               block.placeholderImage
                 ? block.placeholderImage
-                : `https://media.missguided.co.uk/image/upload/w_600,q_70${
-                    block.image
-                  }`
+                : `https://media.missguided.co.uk/image/upload/${transformedImage}`
             }"
             alt="backup_img"
           />
@@ -30,7 +29,7 @@ const LowerTemplate = blocks => {
         </div>
       </a>
     </div>`
-      )
+      })
       .join('')}`
 }
 
