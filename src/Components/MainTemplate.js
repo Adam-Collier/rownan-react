@@ -1,61 +1,22 @@
 import removeEmptyLines from '../lib/removeEmptyLines'
+import addImageTransformations from '../lib/addImageTransformations'
 
 const MainTemplate = blocks =>
   blocks
-    .map(
-      (block, index) => removeEmptyLines`<div class="row fullwidth row${index +
-        1}">
+    .map((block, index) => {
+      let transformedImage = addImageTransformations(block.image)
+      let transformedMobile = addImageTransformations(block.mobile)
+
+      return removeEmptyLines`<div class="row fullwidth row${index + 1}">
       <a href="${block.primaryUrl}">
-        ${block.image &&
+        ${transformedImage &&
           `<picture>
-            <source media="(max-width: 767px)" sizes="(max-width: 767px) 100vw, 767px" data-srcset="https://media.missguided.co.uk/image/upload/c_fill,c_scale,w_300${
-              block.mobile
-            } 300w, https://media.missguided.co.uk/image/upload/w_402,q_70${
-            block.mobile
-          } 402w, https://media.missguided.co.uk/image/upload/w_491,q_70${
-            block.mobile
-          } 491w, https://media.missguided.co.uk/image/upload/w_569,q_70${
-            block.mobile
-          } 569w, https://media.missguided.co.uk/image/upload/w_639,q_70${
-            block.mobile
-          } 639w, https://media.missguided.co.uk/image/upload/w_711,q_70${
-            block.mobile
-          } 711w, https://media.missguided.co.uk/image/upload/w_756,q_70${
-            block.mobile
-          } 756w, https://media.missguided.co.uk/image/upload/w_767,q_70${
-            block.mobile
-          } 767w">
-            <source sizes="(max-width: 1920px) 100vw, 1920px" data-srcset="https://media.missguided.co.uk/image/upload/w_768,q_70${
-              block.image
-            } 768w, https://media.missguided.co.uk/image/upload/w_937,q_70${
-            block.image
-          } 937w, https://media.missguided.co.uk/image/upload/w_1086,q_70${
-            block.image
-          } 1086w, https://media.missguided.co.uk/image/upload/w_1226,q_70${
-            block.image
-          } 1226w, https://media.missguided.co.uk/image/upload/w_1353,q_70${
-            block.image
-          } 1353w, https://media.missguided.co.uk/image/upload/w_1474,q_70${
-            block.image
-          } 1474w, https://media.missguided.co.uk/image/upload/w_1582,q_70${
-            block.image
-          } 1582w, https://media.missguided.co.uk/image/upload/w_1686,q_70${
-            block.image
-          } 1686w, https://media.missguided.co.uk/image/upload/w_1792,q_70${
-            block.image
-          } 1792w, https://media.missguided.co.uk/image/upload/w_1905,q_70${
-            block.image
-          } 1905w, https://media.missguided.co.uk/image/upload/w_1920,q_70${
-            block.image
-          } 1920w" alt="image failed">
-            <img class="lazyload" data-expand="-50" data-src="https://media.missguided.co.uk/image/upload/w_1920,q_70${
-              block.image
-            }" src="${
+            <source media="(max-width: 767px)" sizes="(max-width: 767px) 100vw, 767px" data-srcset="https://media.missguided.co.uk/image/upload/c_fill,c_scale,w_300${transformedMobile} 300w, https://media.missguided.co.uk/image/upload/w_402${transformedMobile} 402w, https://media.missguided.co.uk/image/upload/w_491${transformedMobile} 491w, https://media.missguided.co.uk/image/upload/w_569${transformedMobile} 569w, https://media.missguided.co.uk/image/upload/w_639${transformedMobile} 639w, https://media.missguided.co.uk/image/upload/w_711${transformedMobile} 711w, https://media.missguided.co.uk/image/upload/w_756${transformedMobile} 756w, https://media.missguided.co.uk/image/upload/w_767${transformedMobile} 767w">
+            <source sizes="(max-width: 1920px) 100vw, 1920px" data-srcset="https://media.missguided.co.uk/image/upload/w_768${transformedImage} 768w, https://media.missguided.co.uk/image/upload/w_937${transformedImage} 937w, https://media.missguided.co.uk/image/upload/w_1086${transformedImage} 1086w, https://media.missguided.co.uk/image/upload/w_1226${transformedImage} 1226w, https://media.missguided.co.uk/image/upload/w_1353${transformedImage} 1353w, https://media.missguided.co.uk/image/upload/w_1474${transformedImage} 1474w, https://media.missguided.co.uk/image/upload/w_1582${transformedImage} 1582w, https://media.missguided.co.uk/image/upload/w_1686${transformedImage} 1686w, https://media.missguided.co.uk/image/upload/w_1792${transformedImage} 1792w, https://media.missguided.co.uk/image/upload/w_1905${transformedImage} 1905w, https://media.missguided.co.uk/image/upload/w_1920${transformedImage} 1920w" alt="image failed">
+            <img class="lazyload" data-expand="-50" data-src="https://media.missguided.co.uk/image/upload/w_1920${transformedImage}" src="${
             block.placeholderImage
               ? block.placeholderImage
-              : `https://media.missguided.co.uk/image/upload/w_1920,q_70${
-                  block.image
-                }`
+              : `https://media.missguided.co.uk/image/upload/w_1920${transformedImage}`
           }" alt="backup">
         </picture>`}
         <div class="banner_content center">
@@ -74,7 +35,7 @@ const MainTemplate = blocks =>
         </div>
       </a>
     </div>`
-    )
+    })
     .join('')
 
 export default MainTemplate
