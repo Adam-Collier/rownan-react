@@ -166,7 +166,11 @@ ${styles}
     ${MainTemplate(mainBlocks)}
   </div>
   ${hasContent(state.promoBlocks) ? PromoTemplate(state.promoBlocks) : ''}
-  ${hasContent(state.categories) ? CategoryTemplate(state.categories) : ''}
+  ${
+    hasContent(state.categories)
+      ? CategoryTemplate(state.categories, state.territory)
+      : ''
+  }
   <div class="slick-three">
     ${LowerTemplate(lowerBlocks)}
   </div>
