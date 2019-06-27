@@ -1,4 +1,21 @@
-const CategoryTemplate = categories => {
+const CategoryTemplate = (categories, territory) => {
+  let categoryTitle = () => {
+    switch (territory.identifier) {
+      case 'DE': {
+        return 'Shoppe nach'
+      }
+      case 'PL': {
+        return 'Zniżka na'
+      }
+      case 'FR': {
+        return 'parcourir les catégories'
+      }
+      default: {
+        return 'browse categories'
+      }
+    }
+  }
+
   return `
   <style>
     .categories-container--mobile {
@@ -98,16 +115,14 @@ const CategoryTemplate = categories => {
     }
   </style>
   <div class="categories-container categories-container-- modifier">
-    <h2 class="categories-container__heading">browse Categories</h2>
+    <h2 class="categories-container__heading">${categoryTitle()}</h2>
     <div class="categories-carousel">
       ${categories
         .map(
           category =>
             `<a class="category-tile__link" href="${category.url}">
           <div class="category-tile">
-            <img class="category-tile__image lazyload" data-src="https://media.missguided.co.uk/image/upload${
-              category.image
-            }" />
+            <img class="category-tile__image lazyload" data-src="https://media.missguided.co.uk/image/upload${category.image}" />
             <h3 class="category-tile__heading">${category.title}</h3>
           </div>
         </a>`
