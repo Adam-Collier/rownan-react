@@ -19,7 +19,6 @@ const MainForm = props => {
           index,
           payload: placeholder
         })
-        dispatch({ type: 'updateHTML' })
       })
     }
 
