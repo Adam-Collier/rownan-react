@@ -60,7 +60,6 @@ function Editor(props) {
     )
 
     codeMirrorInstance.on('change', instance => {
-      console.log('changed')
       let value = instance.getValue()
       dispatch({ type: 'editorCode', payload: value })
     })
