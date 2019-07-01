@@ -1,4 +1,4 @@
-import React, { memo } from 'react'
+import React from 'react'
 import { useAppState } from '../state-context'
 import styled from 'styled-components'
 
@@ -34,4 +34,4 @@ const CodePreview = () => {
   )
 }
 
-export default memo(CodePreview)
+export default CodePreview
