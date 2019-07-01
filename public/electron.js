@@ -1,5 +1,6 @@
 // Modules to control application life and create native browser window
 const { app, BrowserWindow } = require('electron')
+const path = require('path')
 const fs = require('fs-extra')
 
 const appPath = require('electron').app.getAppPath()
@@ -9,18 +10,13 @@ const tempDirPath = require('electron').app.getPath('temp')
 // be closed automatically when the JavaScript object is garbage collected.
 let mainWindow
 
-const installExtensions = async () => {
-  const installer = require('electron-devtools-installer')
-  const forceDownload = !!process.env.UPGRADE_EXTENSIONS
-  const extensions = ['REACT_DEVELOPER_TOOLS', 'REDUX_DEVTOOLS']
-  console.log('devtools installed')
-  return Promise.all(
-    extensions.map(name => installer.default(installer[name], forceDownload))
-  ).catch(console.log)
-}
-
-fs.copySync(`${appPath}/public/template`, `${tempDirPath}/template`)
-console.log('success!')
+// fs.copySync(
+//   process.env.ELECTRON_ENV === 'production'
+//     ? `${appPath}/public/template`
+//     : `${appPath}/template`,
+//   `${tempDirPath}/template`
+// )
+// console.log('success!')
 
 function createWindow() {
   // Create the browser window.
@@ -40,20 +36,16 @@ function createWindow() {
 
   // and load the index.html of the app.
   // mainWindow.loadFile("index.html");
-  mainWindow.loadURL(
-    process.env.ELECTRON_START_URL ||
-      url.format({
-        pathname: path.join(__dirname, '/../public/index.html'),
-        protocol: 'file:',
-        slashes: true
-      })
-  )
+
+  process.env.ELECTRON_START_URL
+    ? mainWindow.loadURL(process.env.ELECTRON_START_URL)
+    : mainWindow.loadFile('./build/index.html')
 
   // Open the DevTools.
   // mainWindow.webContents.openDevTools()
 
   // Add the menu
-  require('./lib/menu')
+  require('../src/lib/menu')
 
   // Emitted when the window is closed.
   mainWindow.on('closed', function() {
@@ -64,12 +56,22 @@ function createWindow() {
   })
 }
 
+const installExtensions = async () => {
+  const installer = require('electron-devtools-installer')
+  const forceDownload = !!process.env.UPGRADE_EXTENSIONS
+  const extensions = ['REACT_DEVELOPER_TOOLS']
+  console.log('devtools installed')
+  return Promise.all(
+    extensions.map(name => installer.default(installer[name], forceDownload))
+  ).catch(console.log)
+}
+
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.
 // Some APIs can only be used after this event occurs.
 app.on('ready', async () => {
   // install the devtools
-  await installExtensions()
+  // if (isDev) await installExtensions()
   createWindow()
 })
 
