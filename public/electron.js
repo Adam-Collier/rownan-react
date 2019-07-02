@@ -1,7 +1,7 @@
 // Modules to control application life and create native browser window
-const { app, BrowserWindow } = require('electron')
-const path = require('path')
+const { app, BrowserWindow, Menu } = require('electron')
 const fs = require('fs-extra')
+const menuTemplate = require('./menuTemplate')
 
 const appPath = require('electron').app.getAppPath()
 const tempDirPath = require('electron').app.getPath('temp')
@@ -9,14 +9,6 @@ const tempDirPath = require('electron').app.getPath('temp')
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
 let mainWindow
-
-// fs.copySync(
-//   process.env.ELECTRON_ENV === 'production'
-//     ? `${appPath}/public/template`
-//     : `${appPath}/template`,
-//   `${tempDirPath}/template`
-// )
-// console.log('success!')
 
 function createWindow() {
   // Create the browser window.
@@ -35,8 +27,6 @@ function createWindow() {
   })
 
   // and load the index.html of the app.
-  // mainWindow.loadFile("index.html");
-
   process.env.ELECTRON_START_URL
     ? mainWindow.loadURL(process.env.ELECTRON_START_URL)
     : mainWindow.loadFile('./build/index.html')
@@ -44,8 +34,9 @@ function createWindow() {
   // Open the DevTools.
   // mainWindow.webContents.openDevTools()
 
-  // Add the menu
-  require('../src/lib/menu')
+  // create the menu
+  const menu = Menu.buildFromTemplate(menuTemplate)
+  Menu.setApplicationMenu(menu)
 
   // Emitted when the window is closed.
   mainWindow.on('closed', function() {
@@ -56,6 +47,7 @@ function createWindow() {
   })
 }
 
+// install dev tools
 const installExtensions = async () => {
   const installer = require('electron-devtools-installer')
   const forceDownload = !!process.env.UPGRADE_EXTENSIONS
@@ -71,7 +63,7 @@ const installExtensions = async () => {
 // Some APIs can only be used after this event occurs.
 app.on('ready', async () => {
   // install the devtools
-  // if (isDev) await installExtensions()
+  if (process.env.ELECTRON_START_URL) await installExtensions()
   createWindow()
 })
 
@@ -90,3 +82,12 @@ app.on('activate', function() {
 
 // In this file you can include the rest of your app's specific main process
 // code. You can also put them in separate files and require them here.
+
+// set up temp file
+fs.copySync(
+  process.env.ELECTRON_START_URL
+    ? `${appPath}/public/template`
+    : `${appPath}/build/template`,
+  `${tempDirPath}/template`
+)
+console.log('success!')
