@@ -1,15 +1,7 @@
 /* BASICS */
-
-@font-face {
-  font-family: 'Fira Mono';
-  src: url('../../fonts/FiraMono-Regular.ttf') format('truetype');
-  font-weight: 400;
-  font-style: normal;
-}
-
 .CodeMirror {
   /* Set height, width, borders, and global font properties here */
-  font-family: 'Fira Mono';
+  font-family: Menlo;
   height: 300px;
   color: black;
   direction: ltr;
@@ -362,17 +354,16 @@ div.CodeMirror span.CodeMirror-nonmatchingbracket {
 }
 .CodeMirror pre {
   /* Reset some styles that the rest of the page might have set */
+  font-family: Menlo;
   -moz-border-radius: 0;
   -webkit-border-radius: 0;
   border-radius: 0;
   border-width: 0;
   background: transparent;
-  font-family: inherit;
-  font-size: inherit;
   margin: 0;
   white-space: pre;
   word-wrap: normal;
-  line-height: inherit;
+  line-height: 1.5;
   color: inherit;
   z-index: 2;
   position: relative;
