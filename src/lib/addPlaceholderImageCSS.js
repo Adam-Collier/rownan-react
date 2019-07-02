@@ -9,9 +9,20 @@ export default (editorContent, contentBlocks) => {
 
     let styleElement = editorCSS.querySelectorAll('style')[0].sheet
 
+    let styleRules = Array.from(styleElement.cssRules)
+
+    let mediaQueryIndexes = styleRules.reduce((arr, curr, index) => {
+      if (curr.type === 4) {
+        arr.push(index)
+      }
+      return arr
+    }, [])
+
+    if (mediaQueryIndexes.length < 2) return editorContent
+
     contentBlocks.forEach(({ content: block, type }, i) => {
       if (block.placeholderImage && type === 'main') {
-        styleElement.cssRules[1].insertRule(
+        styleRules[mediaQueryIndexes[0]].insertRule(
           `.row${i + 1} { background: url("${
             block.placeholderImage
           }"); background-size: contain; background-repeat: no-repeat;
@@ -20,7 +31,7 @@ export default (editorContent, contentBlocks) => {
         )
       }
       if (block.placeholderMobile) {
-        styleElement.cssRules[2].insertRule(
+        styleRules[mediaQueryIndexes[1]].insertRule(
           `.row${i + 1} { background: url("${
             block.placeholderMobile
           }"); background-size: contain; background-repeat: no-repeat;
@@ -31,7 +42,8 @@ export default (editorContent, contentBlocks) => {
     })
 
     let newStyleSheet = document.createElement('style')
-    Array.from(styleElement.cssRules).forEach(rule => {
+
+    styleRules.forEach(rule => {
       newStyleSheet.innerHTML += rule.cssText
     })
 
