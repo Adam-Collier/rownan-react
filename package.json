@@ -58,19 +58,6 @@
     "electron-rebuild": "^1.8.5",
     "foreman": "^3.0.1"
   },
-  "build": {
-    "extends": null,
-    "files": [
-      "build/**/*"
-    ],
-    "extraMetadata": {
-      "main": "build/electron.js"
-    },
-    "directories": {
-      "buildResources": "public"
-    },
-    "asar": false
-  },
   "repository": "https://github.com/Adam-Collier/rownan-react.git",
   "license": "MIT"
 }
