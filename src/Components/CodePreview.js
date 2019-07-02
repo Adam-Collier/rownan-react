@@ -2,9 +2,9 @@ import React from 'react'
 import { useAppState } from '../state-context'
 import styled from 'styled-components'
 
-import { Light as SyntaxHighlighter } from 'react-syntax-highlighter'
-import { githubGist } from 'react-syntax-highlighter/dist/esm/styles/hljs'
-import html from 'react-syntax-highlighter/dist/esm/languages/hljs/htmlbars'
+import { PrismLight as SyntaxHighlighter } from 'react-syntax-highlighter'
+import prism from '../lib/Prism/theme'
+import html from 'react-syntax-highlighter/dist/esm/languages/prism/markup'
 
 const CodeEditor = styled.div`
   overflow: scroll;
@@ -27,7 +27,11 @@ const CodePreview = () => {
 
   return (
     <CodeEditor className="CodeMirror">
-      <SyntaxHighlighter language="html" style={githubGist}>
+      <SyntaxHighlighter
+        language="html"
+        style={prism}
+        customStyle={syntaxOverrides}
+      >
         {outputHTML}
       </SyntaxHighlighter>
     </CodeEditor>
