@@ -1,8 +1,10 @@
 {
   "name": "rownan-react",
+  "author": "Adam Collier",
   "version": "0.1.0",
   "private": true,
-  "main": "src/electron-main.js",
+  "homepage": "./",
+  "main": "public/electron.js",
   "dependencies": {
     "axios": "^0.19.0",
     "cheerio": "^1.0.0-rc.3",
@@ -30,7 +32,9 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "npm-rebuild": "electron-rebuild"
+    "npm-rebuild": "electron-rebuild",
+    "electron-build": "electron-builder --dir",
+    "postinstall": "electron-builder install-app-deps"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -49,8 +53,11 @@
   },
   "devDependencies": {
     "electron": "^5.0.2",
+    "electron-builder": "^20.44.4",
     "electron-devtools-installer": "^2.2.4",
     "electron-rebuild": "^1.8.5",
     "foreman": "^3.0.1"
-  }
+  },
+  "repository": "https://github.com/Adam-Collier/rownan-react.git",
+  "license": "MIT"
 }
