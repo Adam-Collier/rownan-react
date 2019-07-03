@@ -55,7 +55,6 @@ const MainForm = props => {
         </div>
       </div>
       <label>Image</label>
-      <span>../image/upload/q_70</span>
       <input
         type="text"
         name="image"
@@ -64,7 +63,6 @@ const MainForm = props => {
         onChange={handleChange}
       />
       <label>Mobile Image</label>
-      <span>../image/upload/q_70</span>
       <input
         type="text"
         name="mobile"

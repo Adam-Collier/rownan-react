@@ -7,16 +7,37 @@ const MainTemplate = blocks =>
       let transformedImage = addImageTransformations(block.image)
       let transformedMobile = addImageTransformations(block.mobile)
 
+      let transformations = '&qlt=70&fmt.jpeg.interlaced=true'
+
       return removeEmptyLines`<div class="row fullwidth row${index + 1}">
       <a href="${block.primaryUrl}">
         ${transformedImage &&
           `<picture>
-            <source media="(max-width: 767px)" sizes="(max-width: 767px) 100vw, 767px" data-srcset="https://media.missguided.co.uk/image/upload/c_fill,c_scale,w_300${transformedMobile} 300w, https://media.missguided.co.uk/image/upload/w_402${transformedMobile} 402w, https://media.missguided.co.uk/image/upload/w_491${transformedMobile} 491w, https://media.missguided.co.uk/image/upload/w_569${transformedMobile} 569w, https://media.missguided.co.uk/image/upload/w_639${transformedMobile} 639w, https://media.missguided.co.uk/image/upload/w_711${transformedMobile} 711w, https://media.missguided.co.uk/image/upload/w_756${transformedMobile} 756w, https://media.missguided.co.uk/image/upload/w_767${transformedMobile} 767w">
-            <source sizes="(max-width: 1920px) 100vw, 1920px" data-srcset="https://media.missguided.co.uk/image/upload/w_768${transformedImage} 768w, https://media.missguided.co.uk/image/upload/w_937${transformedImage} 937w, https://media.missguided.co.uk/image/upload/w_1086${transformedImage} 1086w, https://media.missguided.co.uk/image/upload/w_1226${transformedImage} 1226w, https://media.missguided.co.uk/image/upload/w_1353${transformedImage} 1353w, https://media.missguided.co.uk/image/upload/w_1474${transformedImage} 1474w, https://media.missguided.co.uk/image/upload/w_1582${transformedImage} 1582w, https://media.missguided.co.uk/image/upload/w_1686${transformedImage} 1686w, https://media.missguided.co.uk/image/upload/w_1792${transformedImage} 1792w, https://media.missguided.co.uk/image/upload/w_1905${transformedImage} 1905w, https://media.missguided.co.uk/image/upload/w_1920${transformedImage} 1920w" alt="image failed">
-            <img class="lazyload" data-expand="-50" data-src="https://media.missguided.co.uk/image/upload/w_1920${transformedImage}" src="${
+            <source media="(max-width: 767px)" sizes="(max-width: 767px) 100vw, 767px" 
+              data-srcset="${transformedMobile}?w=300${transformations} 300w, 
+              ${transformedMobile}?w=402${transformations} 402w, 
+              ${transformedMobile}?w=491${transformations} 491w, 
+              ${transformedMobile}?w=569${transformations} 569w, 
+              ${transformedMobile}?w=639${transformations} 639w, 
+              ${transformedMobile}?w=711${transformations} 711w, 
+              ${transformedMobile}?w=756${transformations} 756w, 
+              ${transformedMobile}?w=767${transformations} 767w">
+            <source sizes="(max-width: 1920px) 100vw, 1920px" 
+            data-srcset="${transformedImage}?w=768 768w, 
+              ${transformedImage}?w=937${transformations} 937w, 
+              ${transformedImage}?w=1086${transformations} 1086w, 
+              ${transformedImage}?w=1226${transformations} 1226w, 
+              ${transformedImage}?w=1353${transformations} 1353w, 
+              ${transformedImage}?w=1474${transformations} 1474w, 
+              ${transformedImage}?w=1582${transformations} 1582w, 
+              ${transformedImage}?w=1686${transformations} 1686w, 
+              ${transformedImage}?w=1792${transformations} 1792w, 
+              ${transformedImage}?w=1905${transformations} 1905w, 
+              ${transformedImage}?w=1920${transformations} 1920w" alt="image failed">
+            <img class="lazyload" data-expand="-50" data-src="${transformedImage}?w=1920${transformations}" src="${
             block.placeholderImage
               ? block.placeholderImage
-              : `https://media.missguided.co.uk/image/upload/w_1920${transformedImage}`
+              : `${transformedImage}?w=1920`
           }" alt="backup">
         </picture>`}
         <div class="banner_content center">

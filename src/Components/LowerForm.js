@@ -41,7 +41,6 @@ const LowerForm = props => {
         </div>
       </div>
       <label>Image</label>
-      <span>../image/upload/q_70</span>
       <input
         type="text"
         name="image"

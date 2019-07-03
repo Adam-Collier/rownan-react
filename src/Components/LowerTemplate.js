@@ -1,6 +1,8 @@
 import removeEmptyLines from '../lib/removeEmptyLines'
 import addImageTransformations from '../lib/addImageTransformations'
 
+let transformation = 'w=600&bg=rgb(254,245,240)&fmt.jpeg.interlaced=true'
+
 const LowerTemplate = blocks => {
   return `<div class="blocker"></div>
     ${blocks
@@ -13,11 +15,11 @@ const LowerTemplate = blocks => {
           <img
             class="lazyload"
             data-expand="-50"
-            data-src="https://media.missguided.co.uk/image/upload/${transformedImage}"
+            data-src="${transformedImage}?${transformation}"
             src="${
               block.placeholderImage
                 ? block.placeholderImage
-                : `https://media.missguided.co.uk/image/upload/${transformedImage}`
+                : `${transformedImage}?${transformation}`
             }"
             alt="backup_img"
           />

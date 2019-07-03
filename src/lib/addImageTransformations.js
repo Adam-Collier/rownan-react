@@ -1,6 +1,8 @@
 export default (image, type) => {
   let extension = image.split('.').pop()
 
+  return image
+
   switch (extension) {
     case 'jpeg':
     case 'jpg': {
