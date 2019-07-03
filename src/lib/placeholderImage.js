@@ -7,7 +7,10 @@ const sqip = window.require('sqip')
 
 export const placeholderImage = async image => {
   try {
-    if (image.match(/https:\/\/i1.adis.ws\/i\/missguided/)) {
+    if (
+      image.match(/https:\/\/i1.adis.ws\/i\/missguided/) ||
+      image.match(/\.(jpeg|jpg|gif|png)$/)
+    ) {
       let id = shortid.generate()
 
       let imagePath = `${tempDirPath}rownan--temp/${id}.jpeg`
