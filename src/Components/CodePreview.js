@@ -27,11 +27,7 @@ const CodePreview = () => {
 
   return (
     <CodeEditor className="CodeMirror">
-      <SyntaxHighlighter
-        language="html"
-        style={prism}
-        customStyle={syntaxOverrides}
-      >
+      <SyntaxHighlighter language="html" style={prism}>
         {outputHTML}
       </SyntaxHighlighter>
     </CodeEditor>
