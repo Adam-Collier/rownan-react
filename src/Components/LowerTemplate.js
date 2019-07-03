@@ -1,13 +1,15 @@
 import removeEmptyLines from '../lib/removeEmptyLines'
 import addImageTransformations from '../lib/addImageTransformations'
 
-let transformation = 'w=600&bg=rgb(254,245,240)&fmt.jpeg.interlaced=true'
-
 const LowerTemplate = blocks => {
   return `<div class="blocker"></div>
     ${blocks
       .map(block => {
-        let transformedImage = addImageTransformations(block.image, 'lower')
+        let transformedImage = addImageTransformations(
+          block.image,
+          '600',
+          'lower'
+        )
 
         return removeEmptyLines`<div>
       <a href="${block.url}" class="tracking">
@@ -15,11 +17,11 @@ const LowerTemplate = blocks => {
           <img
             class="lazyload"
             data-expand="-50"
-            data-src="${transformedImage}?${transformation}"
+            data-src="${transformedImage}"
             src="${
               block.placeholderImage
                 ? block.placeholderImage
-                : `${transformedImage}?${transformation}`
+                : `${transformedImage}`
             }"
             alt="backup_img"
           />
