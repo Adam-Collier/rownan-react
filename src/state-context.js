@@ -224,10 +224,13 @@ ${styles}
       }
     }
 
-    case 'autoFillCategories': {
+    case 'autoFillCategories':
+    case 'autoFillPromoBlocks': {
+      let name = action.type.slice(8)
+      let blockType = name.charAt(0).toLowerCase() + name.slice(1)
       return {
         ...state,
-        categories: [...action.payload]
+        [blockType]: [...action.payload]
       }
     }
 
