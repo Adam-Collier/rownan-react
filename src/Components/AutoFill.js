@@ -1,13 +1,14 @@
-import React from 'react'
-import fillIcon from '../icons/autoFill.svg'
 import axios from 'axios'
-
+import React from 'react'
 import styled from 'styled-components'
-import { useAppState, useAppDispatch } from '../state-context'
 
+import { useAppState, useAppDispatch } from '../state-context'
 import { placeholderImage } from '../lib/placeholderImage'
 
-const Icon = styled.div`
+import fillIcon from '../icons/autoFill.svg'
+import { ReactComponent as AutoFillIcon } from '../icons/autoFill.svg'
+
+const IconContent = styled.div`
   > select {
     appearance: none;
     background: url(${fillIcon});
@@ -23,7 +24,7 @@ const Icon = styled.div`
   }
 `
 
-const AutoFill = ({ index, type }) => {
+export const AutoFillContent = ({ index, type }) => {
   const { territory } = useAppState()
   let dispatch = useAppDispatch()
 
@@ -108,7 +109,7 @@ const AutoFill = ({ index, type }) => {
   }
 
   return (
-    <Icon>
+    <IconContent>
       <select
         name="autofill"
         value="default"
@@ -136,8 +137,84 @@ const AutoFill = ({ index, type }) => {
           </>
         )}
       </select>
-    </Icon>
+    </IconContent>
   )
 }
 
-export default AutoFill
+const Icon = styled(AutoFillIcon)`
+  width: 28px;
+  height: 28px;
+  cursor: pointer;
+`
+
+export const AutoFillCategories = props => {
+  const dispatch = useAppDispatch()
+  const { territory } = useAppState()
+  const handleClick = async e => {
+    e.persist()
+
+    let { data } = await axios.get(territory.url)
+    let parser = new DOMParser()
+    let html = parser.parseFromString(data, 'text/html')
+
+    let categoryTiles = Array.from(
+      html.querySelectorAll('.category-tile__link')
+    )
+
+    console.log(categoryTiles)
+
+    if (!categoryTiles.length) return
+
+    let categoriesArr = []
+
+    categoryTiles.forEach(category => {
+      let image = category
+        .querySelector('.category-tile__image')
+        .dataset.src.slice(43)
+      let url = category.getAttribute('href')
+      let title = category.querySelector('.category-tile__heading').textContent
+
+      categoriesArr.push({
+        image,
+        url,
+        title
+      })
+
+      dispatch({ type: 'autoFillCategories', payload: categoriesArr })
+    })
+  }
+
+  return <Icon onClick={handleClick} />
+}
+
+export const AutoFillPromos = props => {
+  const dispatch = useAppDispatch()
+  const { territory } = useAppState()
+  const handleClick = async e => {
+    e.persist()
+
+    let { data } = await axios.get(territory.url)
+    let parser = new DOMParser()
+    let html = parser.parseFromString(data, 'text/html')
+
+    let promos = Array.from(html.querySelectorAll('.info'))
+
+    if (!promos.length) return
+
+    let promosArr = []
+
+    promos.forEach(promo => {
+      let url = promo.querySelector('a').getAttribute('href')
+      let title = promo.querySelector('h3').textContent
+
+      promosArr.push({
+        url,
+        title
+      })
+
+      dispatch({ type: 'autoFillPromoBlocks', payload: promosArr })
+    })
+  }
+
+  return <Icon onClick={handleClick} />
+}
