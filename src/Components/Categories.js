@@ -4,7 +4,7 @@ import styled from 'styled-components'
 import { useAppState, useAppDispatch } from '../state-context'
 
 import { Form } from './styles/Form'
-import AutoFillIcon from './AutoFillCategories'
+import { AutoFillCategories } from './AutoFill'
 
 const CategoryForm = styled(Form)`
   padding: 0;
@@ -44,7 +44,7 @@ const Categories = props => {
         <CategoryForm ref={provided.innerRef} {...provided.droppableProps}>
           <section>
             <h3>Categories</h3>
-            <AutoFillIcon />
+            <AutoFillCategories />
           </section>
           {categories.map((category, index) => (
             <Draggable
