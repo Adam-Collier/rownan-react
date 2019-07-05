@@ -24,6 +24,12 @@ const IconContent = styled.div`
   }
 `
 
+let trimWhiteSpace = obj => {
+  Object.keys(obj).forEach(key => {
+    obj[key] = obj[key].trim()
+  })
+}
+
 export const AutoFillContent = ({ index, type }) => {
   const { territory } = useAppState()
   let dispatch = useAppDispatch()
@@ -62,6 +68,8 @@ export const AutoFillContent = ({ index, type }) => {
       svg: row.querySelector('svg').outerHTML,
       title: title ? title.textContent : ''
     }
+
+    trimWhiteSpace(block)
 
     dispatch({ type: 'autoFill', payload: block, index })
     ;[image, mobileImage].forEach((x, i) => {
@@ -104,6 +112,8 @@ export const AutoFillContent = ({ index, type }) => {
       title: title ? title.textContent : '',
       url: lowerSlot.getAttribute('href')
     }
+
+    trimWhiteSpace(block)
 
     dispatch({ type: 'autoFill', payload: block, index: index })
   }
@@ -161,8 +171,6 @@ export const AutoFillCategories = props => {
       html.querySelectorAll('.category-tile__link')
     )
 
-    console.log(categoryTiles)
-
     if (!categoryTiles.length) return
 
     let categoriesArr = []
@@ -178,6 +186,10 @@ export const AutoFillCategories = props => {
         image,
         url,
         title
+      })
+
+      categoriesArr.forEach(x => {
+        trimWhiteSpace(x)
       })
 
       dispatch({ type: 'autoFillCategories', payload: categoriesArr })
@@ -210,6 +222,10 @@ export const AutoFillPromos = props => {
       promosArr.push({
         url,
         title
+      })
+
+      promosArr.forEach(x => {
+        trimWhiteSpace(x)
       })
 
       dispatch({ type: 'autoFillPromoBlocks', payload: promosArr })
