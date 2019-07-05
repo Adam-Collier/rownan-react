@@ -1,3 +1,5 @@
+import addImageTransformations from '../lib/addImageTransformations'
+
 const CategoryTemplate = (categories, territory) => {
   let categoryTitle = () => {
     switch (territory.identifier) {
@@ -122,7 +124,11 @@ const CategoryTemplate = (categories, territory) => {
           category =>
             `<a class="category-tile__link" href="${category.url}">
           <div class="category-tile">
-            <img class="category-tile__image lazyload" data-src="https://media.missguided.co.uk/image/upload${category.image}" />
+            <img class="category-tile__image lazyload" data-src="${addImageTransformations(
+              category.image,
+              '184',
+              'category'
+            )}" />
             <h3 class="category-tile__heading">${category.title}</h3>
           </div>
         </a>`

@@ -35,7 +35,8 @@
     "eject": "react-scripts eject",
     "npm-rebuild": "electron-rebuild",
     "electron-build": "electron-builder --dir",
-    "postinstall": "electron-builder install-app-deps"
+    "postinstall": "electron-builder install-app-deps",
+    "package": "npm run build && npm run electron-build"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -58,6 +59,9 @@
     "electron-devtools-installer": "^2.2.4",
     "electron-rebuild": "^1.8.5",
     "foreman": "^3.0.1"
+  },
+  "build": {
+    "asar": false
   },
   "repository": "https://github.com/Adam-Collier/rownan-react.git",
   "license": "MIT"

@@ -50,11 +50,4 @@ export const Form = styled.div`
     font-size: 14px;
     font-weight: 300;
   }
-
-  input.image,
-  input.mobile,
-  input.image2,
-  input.vid {
-    width: 58%;
-  }
 `

@@ -5,7 +5,11 @@ const LowerTemplate = blocks => {
   return `<div class="blocker"></div>
     ${blocks
       .map(block => {
-        let transformedImage = addImageTransformations(block.image, 'lower')
+        let transformedImage = addImageTransformations(
+          block.image,
+          '600',
+          'lower'
+        )
 
         return removeEmptyLines`<div>
       <a href="${block.url}" class="tracking">
@@ -13,11 +17,11 @@ const LowerTemplate = blocks => {
           <img
             class="lazyload"
             data-expand="-50"
-            data-src="https://media.missguided.co.uk/image/upload/${transformedImage}"
+            data-src="${transformedImage}"
             src="${
               block.placeholderImage
                 ? block.placeholderImage
-                : `https://media.missguided.co.uk/image/upload/${transformedImage}`
+                : `${transformedImage}`
             }"
             alt="backup_img"
           />

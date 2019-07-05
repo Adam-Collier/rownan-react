@@ -4,19 +4,51 @@ import addImageTransformations from '../lib/addImageTransformations'
 const MainTemplate = blocks =>
   blocks
     .map((block, index) => {
-      let transformedImage = addImageTransformations(block.image)
-      let transformedMobile = addImageTransformations(block.mobile)
+      let mobileBreakPoints = [300, 402, 491, 569, 639, 711, 756, 767]
+      let desktopBreakPoints = [
+        768,
+        937,
+        1086,
+        1226,
+        1353,
+        1474,
+        1582,
+        1686,
+        1792,
+        1905
+      ]
 
       return removeEmptyLines`<div class="row fullwidth row${index + 1}">
       <a href="${block.primaryUrl}">
-        ${transformedImage &&
+        ${block.image &&
           `<picture>
-            <source media="(max-width: 767px)" sizes="(max-width: 767px) 100vw, 767px" data-srcset="https://media.missguided.co.uk/image/upload/c_fill,c_scale,w_300${transformedMobile} 300w, https://media.missguided.co.uk/image/upload/w_402${transformedMobile} 402w, https://media.missguided.co.uk/image/upload/w_491${transformedMobile} 491w, https://media.missguided.co.uk/image/upload/w_569${transformedMobile} 569w, https://media.missguided.co.uk/image/upload/w_639${transformedMobile} 639w, https://media.missguided.co.uk/image/upload/w_711${transformedMobile} 711w, https://media.missguided.co.uk/image/upload/w_756${transformedMobile} 756w, https://media.missguided.co.uk/image/upload/w_767${transformedMobile} 767w">
-            <source sizes="(max-width: 1920px) 100vw, 1920px" data-srcset="https://media.missguided.co.uk/image/upload/w_768${transformedImage} 768w, https://media.missguided.co.uk/image/upload/w_937${transformedImage} 937w, https://media.missguided.co.uk/image/upload/w_1086${transformedImage} 1086w, https://media.missguided.co.uk/image/upload/w_1226${transformedImage} 1226w, https://media.missguided.co.uk/image/upload/w_1353${transformedImage} 1353w, https://media.missguided.co.uk/image/upload/w_1474${transformedImage} 1474w, https://media.missguided.co.uk/image/upload/w_1582${transformedImage} 1582w, https://media.missguided.co.uk/image/upload/w_1686${transformedImage} 1686w, https://media.missguided.co.uk/image/upload/w_1792${transformedImage} 1792w, https://media.missguided.co.uk/image/upload/w_1905${transformedImage} 1905w, https://media.missguided.co.uk/image/upload/w_1920${transformedImage} 1920w" alt="image failed">
-            <img class="lazyload" data-expand="-50" data-src="https://media.missguided.co.uk/image/upload/w_1920${transformedImage}" src="${
+            <source media="(max-width: 767px)" sizes="(max-width: 767px) 100vw" 
+              data-srcset="${mobileBreakPoints
+                .map(width => {
+                  return `${addImageTransformations(
+                    block.mobile,
+                    width
+                  )} ${width}w`
+                })
+                .join(',\n              ')}">
+            <source 
+            sizes="(max-width: 1920px) 100vw" 
+            data-srcset="${desktopBreakPoints
+              .map(width => {
+                return `${addImageTransformations(
+                  block.image,
+                  width
+                )} ${width}w`
+              })
+              .join(',\n              ')}" 
+              alt="image failed">
+            <img class="lazyload" data-expand="-50" data-src="${addImageTransformations(
+              block.image,
+              '1920'
+            )}" src="${
             block.placeholderImage
               ? block.placeholderImage
-              : `https://media.missguided.co.uk/image/upload/w_1920${transformedImage}`
+              : `${addImageTransformations(block.image, '1920')}`
           }" alt="backup">
         </picture>`}
         <div class="banner_content center">

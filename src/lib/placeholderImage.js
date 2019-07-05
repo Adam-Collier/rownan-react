@@ -5,10 +5,12 @@ const tempDirPath = window.require('electron').remote.app.getPath('temp')
 const fs = window.require('fs-extra')
 const sqip = window.require('sqip')
 
-export const placeholderImage = async imgPart => {
+export const placeholderImage = async image => {
   try {
-    if (imgPart.match(/\.(jpeg|jpg|gif|png)$/)) {
-      let image = `https://media.missguided.co.uk/image/upload${imgPart}`
+    if (
+      image.match(/https:\/\/i1.adis.ws\/i\/missguided/) ||
+      image.match(/\.(jpeg|jpg|gif|png)$/)
+    ) {
       let id = shortid.generate()
 
       let imagePath = `${tempDirPath}rownan--temp/${id}.jpeg`
