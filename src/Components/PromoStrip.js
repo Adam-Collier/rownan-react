@@ -1,9 +1,10 @@
 import React, { memo } from 'react'
+import styled from 'styled-components'
+
+import { AutoFillPromos } from './AutoFill'
+import { Form } from './styles/Form'
 import PromoBlocks from './PromoBlocks'
 import { useAppDispatch } from '../state-context'
-import { Form } from './styles/Form'
-
-import styled from 'styled-components'
 
 const PromoButton = styled.input`
   background: none;
@@ -28,11 +29,14 @@ function PromoStrip() {
     <Form>
       <PromoHeader>
         <h3>Promo Strip</h3>
-        <PromoButton
-          type="button"
-          value="+"
-          onClick={() => dispatch({ type: 'addPromoBlock' })}
-        />
+        <div>
+          <AutoFillPromos />
+          <PromoButton
+            type="button"
+            value="+"
+            onClick={() => dispatch({ type: 'addPromoBlock' })}
+          />
+        </div>
       </PromoHeader>
       <PromoBlocks />
     </Form>
