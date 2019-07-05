@@ -22,7 +22,7 @@ const MainTemplate = blocks =>
       <a href="${block.primaryUrl}">
         ${block.image &&
           `<picture>
-            <source media="(max-width: 767px)" sizes="(max-width: 767px) 100vw, 767px" 
+            <source media="(max-width: 767px)" sizes="(max-width: 767px) 100vw" 
               data-srcset="${mobileBreakPoints
                 .map(width => {
                   return `${addImageTransformations(
@@ -31,7 +31,8 @@ const MainTemplate = blocks =>
                   )} ${width}w`
                 })
                 .join(',\n              ')}">
-            <source sizes="(max-width: 1920px) 100vw, 1920px" 
+            <source 
+            sizes="(max-width: 1920px) 100vw" 
             data-srcset="${desktopBreakPoints
               .map(width => {
                 return `${addImageTransformations(
