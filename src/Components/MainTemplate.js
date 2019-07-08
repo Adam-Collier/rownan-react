@@ -32,7 +32,7 @@ const MainTemplate = blocks =>
                 })
                 .join(',\n              ')}">
             <source 
-            sizes="(max-width: 1920px) 100vw" 
+            sizes="(min-width: 768px) 100vw" 
             data-srcset="${desktopBreakPoints
               .map(width => {
                 return `${addImageTransformations(

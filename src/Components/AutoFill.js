@@ -30,6 +30,22 @@ let trimWhiteSpace = obj => {
   })
 }
 
+let removeTransformations = url => {
+  if (url.includes('https://media.missguided.co.uk')) {
+    let arr = url.split('/')
+
+    if (arr[5].includes('w_')) {
+      arr.splice(5, 1)
+      return arr.join('/')
+    }
+
+    return arr.join('/')
+  }
+  if (url.includes('https://i1.adis.ws/i/missguided')) {
+    return url.split('?')[0]
+  }
+}
+
 export const AutoFillContent = ({ index, type }) => {
   const { territory } = useAppState()
   let dispatch = useAppDispatch()
@@ -49,8 +65,9 @@ export const AutoFillContent = ({ index, type }) => {
 
     let srcSet = row.querySelector('source').dataset.srcset
 
-    let mobileImage = srcSet.match(/^https:[^ ]+/gi)[0].slice(64)
-    let image = row.querySelector('img').dataset.src.slice(55)
+    let mobileImage = removeTransformations(srcSet.match(/^https:[^ ]+/gi)[0])
+    let image = removeTransformations(row.querySelector('img').dataset.src)
+
     let urls = row.querySelectorAll('a')
     let buttons = row.querySelectorAll('button')
 
@@ -107,7 +124,7 @@ export const AutoFillContent = ({ index, type }) => {
 
     let block = {
       cta: lowerSlot.querySelector('button').textContent,
-      image: lowerSlot.querySelector('img').dataset.src.slice(54),
+      image: removeTransformations(lowerSlot.querySelector('img').dataset.src),
       subtitle: subtitle ? subtitle.textContent : '',
       title: title ? title.textContent : '',
       url: lowerSlot.getAttribute('href')
@@ -176,9 +193,9 @@ export const AutoFillCategories = props => {
     let categoriesArr = []
 
     categoryTiles.forEach(category => {
-      let image = category
-        .querySelector('.category-tile__image')
-        .dataset.src.slice(43)
+      let image = removeTransformations(
+        category.querySelector('.category-tile__image').dataset.src
+      )
       let url = category.getAttribute('href')
       let title = category.querySelector('.category-tile__heading').textContent
 
