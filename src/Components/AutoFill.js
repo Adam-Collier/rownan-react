@@ -4,6 +4,7 @@ import styled from 'styled-components'
 
 import { useAppState, useAppDispatch } from '../state-context'
 import { placeholderImage } from '../lib/placeholderImage'
+import { convertEmojis } from '../lib/emojiConvert'
 
 import fillIcon from '../icons/autoFill.svg'
 import { ReactComponent as AutoFillIcon } from '../icons/autoFill.svg'
@@ -234,7 +235,9 @@ export const AutoFillPromos = props => {
 
     promos.forEach(promo => {
       let url = promo.querySelector('a').getAttribute('href')
-      let title = promo.querySelector('h3').textContent
+      let title = promo.querySelector('h3').innerHTML
+
+      title = convertEmojis(title)
 
       promosArr.push({
         url,
