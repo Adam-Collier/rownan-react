@@ -7,7 +7,7 @@ const CategoryTemplate = (categories, territory) => {
         return 'Shoppe nach'
       }
       case 'PL': {
-        return 'Zniżka na'
+        return 'sprawdź nasze'
       }
       case 'FR': {
         return 'parcourir les catégories'
@@ -126,7 +126,7 @@ const CategoryTemplate = (categories, territory) => {
           <div class="category-tile">
             <img class="category-tile__image lazyload" data-src="${addImageTransformations(
               category.image,
-              '184',
+              '200',
               'category'
             )}" />
             <h3 class="category-tile__heading">${category.title}</h3>
