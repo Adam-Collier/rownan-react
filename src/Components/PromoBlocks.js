@@ -1,6 +1,7 @@
 import React from 'react'
 import { useAppState, useAppDispatch } from '../state-context'
 import { ReactComponent as CloseIcon } from '../icons/close.svg'
+import { convertEmojis } from '../lib/emojiConvert'
 
 import styled from 'styled-components'
 
@@ -24,6 +25,9 @@ function PromoBlocks() {
   const dispatch = useAppDispatch()
 
   const handleChange = (index, e) => {
+    if (e.target.name === 'title')
+      e.target.value = convertEmojis(e.target.value)
+
     dispatch({
       type: 'addPromoContent',
       payload: e.target.value,
