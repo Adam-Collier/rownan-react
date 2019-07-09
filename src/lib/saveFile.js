@@ -5,6 +5,7 @@ export default state => {
   // open the save dialog
   dialog.showSaveDialog(
     {
+      defaultPath: `${state.territory.identifier}.html`,
       filters: [
         {
           name: 'Custom File Type',
