@@ -2,7 +2,7 @@ import React from 'react'
 import { useAppDispatch } from '../state-context'
 import { placeholderImage } from '../lib/placeholderImage'
 
-import { Form } from './styles/Form'
+import { BlockForm } from './styles/ContentBlocks'
 
 const LowerForm = props => {
   const { index, block } = props
@@ -30,8 +30,8 @@ const LowerForm = props => {
   }
 
   return (
-    <Form>
-      <div className="inline">
+    <BlockForm>
+      <section className="inline">
         <div>
           <label>URL</label>
           <input
@@ -52,7 +52,7 @@ const LowerForm = props => {
             onChange={handleChange}
           />
         </div>
-      </div>
+      </section>
       <label>Image</label>
       <input
         type="text"
@@ -77,7 +77,7 @@ const LowerForm = props => {
         className="subtitle"
         onChange={handleChange}
       />
-    </Form>
+    </BlockForm>
   )
 }
 
