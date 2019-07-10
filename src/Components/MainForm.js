@@ -1,7 +1,7 @@
 import React from 'react'
 import { useAppDispatch } from '../state-context'
 
-import { Form } from './styles/Form'
+import { BlockForm } from './styles/ContentBlocks'
 import { placeholderImage } from '../lib/placeholderImage'
 
 const MainForm = props => {
@@ -31,10 +31,10 @@ const MainForm = props => {
   }
 
   return (
-    <Form>
-      <div className="inline">
+    <BlockForm>
+      <section className="inline">
         <div>
-          <label>PRIMARY URL</label>
+          <label>Primary URL</label>
           <input
             type="text"
             name="primaryUrl"
@@ -44,7 +44,7 @@ const MainForm = props => {
           />
         </div>
         <div>
-          <label>SECONDARY URL</label>
+          <label>Secondary URL</label>
           <input
             type="text"
             name="secondaryUrl"
@@ -53,7 +53,7 @@ const MainForm = props => {
             onChange={handleChange}
           />
         </div>
-      </div>
+      </section>
       <label>Image</label>
       <input
         type="text"
@@ -94,9 +94,9 @@ const MainForm = props => {
         className="subtitle"
         onChange={handleChange}
       />
-      <div className="inline">
+      <section className="inline">
         <div>
-          <label>PRIMARY CTA</label>
+          <label>Primary CTA</label>
           <input
             type="text"
             name="primaryCta"
@@ -106,7 +106,7 @@ const MainForm = props => {
           />
         </div>
         <div>
-          <label>SECONDARY CTA</label>
+          <label>Secondary CTA</label>
           <input
             type="text"
             name="secondaryCta"
@@ -115,8 +115,8 @@ const MainForm = props => {
             onChange={handleChange}
           />
         </div>
-      </div>
-    </Form>
+      </section>
+    </BlockForm>
   )
 }
 
