@@ -1,5 +1,6 @@
 // Modules to control application life and create native browser window
 const { app, BrowserWindow, Menu } = require('electron')
+const { autoUpdater } = require('electron-updater')
 const browserSync = require('./browsersync')
 const fs = require('fs-extra')
 const menuTemplate = require('./menuTemplate')
@@ -38,6 +39,22 @@ function createWindow() {
   // create the menu
   const menu = Menu.buildFromTemplate(menuTemplate)
   Menu.setApplicationMenu(menu)
+
+  /* Update is ready */
+  autoUpdater.on('update-downloaded', updateInfo => {
+    /* Notify user about ready to be installed update */
+    // ...
+    /* Or force quit app and install update */
+    // autoUpdater.quitAndInstall();
+  })
+
+  /* Check for updates manually */
+  autoUpdater.checkForUpdates()
+
+  /* Check updates every 10 minutes */
+  setInterval(() => {
+    autoUpdater.checkForUpdates()
+  }, 10 * 60 * 1000)
 
   // Emitted when the window is closed.
   mainWindow.on('closed', function() {
