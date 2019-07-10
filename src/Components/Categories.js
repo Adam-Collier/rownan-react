@@ -1,29 +1,9 @@
 import React from 'react'
 import { Droppable, Draggable } from 'react-beautiful-dnd'
-import styled from 'styled-components'
 import { useAppState, useAppDispatch } from '../state-context'
 
-import { Form } from './styles/Form'
+import { BlockWrapper } from './styles/ContentBlocks'
 import { AutoFillCategories } from './AutoFill'
-
-const CategoryForm = styled(Form)`
-  padding: 0;
-  > div {
-    padding: 10px 20px;
-  }
-  > div:nth-child(even) {
-    background-color: #292d2f;
-  }
-  > div:nth-child(odd) {
-    background-color: #2e3235;
-  }
-  > section {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0 20px;
-  }
-`
 
 const Categories = props => {
   const { categories } = useAppState()
@@ -41,7 +21,7 @@ const Categories = props => {
   return (
     <Droppable droppableId="categories">
       {provided => (
-        <CategoryForm ref={provided.innerRef} {...provided.droppableProps}>
+        <BlockWrapper ref={provided.innerRef} {...provided.droppableProps}>
           <section>
             <h3>Categories</h3>
             <AutoFillCategories />
@@ -59,7 +39,7 @@ const Categories = props => {
                   ref={provided.innerRef}
                   {...provided.dragHandleProps}
                 >
-                  <div className="inline">
+                  <section className="inline">
                     <div>
                       <label>URL</label>
                       <input
@@ -78,7 +58,7 @@ const Categories = props => {
                         onChange={e => handleChange(index, e)}
                       />
                     </div>
-                  </div>
+                  </section>
                   <label>Image</label>
                   <input
                     type="text"
@@ -91,7 +71,7 @@ const Categories = props => {
               )}
             </Draggable>
           ))}
-        </CategoryForm>
+        </BlockWrapper>
       )}
     </Droppable>
   )
