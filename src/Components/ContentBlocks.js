@@ -7,7 +7,8 @@ import { ReactComponent as DragIcon } from '../icons/dragIcon.svg'
 import { AutoFillContent } from './AutoFill'
 import MainForm from './MainForm'
 import LowerForm from './LowerForm'
-import { DropDown, Block, Remove } from './styles/ContentBlocks'
+
+import { BlockWrapper, DropDown, Block, Remove } from './styles/ContentBlocks'
 
 const ContentBlocks = props => {
   const dispatch = useAppDispatch()
@@ -36,7 +37,7 @@ const ContentBlocks = props => {
   return (
     <Droppable droppableId="droppable">
       {provided => (
-        <div ref={provided.innerRef} {...provided.droppableProps}>
+        <BlockWrapper ref={provided.innerRef} {...provided.droppableProps}>
           {contentBlocks.map((block, index) => (
             <Draggable
               key={index}
@@ -91,7 +92,7 @@ const ContentBlocks = props => {
             </Draggable>
           ))}
           {provided.placeholder}
-        </div>
+        </BlockWrapper>
       )}
     </Droppable>
   )

@@ -10,12 +10,18 @@ const PromoBlock = styled.div`
   align-items: center;
   justify-content: space-between;
   margin-bottom: 20px;
-  input[type='text']:last-of-type {
-    margin-bottom: 0px;
+
+  input[type='text'] {
+    margin-bottom: 15px;
   }
+
+  input[type='text']:last-of-type {
+    margin-bottom: 10px;
+  }
+
   svg {
     width: 30px;
-    padding: 10px 0px 10px 10px;
+    padding: 10px 0px 10px 20px;
     cursor: pointer;
   }
 `
