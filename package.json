@@ -27,6 +27,7 @@
     "styled-components": "^4.2.0"
   },
   "scripts": {
+    "analyze": "node analyze.js",
     "start": "BROWSER=none react-scripts start",
     "dev": "nf start",
     "electron": "electron .",
@@ -58,7 +59,9 @@
     "electron-builder": "^20.44.4",
     "electron-devtools-installer": "^2.2.4",
     "electron-rebuild": "^1.8.5",
-    "foreman": "^3.0.1"
+    "foreman": "^3.0.1",
+    "progress-bar-webpack-plugin": "^1.12.1",
+    "webpack-bundle-analyzer": "^3.3.2"
   },
   "build": {
     "asar": false
