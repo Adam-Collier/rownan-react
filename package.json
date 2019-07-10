@@ -10,6 +10,7 @@
     "browser-sync": "^2.26.7",
     "cheerio": "^1.0.0-rc.3",
     "codemirror": "^5.47.0",
+    "electron-updater": "^4.0.14",
     "fs-extra": "^8.0.1",
     "prettier": "^1.18.2",
     "react": "^16.8.6",
@@ -37,7 +38,8 @@
     "npm-rebuild": "electron-rebuild",
     "electron-build": "electron-builder --dir",
     "postinstall": "electron-builder install-app-deps",
-    "package": "npm run build && npm run electron-build"
+    "package": "npm run build && npm run electron-build",
+    "ship": "npm run build && electron-builder -p always"
   },
   "eslintConfig": {
     "extends": "react-app"
