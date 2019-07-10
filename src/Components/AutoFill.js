@@ -16,10 +16,10 @@ const IconContent = styled.div`
     border: none;
     color: transparent;
     position: absolute;
-    right: 60px;
-    width: 28px;
-    height: 28px;
-    top: 48%;
+    right: 32px;
+    width: 26px;
+    height: 26px;
+    top: calc(46% - 7px);
     transform: translateY(-50%);
     cursor: pointer;
   }
@@ -132,6 +132,15 @@ export const AutoFillContent = ({ index, type }) => {
     }
 
     trimWhiteSpace(block)
+
+    placeholderImage(block.image).then(placeholder => {
+      dispatch({
+        type: 'placeholderImage',
+        name: 'image',
+        index,
+        payload: placeholder
+      })
+    })
 
     dispatch({ type: 'autoFill', payload: block, index: index })
   }
