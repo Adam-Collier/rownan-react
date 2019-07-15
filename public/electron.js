@@ -1,5 +1,5 @@
 // Modules to control application life and create native browser window
-const { app, BrowserWindow, Menu } = require('electron')
+const { app, BrowserWindow, Menu, dialog } = require('electron')
 const { autoUpdater } = require('electron-updater')
 const browserSync = require('./browsersync')
 const fs = require('fs-extra')
@@ -42,10 +42,18 @@ function createWindow() {
 
   /* Update is ready */
   autoUpdater.on('update-downloaded', updateInfo => {
-    /* Notify user about ready to be installed update */
-    // ...
-    /* Or force quit app and install update */
-    // autoUpdater.quitAndInstall();
+    const dialogOpts = {
+      type: 'info',
+      buttons: ['Restart', 'Later'],
+      title: 'Application Update',
+      message: process.platform === 'win32' ? releaseNotes : releaseName,
+      detail:
+        'A new version has been downloaded. Restart the application to apply the updates.'
+    }
+
+    dialog.showMessageBox(dialogOpts, response => {
+      if (response === 0) autoUpdater.quitAndInstall()
+    })
   })
 
   /* Check for updates manually */
