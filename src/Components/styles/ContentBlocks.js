@@ -72,6 +72,10 @@ export const BlockWrapper = styled.div`
     display: flex;
     justify-content: space-between;
     align-items: center;
+
+    h3 {
+      padding-left: 20px;
+    }
   }
 `
 
