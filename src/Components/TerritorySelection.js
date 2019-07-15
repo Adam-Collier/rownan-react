@@ -6,18 +6,22 @@ let Territories = styled.ul`
   list-style-type: none;
   color: #ffffff;
   display: flex;
-  padding: 0 20px;
+  margin: 0;
+  padding: 1em 10px;
   justify-content: space-between;
+  background: #26292b;
   input {
     display: none;
   }
   label {
+    font-weight: 700;
     cursor: pointer;
     border: 1px solid #ffffff;
     width: 22px;
     text-align: center;
-    padding: 5px;
-    border-radius: 3px;
+    padding: 6px;
+    border-radius: 4px;
+    font-size: 13px;
   }
   .checked {
     background: #ffffff;
