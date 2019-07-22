@@ -22,7 +22,17 @@ const MainTemplate = blocks =>
       <a href="${block.primaryUrl}">
         ${block.image &&
           `<picture>
-            <source media="(max-width: 767px)" sizes="(max-width: 767px) 100vw" 
+            <source type="image/webp" media="(max-width: 767px)" sizes="(max-width: 767px) 100vw"
+              data-srcset="${mobileBreakPoints
+                .map(width => {
+                  return `${addImageTransformations(
+                    block.mobile,
+                    width,
+                    true
+                  )} ${width}w`
+                })
+                .join(',\n              ')}">
+            <source type="image/jpg" media="(max-width: 767px)" sizes="(max-width: 767px) 100vw" 
               data-srcset="${mobileBreakPoints
                 .map(width => {
                   return `${addImageTransformations(
@@ -31,7 +41,24 @@ const MainTemplate = blocks =>
                   )} ${width}w`
                 })
                 .join(',\n              ')}">
+            <source
+            type="image/webp"
+            media="(min-width: 768px)"
+            sizes="(min-width: 768px) 100vw"
+            data-srcset="${desktopBreakPoints
+              .map(width => {
+                return `${addImageTransformations(
+                  block.image,
+                  width,
+                  'main',
+                  true
+                )} ${width}w`
+              })
+              .join(',\n              ')}" 
+              alt="image failed">
             <source 
+            type="image/jpg"
+            media="(min-width: 768px)"
             sizes="(min-width: 768px) 100vw" 
             data-srcset="${desktopBreakPoints
               .map(width => {
