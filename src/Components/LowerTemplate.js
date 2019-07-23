@@ -53,7 +53,6 @@ const LowerTemplate = blocks => {
                 false
               )}" 
                 alt="image failed">
-
             <img
               class="lazyload"
               data-expand="-50"
