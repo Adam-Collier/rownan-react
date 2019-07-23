@@ -124,11 +124,25 @@ const CategoryTemplate = (categories, territory) => {
           category =>
             `<a class="category-tile__link" href="${category.url}">
           <div class="category-tile">
-            <img class="category-tile__image lazyload" data-src="${addImageTransformations(
-              category.image,
-              '200',
-              'category'
-            )}" />
+            <picture>
+              <source type="image/webp" data-srcset="${addImageTransformations(
+                category.image,
+                '200',
+                'category',
+                true
+              )}" >
+              <source data-srcset="${addImageTransformations(
+                category.image,
+                '200',
+                'category',
+                false
+              )}" >
+              <img class="category-tile__image lazyload" data-src="${addImageTransformations(
+                category.image,
+                '100',
+                'category'
+              )}" />
+            </picture>
             <h3 class="category-tile__heading">${category.title}</h3>
           </div>
         </a>`
