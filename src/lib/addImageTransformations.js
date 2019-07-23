@@ -2,13 +2,10 @@ export default (image, width, type, webp) => {
   let extension = image.split('.').pop()
 
   if (image.includes('https://i1.adis.ws/i/missguided')) {
-    console.log(type)
-    if (type === 'category') {
-      console.log(webp)
+    if (type === 'category')
       return webp === true
         ? `${image}.webp?w=${width}&fmt.jpeg.interlaced=true`
         : `${image}?w=${width}&fmt.jpeg.interlaced=true`
-    }
 
     if (webp === true)
       return `${image}.webp?bg=rgb(254,245,240)&w=${width}&qlt=70&fmt.jpeg.interlaced=true&upscale=false`
