@@ -56,7 +56,6 @@ const MainTemplate = blocks =>
               .join(',\n              ')}" 
               alt="image failed">
             <source 
-            type="image/jpg"
             media="(min-width: 768px)"
             sizes="(min-width: 768px) 100vw" 
             data-srcset="${desktopBreakPoints
