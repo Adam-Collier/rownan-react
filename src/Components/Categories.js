@@ -45,7 +45,7 @@ const Categories = props => {
                       <input
                         type="text"
                         name="url"
-                        value={category.url}
+                        value={category.url.trim()}
                         onChange={e => handleChange(index, e)}
                       />
                     </div>

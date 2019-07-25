@@ -50,7 +50,7 @@ function PromoBlocks() {
             <input
               type="text"
               name="url"
-              value={block.url}
+              value={block.url.trim()}
               placeholder="url"
               onChange={e => handleChange(index, e)}
             />
