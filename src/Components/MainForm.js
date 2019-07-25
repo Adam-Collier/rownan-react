@@ -38,7 +38,7 @@ const MainForm = props => {
           <input
             type="text"
             name="primaryUrl"
-            value={block.content.primaryUrl}
+            value={block.content.primaryUrl.trim()}
             className="primary-url"
             onChange={handleChange}
           />
@@ -48,7 +48,7 @@ const MainForm = props => {
           <input
             type="text"
             name="secondaryUrl"
-            value={block.content.secondaryUrl}
+            value={block.content.secondaryUrl.trim()}
             className="secondary-url"
             onChange={handleChange}
           />

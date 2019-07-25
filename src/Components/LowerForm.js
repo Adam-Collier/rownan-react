@@ -37,7 +37,7 @@ const LowerForm = props => {
           <input
             type="text"
             name="url"
-            value={block.content.url}
+            value={block.content.url.trim()}
             className="url"
             onChange={handleChange}
           />
