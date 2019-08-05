@@ -9,6 +9,9 @@ import { convertEmojis } from '../lib/emojiConvert'
 import fillIcon from '../icons/autoFill.svg'
 import { ReactComponent as AutoFillIcon } from '../icons/autoFill.svg'
 
+const fs = window.require('fs-extra')
+const { dialog } = window.require('electron').remote
+
 const IconContent = styled.div`
   > select {
     appearance: none;
@@ -47,6 +50,119 @@ let removeTransformations = url => {
   }
 }
 
+let autoFillFromFile = (dispatch, index, value, type) => {
+  dialog.showOpenDialog(
+    { properties: ['openFile'], filters: [{ extensions: ['json'] }] },
+    async function(files) {
+      if (files) {
+        let file = JSON.parse(fs.readFileSync(files[0], 'utf8'))
+
+        let contentBlocks = file.contentBlocks.filter(block => {
+          return block.type === type
+        })
+
+        let blockIndex =
+          type === 'main'
+            ? parseInt(value.substring(3, 4)) - 1
+            : value.substring(0, 1)
+
+        if (!contentBlocks[blockIndex]) return
+
+        let block = contentBlocks[blockIndex].content
+
+        let imageArr =
+          type === 'main' ? [block.image, block.mobile] : [block.image]
+
+        imageArr.forEach((x, i) => {
+          placeholderImage(x).then(placeholder => {
+            dispatch({
+              type: 'placeholderImage',
+              name: i === 0 ? 'image' : 'mobile',
+              index,
+              payload: placeholder
+            })
+          })
+        })
+
+        dispatch({ type: 'autoFill', payload: block, index })
+      }
+    }
+  )
+}
+
+let createBlock = (el, type) => {
+  if (type === 'lower') {
+    let subtitle = el.querySelector('.subtitle3')
+    let title = el.querySelector('.title3')
+
+    return {
+      cta: el.querySelector('button').textContent,
+      image: removeTransformations(el.querySelector('img').dataset.src),
+      subtitle: subtitle ? subtitle.textContent : '',
+      title: title ? title.textContent : '',
+      url: el.getAttribute('href')
+    }
+  } else if (type === 'main') {
+    let srcSet = el.querySelector('source').dataset.srcset
+    let urls = el.querySelectorAll('a')
+    let buttons = el.querySelectorAll('button')
+    let subtitle = el.querySelector('.subtitle1')
+    let title = el.querySelector('.title1')
+
+    return {
+      image: removeTransformations(el.querySelector('img').dataset.src),
+      mobile: removeTransformations(srcSet.match(/^https:[^ ]+/gi)[0]),
+      primaryCta: buttons[0].textContent,
+      primaryUrl: urls[0].getAttribute('href'),
+      secondaryCta: buttons[1] ? buttons[1].textContent : '',
+      secondaryUrl: urls[1] ? urls[1].getAttribute('href') : '',
+      subtitle: subtitle ? subtitle.textContent : '',
+      svg: el.querySelector('svg').outerHTML,
+      title: title ? title.textContent : ''
+    }
+  }
+}
+
+let autoFillFromSite = async (
+  dispatch,
+  index,
+  value,
+  territory,
+  type,
+  selector
+) => {
+  if (value === 'default') return
+
+  let { data } = await axios.get(territory.url)
+  let parser = new DOMParser()
+  let html = parser.parseFromString(data, 'text/html')
+
+  let el =
+    type === 'main'
+      ? html.querySelector(`.${value}`)
+      : html.querySelectorAll(selector)[value]
+
+  if (el === null) return
+
+  let block = createBlock(el, type)
+
+  trimWhiteSpace(block)
+
+  let imageArr = type === 'main' ? [block.image, block.mobile] : [block.image]
+
+  imageArr.forEach((x, i) => {
+    placeholderImage(x).then(placeholder => {
+      dispatch({
+        type: 'placeholderImage',
+        name: i === 0 ? 'image' : 'mobile',
+        index,
+        payload: placeholder
+      })
+    })
+  })
+  dispatch({ type: 'autoFill', payload: block, index })
+}
+
 export const AutoFillContent = ({ index, type }) => {
   const { territory } = useAppState()
   let dispatch = useAppDispatch()
@@ -54,95 +170,28 @@ export const AutoFillContent = ({ index, type }) => {
   let mainPopulate = async (territory, index, e) => {
     if (e.target.value === 'default') return
 
-    let rowName = `.${e.target.value}`
-    let { data } = await axios.get(territory.url)
-
-    let parser = new DOMParser()
-    let html = parser.parseFromString(data, 'text/html')
-
-    let row = html.querySelector(rowName)
-
-    if (row === null) return
-
-    let srcSet = row.querySelector('source').dataset.srcset
-
-    let mobileImage = removeTransformations(srcSet.match(/^https:[^ ]+/gi)[0])
-    let image = removeTransformations(row.querySelector('img').dataset.src)
-
-    let urls = row.querySelectorAll('a')
-    let buttons = row.querySelectorAll('button')
-
-    let subtitle = row.querySelector('.subtitle1')
-    let title = row.querySelector('.title1')
-
-    let block = {
-      image: image,
-      mobile: mobileImage,
-      primaryCta: buttons[0].textContent,
-      primaryUrl: urls[0].getAttribute('href'),
-      secondaryCta: buttons[1] ? buttons[1].textContent : '',
-      secondaryUrl: urls[1] ? urls[1].getAttribute('href') : '',
-      subtitle: subtitle ? subtitle.textContent : '',
-      svg: row.querySelector('svg').outerHTML,
-      title: title ? title.textContent : ''
+    if (e.target.value.includes('file')) {
+      autoFillFromFile(dispatch, index, e.target.value, 'main')
+    } else {
+      autoFillFromSite(dispatch, index, e.target.value, territory, 'main')
     }
-
-    trimWhiteSpace(block)
-
-    dispatch({ type: 'autoFill', payload: block, index })
-    ;[image, mobileImage].forEach((x, i) => {
-      placeholderImage(x).then(placeholder => {
-        dispatch({
-          type: 'placeholderImage',
-          name: i === 0 ? 'image' : 'mobile',
-          index,
-          payload: placeholder
-        })
-      })
-    })
-
-    dispatch({ type: 'updateHTML' })
   }
 
   let lowerPopulate = async (territory, index, e) => {
     e.persist()
 
-    let lowerValue = e.target.value
-
-    if (e.target.value === 'default') return
-
-    let { data } = await axios.get(territory.url)
-
-    let parser = new DOMParser()
-    let html = parser.parseFromString(data, 'text/html')
-
-    let lowerSlot = html.querySelectorAll('.slick-three > div > a')[lowerValue]
-
-    if (lowerSlot === null) return
-
-    let subtitle = lowerSlot.querySelector('.subtitle3')
-    let title = lowerSlot.querySelector('.title3')
-
-    let block = {
-      cta: lowerSlot.querySelector('button').textContent,
-      image: removeTransformations(lowerSlot.querySelector('img').dataset.src),
-      subtitle: subtitle ? subtitle.textContent : '',
-      title: title ? title.textContent : '',
-      url: lowerSlot.getAttribute('href')
-    }
-
-    trimWhiteSpace(block)
-
-    placeholderImage(block.image).then(placeholder => {
-      dispatch({
-        type: 'placeholderImage',
-        name: 'image',
+    if (e.target.value.includes('file')) {
+      autoFillFromFile(dispatch, index, e.target.value, 'lower')
+    } else {
+      autoFillFromSite(
+        dispatch,
         index,
-        payload: placeholder
-      })
-    })
-
-    dispatch({ type: 'autoFill', payload: block, index: index })
+        e.target.value,
+        territory,
+        'lower',
+        '.slick-three > div > a'
+      )
+    }
   }
 
   return (
@@ -162,6 +211,9 @@ export const AutoFillContent = ({ index, type }) => {
             <option value="row1">Row 1</option>
             <option value="row2">Row 2</option>
             <option value="row3">Row 3</option>
+            <option value="row1 file">Row 1 (from file)</option>
+            <option value="row2 file">Row 2 (from file)</option>
+            <option value="row3 file">Row 3 (from file)</option>
           </>
         )}
         {type === 'lower' && (
@@ -170,7 +222,9 @@ export const AutoFillContent = ({ index, type }) => {
             <option value="0">Lower 1</option>
             <option value="1">Lower 2</option>
             <option value="2">Lower 3</option>
-            <option value="3">Lower 4</option>
+            <option value="0 file">Lower 1 (from file)</option>
+            <option value="1 file">Lower 2 (from file)</option>
+            <option value="2 file">Lower 3 (from file)</option>
           </>
         )}
       </select>
@@ -184,7 +238,7 @@ const Icon = styled(AutoFillIcon)`
   cursor: pointer;
 `
 
-export const AutoFillCategories = props => {
+export const AutoFillCategories = () => {
   const dispatch = useAppDispatch()
   const { territory } = useAppState()
   const handleClick = async e => {
