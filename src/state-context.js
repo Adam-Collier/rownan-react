@@ -249,6 +249,11 @@ let defaultEditorCode = `<style>
     text-transform: none;
   }
   @media (min-width: 768px) {
+    .row button.button {
+      background: rgb(255, 255, 255);
+      color: rgb(50, 50, 50);
+      border-color: rgb(255, 255, 255);
+    }
     .row1 .title1,
     .row2 .title1,
     .row3 .title1 {
