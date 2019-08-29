@@ -91,10 +91,8 @@ export const BlockForm = styled.div`
 `
 
 export const DropDown = styled.div`
-  /* padding: 20px 20px 20px 20px; */
   padding-bottom: 10px;
   position: relative;
-  -webkit-app-region: no-drag;
   display: flex;
   align-items: center;
 
@@ -126,7 +124,6 @@ export const DropDown = styled.div`
     right: 0px;
     top: calc(50% - 4px);
     transform: translateY(-50%);
-    -webkit-app-region: no-drag;
     cursor: -webkit-grab;
     padding-left: 10px;
   }

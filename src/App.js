@@ -16,6 +16,16 @@ const fs = window.require('fs')
 const AppContainer = styled.div`
   display: grid;
   grid-template-columns: 400px 1fr;
+
+  &:after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 30px;
+    -webkit-app-region: drag;
+  }
 `
 
 const Left = styled.div`

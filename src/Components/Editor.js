@@ -26,16 +26,6 @@ const CodeEditor = styled.div`
     border-radius: 3px;
     background: #21252b;
   }
-
-  .CodeMirror:after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 200%;
-    height: 30px;
-    -webkit-app-region: drag;
-  }
 `
 
 function Editor(props) {
