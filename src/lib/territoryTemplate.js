@@ -147,6 +147,8 @@ let territoryPicker = () => `
       let includes = document.querySelector("[data-include]");
       let file = "./" + territory + ".html";
 
+      document.querySelector("html").setAttribute('lang', territory)
+
       fetch(file)
         .then(response => response.text())
         .then(data => (document.querySelector(".main").innerHTML = data));
