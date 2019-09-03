@@ -132,7 +132,7 @@ let territoryPicker = () => `
   <button data-terr="EU" class="button done">EU</button>
   <button data-terr="US" class="button done">US</button>
   <button data-terr="AU" class="button done">AU</button>
-  <button data-terr="FR" class="button not-done">FR</button>
+  <button data-terr="FR" class="button done">FR</button>
   <button data-terr="DE" class="button done">DE</button>
   <button data-terr="ES" class="button done">ES</button>
   <button data-terr="PL" class="button done">PL</button>
