@@ -12,6 +12,9 @@ const CategoryTemplate = (categories, territory) => {
       case 'FR': {
         return 'parcourir les catégories'
       }
+      case 'ES': {
+        return 'Ver categorías'
+      }
       default: {
         return 'browse categories'
       }
