@@ -26,6 +26,9 @@ const IconContent = styled.div`
     transform: translateY(-50%);
     cursor: pointer;
   }
+  .categories{
+    right: 0;
+  }
 `
 
 let trimWhiteSpace = obj => {
@@ -53,38 +56,41 @@ let removeTransformations = url => {
 let autoFillFromFile = (dispatch, index, value, type) => {
   dialog.showOpenDialog(
     { properties: ['openFile'], filters: [{ extensions: ['json'] }] },
-    async function(files) {
+    async function (files) {
       if (files) {
         let file = JSON.parse(fs.readFileSync(files[0], 'utf8'))
 
-        let contentBlocks = file.contentBlocks.filter(block => {
-          return block.type === type
-        })
+        if (type === "main" || type === "lower") {
+          let contentBlocks = file.contentBlocks.filter(block => {
+            return block.type === type
+          })
 
-        let blockIndex =
-          type === 'main'
-            ? parseInt(value.substring(3, 4)) - 1
-            : value.substring(0, 1)
+          let blockIndex =
+            type === 'main'
+              ? parseInt(value.substring(3, 4)) - 1
+              : value.substring(0, 1)
 
-        if (!contentBlocks[blockIndex]) return
+          if (!contentBlocks[blockIndex]) return
 
-        let block = contentBlocks[blockIndex].content
+          let block = contentBlocks[blockIndex].content
 
-        let imageArr =
-          type === 'main' ? [block.image, block.mobile] : [block.image]
+          let imageArr =
+            type === 'main' ? [block.image, block.mobile] : [block.image]
 
-        imageArr.forEach((x, i) => {
-          placeholderImage(x).then(placeholder => {
-            dispatch({
-              type: 'placeholderImage',
-              name: i === 0 ? 'image' : 'mobile',
-              index,
-              payload: placeholder
+          imageArr.forEach((x, i) => {
+            placeholderImage(x).then(placeholder => {
+              dispatch({
+                type: 'placeholderImage',
+                name: i === 0 ? 'image' : 'mobile',
+                index,
+                payload: placeholder
+              })
             })
           })
-        })
-
-        dispatch({ type: 'autoFill', payload: block, index })
+          dispatch({ type: 'autoFill', payload: block, index })
+        } else if (type === "categories") {
+          dispatch({ type: 'autoFillCategories', payload: file.categories })
+        }
       }
     }
   )
@@ -241,43 +247,61 @@ const Icon = styled(AutoFillIcon)`
 export const AutoFillCategories = () => {
   const dispatch = useAppDispatch()
   const { territory } = useAppState()
-  const handleClick = async e => {
-    e.persist()
 
-    let { data } = await axios.get(territory.url)
-    let parser = new DOMParser()
-    let html = parser.parseFromString(data, 'text/html')
+  const handleClick = async (territory, e) => {
+    if (e.target.value.includes('file')) {
+      autoFillFromFile(dispatch, null, e.target.value, 'categories')
+    } else {
+      let { data } = await axios.get(territory.url)
+      let parser = new DOMParser()
+      let html = parser.parseFromString(data, 'text/html')
 
-    let categoryTiles = Array.from(
-      html.querySelectorAll('.category-tile__link')
-    )
-
-    if (!categoryTiles.length) return
-
-    let categoriesArr = []
-
-    categoryTiles.forEach(category => {
-      let image = removeTransformations(
-        category.querySelector('.category-tile__image').dataset.src
+      let categoryTiles = Array.from(
+        html.querySelectorAll('.category-tile__link')
       )
-      let url = category.getAttribute('href')
-      let title = category.querySelector('.category-tile__heading').textContent
 
-      categoriesArr.push({
-        image,
-        url,
-        title
+      if (!categoryTiles.length) return
+
+      let categoriesArr = []
+
+      categoryTiles.forEach(category => {
+        let image = removeTransformations(
+          category.querySelector('.category-tile__image').dataset.src
+        )
+        let url = category.getAttribute('href')
+        let title = category.querySelector('.category-tile__heading').textContent
+
+        categoriesArr.push({
+          image,
+          url,
+          title
+        })
+
+        categoriesArr.forEach(x => {
+          trimWhiteSpace(x)
+        })
+
+        dispatch({ type: 'autoFillCategories', payload: categoriesArr })
       })
-
-      categoriesArr.forEach(x => {
-        trimWhiteSpace(x)
-      })
-
-      dispatch({ type: 'autoFillCategories', payload: categoriesArr })
-    })
+    }
   }
 
-  return <Icon onClick={handleClick} />
+  return (<IconContent>
+    <select
+      name="autofill"
+      value="default"
+      className="categories"
+      onChange={e =>
+        handleClick(territory, e)
+      }
+    >
+      <>
+        <option value="default">No categories</option>
+        <option value="0">From site</option>
+        <option value="0 file">From file</option>
+      </>
+    </select>
+  </IconContent>)
 }
 
 export const AutoFillPromos = props => {
