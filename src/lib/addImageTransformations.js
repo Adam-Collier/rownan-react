@@ -8,12 +8,12 @@ export default (image, width, type, webp) => {
         : `${image}?w=${width}&fmt.jpeg.interlaced=true`
 
     if (webp === true)
-      return `${image}.webp?bg=rgb(254,245,240)&w=${width}&qlt=70&fmt.jpeg.interlaced=true&upscale=false`
+      return `${image}.webp?bg=rgb(254,245,240)&w=${width}&qlt=60&fmt.jpeg.interlaced=true&upscale=false`
 
     if (webp === true)
-      return `${image}.webp?bg=rgb(254,245,240)&w=${width}&qlt=70&fmt.jpeg.interlaced=true&upscale=false`
+      return `${image}.webp?bg=rgb(254,245,240)&w=${width}&qlt=60&fmt.jpeg.interlaced=true&upscale=false`
 
-    return `${image}?bg=rgb(254,245,240)&w=${width}&qlt=70&fmt.jpeg.interlaced=true&upscale=false`
+    return `${image}?bg=rgb(254,245,240)&w=${width}&qlt=60&fmt.jpeg.interlaced=true&upscale=false`
   }
 
   if (image.includes('https://media.missguided.co.uk')) {
