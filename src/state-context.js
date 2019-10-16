@@ -18,7 +18,7 @@ const DispatchContext = React.createContext()
 
 const hasContent = array => {
   let arr = array.filter(object => {
-    return Object.keys(object).every(function(key) {
+    return Object.keys(object).every(function (key) {
       return object[key] === ''
     })
       ? false
@@ -167,10 +167,10 @@ ${styles}
   </div>
   ${hasContent(state.promoBlocks) ? PromoTemplate(state.promoBlocks) : ''}
   ${
-    hasContent(state.categories)
-      ? CategoryTemplate(state.categories, state.territory)
-      : ''
-  }
+          hasContent(state.categories)
+            ? CategoryTemplate(state.categories, state.territory)
+            : ''
+          }
   <div class="slick-three">
     ${LowerTemplate(lowerBlocks)}
   </div>
@@ -253,6 +253,12 @@ let defaultEditorCode = `<style>
       background: rgb(255, 255, 255);
       color: rgb(50, 50, 50);
       border-color: rgb(255, 255, 255);
+    }
+    .row svg{
+      margin-bottom: 20px;
+    }
+    .row .banner_content {
+      width: 100%;
     }
     .row1 .title1,
     .row2 .title1,
