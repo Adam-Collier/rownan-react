@@ -6,6 +6,7 @@ import Editor from './Components/Editor'
 import Content from './Components/Content'
 import Preview from './Components/Preview'
 import ActionIcons from './Components/ActionIcons'
+import Titlebar from './Components/Titlebar'
 
 import { useAppDispatch } from './state-context'
 
@@ -16,16 +17,6 @@ const fs = window.require('fs')
 const AppContainer = styled.div`
   display: grid;
   grid-template-columns: 400px 1fr;
-
-  &:after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 30px;
-    -webkit-app-region: drag;
-  }
 `
 
 const Left = styled.div`
@@ -77,6 +68,7 @@ function App() {
   })
   return (
     <AppContainer className="App">
+      <Titlebar />
       <Left>
         <Editor />
         <Content />
