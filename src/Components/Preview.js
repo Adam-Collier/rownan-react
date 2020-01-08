@@ -11,6 +11,7 @@ const PreviewPane = styled.div`
   grid-row: 1/3;
   height: 100vh;
   background: #fff;
+  overflow: scroll;
 `
 
 const Preview = props => {
