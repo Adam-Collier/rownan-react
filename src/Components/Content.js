@@ -17,7 +17,7 @@ const ContentContainer = styled.div`
 
 const Content = props => {
   const dispatch = useAppDispatch()
-  const { contentBlocks, categories } = useAppState()
+  const { contentBlocks, categories, promoBlocks } = useAppState()
 
   const onDragEnd = (result, blockType) => {
     const { destination, source } = result
@@ -46,7 +46,9 @@ const Content = props => {
   return (
     <ContentContainer>
       <TerritorySelection />
-      <PromoStrip />
+      <DragDropContext onDragEnd={e => onDragEnd(e, promoBlocks)}>
+        <PromoStrip />
+      </DragDropContext>
       <DragDropContext onDragEnd={e => onDragEnd(e, categories)}>
         <Categories />
       </DragDropContext>
