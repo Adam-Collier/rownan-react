@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react'
+import React from 'react'
 import { useAppDispatch } from '../state-context'
 import { ReactComponent as CloseIcon } from '../icons/close.svg'
 import { convertEmojis } from '../lib/emojiConvert'
