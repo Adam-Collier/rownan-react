@@ -49,7 +49,7 @@ function PromoStrip() {
                   ref={provided.innerRef}
                   {...provided.dragHandleProps}
                 >
-                  <PromoBlock provided={provided} block={block} />{' '}
+                  <PromoBlock provided={provided} block={block} index={index} />{' '}
                 </div>
               )}
             </Draggable>
