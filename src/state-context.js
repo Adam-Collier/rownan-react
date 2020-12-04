@@ -12,21 +12,31 @@ import addPlaceholderImageCSS from './lib/addPlaceholderImageCSS'
 
 import saveFile from './lib/saveFile'
 import contentPreviewUpdate from './lib/contentPreviewUpdate'
+import { AppDownloadTemplate } from './Components/AppDownload'
 
 // https://kentcdodds.com/blog/how-to-use-react-context-effectively
 // https://daveceddia.com/react-redux-immutability-guide/
 const StateContext = React.createContext()
 const DispatchContext = React.createContext()
 
-const hasContent = array => {
-  let arr = array.filter(object => {
+const hasContent = state => {
+  if(Array.isArray(state)){
+    let arr = state.filter(object => {
     return Object.keys(object).every(function(key) {
       return object[key] === ''
     })
       ? false
       : true
-  })
-  return arr.length ? true : false
+    })
+    return arr.length ? true : false
+  }else{
+    // assume if it isn't an array it is an object
+    return Object.keys(state).every(function(key) {
+      return state[key] === ''
+    })
+      ? false
+      : true
+  }
 }
 
 function stateReducer(state, action) {
@@ -37,6 +47,13 @@ function stateReducer(state, action) {
 
     case 'ticker': {
       return { ...state, tickerText: action.payload }
+    }
+
+    case 'appDownload': {
+      return { ...state, appDownload: {
+        ...state.appDownload,
+        [action.name]: action.payload,
+      } }
     }
 
     case 'switch': {
@@ -182,6 +199,7 @@ ${styles}
   <div class="slick-three">
     ${LowerTemplate(lowerBlocks)}
   </div>
+  ${hasContent(state.appDownload) ? AppDownloadTemplate(state.appDownload) : ""}
 </div>`
       }
 
@@ -204,7 +222,7 @@ ${styles}
     }
 
     case 'openFile': {
-      return { ...action.savedState }
+      return { ...state, ...action.savedState }
     }
 
     case 'territory': {
@@ -290,6 +308,11 @@ let defaultEditorCode = `<style>
 </style>`
 
 let initialState = {
+  appDownload: {
+    link: "",
+    title: "",
+    subtitle: ""
+  },
   categories: Array(5).fill({ url: '', title: '', image: '' }),
   contentBlocks: [],
   contentView: true,

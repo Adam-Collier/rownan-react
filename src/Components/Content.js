@@ -10,6 +10,7 @@ import Ticker from "./Ticker"
 
 import { DragDropContext } from 'react-beautiful-dnd'
 import { FormButton } from './styles/FormButton'
+import { AppDownload } from './AppDownload'
 
 const ContentContainer = styled.div`
   grid-column: 1/2;
@@ -48,6 +49,7 @@ const Content = props => {
     <ContentContainer>
       <TerritorySelection />
       <Ticker />
+      
       <DragDropContext onDragEnd={e => onDragEnd(e, promoBlocks)}>
         <PromoStrip />
       </DragDropContext>
@@ -57,6 +59,7 @@ const Content = props => {
       <DragDropContext onDragEnd={e => onDragEnd(e, contentBlocks)}>
         <ContentBlocks />
       </DragDropContext>
+      <AppDownload />
       <FormButton
         type="button"
         value="+"
