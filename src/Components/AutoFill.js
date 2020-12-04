@@ -48,7 +48,7 @@ let removeTransformations = url => {
 
     return arr.join('/')
   }
-  if (url.includes('https://i1.adis.ws/i/missguided')) {
+  if (url.includes('https://i1.adis.ws/i/missguided') || url.includes('https://media.missguided.com/i/missguided')) {
     return url.split('?')[0]
   }
 }
