@@ -26,7 +26,7 @@ const IconContent = styled.div`
     transform: translateY(-50%);
     cursor: pointer;
   }
-  .categories{
+  .categories {
     right: 0;
   }
 `
@@ -56,11 +56,11 @@ let removeTransformations = url => {
 let autoFillFromFile = (dispatch, index, value, type) => {
   dialog.showOpenDialog(
     { properties: ['openFile'], filters: [{ extensions: ['json'] }] },
-    async function (files) {
+    async function(files) {
       if (files) {
         let file = JSON.parse(fs.readFileSync(files[0], 'utf8'))
 
-        if (type === "main" || type === "lower") {
+        if (type === 'main' || type === 'lower') {
           let contentBlocks = file.contentBlocks.filter(block => {
             return block.type === type
           })
@@ -88,7 +88,7 @@ let autoFillFromFile = (dispatch, index, value, type) => {
             })
           })
           dispatch({ type: 'autoFill', payload: block, index })
-        } else if (type === "categories") {
+        } else if (type === 'categories') {
           dispatch({ type: 'autoFillCategories', payload: file.categories })
         }
       }
@@ -217,9 +217,11 @@ export const AutoFillContent = ({ index, type }) => {
             <option value="row1">Row 1</option>
             <option value="row2">Row 2</option>
             <option value="row3">Row 3</option>
+            <option value="row4">Row 4</option>
             <option value="row1 file">Row 1 (from file)</option>
             <option value="row2 file">Row 2 (from file)</option>
             <option value="row3 file">Row 3 (from file)</option>
+            <option value="row4 file">Row 4 (from file)</option>
           </>
         )}
         {type === 'lower' && (
@@ -228,9 +230,11 @@ export const AutoFillContent = ({ index, type }) => {
             <option value="0">Lower 1</option>
             <option value="1">Lower 2</option>
             <option value="2">Lower 3</option>
+            <option value="3">Lower 4</option>
             <option value="0 file">Lower 1 (from file)</option>
             <option value="1 file">Lower 2 (from file)</option>
             <option value="2 file">Lower 3 (from file)</option>
+            <option value="3 file">Lower 4 (from file)</option>
           </>
         )}
       </select>
@@ -269,7 +273,8 @@ export const AutoFillCategories = () => {
           category.querySelector('.category-tile__image').dataset.src
         )
         let url = category.getAttribute('href')
-        let title = category.querySelector('.category-tile__heading').textContent
+        let title = category.querySelector('.category-tile__heading')
+          .textContent
 
         categoriesArr.push({
           image,
@@ -286,22 +291,22 @@ export const AutoFillCategories = () => {
     }
   }
 
-  return (<IconContent>
-    <select
-      name="autofill"
-      value="default"
-      className="categories"
-      onChange={e =>
-        handleClick(territory, e)
-      }
-    >
-      <>
-        <option value="default">No categories</option>
-        <option value="0">From site</option>
-        <option value="0 file">From file</option>
-      </>
-    </select>
-  </IconContent>)
+  return (
+    <IconContent>
+      <select
+        name="autofill"
+        value="default"
+        className="categories"
+        onChange={e => handleClick(territory, e)}
+      >
+        <>
+          <option value="default">No categories</option>
+          <option value="0">From site</option>
+          <option value="0 file">From file</option>
+        </>
+      </select>
+    </IconContent>
+  )
 }
 
 export const AutoFillPromos = props => {
