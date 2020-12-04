@@ -222,7 +222,7 @@ ${styles}
     }
 
     case 'openFile': {
-      return { ...action.savedState }
+      return { ...state, ...action.savedState }
     }
 
     case 'territory': {
@@ -308,7 +308,11 @@ let defaultEditorCode = `<style>
 </style>`
 
 let initialState = {
-  appDownload: {},
+  appDownload: {
+    link: "",
+    title: "",
+    subtitle: ""
+  },
   categories: Array(5).fill({ url: '', title: '', image: '' }),
   contentBlocks: [],
   contentView: true,
