@@ -1,7 +1,7 @@
 {
   "name": "rownan-react",
   "author": "Adam Collier",
-  "version": "0.1.7",
+  "version": "0.1.8",
   "private": true,
   "homepage": "./",
   "main": "public/electron.js",
