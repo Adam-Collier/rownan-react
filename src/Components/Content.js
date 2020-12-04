@@ -6,6 +6,7 @@ import Categories from './Categories'
 import ContentBlocks from './ContentBlocks'
 import PromoStrip from './PromoStrip'
 import TerritorySelection from './TerritorySelection'
+import Ticker from "./Ticker"
 
 import { DragDropContext } from 'react-beautiful-dnd'
 import { FormButton } from './styles/FormButton'
@@ -46,6 +47,7 @@ const Content = props => {
   return (
     <ContentContainer>
       <TerritorySelection />
+      <Ticker />
       <DragDropContext onDragEnd={e => onDragEnd(e, promoBlocks)}>
         <PromoStrip />
       </DragDropContext>

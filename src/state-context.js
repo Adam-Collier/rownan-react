@@ -5,6 +5,8 @@ import css from 'prettier/parser-postcss'
 import PromoTemplate from './Components/PromoTemplate'
 import MainTemplate from './Components/MainTemplate'
 import LowerTemplate from './Components/LowerTemplate'
+import MegaBannerWidget from './Components/MegaBannerWidget'
+import TickerTemplate from './Components/TickerTemplate'
 import CategoryTemplate from './Components/CategoryTemplate'
 import addPlaceholderImageCSS from './lib/addPlaceholderImageCSS'
 
@@ -18,7 +20,7 @@ const DispatchContext = React.createContext()
 
 const hasContent = array => {
   let arr = array.filter(object => {
-    return Object.keys(object).every(function (key) {
+    return Object.keys(object).every(function(key) {
       return object[key] === ''
     })
       ? false
@@ -31,6 +33,10 @@ function stateReducer(state, action) {
   switch (action.type) {
     case 'editorCode': {
       return { ...state, editorCode: action.payload }
+    }
+
+    case 'ticker': {
+      return { ...state, tickerText: action.payload }
     }
 
     case 'switch': {
@@ -162,15 +168,17 @@ function stateReducer(state, action) {
         return `
 ${styles}
 <div class="container">
+  ${MegaBannerWidget(state.territory)}
+  ${state.tickerText ? TickerTemplate(state.tickerText) : ''}
   <div id="homeSlider">
     ${MainTemplate(mainBlocks)}
   </div>
   ${hasContent(state.promoBlocks) ? PromoTemplate(state.promoBlocks) : ''}
   ${
-          hasContent(state.categories)
-            ? CategoryTemplate(state.categories, state.territory)
-            : ''
-          }
+    hasContent(state.categories)
+      ? CategoryTemplate(state.categories, state.territory)
+      : ''
+  }
   <div class="slick-three">
     ${LowerTemplate(lowerBlocks)}
   </div>
@@ -255,7 +263,12 @@ let defaultEditorCode = `<style>
       border-color: rgb(255, 255, 255);
     }
     .row svg{
+      margin-bottom: 40px;
+      filter: drop-shadow(0 0 10px rgba(0,0,0,0.3));
+    }
+    .row .subtitle1{
       margin-bottom: 20px;
+      text-shadow: 0 0 10px rgba(0,0,0,0.3);
     }
     .row .banner_content {
       width: 100%;
@@ -296,7 +309,8 @@ let initialState = {
   territory: {
     identifier: 'UK',
     url: 'https://www.missguided.co.uk/'
-  }
+  },
+  tickerText: ""
 }
 
 function StateProvider({ children }) {
