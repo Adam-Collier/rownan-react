@@ -1,10 +1,10 @@
 import React from 'react'
-import { useAppDispatch } from '../state-context'
+import { useAppDispatch } from '../../state-context'
 
-import { BlockForm } from './styles/ContentBlocks'
-import { placeholderImage } from '../lib/placeholderImage'
+import { BlockForm } from '../styles/ContentBlocks'
+import { placeholderImage } from '../../lib/placeholderImage'
 
-const MainForm = props => {
+const HeroForm = props => {
   const { index, block } = props
 
   const dispatch = useAppDispatch()
@@ -120,4 +120,4 @@ const MainForm = props => {
   )
 }
 
-export default MainForm
+export default HeroForm

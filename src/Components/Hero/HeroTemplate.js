@@ -1,7 +1,7 @@
-import removeEmptyLines from '../lib/removeEmptyLines'
-import addImageTransformations from '../lib/addImageTransformations'
+import removeEmptyLines from '../../lib/removeEmptyLines'
+import addImageTransformations from '../../lib/addImageTransformations'
 
-const MainTemplate = blocks =>
+const HeroTemplate = blocks =>
   blocks
     .map((block, index) => {
       let mobileBreakPoints = [300, 402, 491, 569, 639, 711, 756, 767]
@@ -95,4 +95,4 @@ const MainTemplate = blocks =>
     })
     .join('')
 
-export default MainTemplate
+export default HeroTemplate

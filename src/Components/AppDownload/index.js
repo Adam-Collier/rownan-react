@@ -1,7 +1,7 @@
 import React from "react";
-import removeEmptyLines from "../lib/removeEmptyLines";
-import { useAppState, useAppDispatch } from '../state-context'
-import { BlockWrapper } from './styles/ContentBlocks'
+import removeEmptyLines from "../../lib/removeEmptyLines";
+import { useAppState, useAppDispatch } from '../../state-context'
+import { BlockWrapper } from '../styles/ContentBlocks'
 
 const AppDownloadTemplate = ({title, subtitle, link}) => {
     return removeEmptyLines`
@@ -45,7 +45,7 @@ const AppDownloadTemplate = ({title, subtitle, link}) => {
 
 
 
-const AppDownload = () => {
+const AppDownloadBlock = () => {
   const { appDownload } = useAppState()
   const dispatch = useAppDispatch()
 
@@ -90,4 +90,4 @@ return(
     </BlockWrapper>
 )}
 
-export {AppDownload, AppDownloadTemplate};
+export {AppDownloadBlock, AppDownloadTemplate};

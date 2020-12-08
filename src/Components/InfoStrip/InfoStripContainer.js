@@ -2,10 +2,10 @@ import React, { memo } from 'react'
 import styled from 'styled-components'
 import { Draggable, Droppable } from 'react-beautiful-dnd'
 
-import { AutoFillPromos } from './AutoFill'
-import { BlockWrapper } from './styles/ContentBlocks'
-import PromoBlock from './PromoBlock'
-import { useAppDispatch, useAppState } from '../state-context'
+import { AutoFillPromos } from '../AutoFill'
+import { BlockWrapper } from '../styles/ContentBlocks'
+import InfoStripBlock from './InfoStripBlock'
+import { useAppDispatch, useAppState } from '../../state-context'
 
 const PromoButton = styled.input`
   background: none;
@@ -17,7 +17,7 @@ const PromoButton = styled.input`
   cursor: pointer;
 `
 
-function PromoStrip() {
+function InfoStripContainer() {
   const dispatch = useAppDispatch()
   const { promoBlocks } = useAppState()
 
@@ -26,7 +26,7 @@ function PromoStrip() {
       {provided => (
         <BlockWrapper ref={provided.innerRef} {...provided.droppableProps}>
           <section>
-            <h3>Promo Strip</h3>
+            <h3>Info Strip</h3>
             <div>
               <AutoFillPromos />
               <PromoButton
@@ -49,7 +49,7 @@ function PromoStrip() {
                   ref={provided.innerRef}
                   {...provided.dragHandleProps}
                 >
-                  <PromoBlock provided={provided} block={block} index={index} />{' '}
+                  <InfoStripBlock provided={provided} block={block} index={index} />{' '}
                 </div>
               )}
             </Draggable>
@@ -61,4 +61,4 @@ function PromoStrip() {
   )
 }
 
-export default memo(PromoStrip)
+export default memo(InfoStripContainer)

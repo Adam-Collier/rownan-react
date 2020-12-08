@@ -1,8 +1,8 @@
 import React from 'react'
-import { useAppDispatch } from '../state-context'
-import { placeholderImage } from '../lib/placeholderImage'
+import { useAppDispatch } from '../../state-context'
+import { placeholderImage } from '../../lib/placeholderImage'
 
-import { BlockForm } from './styles/ContentBlocks'
+import { BlockForm } from '../styles/ContentBlocks'
 
 const LowerForm = props => {
   const { index, block } = props

@@ -1,8 +1,8 @@
 import React from "react";
-import { useAppState, useAppDispatch } from '../state-context'
-import { BlockWrapper } from './styles/ContentBlocks'
+import { useAppState, useAppDispatch } from '../../state-context'
+import { BlockWrapper } from '../styles/ContentBlocks'
 
-const Ticker = () => {
+const TickerBlock = () => {
   const { tickerText } = useAppState()
   const dispatch = useAppDispatch()
 
@@ -30,4 +30,4 @@ return(
     </BlockWrapper>
 )}
 
-export default Ticker;
+export default TickerBlock;

@@ -5,8 +5,8 @@ import { Droppable, Draggable } from 'react-beautiful-dnd'
 import { ReactComponent as DragIcon } from '../icons/dragIcon.svg'
 
 import { AutoFillContent } from './AutoFill'
-import MainForm from './MainForm'
-import LowerForm from './LowerForm'
+import HeroBlock from './Hero/HeroBlock'
+import LowerBlock from './Lower/LowerBlock'
 
 import { BlockWrapper, DropDown, Block, Remove } from './styles/ContentBlocks'
 
@@ -82,10 +82,10 @@ const ContentBlocks = props => {
                     <DragIcon />
                   </DropDown>
                   {block.type === 'main' && (
-                    <MainForm index={index} block={block} />
+                    <HeroBlock index={index} block={block} />
                   )}
                   {block.type === 'lower' && (
-                    <LowerForm index={index} block={block} />
+                    <LowerBlock index={index} block={block} />
                   )}
                 </Block>
               )}

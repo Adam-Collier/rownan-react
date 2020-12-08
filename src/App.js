@@ -2,7 +2,7 @@ import React from 'react'
 // import logo from './logo.svg'
 import './App.css'
 import styled from 'styled-components'
-import Editor from './Components/Editor'
+import CodeEditor from './Components/CodeEditor'
 import Content from './Components/Content'
 import Preview from './Components/Preview'
 import ActionIcons from './Components/ActionIcons'
@@ -70,7 +70,7 @@ function App() {
     <AppContainer className="App">
       <Titlebar />
       <Left>
-        <Editor />
+        <CodeEditor />
         <Content />
       </Left>
       <Preview />

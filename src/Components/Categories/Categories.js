@@ -1,9 +1,9 @@
 import React from 'react'
 import { Droppable, Draggable } from 'react-beautiful-dnd'
-import { useAppState, useAppDispatch } from '../state-context'
+import { useAppState, useAppDispatch } from '../../state-context'
 
-import { BlockWrapper } from './styles/ContentBlocks'
-import { AutoFillCategories } from './AutoFill'
+import { BlockWrapper } from '../styles/ContentBlocks'
+import { AutoFillCategories } from '../AutoFill'
 
 const Categories = props => {
   const { categories } = useAppState()

@@ -1,11 +1,11 @@
 import React from 'react'
-import { useAppDispatch } from '../state-context'
-import { ReactComponent as CloseIcon } from '../icons/close.svg'
-import { convertEmojis } from '../lib/emojiConvert'
+import { useAppDispatch } from '../../state-context'
+import { ReactComponent as CloseIcon } from '../../icons/close.svg'
+import { convertEmojis } from '../../lib/emojiConvert'
 
 import styled from 'styled-components'
 
-const PromoBlock = styled.div`
+const Block = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -25,7 +25,7 @@ const PromoBlock = styled.div`
   }
 `
 
-function PromoBlocks({ block, provided, index }) {
+function InfoStripBlock({ block, provided, index }) {
   const dispatch = useAppDispatch()
 
   const handleChange = (index, e) => {
@@ -41,7 +41,7 @@ function PromoBlocks({ block, provided, index }) {
   }
 
   return (
-    <PromoBlock>
+    <Block>
       <div>
         <input
           type="text"
@@ -64,8 +64,8 @@ function PromoBlocks({ block, provided, index }) {
           dispatch({ type: 'updateHTML' })
         }}
       />
-    </PromoBlock>
+    </Block>
   )
 }
 
-export default PromoBlocks
+export default InfoStripBlock

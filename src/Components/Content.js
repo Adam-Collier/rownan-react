@@ -2,15 +2,15 @@ import React, { memo } from 'react'
 import styled from 'styled-components'
 import { useAppDispatch, useAppState } from '../state-context'
 
-import Categories from './Categories'
+import Categories from './Categories/Categories'
 import ContentBlocks from './ContentBlocks'
-import PromoStrip from './PromoStrip'
-import TerritorySelection from './TerritorySelection'
-import Ticker from "./Ticker"
+import InfoStripContainer from './InfoStrip/InfoStripContainer'
+import Territory from "./TerritorySelection"
+import Ticker from "./Ticker/TickerBlock"
 
 import { DragDropContext } from 'react-beautiful-dnd'
 import { FormButton } from './styles/FormButton'
-import { AppDownload } from './AppDownload'
+import { AppDownloadBlock } from './AppDownload'
 
 const ContentContainer = styled.div`
   grid-column: 1/2;
@@ -47,19 +47,18 @@ const Content = props => {
 
   return (
     <ContentContainer>
-      <TerritorySelection />
+      <Territory />
       <Ticker />
-      
       <DragDropContext onDragEnd={e => onDragEnd(e, promoBlocks)}>
-        <PromoStrip />
+        <InfoStripContainer />
       </DragDropContext>
       <DragDropContext onDragEnd={e => onDragEnd(e, categories)}>
         <Categories />
       </DragDropContext>
+      <AppDownloadBlock />
       <DragDropContext onDragEnd={e => onDragEnd(e, contentBlocks)}>
         <ContentBlocks />
       </DragDropContext>
-      <AppDownload />
       <FormButton
         type="button"
         value="+"

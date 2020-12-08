@@ -2,12 +2,12 @@ import React from 'react'
 import prettier from 'prettier/standalone'
 import html from 'prettier/parser-html'
 import css from 'prettier/parser-postcss'
-import PromoTemplate from './Components/PromoTemplate'
-import MainTemplate from './Components/MainTemplate'
-import LowerTemplate from './Components/LowerTemplate'
-import MegaBannerWidget from './Components/MegaBannerWidget'
-import TickerTemplate from './Components/TickerTemplate'
-import CategoryTemplate from './Components/CategoryTemplate'
+import InfoStripTemplate from './Components/InfoStrip/InfoStripTemplate'
+import HeroTemplate from './Components/Hero/HeroTemplate'
+import LowerTemplate from './Components/Lower/LowerTemplate'
+import MegaBannerWidget from './Components/MegaBanner'
+import TickerTemplate from './Components/Ticker/TickerTemplate'
+import CategoryTemplate from './Components/Categories/CategoryTemplate'
 import addPlaceholderImageCSS from './lib/addPlaceholderImageCSS'
 
 import saveFile from './lib/saveFile'
@@ -188,9 +188,9 @@ ${styles}
   ${MegaBannerWidget(state.territory)}
   ${state.tickerText ? TickerTemplate(state.tickerText) : ''}
   <div id="homeSlider">
-    ${MainTemplate(mainBlocks)}
+    ${HeroTemplate(mainBlocks)}
   </div>
-  ${hasContent(state.promoBlocks) ? PromoTemplate(state.promoBlocks) : ''}
+  ${hasContent(state.promoBlocks) ? InfoStripTemplate(state.promoBlocks) : ''}
   ${
     hasContent(state.categories)
       ? CategoryTemplate(state.categories, state.territory)
