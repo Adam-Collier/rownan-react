@@ -20,16 +20,16 @@ const StateContext = React.createContext()
 const DispatchContext = React.createContext()
 
 const hasContent = state => {
-  if(Array.isArray(state)){
+  if (Array.isArray(state)) {
     let arr = state.filter(object => {
-    return Object.keys(object).every(function(key) {
-      return object[key] === ''
-    })
-      ? false
-      : true
+      return Object.keys(object).every(function(key) {
+        return object[key] === ''
+      })
+        ? false
+        : true
     })
     return arr.length ? true : false
-  }else{
+  } else {
     // assume if it isn't an array it is an object
     return Object.keys(state).every(function(key) {
       return state[key] === ''
@@ -50,10 +50,13 @@ function stateReducer(state, action) {
     }
 
     case 'appDownload': {
-      return { ...state, appDownload: {
-        ...state.appDownload,
-        [action.name]: action.payload,
-      } }
+      return {
+        ...state,
+        appDownload: {
+          ...state.appDownload,
+          [action.name]: action.payload
+        }
+      }
     }
 
     case 'switch': {
@@ -199,7 +202,7 @@ ${styles}
   <div class="slick-three">
     ${LowerTemplate(lowerBlocks)}
   </div>
-  ${hasContent(state.appDownload) ? AppDownloadTemplate(state.appDownload) : ""}
+  ${hasContent(state.appDownload) ? AppDownloadTemplate(state.appDownload) : ''}
 </div>`
       }
 
@@ -309,9 +312,9 @@ let defaultEditorCode = `<style>
 
 let initialState = {
   appDownload: {
-    link: "",
-    title: "",
-    subtitle: ""
+    link: '',
+    title: '',
+    subtitle: ''
   },
   categories: Array(5).fill({ url: '', title: '', image: '' }),
   contentBlocks: [],
@@ -333,7 +336,7 @@ let initialState = {
     identifier: 'UK',
     url: 'https://www.missguided.co.uk/'
   },
-  tickerText: ""
+  tickerText: ''
 }
 
 function StateProvider({ children }) {

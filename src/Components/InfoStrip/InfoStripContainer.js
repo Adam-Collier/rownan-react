@@ -2,7 +2,7 @@ import React, { memo } from 'react'
 import styled from 'styled-components'
 import { Draggable, Droppable } from 'react-beautiful-dnd'
 
-import { AutoFillPromos } from '../AutoFill'
+import { AutoFillPromos } from '../Autofill'
 import { BlockWrapper } from '../styles/ContentBlocks'
 import InfoStripBlock from './InfoStripBlock'
 import { useAppDispatch, useAppState } from '../../state-context'
@@ -46,10 +46,14 @@ function InfoStripContainer() {
                 <div
                   key={index}
                   {...provided.draggableProps}
-                  ref={provided.innerRef}
+                  ref={provided.ref}
                   {...provided.dragHandleProps}
                 >
-                  <InfoStripBlock provided={provided} block={block} index={index} />{' '}
+                  <InfoStripBlock
+                    provided={provided}
+                    block={block}
+                    index={index}
+                  />{' '}
                 </div>
               )}
             </Draggable>

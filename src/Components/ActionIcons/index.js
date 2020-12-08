@@ -1,10 +1,10 @@
 import React from 'react'
-import { ReactComponent as Switch } from '../icons/switch.svg'
-import { ReactComponent as Territories } from '../icons/territories.svg'
+import { ReactComponent as Switch } from '../../icons/switch.svg'
+import { ReactComponent as Territories } from '../../icons/territories.svg'
 import styled from 'styled-components'
-import { territoryTemplate } from '../lib/territoryTemplate'
+import { territoryTemplate } from '../../lib/territoryTemplate'
 
-import { useAppDispatch } from '../state-context'
+import { useAppDispatch } from '../../state-context'
 
 const Icons = styled.div`
   position: fixed;

@@ -2,12 +2,12 @@ import axios from 'axios'
 import React from 'react'
 import styled from 'styled-components'
 
-import { useAppState, useAppDispatch } from '../state-context'
-import { placeholderImage } from '../lib/placeholderImage'
-import { convertEmojis } from '../lib/emojiConvert'
+import { useAppState, useAppDispatch } from '../../state-context'
+import { placeholderImage } from '../../lib/placeholderImage'
+import { convertEmojis } from '../../lib/emojiConvert'
 
-import fillIcon from '../icons/autoFill.svg'
-import { ReactComponent as AutoFillIcon } from '../icons/autoFill.svg'
+import fillIcon from '../../icons/autoFill.svg'
+import { ReactComponent as AutoFillIcon } from '../../icons/autoFill.svg'
 
 const fs = window.require('fs-extra')
 const { dialog } = window.require('electron').remote
@@ -48,7 +48,10 @@ let removeTransformations = url => {
 
     return arr.join('/')
   }
-  if (url.includes('https://i1.adis.ws/i/missguided') || url.includes('https://media.missguided.com/i/missguided')) {
+  if (
+    url.includes('https://i1.adis.ws/i/missguided') ||
+    url.includes('https://media.missguided.com/i/missguided')
+  ) {
     return url.split('?')[0]
   }
 }

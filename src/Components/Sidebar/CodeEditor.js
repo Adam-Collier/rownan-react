@@ -1,9 +1,9 @@
 import React, { useEffect, useRef } from 'react'
-import { useAppDispatch, useAppState } from '../state-context'
+import { useAppDispatch, useAppState } from '../../state-context'
 import styled from 'styled-components'
 
-import '../lib/CodeMirror/codemirror.css'
-import '../lib/CodeMirror/one-dark.css'
+import '../../lib/CodeMirror/codemirror.css'
+import '../../lib/CodeMirror/one-dark.css'
 
 import 'codemirror/mode/javascript/javascript'
 import 'codemirror/mode/xml/xml'

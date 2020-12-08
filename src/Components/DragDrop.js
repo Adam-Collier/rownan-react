@@ -1,6 +1,6 @@
 import React from 'react'
 import { Droppable, Draggable } from 'react-beautiful-dnd'
-import { BlockWrapper } from './styles/ContentBlocks'
+import { BlockWrapper, Block } from './styles/ContentBlocks'
 
 const DragDrop = ({ id, stateItems, children }) => (
   <Droppable droppableId={id}>
@@ -14,14 +14,16 @@ const DragDrop = ({ id, stateItems, children }) => (
               index={index}
             >
               {provided => (
-                <div
+                <Block
                   key={index}
                   {...provided.draggableProps}
                   ref={provided.innerRef}
                   {...provided.dragHandleProps}
                 >
-                  {children}
-                </div>
+                  {React.Children.map(children, child =>
+                    React.cloneElement(child, { stateItem })
+                  )}
+                </Block>
               )}
             </Draggable>
           )

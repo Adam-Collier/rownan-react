@@ -1,8 +1,8 @@
 import React, { memo } from 'react'
-import { useAppState } from '../state-context'
+import { useAppState } from '../../state-context'
 import styled from 'styled-components'
 
-import ContentPreview from './ContentPreview'
+import VisualPreview from './VisualPreview'
 import CodePreview from './CodePreview'
 
 const PreviewPane = styled.div`
@@ -18,7 +18,7 @@ const Preview = props => {
   const { contentView } = useAppState()
   return (
     <PreviewPane>
-      {contentView === true ? <ContentPreview /> : <CodePreview />}
+      {contentView === true ? <VisualPreview /> : <CodePreview />}
     </PreviewPane>
   )
 }

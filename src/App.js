@@ -2,9 +2,8 @@ import React from 'react'
 // import logo from './logo.svg'
 import './App.css'
 import styled from 'styled-components'
-import CodeEditor from './Components/CodeEditor'
-import Content from './Components/Content'
-import Preview from './Components/Preview'
+import Sidebar from './Components/Sidebar'
+import Preview from './Components/Preview/Preview'
 import ActionIcons from './Components/ActionIcons'
 import Titlebar from './Components/Titlebar'
 
@@ -17,13 +16,6 @@ const fs = window.require('fs')
 const AppContainer = styled.div`
   display: grid;
   grid-template-columns: 400px 1fr;
-`
-
-const Left = styled.div`
-  height: 100vh;
-  background: #2e3235;
-  overflow: scroll;
-  -webkit-overflow-scrolling: touch;
 `
 
 function App() {
@@ -69,10 +61,7 @@ function App() {
   return (
     <AppContainer className="App">
       <Titlebar />
-      <Left>
-        <CodeEditor />
-        <Content />
-      </Left>
+      <Sidebar />
       <Preview />
       <ActionIcons />
     </AppContainer>
