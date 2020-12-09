@@ -25,9 +25,9 @@ const Block = styled.div`
   }
 `
 
-function InfoStripBlock({ block, provided, index }) {
+function InfoStripBlock({ block, index }) {
+  const { url, title } = block
   const dispatch = useAppDispatch()
-
   const handleChange = (index, e) => {
     if (e.target.name === 'title')
       e.target.value = convertEmojis(e.target.value)
@@ -46,14 +46,14 @@ function InfoStripBlock({ block, provided, index }) {
         <input
           type="text"
           name="url"
-          value={block.url.trim()}
+          value={url.trim()}
           placeholder="url"
           onChange={e => handleChange(index, e)}
         />
         <input
           type="text"
           name="title"
-          value={block.title}
+          value={title}
           placeholder="title"
           onChange={e => handleChange(index, e)}
         />
