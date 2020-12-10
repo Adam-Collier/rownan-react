@@ -1,6 +1,6 @@
 import React, { memo } from 'react'
 import styled from 'styled-components'
-import { useAppDispatch, useAppState } from '../../state-context'
+import { useAppDispatch, useAppState } from '../../context/state-context'
 
 import Categories from '../Categories/Categories'
 import DynamicBlocks from '../DynamicBlocks'
@@ -39,6 +39,7 @@ const Content = props => {
       reorderedBlocks: blocks,
       blockType
     })
+
     dispatch({
       type: 'updateHTML'
     })
@@ -62,7 +63,7 @@ const Content = props => {
       <FormButton
         type="button"
         value="+"
-        onClick={() => dispatch({ type: 'addBlock', payload: 'select' })}
+        onClick={() => dispatch({ type: 'addDynamicBlock', payload: 'select' })}
       />
     </ContentContainer>
   )

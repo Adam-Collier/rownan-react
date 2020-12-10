@@ -1,5 +1,5 @@
 import React, { memo } from 'react'
-import { useAppState } from '../../state-context'
+import { useAppState } from '../../context/state-context'
 import styled from 'styled-components'
 
 import VisualPreview from './VisualPreview'

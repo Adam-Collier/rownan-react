@@ -1,5 +1,5 @@
 import React from 'react'
-import { useAppState } from '../../state-context'
+import { useAppState } from '../../context/state-context'
 import styled from 'styled-components'
 
 import { PrismLight as SyntaxHighlighter } from 'react-syntax-highlighter'

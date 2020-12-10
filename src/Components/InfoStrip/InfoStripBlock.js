@@ -1,5 +1,5 @@
 import React from 'react'
-import { useAppDispatch } from '../../state-context'
+import { useAppDispatch } from '../../context/state-context'
 import { ReactComponent as CloseIcon } from '../../icons/close.svg'
 import { convertEmojis } from '../../lib/emojiConvert'
 
@@ -33,7 +33,7 @@ function InfoStripBlock({ block, index }) {
       e.target.value = convertEmojis(e.target.value)
 
     dispatch({
-      type: 'addPromoContent',
+      type: 'addInfoStripContent',
       payload: e.target.value,
       name: e.target.name,
       index
@@ -60,7 +60,7 @@ function InfoStripBlock({ block, index }) {
       </div>
       <CloseIcon
         onClick={() => {
-          dispatch({ type: 'removePromoBlock', index })
+          dispatch({ type: 'removeInfoStrip', index })
           dispatch({ type: 'updateHTML' })
         }}
       />

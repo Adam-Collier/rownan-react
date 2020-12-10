@@ -1,5 +1,5 @@
 import React from 'react'
-import { useAppDispatch } from '../../state-context'
+import { useAppDispatch } from '../../context/state-context'
 
 import { BlockForm } from '../styles/ContentBlocks'
 import { placeholderImage } from '../../lib/placeholderImage'
@@ -23,7 +23,7 @@ const HeroForm = props => {
     }
 
     dispatch({
-      type: 'addBlockContent',
+      type: 'addDynamicBlockContent',
       payload: e.target.value,
       name: e.target.name,
       index

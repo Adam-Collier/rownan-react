@@ -3,7 +3,7 @@ import styled from 'styled-components'
 
 import { AutoFillPromos } from '../Autofill'
 import InfoStripBlock from './InfoStripBlock'
-import { useAppDispatch, useAppState } from '../../state-context'
+import { useAppDispatch, useAppState } from '../../context/state-context'
 import DragDrop from '../DragDrop'
 
 const PromoButton = styled.input`
@@ -29,7 +29,7 @@ function InfoStripContainer() {
           <PromoButton
             type="button"
             value="+"
-            onClick={() => dispatch({ type: 'addPromoBlock' })}
+            onClick={() => dispatch({ type: 'addInfoStrip' })}
           />
         </div>
       </section>

@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react'
 import styled from 'styled-components'
-import { useAppDispatch, useAppState } from '../../state-context'
+import { useAppDispatch, useAppState } from '../../context/state-context'
 
 let Territories = styled.ul`
   list-style-type: none;
@@ -74,7 +74,7 @@ const TerritorySelection = () => {
 
   const handleChange = (e, url) => {
     dispatch({
-      type: 'territory',
+      type: 'switchTerritory',
       identifier: e.target.value,
       url: e.target.dataset.url
     })

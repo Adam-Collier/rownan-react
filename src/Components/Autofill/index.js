@@ -2,7 +2,7 @@ import axios from 'axios'
 import React from 'react'
 import styled from 'styled-components'
 
-import { useAppState, useAppDispatch } from '../../state-context'
+import { useAppState, useAppDispatch } from '../../context/state-context'
 import { placeholderImage } from '../../lib/placeholderImage'
 import { convertEmojis } from '../../lib/emojiConvert'
 
@@ -343,7 +343,7 @@ export const AutoFillPromos = props => {
         trimWhiteSpace(x)
       })
 
-      dispatch({ type: 'autoFillPromoBlocks', payload: promosArr })
+      dispatch({ type: 'autoFillInfoStrip', payload: promosArr })
     })
   }
 

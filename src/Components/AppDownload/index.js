@@ -1,10 +1,10 @@
-import React from "react";
-import removeEmptyLines from "../../lib/removeEmptyLines";
-import { useAppState, useAppDispatch } from '../../state-context'
+import React from 'react'
+import removeEmptyLines from '../../lib/removeEmptyLines'
+import { useAppState, useAppDispatch } from '../../context/state-context'
 import { BlockWrapper } from '../styles/ContentBlocks'
 
-const AppDownloadTemplate = ({title, subtitle, link}) => {
-    return removeEmptyLines`
+const AppDownloadTemplate = ({ title, subtitle, link }) => {
+  return removeEmptyLines`
 <div class="app-download-strip">
   <style>
     .app-download-strip {
@@ -43,51 +43,50 @@ const AppDownloadTemplate = ({title, subtitle, link}) => {
     `
 }
 
-
-
 const AppDownloadBlock = () => {
   const { appDownload } = useAppState()
   const dispatch = useAppDispatch()
 
-  const {title, subtitle, link} = appDownload;
+  const { title, subtitle, link } = appDownload
 
-  const handleChange = (e) => {
+  const handleChange = e => {
     dispatch({
       type: 'appDownload',
       name: e.target.name,
-      payload: e.target.name === "link" ? e.target.value.trim() : e.target.value,
+      payload: e.target.name === 'link' ? e.target.value.trim() : e.target.value
     })
   }
-    
-return(
-    <BlockWrapper>
-        <section>
-            <h3>App Download</h3>
-        </section>
-        <div>
-            <label htmlFor="link">Link</label>
-            <input
-                type="text"
-                name="link"
-                value={link}
-                onChange={e => handleChange(e)}
-            />
-            <label htmlFor="title">Title</label>
-            <input
-                type="text"
-                name="title"
-                value={title}
-                onChange={e => handleChange(e)}
-            />
-            <label htmlFor="subtitle">Subtitle</label>
-            <input
-                type="text"
-                name="subtitle"
-                value={subtitle}
-                onChange={e => handleChange(e)}
-            />
-        </div>
-    </BlockWrapper>
-)}
 
-export {AppDownloadBlock, AppDownloadTemplate};
+  return (
+    <BlockWrapper>
+      <section>
+        <h3>App Download</h3>
+      </section>
+      <div>
+        <label htmlFor="link">Link</label>
+        <input
+          type="text"
+          name="link"
+          value={link}
+          onChange={e => handleChange(e)}
+        />
+        <label htmlFor="title">Title</label>
+        <input
+          type="text"
+          name="title"
+          value={title}
+          onChange={e => handleChange(e)}
+        />
+        <label htmlFor="subtitle">Subtitle</label>
+        <input
+          type="text"
+          name="subtitle"
+          value={subtitle}
+          onChange={e => handleChange(e)}
+        />
+      </div>
+    </BlockWrapper>
+  )
+}
+
+export { AppDownloadBlock, AppDownloadTemplate }

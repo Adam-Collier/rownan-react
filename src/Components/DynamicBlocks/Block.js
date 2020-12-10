@@ -1,5 +1,5 @@
 import React from 'react'
-import { useAppDispatch } from '../../state-context'
+import { useAppDispatch } from '../../context/state-context'
 
 import { ReactComponent as DragIcon } from '../../icons/dragIcon.svg'
 
@@ -39,7 +39,7 @@ const DynamicBlock = ({ block, index }) => {
           value={block.type}
           onChange={e => {
             dispatch({
-              type: 'editBlock',
+              type: 'editDynamicBlock',
               payload: e.target.value,
               index,
               initial: e.target.value === 'main' ? mainInitial : lowerInitial
@@ -53,7 +53,7 @@ const DynamicBlock = ({ block, index }) => {
         </select>
         <Remove
           onClick={() => {
-            dispatch({ type: 'removeBlock', payload: index })
+            dispatch({ type: 'removeDynamicBlock', payload: index })
             dispatch({ type: 'updateHTML' })
           }}
         >
