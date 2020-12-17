@@ -4,6 +4,8 @@ import css from 'prettier/parser-postcss'
 import InfoStripTemplate from '../Components/InfoStrip/InfoStripTemplate'
 import HeroTemplate from '../Components/Hero/HeroTemplate'
 import LowerTemplate from '../Components/Lower/LowerTemplate'
+import SaleTemplate from '../Components/Sale/SaleTemplate'
+import SaleCategoriesTemplate from '../Components/Sale/SaleCategoriesTemplate'
 import MegaBannerWidget from '../Components/MegaBanner'
 import TickerTemplate from '../Components/Ticker/TickerTemplate'
 import CategoryTemplate from '../Components/Categories/CategoryTemplate'
@@ -33,11 +35,13 @@ const hasContent = state => {
 export default {
   updateHTML: state => {
     let mainBlocks = [],
-      lowerBlocks = []
+      lowerBlocks = [],
+      saleBlocks = []
 
     state.contentBlocks.map(block => {
       if (block.type === 'main') mainBlocks.push(block.content)
       if (block.type === 'lower') lowerBlocks.push(block.content)
+      if (block.type === 'sale') saleBlocks.push(block.content)
       return null
     })
 
@@ -52,6 +56,8 @@ export default {
     <div id="homeSlider">
       ${HeroTemplate(mainBlocks)}
     </div>
+    ${SaleTemplate(saleBlocks)}
+    ${SaleCategoriesTemplate(state.territory)}
     ${hasContent(state.promoBlocks) ? InfoStripTemplate(state.promoBlocks) : ''}
     ${
       hasContent(state.categories)
