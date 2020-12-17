@@ -14,11 +14,9 @@ export default {
     }
   },
   autoFillInfoStrip: (state, action) => {
-    let name = action.type.slice(8)
-    let blockType = name.charAt(0).toLowerCase() + name.slice(1)
     return {
       ...state,
-      [blockType]: [...action.payload]
+      promoBlocks: [...action.payload]
     }
   },
   autoFillCategories: (state, action) => {
