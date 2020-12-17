@@ -13,6 +13,7 @@ import { FormButton } from '../styles/FormButton'
 import { AppDownloadBlock } from '../AppDownload'
 
 const ContentContainer = styled.div`
+  padding: 1rem;
   grid-column: 1/2;
   grid-row: 2/3;
 `
@@ -47,25 +48,29 @@ const Content = props => {
   }
 
   return (
-    <ContentContainer>
+    <>
       <Territory />
-      <Ticker />
-      <DragDropContext onDragEnd={e => onDragEnd(e, promoBlocks)}>
-        <InfoStripContainer />
-      </DragDropContext>
-      <DragDropContext onDragEnd={e => onDragEnd(e, categories)}>
-        <Categories />
-      </DragDropContext>
-      <AppDownloadBlock />
-      <DragDropContext onDragEnd={e => onDragEnd(e, contentBlocks)}>
-        <DynamicBlocks />
-      </DragDropContext>
-      <FormButton
-        type="button"
-        value="+"
-        onClick={() => dispatch({ type: 'addDynamicBlock', payload: 'select' })}
-      />
-    </ContentContainer>
+      <ContentContainer>
+        <Ticker />
+        <DragDropContext onDragEnd={e => onDragEnd(e, promoBlocks)}>
+          <InfoStripContainer />
+        </DragDropContext>
+        <DragDropContext onDragEnd={e => onDragEnd(e, categories)}>
+          <Categories />
+        </DragDropContext>
+        <AppDownloadBlock />
+        <DragDropContext onDragEnd={e => onDragEnd(e, contentBlocks)}>
+          <DynamicBlocks />
+        </DragDropContext>
+        <FormButton
+          type="button"
+          value="+"
+          onClick={() =>
+            dispatch({ type: 'addDynamicBlock', payload: 'select' })
+          }
+        />
+      </ContentContainer>
+    </>
   )
 }
 
