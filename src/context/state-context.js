@@ -31,6 +31,57 @@ function stateReducer(state, action) {
           }
         })
       }),
+      addSaleCta: () => ({
+        ...state,
+        contentBlocks: state.contentBlocks.map((item, index) => {
+          if (index !== action.index) return item
+          return {
+            ...item,
+            content: {
+              ...item.content,
+              ctas: [...item.content.ctas, { text: '', url: '' }]
+            }
+          }
+        })
+      }),
+      addSaleCtaContent: () => {
+        return {
+          ...state,
+          contentBlocks: state.contentBlocks.map((contentBlock, index) => {
+            if (index !== action.contentBlockIndex) return contentBlock
+            return {
+              ...contentBlock,
+              content: {
+                ...contentBlock.content,
+                ctas: contentBlock.content.ctas.map((cta, i) => {
+                  if (i !== action.index) return cta
+                  return {
+                    ...cta,
+                    [action.name]: action.payload
+                  }
+                })
+              }
+            }
+          })
+        }
+      },
+      removeSaleCta: () => {
+        return {
+          ...state,
+          contentBlocks: state.contentBlocks.map((contentBlock, index) => {
+            if (index !== action.contentBlockIndex) return contentBlock
+            return {
+              ...contentBlock,
+              content: {
+                ...contentBlock.content,
+                ctas: contentBlock.content.ctas.filter(
+                  (block, index) => index !== action.index
+                )
+              }
+            }
+          })
+        }
+      },
       appDownload: () => ({
         ...state,
         appDownload: {
@@ -44,6 +95,16 @@ function stateReducer(state, action) {
       reorderBlocks: () => ({
         ...state,
         [action.blockType]: [...action.reorderedBlocks]
+      }),
+      reorderNestedBlocks: () => ({
+        ...state,
+        contentBlocks: state.contentBlocks.map((item, index) => {
+          if (index !== action.index) return item
+          return {
+            ...item,
+            ctas: [...action.reorderedBlocks]
+          }
+        })
       }),
       switchTerritory: () => ({
         ...state,
