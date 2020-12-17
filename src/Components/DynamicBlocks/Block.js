@@ -6,6 +6,7 @@ import { ReactComponent as DragIcon } from '../../icons/dragIcon.svg'
 import { AutoFillContent } from '../Autofill'
 import HeroBlock from '../Hero/HeroBlock'
 import LowerBlock from '../Lower/LowerBlock'
+import SaleContainer from '../Sale/SaleContainer'
 
 import { DropDown, Remove } from '../styles/ContentBlocks'
 
@@ -20,7 +21,7 @@ const DynamicBlock = ({ block, index }) => {
     url: ''
   }
 
-  let mainInitial = {
+  let heroInitial = {
     image: '',
     mobile: '',
     primaryCta: '',
@@ -30,6 +31,24 @@ const DynamicBlock = ({ block, index }) => {
     subtitle: '',
     svg: '',
     title: ''
+  }
+
+  let saleInitial = {
+    title: '',
+    ctas: []
+  }
+
+  let getInitial = val => {
+    switch (val) {
+      case 'hero':
+        return heroInitial
+      case 'lower':
+        return lowerInitial
+      case 'sale':
+        return saleInitial
+      default:
+        return heroInitial
+    }
   }
 
   return (
@@ -42,7 +61,7 @@ const DynamicBlock = ({ block, index }) => {
               type: 'editDynamicBlock',
               payload: e.target.value,
               index,
-              initial: e.target.value === 'main' ? mainInitial : lowerInitial
+              initial: getInitial(e.target.value)
             })
             dispatch({ type: 'updateHTML' })
           }}
@@ -50,6 +69,7 @@ const DynamicBlock = ({ block, index }) => {
           <option value="select">Please Select</option>
           <option value="main">Home Slider</option>
           <option value="lower">Three Slider</option>
+          <option value="sale">Sale</option>
         </select>
         <Remove
           onClick={() => {
@@ -64,6 +84,7 @@ const DynamicBlock = ({ block, index }) => {
       </DropDown>
       {block.type === 'main' && <HeroBlock index={index} block={block} />}
       {block.type === 'lower' && <LowerBlock index={index} block={block} />}
+      {block.type === 'sale' && <SaleContainer index={index} block={block} />}
     </>
   )
 }
