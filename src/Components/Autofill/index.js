@@ -147,6 +147,21 @@ let createBlock = (el, type) => {
       svg: el.querySelector('svg').outerHTML,
       title: title ? title.textContent : ''
     }
+  } else if (type === 'sale') {
+    let ctas = Array.from(el.querySelectorAll('a')).map(cta => {
+      let url = cta.getAttribute('href')
+      let text = cta.querySelector('button').textContent
+
+      return {
+        url,
+        text
+      }
+    })
+
+    return {
+      title: el.querySelector('h2').textContent.trim(),
+      ctas
+    }
   }
 }
 
@@ -173,20 +188,23 @@ let autoFillFromSite = async (
 
   let block = createBlock(el, type)
 
-  trimWhiteSpace(block)
+  if (type === 'main' || type === 'lower') {
+    trimWhiteSpace(block)
 
-  let imageArr = type === 'main' ? [block.image, block.mobile] : [block.image]
+    let imageArr = type === 'main' ? [block.image, block.mobile] : [block.image]
 
-  imageArr.forEach((x, i) => {
-    placeholderImage(x).then(placeholder => {
-      dispatch({
-        type: 'placeholderImage',
-        name: i === 0 ? 'image' : 'mobile',
-        index,
-        payload: placeholder
+    imageArr.forEach((x, i) => {
+      placeholderImage(x).then(placeholder => {
+        dispatch({
+          type: 'placeholderImage',
+          name: i === 0 ? 'image' : 'mobile',
+          index,
+          payload: placeholder
+        })
       })
     })
-  })
+  }
+
   dispatch({ type: 'autoFill', payload: block, index })
 }
 
@@ -227,7 +245,14 @@ export const AutoFillContent = ({ index, type }) => {
     if (e.target.value.includes('file')) {
       autoFillFromFile(dispatch, index, e.target.value, 'sale')
     } else {
-      autoFillFromSite(dispatch, index, e.target.value, territory, 'sale')
+      autoFillFromSite(
+        dispatch,
+        index,
+        e.target.value,
+        territory,
+        'sale',
+        '.categories-sale__container'
+      )
     }
   }
 
