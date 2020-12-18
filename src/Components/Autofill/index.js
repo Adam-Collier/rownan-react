@@ -91,6 +91,20 @@ export const autoFillFromFile = (dispatch, index, value, type) => {
             })
           })
           dispatch({ type: 'autoFill', payload: block, index })
+        } else if (type === 'sale') {
+          let saleContentBlocks = file.contentBlocks.filter(
+            block => block.type === type
+          )
+
+          let saleBlockIndex = value.substring(0, 1)
+
+          if (!saleContentBlocks[saleBlockIndex]) return
+
+          dispatch({
+            type: 'autoFill',
+            payload: saleContentBlocks[index].content,
+            index
+          })
         } else if (type.toLowerCase().includes('categories')) {
           dispatch({
             type: 'autoFillBlock',
@@ -207,16 +221,35 @@ export const AutoFillContent = ({ index, type }) => {
     }
   }
 
+  let salePopulate = async (territory, index, e) => {
+    if (e.target.value === 'default') return
+
+    if (e.target.value.includes('file')) {
+      autoFillFromFile(dispatch, index, e.target.value, 'sale')
+    } else {
+      autoFillFromSite(dispatch, index, e.target.value, territory, 'sale')
+    }
+  }
+
+  let selectSwitch = (e, type) => {
+    switch (type) {
+      case 'main':
+        return mainPopulate(territory, index, e)
+      case 'lower':
+        return lowerPopulate(territory, index, e)
+      case 'sale':
+        return salePopulate(territory, index, e)
+      default:
+        console.log('type not handled')
+    }
+  }
+
   return (
     <IconContent>
       <select
         name="autofill"
         value="default"
-        onChange={e =>
-          type === 'main'
-            ? mainPopulate(territory, index, e)
-            : lowerPopulate(territory, index, e)
-        }
+        onChange={e => selectSwitch(e, type)}
       >
         {type === 'main' && (
           <>
@@ -242,6 +275,15 @@ export const AutoFillContent = ({ index, type }) => {
             <option value="1 file">Lower 2 (from file)</option>
             <option value="2 file">Lower 3 (from file)</option>
             <option value="3 file">Lower 4 (from file)</option>
+          </>
+        )}
+        {type === 'sale' && (
+          <>
+            <option value="default">No Lower</option>
+            <option value="0">CTA's 1</option>
+            <option value="1">CTA's 2</option>
+            <option value="0 file">CTA's 1 (from file)</option>
+            <option value="1 file">CTA's 2 (from file)</option>
           </>
         )}
       </select>
