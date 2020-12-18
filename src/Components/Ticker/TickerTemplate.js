@@ -1,4 +1,4 @@
-const MegaBannerWidget = (text) => {
+const MegaBannerWidget = text => {
   return `
 <style>
   @keyframes marquee {
@@ -30,7 +30,7 @@ const MegaBannerWidget = (text) => {
   .friday-ticker span {
     margin-bottom: 0;
     display: inline-block;
-    animation: marquee 10s linear infinite;
+    animation: marquee 15s linear infinite;
     will-change: transform;
   }
 </style>
