@@ -7,6 +7,7 @@ export default {
     subtitle: ''
   },
   categories: Array(5).fill({ url: '', title: '', image: '' }),
+  saleCategories: Array(4).fill({ url: '', image: '' }),
   contentBlocks: [],
   contentView: true,
   editorCode: defaultEditorCode,

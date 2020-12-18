@@ -5,7 +5,7 @@ import InfoStripTemplate from '../Components/InfoStrip/InfoStripTemplate'
 import HeroTemplate from '../Components/Hero/HeroTemplate'
 import LowerTemplate from '../Components/Lower/LowerTemplate'
 import SaleTemplate from '../Components/Sale/SaleTemplate'
-import SaleCategoriesTemplate from '../Components/Sale/SaleCategoriesTemplate'
+import SaleCategoriesTemplate from '../Components/SaleCategories/SaleCategoryTemplate'
 import MegaBannerWidget from '../Components/MegaBanner'
 import TickerTemplate from '../Components/Ticker/TickerTemplate'
 import CategoryTemplate from '../Components/Categories/CategoryTemplate'
@@ -57,7 +57,11 @@ export default {
       ${HeroTemplate(mainBlocks)}
     </div>
     ${SaleTemplate(saleBlocks)}
-    ${SaleCategoriesTemplate(state.territory)}
+    ${
+      hasContent(state.saleCategories)
+        ? SaleCategoriesTemplate(state.saleCategories, state.territory)
+        : ''
+    }
     ${hasContent(state.promoBlocks) ? InfoStripTemplate(state.promoBlocks) : ''}
     ${
       hasContent(state.categories)

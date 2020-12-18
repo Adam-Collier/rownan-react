@@ -12,7 +12,7 @@ import { ReactComponent as AutoFillIcon } from '../../icons/autoFill.svg'
 const fs = window.require('fs-extra')
 const { dialog } = window.require('electron').remote
 
-const IconContent = styled.div`
+export const IconContent = styled.div`
   > select {
     appearance: none;
     background: url(${fillIcon});
@@ -31,13 +31,13 @@ const IconContent = styled.div`
   }
 `
 
-let trimWhiteSpace = obj => {
+export const trimWhiteSpace = obj => {
   Object.keys(obj).forEach(key => {
     obj[key] = obj[key].trim()
   })
 }
 
-let removeTransformations = url => {
+export const removeTransformations = url => {
   if (url.includes('https://media.missguided.co.uk')) {
     let arr = url.split('/')
 
@@ -56,7 +56,7 @@ let removeTransformations = url => {
   }
 }
 
-let autoFillFromFile = (dispatch, index, value, type) => {
+export const autoFillFromFile = (dispatch, index, value, type) => {
   dialog.showOpenDialog(
     { properties: ['openFile'], filters: [{ extensions: ['json'] }] },
     async function(files) {
@@ -91,8 +91,12 @@ let autoFillFromFile = (dispatch, index, value, type) => {
             })
           })
           dispatch({ type: 'autoFill', payload: block, index })
-        } else if (type === 'categories') {
-          dispatch({ type: 'autoFillCategories', payload: file.categories })
+        } else if (type.toLowerCase().includes('categories')) {
+          dispatch({
+            type: 'autoFillBlock',
+            payload: file[type],
+            blockName: type
+          })
         }
       }
     }
@@ -289,7 +293,11 @@ export const AutoFillCategories = () => {
           trimWhiteSpace(x)
         })
 
-        dispatch({ type: 'autoFillCategories', payload: categoriesArr })
+        dispatch({
+          type: 'autoFillBlock',
+          payload: categoriesArr,
+          blockName: 'categories'
+        })
       })
     }
   }
@@ -343,7 +351,11 @@ export const AutoFillPromos = props => {
         trimWhiteSpace(x)
       })
 
-      dispatch({ type: 'autoFillInfoStrip', payload: promosArr })
+      dispatch({
+        type: 'autoFillBlock',
+        payload: promosArr,
+        blockName: 'promoBlocks'
+      })
     })
   }
 

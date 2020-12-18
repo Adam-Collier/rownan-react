@@ -3,6 +3,7 @@ import styled from 'styled-components'
 import { useAppDispatch, useAppState } from '../../context/state-context'
 
 import Categories from '../Categories/Categories'
+import SaleCategories from '../SaleCategories/SaleCategories'
 import DynamicBlocks from '../DynamicBlocks'
 import InfoStripContainer from '../InfoStrip/InfoStripContainer'
 import Territory from '../TerritorySelection'
@@ -20,7 +21,12 @@ const ContentContainer = styled.div`
 
 const Content = props => {
   const dispatch = useAppDispatch()
-  const { contentBlocks, categories, promoBlocks } = useAppState()
+  const {
+    contentBlocks,
+    categories,
+    saleCategories,
+    promoBlocks
+  } = useAppState()
 
   const onDragEnd = (result, blockType) => {
     const { destination, source } = result
@@ -57,6 +63,9 @@ const Content = props => {
         </DragDropContext>
         <DragDropContext onDragEnd={e => onDragEnd(e, categories)}>
           <Categories />
+        </DragDropContext>
+        <DragDropContext onDragEnd={e => onDragEnd(e, saleCategories)}>
+          <SaleCategories />
         </DragDropContext>
         <AppDownloadBlock />
         <DragDropContext onDragEnd={e => onDragEnd(e, contentBlocks)}>

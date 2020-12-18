@@ -31,6 +31,18 @@ function stateReducer(state, action) {
           }
         })
       }),
+      addSaleCategoryContent: () => ({
+        ...state,
+        saleCategories: state.saleCategories.map((saleCategory, index) => {
+          if (index !== action.index) {
+            return saleCategory
+          }
+          return {
+            ...saleCategory,
+            [action.name]: action.payload
+          }
+        })
+      }),
       addSaleCta: () => ({
         ...state,
         contentBlocks: state.contentBlocks.map((item, index) => {
@@ -90,7 +102,6 @@ function stateReducer(state, action) {
         }
       }),
       editorCode: () => ({ ...state, editorCode: action.payload }),
-      ...autoFill,
       openFile: () => ({ ...state, ...action.savedState }),
       reorderBlocks: () => ({
         ...state,
@@ -114,6 +125,7 @@ function stateReducer(state, action) {
         }
       }),
       ticker: () => ({ ...state, tickerText: action.payload }),
+      ...autoFill,
       ...dynamicBlock,
       ...infoStrip,
       ...placeholderImage,
