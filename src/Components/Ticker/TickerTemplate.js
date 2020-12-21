@@ -10,7 +10,7 @@ const MegaBannerWidget = text => {
     }
   }
   .friday-ticker {
-    background: #141414;
+    background: #d53a40;
     position: relative;
     height: 40px;
     color: #fff;
