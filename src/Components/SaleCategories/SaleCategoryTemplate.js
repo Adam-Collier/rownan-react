@@ -54,7 +54,7 @@ const SaleCategoryTemplate = (categories, territory) => {
         ${categories
           .map(
             category => `
-          <a href="/sale/sale-dresses">
+          <a href="${category.url}">
             <picture>
               <source type="image/webp" data-srcset="${addImageTransformations(
                 category.image,

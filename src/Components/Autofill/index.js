@@ -102,7 +102,7 @@ export const autoFillFromFile = (dispatch, index, value, type) => {
 
           dispatch({
             type: 'autoFill',
-            payload: saleContentBlocks[index].content,
+            payload: saleContentBlocks[saleBlockIndex].content,
             index
           })
         } else if (type.toLowerCase().includes('categories')) {
