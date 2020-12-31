@@ -1,14 +1,12 @@
 import React from 'react'
-// import logo from './logo.svg'
 import './App.css'
 import styled from 'styled-components'
-import Editor from './Components/Editor'
-import Content from './Components/Content'
-import Preview from './Components/Preview'
+import Sidebar from './Components/Sidebar'
+import Preview from './Components/Preview/Preview'
 import ActionIcons from './Components/ActionIcons'
 import Titlebar from './Components/Titlebar'
 
-import { useAppDispatch } from './state-context'
+import { useAppDispatch } from './context/state-context'
 
 const ipcRenderer = window.require('electron').ipcRenderer
 const { dialog } = window.require('electron').remote
@@ -17,13 +15,6 @@ const fs = window.require('fs')
 const AppContainer = styled.div`
   display: grid;
   grid-template-columns: 400px 1fr;
-`
-
-const Left = styled.div`
-  height: 100vh;
-  background: #2e3235;
-  overflow: scroll;
-  -webkit-overflow-scrolling: touch;
 `
 
 function App() {
@@ -69,10 +60,7 @@ function App() {
   return (
     <AppContainer className="App">
       <Titlebar />
-      <Left>
-        <Editor />
-        <Content />
-      </Left>
+      <Sidebar />
       <Preview />
       <ActionIcons />
     </AppContainer>

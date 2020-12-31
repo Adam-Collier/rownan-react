@@ -5,7 +5,6 @@ export const BlockWrapper = styled.div`
   color: #ffffff;
   animation-duration: 700ms;
   transition-timing-function: ease-in-out;
-  padding: 0px 10px 20px 10px;
 
   .inline {
     display: flex;

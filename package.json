@@ -41,10 +41,15 @@
     "electron-build": "electron-builder --dir",
     "postinstall": "electron-builder install-app-deps",
     "package": "npm run build && npm run electron-build",
-    "ship": "electron-builder -p always"
+    "ship": "electron-builder -p always",
+    "lint": "eslint src/",
+    "lint:fix": "eslint . --fix"
   },
   "eslintConfig": {
-    "extends": "react-app"
+    "extends": [
+      "react-app",
+      "plugin:prettier/recommended"
+    ]
   },
   "browserslist": {
     "production": [
@@ -63,6 +68,9 @@
     "electron-builder": "^20.44.4",
     "electron-devtools-installer": "^2.2.4",
     "electron-rebuild": "^1.8.5",
+    "eslint-config-prettier": "^7.0.0",
+    "eslint-plugin-html": "^6.1.1",
+    "eslint-plugin-prettier": "^3.2.0",
     "foreman": "^3.0.1",
     "progress-bar-webpack-plugin": "^1.12.1",
     "webpack-bundle-analyzer": "^3.3.2"

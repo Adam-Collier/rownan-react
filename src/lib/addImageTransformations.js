@@ -1,7 +1,7 @@
 export default (image, width, type, webp) => {
   let extension = image.split('.').pop()
 
-  if (image.includes('https://i1.adis.ws/i/missguided')) {
+  if (image.includes('https://media.missguided.com/i/missguided')) {
     if (type === 'category')
       return webp === true
         ? `${image}.webp?w=${width}&fmt.jpeg.interlaced=true`
