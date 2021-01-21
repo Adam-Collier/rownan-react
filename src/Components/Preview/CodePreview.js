@@ -1,4 +1,5 @@
 import React from 'react'
+import CopyButton from '../CopyButton'
 import { useAppState } from '../../context/state-context'
 import styled from 'styled-components'
 
@@ -7,6 +8,8 @@ import prism from '../../lib/Prism/theme'
 import html from 'react-syntax-highlighter/dist/esm/languages/prism/markup'
 
 const CodeEditor = styled.div`
+  position: relative;
+
   && {
     overflow: scroll;
     background-color: rgb(245, 242, 240);
@@ -29,6 +32,7 @@ const CodePreview = () => {
 
   return (
     <CodeEditor className="CodeMirror">
+      <CopyButton />
       <SyntaxHighlighter language="html" style={prism}>
         {outputHTML}
       </SyntaxHighlighter>
