@@ -10,7 +10,7 @@ const SaleCategoryTemplate = (categories, territory) => {
         return 'Kupuj według kategorii'
       }
       case 'FR': {
-        return 'parcourir les catégories'
+        return 'Soldes sur les catégorie'
       }
       case 'ES': {
         return 'Comprar por categoría'
