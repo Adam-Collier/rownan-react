@@ -26,5 +26,6 @@ export default {
     identifier: 'UK',
     url: 'https://www.missguided.co.uk/'
   },
-  tickerText: ''
+  tickerText: '',
+  savedFilePath: ''
 }
