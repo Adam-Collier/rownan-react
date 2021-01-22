@@ -1,5 +1,9 @@
 // Modules to control application life and create native browser window
 const { app, BrowserWindow, Menu, dialog } = require('electron')
+const {
+  default: installExtension,
+  REACT_DEVELOPER_TOOLS
+} = require('electron-devtools-installer')
 const { autoUpdater } = require('electron-updater')
 const browserSync = require('./browsersync')
 const fs = require('fs-extra')
@@ -24,7 +28,8 @@ function createWindow() {
     useContentSize: false,
     webPreferences: {
       nodeIntegration: true,
-      webSecurity: false
+      webSecurity: false,
+      enableRemoteModule: true
     }
   })
 
@@ -91,6 +96,12 @@ app.on('ready', async () => {
   // install the devtools
   if (process.env.ELECTRON_START_URL) await installExtensions()
   createWindow()
+})
+
+app.whenReady().then(() => {
+  installExtension(REACT_DEVELOPER_TOOLS)
+    .then(name => console.log(`Added Extension:  ${name}`))
+    .catch(err => console.log('An error occurred: ', err))
 })
 
 // Quit when all windows are closed.

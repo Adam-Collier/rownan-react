@@ -1,6 +1,6 @@
 const fs = window.require('fs-extra')
-const fetch = require('node-fetch')
-const cheerio = require('cheerio')
+const fetch = window.require('node-fetch')
+const cheerio = window.require('cheerio')
 const { dialog } = window.require('electron').remote
 
 export const territoryTemplate = async () => {
