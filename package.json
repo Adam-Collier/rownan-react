@@ -83,7 +83,8 @@
   "config": {
     "forge": {
       "packagerConfig": {
-        "icon": "./assets/icon.icns"
+        "icon": "./assets/icon.icns",
+        "prune": true
       },
       "makers": [
         {
