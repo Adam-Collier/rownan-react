@@ -14,6 +14,7 @@ const Button = styled.button`
   outline: none;
   border: 1px solid #a0a0a0;
   cursor: pointer;
+  font-size: 0.75rem;
 `
 
 const CopyButton = () => {
