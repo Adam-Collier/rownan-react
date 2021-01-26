@@ -56,65 +56,68 @@ export const removeTransformations = url => {
   }
 }
 
-export const autoFillFromFile = (dispatch, index, value, type) => {
-  dialog.showOpenDialog(
-    { properties: ['openFile'], filters: [{ extensions: ['json'] }] },
-    async function(files) {
-      if (files) {
-        let file = JSON.parse(fs.readFileSync(files[0], 'utf8'))
+export const autoFillFromFile = async (dispatch, index, value, type) => {
+  const { filePaths } = await dialog.showOpenDialog({
+    properties: ['openFile'],
+    filters: [{ extensions: ['json'] }]
+  })
 
-        if (type === 'main' || type === 'lower') {
-          let contentBlocks = file.contentBlocks.filter(block => {
-            return block.type === type
-          })
+  if (filePaths) {
+    let file = JSON.parse(fs.readFileSync(filePaths[0], 'utf8'))
 
-          let blockIndex =
-            type === 'main'
-              ? parseInt(value.substring(3, 4)) - 1
-              : value.substring(0, 1)
+    console.log(file)
 
-          if (!contentBlocks[blockIndex]) return
+    if (type === 'main' || type === 'lower') {
+      let contentBlocks = file.contentBlocks.filter(block => {
+        return block.type === type
+      })
 
-          let block = contentBlocks[blockIndex].content
+      let blockIndex =
+        type === 'main'
+          ? parseInt(value.substring(3, 4)) - 1
+          : value.substring(0, 1)
 
-          let imageArr =
-            type === 'main' ? [block.image, block.mobile] : [block.image]
+      if (!contentBlocks[blockIndex]) return
 
-          imageArr.forEach((x, i) => {
-            placeholderImage(x).then(placeholder => {
-              dispatch({
-                type: 'placeholderImage',
-                name: i === 0 ? 'image' : 'mobile',
-                index,
-                payload: placeholder
-              })
-            })
-          })
-          dispatch({ type: 'autoFill', payload: block, index })
-        } else if (type === 'sale') {
-          let saleContentBlocks = file.contentBlocks.filter(
-            block => block.type === type
-          )
+      let block = contentBlocks[blockIndex].content
 
-          let saleBlockIndex = value.substring(0, 1)
+      let imageArr =
+        type === 'main' ? [block.image, block.mobile] : [block.image]
 
-          if (!saleContentBlocks[saleBlockIndex]) return
-
+      imageArr.forEach((x, i) => {
+        placeholderImage(x).then(placeholder => {
           dispatch({
-            type: 'autoFill',
-            payload: saleContentBlocks[saleBlockIndex].content,
-            index
+            type: 'placeholderImage',
+            name: i === 0 ? 'image' : 'mobile',
+            index,
+            payload: placeholder
           })
-        } else if (type.toLowerCase().includes('categories')) {
-          dispatch({
-            type: 'autoFillBlock',
-            payload: file[type],
-            blockName: type
-          })
-        }
-      }
+        })
+      })
+      console.log(block, 'this is the block')
+      dispatch({ type: 'autoFill', payload: block, index })
+    } else if (type === 'sale') {
+      let saleContentBlocks = file.contentBlocks.filter(
+        block => block.type === type
+      )
+
+      let saleBlockIndex = value.substring(0, 1)
+
+      if (!saleContentBlocks[saleBlockIndex]) return
+
+      dispatch({
+        type: 'autoFill',
+        payload: saleContentBlocks[saleBlockIndex].content,
+        index
+      })
+    } else if (type.toLowerCase().includes('categories')) {
+      dispatch({
+        type: 'autoFillBlock',
+        payload: file[type],
+        blockName: type
+      })
     }
-  )
+  }
 }
 
 let createBlock = (el, type) => {
