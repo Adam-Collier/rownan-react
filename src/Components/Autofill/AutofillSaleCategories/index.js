@@ -1,8 +1,7 @@
 import React from 'react'
-import axios from 'axios'
 import { useAppState, useAppDispatch } from '../../../context/state-context'
 
-import { removeTransformations, trimWhiteSpace, IconContent } from '../index'
+import { IconContent } from '../index'
 import { autoFillFromFileStatic } from '../autoFillFromFile'
 import { autoFillFromSiteStatic } from '../autoFillFromSite'
 import { isFromFileCheck, getFileJSON } from '../index'
@@ -32,28 +31,6 @@ const AutofillSaleCategories = () => {
       }
 
       autoFillFromSiteStatic(options)
-
-      // categoryTiles.forEach(category => {
-      //   let image = removeTransformations(
-      //     category.querySelector('.category-tile__image').dataset.src
-      //   )
-      //   let url = category.getAttribute('href')
-
-      //   categoriesArr.push({
-      //     image,
-      //     url
-      //   })
-
-      //   categoriesArr.forEach(x => {
-      //     trimWhiteSpace(x)
-      //   })
-
-      //   dispatch({
-      //     type: 'autoFillBlock',
-      //     payload: categoriesArr,
-      //     blockName: 'saleCategories'
-      //   })
-      // })
     }
   }
 
