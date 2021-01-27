@@ -1,7 +1,7 @@
 import React, { memo } from 'react'
 import styled from 'styled-components'
 
-import { AutoFillPromos } from '../Autofill'
+import { AutoFillInfoStrip } from '../Autofill/AutoFillInfoStrip'
 import InfoStripBlock from './InfoStripBlock'
 import { useAppDispatch, useAppState } from '../../context/state-context'
 import DragDrop from '../DragDrop'
@@ -25,7 +25,7 @@ function InfoStripContainer() {
       <section>
         <h3>Info Strip</h3>
         <div>
-          <AutoFillPromos />
+          <AutoFillInfoStrip />
           <PromoButton
             type="button"
             value="+"

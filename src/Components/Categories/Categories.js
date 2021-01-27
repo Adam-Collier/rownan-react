@@ -1,7 +1,7 @@
 import React from 'react'
 import { useAppState } from '../../context/state-context'
 
-import { AutoFillCategories } from '../Autofill'
+import { AutoFillCategories } from '../Autofill/AutoFillCategories'
 import DragDrop from '../DragDrop'
 import CategoryBlock from './CategoryBlock'
 

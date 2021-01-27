@@ -1,22 +1,29 @@
-import React from 'react'
 import axios from 'axios'
+import React from 'react'
+
 import { useAppState, useAppDispatch } from '../../../context/state-context'
+import {
+  trimWhiteSpace,
+  removeTransformations,
+  IconContent,
+  isFromFileCheck,
+  getFileJSON
+} from '../index'
 
-import { removeTransformations, trimWhiteSpace, IconContent } from '../index'
 import { autoFillFromFileStatic } from '../autoFillFromFile'
-import { isFromFileCheck, getFileJSON } from '../index'
 
-const AutofillSaleCategories = () => {
+export const AutoFillCategories = () => {
   const dispatch = useAppDispatch()
   const { territory } = useAppState()
 
   const handleClick = async (territory, e) => {
     if (isFromFileCheck(e)) {
       let savedJSON = await getFileJSON()
+
       let options = {
         dispatch,
         savedJSON,
-        blockName: 'saleCategories'
+        blockName: 'categories'
       }
 
       autoFillFromFileStatic(options)
@@ -26,7 +33,7 @@ const AutofillSaleCategories = () => {
       let html = parser.parseFromString(data, 'text/html')
 
       let categoryTiles = Array.from(
-        html.querySelectorAll('.categories-sale__grid a')
+        html.querySelectorAll('.category-tile__link')
       )
 
       if (!categoryTiles.length) return
@@ -37,11 +44,15 @@ const AutofillSaleCategories = () => {
         let image = removeTransformations(
           category.querySelector('.category-tile__image').dataset.src
         )
+
         let url = category.getAttribute('href')
+        let title = category.querySelector('.category-tile__heading')
+          .textContent
 
         categoriesArr.push({
           image,
-          url
+          url,
+          title
         })
 
         categoriesArr.forEach(x => {
@@ -51,7 +62,7 @@ const AutofillSaleCategories = () => {
         dispatch({
           type: 'autoFillBlock',
           payload: categoriesArr,
-          blockName: 'saleCategories'
+          blockName: 'categories'
         })
       })
     }
@@ -77,4 +88,4 @@ const AutofillSaleCategories = () => {
   )
 }
 
-export default AutofillSaleCategories
+export default AutoFillCategories
