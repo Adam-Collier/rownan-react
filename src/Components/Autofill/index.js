@@ -1,6 +1,7 @@
 import styled from 'styled-components'
-
 import fillIcon from '../../icons/autoFill.svg'
+import { convertEmojis } from '../../lib/emojiConvert'
+
 const fs = window.require('fs-extra')
 const { dialog } = window.require('electron').remote
 
@@ -49,7 +50,7 @@ export const removeTransformations = url => {
 }
 
 export const isFromFileCheck = e =>
-  e.target[e.target.selectedIndex].getAttribute('data-file')
+  e.target[e.target.selectedIndex].getAttribute('data-file') ? true : false
 
 export const getFileJSON = async () => {
   const { filePaths } = await dialog.showOpenDialog({
@@ -64,160 +65,97 @@ export const getFileJSON = async () => {
   }
 }
 
-// export const autoFillFromFile = async (dispatch, index, value, type) => {
-//   const { filePaths } = await dialog.showOpenDialog({
-//     properties: ['openFile'],
-//     filters: [{ extensions: ['json'] }]
-//   })
+export const createDynamicBlock = (el, type) => {
+  if (type === 'lower') {
+    let subtitle = el.querySelector('.subtitle3')
+    let title = el.querySelector('.title3')
 
-//   if (filePaths) {
-//     let file = JSON.parse(fs.readFileSync(filePaths[0], 'utf8'))
+    return {
+      cta: el.querySelector('button').textContent,
+      image: removeTransformations(el.querySelector('img').dataset.src),
+      subtitle: subtitle ? subtitle.textContent : '',
+      title: title ? title.textContent : '',
+      url: el.getAttribute('href')
+    }
+  } else if (type === 'main') {
+    let srcSet = el.querySelector('source').dataset.srcset
+    let urls = el.querySelectorAll('a')
+    let buttons = el.querySelectorAll('button')
+    let subtitle = el.querySelector('.subtitle1')
+    let title = el.querySelector('.title1')
 
-//     console.log(file)
+    return {
+      image: removeTransformations(el.querySelector('img').dataset.src),
+      mobile: removeTransformations(srcSet.match(/^https:[^ ]+/gi)[0]),
+      primaryCta: buttons[0].textContent,
+      primaryUrl: urls[0].getAttribute('href'),
+      secondaryCta: buttons[1] ? buttons[1].textContent : '',
+      secondaryUrl: urls[1] ? urls[1].getAttribute('href') : '',
+      subtitle: subtitle ? subtitle.textContent : '',
+      svg: el.querySelector('svg').outerHTML,
+      title: title ? title.textContent : ''
+    }
+  } else if (type === 'sale') {
+    let ctas = Array.from(el.querySelectorAll('a')).map(cta => {
+      let url = cta.getAttribute('href')
+      let text = cta.querySelector('button').textContent
 
-//     switch (type) {
-//     }
+      return {
+        url,
+        text
+      }
+    })
 
-//     if (type === 'main' || type === 'lower') {
-//       let contentBlocks = file.contentBlocks.filter(block => {
-//         return block.type === type
-//       })
+    return {
+      title: el.querySelector('h2').textContent.trim(),
+      ctas
+    }
+  }
+}
 
-//       let blockIndex =
-//         type === 'main'
-//           ? parseInt(value.substring(3, 4)) - 1
-//           : value.substring(0, 1)
+export const createStaticBlock = (allElements, blockName) => {
+  if (blockName === 'categories') {
+    return allElements.map(category => {
+      let image = removeTransformations(
+        category.querySelector('.category-tile__image').dataset.src.trim()
+      )
+      let url = category.getAttribute('href').trim()
+      let title = category
+        .querySelector('.category-tile__heading')
+        .textContent.trim()
 
-//       if (!contentBlocks[blockIndex]) return
+      return {
+        image,
+        url,
+        title
+      }
+    })
+  } else if (blockName === 'promoBlocks') {
+    return allElements.map(promo => {
+      let url = promo
+        .querySelector('a')
+        .getAttribute('href')
+        .trim()
+      let title = promo.querySelector('h3').innerHTML.trim()
 
-//       let block = contentBlocks[blockIndex].content
+      title = convertEmojis(title)
 
-//       let imageArr =
-//         type === 'main' ? [block.image, block.mobile] : [block.image]
+      return {
+        url,
+        title
+      }
+    })
+  } else if (blockName === 'saleCategories') {
+    return allElements.map(category => {
+      let image = removeTransformations(
+        category.querySelector('.category-tile__image').dataset.src
+      ).trim()
+      let url = category.getAttribute('href').trim()
 
-//       imageArr.forEach((x, i) => {
-//         placeholderImage(x).then(placeholder => {
-//           dispatch({
-//             type: 'placeholderImage',
-//             name: i === 0 ? 'image' : 'mobile',
-//             index,
-//             payload: placeholder
-//           })
-//         })
-//       })
-//       console.log(block, 'this is the block')
-//       dispatch({ type: 'autoFill', payload: block, index })
-//     } else if (type === 'sale') {
-//       let saleContentBlocks = file.contentBlocks.filter(
-//         block => block.type === type
-//       )
-
-//       let saleBlockIndex = value.substring(0, 1)
-
-//       if (!saleContentBlocks[saleBlockIndex]) return
-
-//       dispatch({
-//         type: 'autoFill',
-//         payload: saleContentBlocks[saleBlockIndex].content,
-//         index
-//       })
-//     } else if (type.toLowerCase().includes('categories')) {
-//       dispatch({
-//         type: 'autoFillBlock',
-//         payload: file[type],
-//         blockName: type
-//       })
-//     }
-//   }
-// }
-
-// let createBlock = (el, type) => {
-//   if (type === 'lower') {
-//     let subtitle = el.querySelector('.subtitle3')
-//     let title = el.querySelector('.title3')
-
-//     return {
-//       cta: el.querySelector('button').textContent,
-//       image: removeTransformations(el.querySelector('img').dataset.src),
-//       subtitle: subtitle ? subtitle.textContent : '',
-//       title: title ? title.textContent : '',
-//       url: el.getAttribute('href')
-//     }
-//   } else if (type === 'main') {
-//     let srcSet = el.querySelector('source').dataset.srcset
-//     let urls = el.querySelectorAll('a')
-//     let buttons = el.querySelectorAll('button')
-//     let subtitle = el.querySelector('.subtitle1')
-//     let title = el.querySelector('.title1')
-
-//     return {
-//       image: removeTransformations(el.querySelector('img').dataset.src),
-//       mobile: removeTransformations(srcSet.match(/^https:[^ ]+/gi)[0]),
-//       primaryCta: buttons[0].textContent,
-//       primaryUrl: urls[0].getAttribute('href'),
-//       secondaryCta: buttons[1] ? buttons[1].textContent : '',
-//       secondaryUrl: urls[1] ? urls[1].getAttribute('href') : '',
-//       subtitle: subtitle ? subtitle.textContent : '',
-//       svg: el.querySelector('svg').outerHTML,
-//       title: title ? title.textContent : ''
-//     }
-//   } else if (type === 'sale') {
-//     let ctas = Array.from(el.querySelectorAll('a')).map(cta => {
-//       let url = cta.getAttribute('href')
-//       let text = cta.querySelector('button').textContent
-
-//       return {
-//         url,
-//         text
-//       }
-//     })
-
-//     return {
-//       title: el.querySelector('h2').textContent.trim(),
-//       ctas
-//     }
-//   }
-// }
-
-// let autoFillFromSite = async (
-//   dispatch,
-//   index,
-//   value,
-//   territory,
-//   type,
-//   selector
-// ) => {
-//   if (value === 'default') return
-
-//   let { data } = await axios.get(territory.url)
-//   let parser = new DOMParser()
-//   let html = parser.parseFromString(data, 'text/html')
-
-//   let el =
-//     type === 'main'
-//       ? html.querySelector(`.${value}`)
-//       : html.querySelectorAll(selector)[value]
-
-//   if (el === null) return
-
-//   let block = createBlock(el, type)
-
-//   if (type === 'main' || type === 'lower') {
-//     trimWhiteSpace(block)
-
-//     let imageArr = type === 'main' ? [block.image, block.mobile] : [block.image]
-
-//     imageArr.forEach((x, i) => {
-//       placeholderImage(x).then(placeholder => {
-//         dispatch({
-//           type: 'placeholderImage',
-//           name: i === 0 ? 'image' : 'mobile',
-//           index,
-//           payload: placeholder
-//         })
-//       })
-//     })
-//   }
-
-//   dispatch({ type: 'autoFill', payload: block, index })
-// }
+      return {
+        image,
+        url
+      }
+    })
+  }
+}

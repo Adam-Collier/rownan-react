@@ -7,12 +7,29 @@ import { isFromFileCheck, getFileJSON } from '../index'
 
 import { autoFillFromFileDynamic } from '../autoFillFromFile'
 
+import { autoFillFromSiteDynamic } from '../autoFillFromSite'
+
+let getSelector = type => {
+  switch (type) {
+    case 'main':
+      return '.row'
+    case 'lower':
+      return '.slick-three > div > a'
+    case 'sale':
+      return '.categories-sale__container'
+    default:
+      console.log('this type isnt handled')
+  }
+}
+
 const AutoFillDynamicBlocks = ({ index, type }) => {
   const { territory } = useAppState()
   let dispatch = useAppDispatch()
 
   let selectSwitch = async (e, type) => {
     e.persist()
+
+    if (e.target.value === 'default') return
 
     let blockIndex = e.target.value
 
@@ -32,19 +49,21 @@ const AutoFillDynamicBlocks = ({ index, type }) => {
       }
 
       if (savedJSON) {
-        switch (type) {
-          case 'main':
-            return autoFillFromFileDynamic(options)
-          case 'lower':
-            return autoFillFromFileDynamic(options)
-          case 'sale':
-            return autoFillFromFileDynamic(options)
-          // return
-          default:
-            console.log('type not handled')
-        }
+        autoFillFromFileDynamic(options)
       }
     } else {
+      let selector = getSelector(type)
+
+      let options = {
+        dispatch,
+        index,
+        territory,
+        blockIndex: e.target.value,
+        blockType: type,
+        selector
+      }
+
+      autoFillFromSiteDynamic(options)
     }
   }
 

@@ -4,6 +4,7 @@ import { useAppState, useAppDispatch } from '../../../context/state-context'
 
 import { removeTransformations, trimWhiteSpace, IconContent } from '../index'
 import { autoFillFromFileStatic } from '../autoFillFromFile'
+import { autoFillFromSiteStatic } from '../autoFillFromSite'
 import { isFromFileCheck, getFileJSON } from '../index'
 
 const AutofillSaleCategories = () => {
@@ -21,39 +22,38 @@ const AutofillSaleCategories = () => {
 
       autoFillFromFileStatic(options)
     } else {
-      let { data } = await axios.get(territory.url)
-      let parser = new DOMParser()
-      let html = parser.parseFromString(data, 'text/html')
+      e.persist()
 
-      let categoryTiles = Array.from(
-        html.querySelectorAll('.categories-sale__grid a')
-      )
+      let options = {
+        dispatch,
+        territory,
+        blockName: 'saleCategories',
+        selector: '.categories-sale__grid a'
+      }
 
-      if (!categoryTiles.length) return
+      autoFillFromSiteStatic(options)
 
-      let categoriesArr = []
+      // categoryTiles.forEach(category => {
+      //   let image = removeTransformations(
+      //     category.querySelector('.category-tile__image').dataset.src
+      //   )
+      //   let url = category.getAttribute('href')
 
-      categoryTiles.forEach(category => {
-        let image = removeTransformations(
-          category.querySelector('.category-tile__image').dataset.src
-        )
-        let url = category.getAttribute('href')
+      //   categoriesArr.push({
+      //     image,
+      //     url
+      //   })
 
-        categoriesArr.push({
-          image,
-          url
-        })
+      //   categoriesArr.forEach(x => {
+      //     trimWhiteSpace(x)
+      //   })
 
-        categoriesArr.forEach(x => {
-          trimWhiteSpace(x)
-        })
-
-        dispatch({
-          type: 'autoFillBlock',
-          payload: categoriesArr,
-          blockName: 'saleCategories'
-        })
-      })
+      //   dispatch({
+      //     type: 'autoFillBlock',
+      //     payload: categoriesArr,
+      //     blockName: 'saleCategories'
+      //   })
+      // })
     }
   }
 

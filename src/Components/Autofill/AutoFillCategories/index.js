@@ -1,16 +1,10 @@
-import axios from 'axios'
 import React from 'react'
 
 import { useAppState, useAppDispatch } from '../../../context/state-context'
-import {
-  trimWhiteSpace,
-  removeTransformations,
-  IconContent,
-  isFromFileCheck,
-  getFileJSON
-} from '../index'
+import { IconContent, isFromFileCheck, getFileJSON } from '../index'
 
 import { autoFillFromFileStatic } from '../autoFillFromFile'
+import { autoFillFromSiteStatic } from '../autoFillFromSite'
 
 export const AutoFillCategories = () => {
   const dispatch = useAppDispatch()
@@ -28,43 +22,14 @@ export const AutoFillCategories = () => {
 
       autoFillFromFileStatic(options)
     } else {
-      let { data } = await axios.get(territory.url)
-      let parser = new DOMParser()
-      let html = parser.parseFromString(data, 'text/html')
+      let options = {
+        dispatch,
+        territory,
+        blockName: 'categories',
+        selector: '.category-tile__link'
+      }
 
-      let categoryTiles = Array.from(
-        html.querySelectorAll('.category-tile__link')
-      )
-
-      if (!categoryTiles.length) return
-
-      let categoriesArr = []
-
-      categoryTiles.forEach(category => {
-        let image = removeTransformations(
-          category.querySelector('.category-tile__image').dataset.src
-        )
-
-        let url = category.getAttribute('href')
-        let title = category.querySelector('.category-tile__heading')
-          .textContent
-
-        categoriesArr.push({
-          image,
-          url,
-          title
-        })
-
-        categoriesArr.forEach(x => {
-          trimWhiteSpace(x)
-        })
-
-        dispatch({
-          type: 'autoFillBlock',
-          payload: categoriesArr,
-          blockName: 'categories'
-        })
-      })
+      autoFillFromSiteStatic(options)
     }
   }
 

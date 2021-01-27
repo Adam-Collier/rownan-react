@@ -16,9 +16,6 @@ export const autoFillFromFileStatic = async ({
   savedJSON,
   blockName
 }) => {
-  console.log(savedJSON, blockName)
-  console.log(savedJSON[blockName])
-
   dispatch({
     type: 'autoFillBlock',
     payload: savedJSON[blockName],
