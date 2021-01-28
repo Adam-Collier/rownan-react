@@ -12,13 +12,10 @@
     "codemirror": "^5.47.0",
     "electron-squirrel-startup": "^1.0.0",
     "fs-extra": "^8.0.1",
-    "node-fetch": "^2.6.0",
     "portscanner": "^2.2.0",
-    "prettier": "^1.18.2",
     "react": "^16.8.6",
     "react-beautiful-dnd": "^11.0.4",
     "react-dom": "^16.8.6",
-    "react-scripts": "3.0.1",
     "react-syntax-highlighter": "^10.3.0",
     "request-promise-native": "^1.0.7",
     "shortid": "^2.2.14",
@@ -76,7 +73,8 @@
     "eslint-plugin-prettier": "^3.2.0",
     "foreman": "^3.0.1",
     "progress-bar-webpack-plugin": "^1.12.1",
-    "webpack-bundle-analyzer": "^3.3.2"
+    "webpack-bundle-analyzer": "^3.3.2",
+    "react-scripts": "3.0.1"
   },
   "repository": "https://github.com/Adam-Collier/rownan-react.git",
   "license": "MIT",

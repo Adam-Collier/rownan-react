@@ -1,6 +1,3 @@
-import prettier from 'prettier/standalone'
-import html from 'prettier/parser-html'
-import css from 'prettier/parser-postcss'
 import InfoStripTemplate from '../Components/InfoStrip/InfoStripTemplate'
 import HeroTemplate from '../Components/Hero/HeroTemplate'
 import LowerTemplate from '../Components/Lower/LowerTemplate'
@@ -79,9 +76,9 @@ export default {
   </div>`
     }
 
-    let output = prettier.format(outputHTML(), {
+    let output = window.prettier.format(outputHTML(), {
       parser: 'html',
-      plugins: [html, css]
+      plugins: window.prettierPlugins
     })
 
     return { ...state, outputHTML: output }
