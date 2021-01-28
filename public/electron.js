@@ -1,6 +1,5 @@
 // Modules to control application life and create native browser window
 const { app, BrowserWindow, Menu } = require('electron')
-const browserSync = require('./browsersync')
 const fs = require('fs-extra')
 const menuTemplate = require('./menuTemplate')
 
@@ -86,5 +85,3 @@ fs.copySync(
   `${tempDirPath}/template`
 )
 console.log('success!')
-
-browserSync()
