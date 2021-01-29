@@ -9,7 +9,7 @@ export const autoFillFromSiteDynamic = async ({
   territory,
   blockIndex,
   blockType,
-  selector
+  selector,
 }) => {
   let { data } = await axios.get(territory.url)
   let parser = new DOMParser()
@@ -32,7 +32,7 @@ export const autoFillFromSiteStatic = async ({
   dispatch,
   territory,
   blockName,
-  selector
+  selector,
 }) => {
   let { data } = await axios.get(territory.url)
   let parser = new DOMParser()
@@ -49,6 +49,6 @@ export const autoFillFromSiteStatic = async ({
   dispatch({
     type: 'autoFillBlock',
     payload: block,
-    blockName
+    blockName,
   })
 }

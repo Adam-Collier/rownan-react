@@ -1,13 +1,13 @@
-export default {
+const infoStrip = {
   removeInfoStrip: (state, action) => {
     let newArr = state.promoBlocks.filter(
       (block, index) => index !== action.index
     )
     return { ...state, promoBlocks: newArr }
   },
-  addInfoStrip: state => ({
+  addInfoStrip: (state) => ({
     ...state,
-    promoBlocks: [...state.promoBlocks, { url: '', title: '' }]
+    promoBlocks: [...state.promoBlocks, { url: '', title: '' }],
   }),
   addInfoStripContent: (state, action) => ({
     ...state,
@@ -15,8 +15,10 @@ export default {
       if (index !== action.index) return item
       return {
         ...item,
-        [action.name]: action.payload
+        [action.name]: action.payload,
       }
-    })
-  })
+    }),
+  }),
 }
+
+export default infoStrip

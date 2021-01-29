@@ -15,14 +15,14 @@ const Icon = styled(AutoFillIcon)`
 export const AutoFillInfoStrip = () => {
   const dispatch = useAppDispatch()
   const { territory } = useAppState()
-  const handleClick = async e => {
+  const handleClick = async (e) => {
     e.persist()
 
     let options = {
       dispatch,
       territory,
       blockName: 'promoBlocks',
-      selector: '.info'
+      selector: '.info',
     }
 
     autoFillFromSiteStatic(options)

@@ -17,7 +17,7 @@ export const AutoFillCategories = () => {
       let options = {
         dispatch,
         savedJSON,
-        blockName: 'categories'
+        blockName: 'categories',
       }
 
       autoFillFromFileStatic(options)
@@ -26,7 +26,7 @@ export const AutoFillCategories = () => {
         dispatch,
         territory,
         blockName: 'categories',
-        selector: '.category-tile__link'
+        selector: '.category-tile__link',
       }
 
       autoFillFromSiteStatic(options)
@@ -39,7 +39,7 @@ export const AutoFillCategories = () => {
         name="autofill"
         value="default"
         className="categories"
-        onChange={e => handleClick(territory, e)}
+        onChange={(e) => handleClick(territory, e)}
       >
         <>
           <option value="default">No categories</option>

@@ -53,7 +53,7 @@ const SaleCategoryTemplate = (categories, territory) => {
       <div class="categories-sale__grid">
         ${categories
           .map(
-            category => `
+            (category) => `
           <a href="${category.url}">
             <picture>
               <source type="image/webp" data-srcset="${addImageTransformations(

@@ -44,21 +44,21 @@ const SaleContainer = ({ block, index }) => {
       type: 'reorderNestedBlocks',
       reorderedBlocks: blocks,
       blockType,
-      index
+      index,
     })
 
     dispatch({
-      type: 'updateHTML'
+      type: 'updateHTML',
     })
     return
   }
 
-  const handleChange = e => {
+  const handleChange = (e) => {
     dispatch({
       type: 'addDynamicBlockContent',
       payload: e.target.value,
       name: e.target.name,
-      index
+      index,
     })
   }
 
@@ -86,7 +86,7 @@ const SaleContainer = ({ block, index }) => {
         </div>
       </BlockSection>
 
-      <DragDropContext onDragEnd={e => onDragEnd(e, content.ctas, index)}>
+      <DragDropContext onDragEnd={(e) => onDragEnd(e, content.ctas, index)}>
         <DragDrop id="saleCtaBlocks" stateItems={content.ctas}>
           {(stateItem, i) => (
             <SaleBlock

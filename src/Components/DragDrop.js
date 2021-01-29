@@ -6,7 +6,7 @@ const DragDrop = ({ id, stateItems, children }) => {
   let numberOfChildren = React.Children.count(children)
   return (
     <Droppable droppableId={id}>
-      {provided => (
+      {(provided) => (
         <>
           <BlockWrapper ref={provided.innerRef} {...provided.droppableProps}>
             {numberOfChildren === 1 && children[0]}
@@ -17,7 +17,7 @@ const DragDrop = ({ id, stateItems, children }) => {
                   draggableId={`${id}${index + 1}`}
                   index={index}
                 >
-                  {provided => (
+                  {(provided) => (
                     <Block
                       key={index}
                       {...provided.draggableProps}

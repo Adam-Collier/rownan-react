@@ -124,7 +124,7 @@ const CategoryTemplate = (categories, territory) => {
     <div class="categories-carousel">
       ${categories
         .map(
-          category =>
+          (category) =>
             `<a class="category-tile__link" href="${category.url}">
           <div class="category-tile">
             <picture>

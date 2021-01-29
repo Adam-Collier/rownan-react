@@ -1,12 +1,14 @@
 import { save, saveAs } from '../lib/saveFile'
 
-export default {
-  saveFile: state => {
+const saveContext = {
+  saveFile: (state) => {
     let fileName = save(state)
     return { ...state, savedFilePath: fileName }
   },
-  saveAs: state => {
+  saveAs: (state) => {
     let fileName = saveAs(state)
     return { ...state, savedFilePath: fileName }
-  }
+  },
 }
+
+export default saveContext

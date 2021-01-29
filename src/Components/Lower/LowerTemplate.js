@@ -1,10 +1,10 @@
 import removeEmptyLines from '../../lib/removeEmptyLines'
 import addImageTransformations from '../../lib/addImageTransformations'
 
-const LowerTemplate = blocks => {
+const LowerTemplate = (blocks) => {
   return `<div class="blocker"></div>
     ${blocks
-      .map(block => {
+      .map((block) => {
         let transformedImage = addImageTransformations(
           block.image,
           '600',

@@ -1,21 +1,21 @@
 import writeSaveFile from './writeSaveFile'
 const { dialog } = window.require('electron').remote
 
-const saveWithDialog = state => {
+const saveWithDialog = (state) => {
   // open the save dialog
   let fileName = dialog.showSaveDialogSync({
     defaultPath: `${state.territory.identifier}.html`,
     filters: [
       {
         name: 'Custom File Type',
-        extensions: ['html']
-      }
-    ]
+        extensions: ['html'],
+      },
+    ],
   })
 
   state = {
     ...state,
-    savedFilePath: fileName
+    savedFilePath: fileName,
   }
 
   writeSaveFile(state, fileName)
@@ -23,13 +23,13 @@ const saveWithDialog = state => {
   return fileName
 }
 
-const saveNoDialog = state => {
+const saveNoDialog = (state) => {
   writeSaveFile(state, state.savedFilePath)
   return state.savedFilePath
 }
 
 // the commands
-const save = state => {
+const save = (state) => {
   if (state.savedFilePath) {
     return saveNoDialog(state)
   } else {
@@ -37,7 +37,7 @@ const save = state => {
   }
 }
 
-const saveAs = state => {
+const saveAs = (state) => {
   return saveWithDialog(state)
 }
 

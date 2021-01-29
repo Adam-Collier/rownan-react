@@ -9,7 +9,7 @@ import { autoFillFromFileDynamic } from '../autoFillFromFile'
 
 import { autoFillFromSiteDynamic } from '../autoFillFromSite'
 
-let getSelector = type => {
+let getSelector = (type) => {
   switch (type) {
     case 'main':
       return '.row'
@@ -37,7 +37,7 @@ const AutoFillDynamicBlocks = ({ index, type }) => {
       let savedJSON = await getFileJSON()
 
       let filteredBlocks = savedJSON.contentBlocks.filter(
-        block => block.type === type
+        (block) => block.type === type
       )
 
       let options = {
@@ -45,7 +45,7 @@ const AutoFillDynamicBlocks = ({ index, type }) => {
         territory,
         index,
         blockIndex,
-        filteredBlocks
+        filteredBlocks,
       }
 
       if (savedJSON) {
@@ -60,7 +60,7 @@ const AutoFillDynamicBlocks = ({ index, type }) => {
         territory,
         blockIndex: e.target.value,
         blockType: type,
-        selector
+        selector,
       }
 
       autoFillFromSiteDynamic(options)
@@ -72,7 +72,7 @@ const AutoFillDynamicBlocks = ({ index, type }) => {
       <select
         name="autofill"
         value="default"
-        onChange={e => selectSwitch(e, type)}
+        onChange={(e) => selectSwitch(e, type)}
       >
         {type === 'main' && (
           <>

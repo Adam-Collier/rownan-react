@@ -19,13 +19,13 @@ const ContentContainer = styled.div`
   grid-row: 2/3;
 `
 
-const Content = props => {
+const Content = (props) => {
   const dispatch = useAppDispatch()
   const {
     contentBlocks,
     categories,
     saleCategories,
-    promoBlocks
+    promoBlocks,
   } = useAppState()
 
   const onDragEnd = (result, blockType) => {
@@ -44,11 +44,11 @@ const Content = props => {
     dispatch({
       type: 'reorderBlocks',
       reorderedBlocks: blocks,
-      blockType
+      blockType,
     })
 
     dispatch({
-      type: 'updateHTML'
+      type: 'updateHTML',
     })
     return
   }
@@ -58,17 +58,17 @@ const Content = props => {
       <Territory />
       <ContentContainer>
         <Ticker />
-        <DragDropContext onDragEnd={e => onDragEnd(e, promoBlocks)}>
+        <DragDropContext onDragEnd={(e) => onDragEnd(e, promoBlocks)}>
           <InfoStripContainer />
         </DragDropContext>
-        <DragDropContext onDragEnd={e => onDragEnd(e, categories)}>
+        <DragDropContext onDragEnd={(e) => onDragEnd(e, categories)}>
           <Categories />
         </DragDropContext>
-        <DragDropContext onDragEnd={e => onDragEnd(e, saleCategories)}>
+        <DragDropContext onDragEnd={(e) => onDragEnd(e, saleCategories)}>
           <SaleCategories />
         </DragDropContext>
         <AppDownloadBlock />
-        <DragDropContext onDragEnd={e => onDragEnd(e, contentBlocks)}>
+        <DragDropContext onDragEnd={(e) => onDragEnd(e, contentBlocks)}>
           <DynamicBlocks />
         </DragDropContext>
         <FormButton

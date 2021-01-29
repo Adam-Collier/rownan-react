@@ -1,4 +1,4 @@
-export default (image, width, type, webp) => {
+const addImageTransformations = (image, width, type, webp) => {
   let extension = image.split('.').pop()
 
   if (image.includes('https://media.missguided.com/i/missguided')) {
@@ -17,7 +17,7 @@ export default (image, width, type, webp) => {
   }
 
   if (image.includes('https://media.missguided.co.uk')) {
-    let transformImage = transformation => {
+    let transformImage = (transformation) => {
       return `${image.slice(0, 44)}${transformation}${image.slice(44)}`
     }
     switch (extension) {
@@ -44,3 +44,5 @@ export default (image, width, type, webp) => {
   }
   return image
 }
+
+export default addImageTransformations

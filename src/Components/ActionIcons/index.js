@@ -23,7 +23,7 @@ const Icons = styled.div`
   }
 `
 
-const ActionIcons = props => {
+const ActionIcons = (props) => {
   const dispatch = useAppDispatch()
   return (
     <Icons>

@@ -6,10 +6,10 @@ const TickerBlock = () => {
   const { tickerText } = useAppState()
   const dispatch = useAppDispatch()
 
-  const handleChange = e => {
+  const handleChange = (e) => {
     dispatch({
       type: 'ticker',
-      payload: e.target.value
+      payload: e.target.value,
     })
   }
 
@@ -24,7 +24,7 @@ const TickerBlock = () => {
           type="text"
           name="tickerText"
           value={tickerText}
-          onChange={e => handleChange(e)}
+          onChange={(e) => handleChange(e)}
         />
       </div>
     </BlockWrapper>

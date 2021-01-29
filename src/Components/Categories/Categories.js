@@ -5,7 +5,7 @@ import { AutoFillCategories } from '../Autofill/AutoFillCategories'
 import DragDrop from '../DragDrop'
 import CategoryBlock from './CategoryBlock'
 
-const Categories = props => {
+const Categories = (props) => {
   const { categories } = useAppState()
 
   return (

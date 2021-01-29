@@ -16,7 +16,7 @@ const AutofillSaleCategories = () => {
       let options = {
         dispatch,
         savedJSON,
-        blockName: 'saleCategories'
+        blockName: 'saleCategories',
       }
 
       autoFillFromFileStatic(options)
@@ -27,7 +27,7 @@ const AutofillSaleCategories = () => {
         dispatch,
         territory,
         blockName: 'saleCategories',
-        selector: '.categories-sale__grid a'
+        selector: '.categories-sale__grid a',
       }
 
       autoFillFromSiteStatic(options)
@@ -40,7 +40,7 @@ const AutofillSaleCategories = () => {
         name="autofill"
         value="default"
         className="categories"
-        onChange={e => handleClick(territory, e)}
+        onChange={(e) => handleClick(territory, e)}
       >
         <>
           <option value="default">No categories</option>

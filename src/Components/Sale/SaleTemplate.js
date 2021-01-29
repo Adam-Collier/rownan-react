@@ -1,4 +1,4 @@
-const SaleTemplate = blocks => {
+const SaleTemplate = (blocks) => {
   return blocks
     .map((block, index) => {
       return /*html*/ `
@@ -60,7 +60,7 @@ const SaleTemplate = blocks => {
         <div class="categories-sale__ctas">
           ${block.ctas
             .map(
-              cta => /*html*/ `
+              (cta) => /*html*/ `
             <a href="${cta.url}">
               <button class="button">${cta.text}</button>
             </a>

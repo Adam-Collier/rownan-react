@@ -19,29 +19,29 @@ const writeSaveFile = (state, fileName) => {
     fs.writeFile(
       jsonDir + '/' + jsonFileName + '.json',
       JSON.stringify(state, null, 2),
-      err => {
+      (err) => {
         if (err) console.log(err)
       }
     )
   } else {
     // if directory doesnt exist create it then write the json
-    fs.mkdir(jsonDir, err => {
+    fs.mkdir(jsonDir, (err) => {
       if (err) console.log(err, 'failed to create directory')
       fs.writeFile(
         jsonDir + '/' + jsonFileName + '.json',
         JSON.stringify(state, null, 2),
-        err => {
+        (err) => {
           if (err) console.log(err)
         }
       )
     })
   }
 
-  fs.writeFile(fileName, state.outputHTML, err => {
+  fs.writeFile(fileName, state.outputHTML, (err) => {
     if (err) console.log(err)
     const notification = {
       title: 'File Saved',
-      body: 'Saved to: ' + fileName
+      body: 'Saved to: ' + fileName,
     }
     const myNotification = new window.Notification(
       notification.title,

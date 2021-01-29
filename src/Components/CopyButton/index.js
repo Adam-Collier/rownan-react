@@ -23,8 +23,8 @@ const CopyButton = () => {
 
   const [copied, setCopied] = useState(false)
 
-  const delay = duration =>
-    new Promise(resolve => setTimeout(resolve, duration))
+  const delay = (duration) =>
+    new Promise((resolve) => setTimeout(resolve, duration))
 
   // utilise useEffect to make sure we dont get a stale outputHTML prop
   useEffect(() => {

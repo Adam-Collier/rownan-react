@@ -24,13 +24,13 @@ export const IconContent = styled.div`
   }
 `
 
-export const trimWhiteSpace = obj => {
-  Object.keys(obj).forEach(key => {
+export const trimWhiteSpace = (obj) => {
+  Object.keys(obj).forEach((key) => {
     obj[key] = obj[key].trim()
   })
 }
 
-export const removeTransformations = url => {
+export const removeTransformations = (url) => {
   if (url.includes('https://media.missguided.co.uk')) {
     let arr = url.split('/')
 
@@ -49,13 +49,13 @@ export const removeTransformations = url => {
   }
 }
 
-export const isFromFileCheck = e =>
+export const isFromFileCheck = (e) =>
   e.target[e.target.selectedIndex].getAttribute('data-file') ? true : false
 
 export const getFileJSON = async () => {
   const { filePaths } = await dialog.showOpenDialog({
     properties: ['openFile'],
-    filters: [{ extensions: ['json'] }]
+    filters: [{ extensions: ['json'] }],
   })
 
   if (filePaths) {
@@ -75,7 +75,7 @@ export const createDynamicBlock = (el, type) => {
       image: removeTransformations(el.querySelector('img').dataset.src),
       subtitle: subtitle ? subtitle.textContent : '',
       title: title ? title.textContent : '',
-      url: el.getAttribute('href')
+      url: el.getAttribute('href'),
     }
   } else if (type === 'main') {
     let srcSet = el.querySelector('source').dataset.srcset
@@ -93,29 +93,29 @@ export const createDynamicBlock = (el, type) => {
       secondaryUrl: urls[1] ? urls[1].getAttribute('href') : '',
       subtitle: subtitle ? subtitle.textContent : '',
       svg: el.querySelector('svg').outerHTML,
-      title: title ? title.textContent : ''
+      title: title ? title.textContent : '',
     }
   } else if (type === 'sale') {
-    let ctas = Array.from(el.querySelectorAll('a')).map(cta => {
+    let ctas = Array.from(el.querySelectorAll('a')).map((cta) => {
       let url = cta.getAttribute('href')
       let text = cta.querySelector('button').textContent
 
       return {
         url,
-        text
+        text,
       }
     })
 
     return {
       title: el.querySelector('h2').textContent.trim(),
-      ctas
+      ctas,
     }
   }
 }
 
 export const createStaticBlock = (allElements, blockName) => {
   if (blockName === 'categories') {
-    return allElements.map(category => {
+    return allElements.map((category) => {
       let image = removeTransformations(
         category.querySelector('.category-tile__image').dataset.src.trim()
       )
@@ -127,26 +127,23 @@ export const createStaticBlock = (allElements, blockName) => {
       return {
         image,
         url,
-        title
+        title,
       }
     })
   } else if (blockName === 'promoBlocks') {
-    return allElements.map(promo => {
-      let url = promo
-        .querySelector('a')
-        .getAttribute('href')
-        .trim()
+    return allElements.map((promo) => {
+      let url = promo.querySelector('a').getAttribute('href').trim()
       let title = promo.querySelector('h3').innerHTML.trim()
 
       title = convertEmojis(title)
 
       return {
         url,
-        title
+        title,
       }
     })
   } else if (blockName === 'saleCategories') {
-    return allElements.map(category => {
+    return allElements.map((category) => {
       let image = removeTransformations(
         category.querySelector('.category-tile__image').dataset.src
       ).trim()
@@ -154,7 +151,7 @@ export const createStaticBlock = (allElements, blockName) => {
 
       return {
         image,
-        url
+        url,
       }
     })
   }

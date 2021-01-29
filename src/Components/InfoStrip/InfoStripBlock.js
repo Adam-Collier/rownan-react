@@ -36,7 +36,7 @@ function InfoStripBlock({ block, index }) {
       type: 'addInfoStripContent',
       payload: e.target.value,
       name: e.target.name,
-      index
+      index,
     })
   }
 
@@ -48,14 +48,14 @@ function InfoStripBlock({ block, index }) {
           name="url"
           value={url.trim()}
           placeholder="url"
-          onChange={e => handleChange(index, e)}
+          onChange={(e) => handleChange(index, e)}
         />
         <input
           type="text"
           name="title"
           value={title}
           placeholder="title"
-          onChange={e => handleChange(index, e)}
+          onChange={(e) => handleChange(index, e)}
         />
       </div>
       <CloseIcon

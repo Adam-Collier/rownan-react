@@ -23,6 +23,26 @@
     "sqip-plugin-svgo": "^1.0.0-alpha.27",
     "styled-components": "^4.2.0"
   },
+  "devDependencies": {
+    "@electron-forge/cli": "^6.0.0-beta.54",
+    "@electron-forge/maker-deb": "^6.0.0-beta.54",
+    "@electron-forge/maker-rpm": "^6.0.0-beta.54",
+    "@electron-forge/maker-squirrel": "^6.0.0-beta.54",
+    "@electron-forge/maker-zip": "^6.0.0-beta.54",
+    "electron": "^11.2.0",
+    "electron-devtools-installer": "^3.1.1",
+    "electron-rebuild": "^1.8.5",
+    "eslint-config-prettier": "^7.0.0",
+    "eslint-plugin-html": "^6.1.1",
+    "eslint-plugin-prettier": "^3.2.0",
+    "foreman": "^3.0.1",
+    "prettier": "2.2.1",
+    "progress-bar-webpack-plugin": "^1.12.1",
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6",
+    "react-scripts": "4.0.1",
+    "webpack-bundle-analyzer": "^3.3.2"
+  },
   "scripts": {
     "analyze": "node analyze.js",
     "start": "electron-forge start",
@@ -35,7 +55,7 @@
     "npm-rebuild": "electron-rebuild",
     "package": "electron-forge package",
     "lint": "eslint src/",
-    "lint:fix": "eslint . --fix",
+    "lint:fix": "eslint --fix 'src/**/*.js'",
     "make": "npm run build && electron-forge make"
   },
   "eslintConfig": {
@@ -55,25 +75,6 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  },
-  "devDependencies": {
-    "@electron-forge/cli": "^6.0.0-beta.54",
-    "@electron-forge/maker-deb": "^6.0.0-beta.54",
-    "@electron-forge/maker-rpm": "^6.0.0-beta.54",
-    "@electron-forge/maker-squirrel": "^6.0.0-beta.54",
-    "@electron-forge/maker-zip": "^6.0.0-beta.54",
-    "electron": "^11.2.0",
-    "electron-devtools-installer": "^3.1.1",
-    "electron-rebuild": "^1.8.5",
-    "eslint-config-prettier": "^7.0.0",
-    "eslint-plugin-html": "^6.1.1",
-    "eslint-plugin-prettier": "^3.2.0",
-    "foreman": "^3.0.1",
-    "progress-bar-webpack-plugin": "^1.12.1",
-    "webpack-bundle-analyzer": "^3.3.2",
-    "react-scripts": "3.0.1",
-    "react-dom": "^16.8.6",
-    "react": "^16.8.6"
   },
   "repository": "https://github.com/Adam-Collier/rownan-react.git",
   "license": "MIT",

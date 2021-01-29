@@ -1,4 +1,4 @@
-export default {
+const autoFill = {
   autoFill: (state, action) => {
     return {
       ...state,
@@ -7,16 +7,18 @@ export default {
         return {
           ...item,
           content: {
-            ...action.payload
-          }
+            ...action.payload,
+          },
         }
-      })
+      }),
     }
   },
   autoFillBlock: (state, action) => {
     return {
       ...state,
-      [action.blockName]: [...action.payload]
+      [action.blockName]: [...action.payload],
     }
-  }
+  },
 }
+
+export default autoFill

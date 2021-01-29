@@ -2,7 +2,7 @@ export const autoFillFromFileDynamic = async ({
   dispatch,
   index,
   blockIndex,
-  filteredBlocks
+  filteredBlocks,
 }) => {
   if (!filteredBlocks[blockIndex]) return
 
@@ -14,11 +14,11 @@ export const autoFillFromFileDynamic = async ({
 export const autoFillFromFileStatic = async ({
   dispatch,
   savedJSON,
-  blockName
+  blockName,
 }) => {
   dispatch({
     type: 'autoFillBlock',
     payload: savedJSON[blockName],
-    blockName
+    blockName,
   })
 }
