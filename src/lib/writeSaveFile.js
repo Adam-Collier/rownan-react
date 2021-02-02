@@ -1,4 +1,4 @@
-const fs = window.require('fs')
+import fs from 'fs'
 
 const writeSaveFile = (state, fileName) => {
   console.log(state, fileName)

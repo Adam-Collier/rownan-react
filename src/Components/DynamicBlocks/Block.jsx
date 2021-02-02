@@ -1,7 +1,7 @@
 import React from 'react'
 import { useAppDispatch } from '../../context/state-context'
 
-import { ReactComponent as DragIcon } from '../../icons/dragIcon.svg'
+import DragIcon from '../../icons/dragIcon.svg'
 
 import AutoFillDynamicBlocks from '../Autofill/AutoFillDynamicBlocks'
 import HeroBlock from '../Hero/HeroBlock'

@@ -5,7 +5,7 @@ import styled from 'styled-components'
 import VisualPreview from './VisualPreview'
 import CodePreview from './CodePreview'
 
-const PreviewPane = styled.div`
+const PreviewPanel = styled.div`
   position: relative;
   grid-column: 2/3;
   grid-row: 1/3;
@@ -17,9 +17,9 @@ const PreviewPane = styled.div`
 const Preview = (props) => {
   const { contentView } = useAppState()
   return (
-    <PreviewPane>
+    <PreviewPanel>
       {contentView === true ? <VisualPreview /> : <CodePreview />}
-    </PreviewPane>
+    </PreviewPanel>
   )
 }
 

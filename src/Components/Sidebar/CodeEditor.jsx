@@ -5,15 +5,16 @@ import styled from 'styled-components'
 import '../../lib/CodeMirror/codemirror.css'
 import '../../lib/CodeMirror/one-dark.css'
 
-import 'codemirror/mode/javascript/javascript'
-import 'codemirror/mode/xml/xml'
-import 'codemirror/mode/css/css'
-import 'codemirror/mode/htmlmixed/htmlmixed'
+import codemirror from 'https://cdn.skypack.dev/codemirror'
+import 'https://cdn.skypack.dev/codemirror/mode/javascript/javascript'
+import 'https://cdn.skypack.dev/codemirror/mode/xml/xml'
+import 'https://cdn.skypack.dev/codemirror/mode/css/css'
+import 'https://cdn.skypack.dev/codemirror/mode/htmlmixed/htmlmixed'
 
-import 'codemirror/addon/edit/closebrackets'
-import 'codemirror/addon/edit/closetag'
-import 'codemirror/addon/search/searchcursor'
-import 'codemirror/keymap/sublime'
+import 'https://cdn.skypack.dev/codemirror/addon/edit/closebrackets'
+import 'https://cdn.skypack.dev/codemirror/addon/edit/closetag'
+import 'https://cdn.skypack.dev/codemirror/addon/search/searchcursor'
+import 'https://cdn.skypack.dev/codemirror/keymap/sublime'
 
 const CodeEditor = styled.div`
   .CodeMirror {
@@ -28,7 +29,7 @@ const CodeEditor = styled.div`
   }
 `
 
-function Editor(props) {
+function Editor() {
   const editor = useRef(null)
   const { editorCode } = useAppState()
   const dispatch = useAppDispatch()
@@ -44,10 +45,7 @@ function Editor(props) {
       keyMap: 'sublime',
     }
 
-    let codeMirrorInstance = require('codemirror').fromTextArea(
-      editor.current,
-      options
-    )
+    let codeMirrorInstance = codemirror.fromTextArea(editor.current, options)
 
     codeMirrorInstance.on('change', (instance) => {
       let value = instance.getValue()

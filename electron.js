@@ -29,7 +29,7 @@ function createWindow() {
 
   // and load the index.html of the app.
   process.env.ELECTRON_START_URL
-    ? mainWindow.loadURL(process.env.ELECTRON_START_URL)
+    ? mainWindow.loadURL('http://localhost:3000/')
     : mainWindow.loadFile('./build/index.html')
 
   // Open the DevTools.
@@ -79,10 +79,10 @@ app.on('activate', function () {
 // code. You can also put them in separate files and require them here.
 
 // set up temp file
-fs.copySync(
-  process.env.ELECTRON_START_URL
-    ? `${appPath}/public/template`
-    : `${appPath}/build/template`,
-  `${tempDirPath}/template`
-)
-console.log('success!')
+// fs.copySync(
+//   process.env.ELECTRON_START_URL
+//     ? `${appPath}/public/template`
+//     : `${appPath}/build/template`,
+//   `${tempDirPath}/template`
+// )
+// console.log('success!')

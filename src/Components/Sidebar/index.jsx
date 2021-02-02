@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import CodeEditor from './CodeEditor'
-import Blocks from './Blocks'
+// import Blocks from './Blocks'
 
 const Container = styled.div`
   height: 100vh;
@@ -13,7 +13,7 @@ const Container = styled.div`
 const Sidebar = () => (
   <Container>
     <CodeEditor />
-    <Blocks />
+    {/* <Blocks /> */}
   </Container>
 )
 

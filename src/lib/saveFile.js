@@ -1,5 +1,7 @@
 import writeSaveFile from './writeSaveFile'
-const { dialog } = window.require('electron').remote
+
+import { remote } from 'electron'
+const { dialog } = remote
 
 const saveWithDialog = (state) => {
   // open the save dialog

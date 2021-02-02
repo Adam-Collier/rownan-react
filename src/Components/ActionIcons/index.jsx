@@ -1,5 +1,5 @@
 import React from 'react'
-import { ReactComponent as Switch } from '../../icons/switch.svg'
+import Switch from '../../icons/switch.svg'
 import styled from 'styled-components'
 
 import { useAppDispatch } from '../../context/state-context'

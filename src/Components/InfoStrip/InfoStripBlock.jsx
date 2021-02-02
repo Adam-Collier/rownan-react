@@ -1,6 +1,6 @@
 import React from 'react'
 import { useAppDispatch } from '../../context/state-context'
-import { ReactComponent as CloseIcon } from '../../icons/close.svg'
+import CloseIcon from '../../icons/close.svg'
 import { convertEmojis } from '../../lib/emojiConvert'
 
 import styled from 'styled-components'

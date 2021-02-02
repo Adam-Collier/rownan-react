@@ -1,6 +1,6 @@
 import React from 'react'
 // import { BlockForm } from '../styles/ContentBlocks'
-import { ReactComponent as CloseIcon } from '../../icons/close.svg'
+import CloseIcon from '../../icons/close.svg'
 import { useAppDispatch } from '../../context/state-context'
 
 import styled from 'styled-components'

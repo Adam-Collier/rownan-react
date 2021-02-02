@@ -2,7 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 
 import { useAppState, useAppDispatch } from '../../../context/state-context'
-import { ReactComponent as AutoFillIcon } from '../../../icons/autoFill.svg'
+import AutoFillIcon from '../../../icons/autoFill.svg'
 
 import { autoFillFromSiteStatic } from '../autoFillFromSite'
 
