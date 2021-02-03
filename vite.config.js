@@ -1,15 +1,20 @@
 import reactRefresh from '@vitejs/plugin-react-refresh'
+import { join } from 'path'
 
 /**
  * https://vitejs.dev/config/
  * @type { import('vite').UserConfig }
  */
-const plugins = {
+const root = join(__dirname, 'src/render')
+
+const config = {
+  jsx: 'react',
+  root,
   plugins: [reactRefresh()],
-  optimizeDeps: {
-    auto: true,
-    exclude: ['electron'],
+  build: {
+    outDir: join('../../build'),
+    emptyOutDir: true,
   },
 }
 
-export default plugins
+export default config

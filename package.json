@@ -4,7 +4,7 @@
   "version": "0.1.8",
   "private": true,
   "homepage": "./",
-  "main": "./electron.js",
+  "main": "./src/main/electron.js",
   "dependencies": {
     "axios": "^0.19.0",
     "cheerio": "^1.0.0-rc.3",
@@ -48,9 +48,10 @@
   "scripts": {
     "analyze": "node analyze.js",
     "start": "electron-forge start",
-    "react:start": "vite",
+    "react:dev": "vite",
     "dev": "nf start",
     "electron": "electron .",
+    "electron:dev": "ELECTRON_START_URL=http://localhost:3000/ electron .",
     "build": "vite build",
     "package": "electron-forge package",
     "lint": "eslint src/",
