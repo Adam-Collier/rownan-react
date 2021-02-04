@@ -40,7 +40,7 @@
     "analyze": "node analyze.js",
     "start": "electron-forge start",
     "react:dev": "vite",
-    "react:build": "vite build --base=./",
+    "react:build": "vite build",
     "react:serve": "vite serve",
     "dev": "nf start",
     "electron": "electron .",

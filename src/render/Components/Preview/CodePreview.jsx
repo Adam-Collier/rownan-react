@@ -4,7 +4,6 @@ import { useAppState } from '../../context/state-context'
 import styled from 'styled-components'
 
 import { PrismLight as SyntaxHighlighter } from 'react-syntax-highlighter'
-// import SyntaxHighlighter from 'https://cdn.skypack.dev/react-syntax-highlighter/dist/esm/prism-light.js';
 
 import prism from '../../lib/Prism/theme'
 import html from 'react-syntax-highlighter/dist/esm/languages/prism/markup'

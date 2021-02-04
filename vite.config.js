@@ -13,20 +13,23 @@ const config = {
   root,
   plugins: [reactRefresh()],
   build: {
-    outDir: join('../../build'),
+    outDir: '../../build',
     emptyOutDir: true,
-  },
-  build: {
     rollupOptions: {
       output: {
         manualChunks: {
           reactSyntaxHighlighter: ['react-syntax-highlighter'],
           reactBeautifulDnD: ['react-beautiful-dnd'],
-          codeMirror: ['codemirror']
+          codeMirror: ['codemirror'],
+          cheerio: ['cheerio']
         }
       }
     }
-  }
+  },
+  optimizeDeps: {
+    auto: true,
+    exclude: ['path'],
+  },
 }
 
 export default config
