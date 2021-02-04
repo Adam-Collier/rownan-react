@@ -7,7 +7,7 @@ import { isFromFileCheck, getFileJSON } from '../index'
 import { autoFillFromFileDynamic } from '../autoFillFromFile'
 import { autoFillFromSiteDynamic } from '../autoFillFromSite'
 
-import DragIcon from 'https://cdn.skypack.dev/react-feather/dist/icons/move'
+import DragIcon from 'https://cdn.skypack.dev/react-feather/dist/icons/move.js'
 
 let getSelector = (type) => {
   switch (type) {

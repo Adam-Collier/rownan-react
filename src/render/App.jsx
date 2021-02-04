@@ -3,7 +3,7 @@ import './App.css'
 import styled from 'styled-components'
 import Sidebar from './Components/Sidebar'
 import Preview from './Components/Preview/Preview'
-// import ActionIcons from './Components/ActionIcons'
+import ActionIcons from './Components/ActionIcons'
 import Titlebar from './Components/Titlebar'
 
 import { useAppDispatch } from './context/state-context'
@@ -73,7 +73,7 @@ function App() {
       <Titlebar />
       <Sidebar />
       <Preview />
-      {/* <ActionIcons /> */}
+      <ActionIcons />
     </AppContainer>
   )
 }

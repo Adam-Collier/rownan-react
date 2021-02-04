@@ -1,5 +1,5 @@
 import { createDynamicBlock } from './index'
-import axios from 'axios'
+import axios from 'axios';
 
 import { trimWhiteSpace, createStaticBlock } from './index'
 

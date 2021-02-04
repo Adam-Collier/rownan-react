@@ -2,7 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 
 import { useAppState, useAppDispatch } from '../../../context/state-context'
-import AutoFillIcon from 'https://cdn.skypack.dev/react-feather/dist/icons/zap'
+import AutoFillIcon from 'https://cdn.skypack.dev/react-feather/dist/icons/zap.js'
 
 import { autoFillFromSiteStatic } from '../autoFillFromSite'
 

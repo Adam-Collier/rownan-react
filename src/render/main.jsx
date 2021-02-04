@@ -7,7 +7,10 @@ import { StateProvider } from './context/state-context'
 
 ReactDOM.render(
   <StateProvider>
-    <App />
-  </StateProvider>,
+    <React.StrictMode>
+      <App />
+    </React.StrictMode>
+  </StateProvider>
+  ,
   document.getElementById('root')
 )

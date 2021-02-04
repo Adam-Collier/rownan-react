@@ -5,16 +5,17 @@ import styled from 'styled-components'
 import '../../lib/CodeMirror/codemirror.css'
 import '../../lib/CodeMirror/one-dark.css'
 
-import codemirror from 'https://cdn.skypack.dev/codemirror'
-import 'https://cdn.skypack.dev/codemirror/mode/javascript/javascript'
-import 'https://cdn.skypack.dev/codemirror/mode/xml/xml'
-import 'https://cdn.skypack.dev/codemirror/mode/css/css'
-import 'https://cdn.skypack.dev/codemirror/mode/htmlmixed/htmlmixed'
+import codemirror from "codemirror"
 
-import 'https://cdn.skypack.dev/codemirror/addon/edit/closebrackets'
-import 'https://cdn.skypack.dev/codemirror/addon/edit/closetag'
-import 'https://cdn.skypack.dev/codemirror/addon/search/searchcursor'
-import 'https://cdn.skypack.dev/codemirror/keymap/sublime'
+import 'codemirror/mode/javascript/javascript'
+import 'codemirror/mode/xml/xml'
+import 'codemirror/mode/css/css'
+import 'codemirror/mode/htmlmixed/htmlmixed'
+
+import 'codemirror/addon/edit/closebrackets'
+import 'codemirror/addon/edit/closetag'
+import 'codemirror/addon/search/searchcursor'
+import 'codemirror/keymap/sublime'
 
 const CodeEditor = styled.div`
   .CodeMirror {
@@ -50,6 +51,7 @@ function Editor() {
       let value = instance.getValue()
       dispatch({ type: 'editorCode', payload: value })
     })
+
     codeMirrorInstance.setValue(editorCode)
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
