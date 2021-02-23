@@ -1,7 +1,8 @@
-export default {
+const placeholderImage = {
   placeholderImage: (state, action) => {
-    let name = `placeholder${action.name.charAt(0).toUpperCase() +
-      action.name.slice(1)}`
+    let name = `placeholder${
+      action.name.charAt(0).toUpperCase() + action.name.slice(1)
+    }`
     return {
       ...state,
       contentBlocks: state.contentBlocks.map((item, index) => {
@@ -10,10 +11,12 @@ export default {
           ...item,
           content: {
             ...item.content,
-            [name]: action.payload
-          }
+            [name]: action.payload,
+          },
         }
-      })
+      }),
     }
-  }
+  },
 }
+
+export default placeholderImage

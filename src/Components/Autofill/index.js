@@ -1,13 +1,6 @@
-import axios from 'axios'
-import React from 'react'
 import styled from 'styled-components'
-
-import { useAppState, useAppDispatch } from '../../context/state-context'
-import { placeholderImage } from '../../lib/placeholderImage'
-import { convertEmojis } from '../../lib/emojiConvert'
-
 import fillIcon from '../../icons/autoFill.svg'
-import { ReactComponent as AutoFillIcon } from '../../icons/autoFill.svg'
+import { convertEmojis } from '../../lib/emojiConvert'
 
 const fs = window.require('fs-extra')
 const { dialog } = window.require('electron').remote
@@ -31,13 +24,13 @@ export const IconContent = styled.div`
   }
 `
 
-export const trimWhiteSpace = obj => {
-  Object.keys(obj).forEach(key => {
+export const trimWhiteSpace = (obj) => {
+  Object.keys(obj).forEach((key) => {
     obj[key] = obj[key].trim()
   })
 }
 
-export const removeTransformations = url => {
+export const removeTransformations = (url) => {
   if (url.includes('https://media.missguided.co.uk')) {
     let arr = url.split('/')
 
@@ -56,68 +49,23 @@ export const removeTransformations = url => {
   }
 }
 
-export const autoFillFromFile = (dispatch, index, value, type) => {
-  dialog.showOpenDialog(
-    { properties: ['openFile'], filters: [{ extensions: ['json'] }] },
-    async function(files) {
-      if (files) {
-        let file = JSON.parse(fs.readFileSync(files[0], 'utf8'))
+export const isFromFileCheck = (e) =>
+  e.target[e.target.selectedIndex].getAttribute('data-file') ? true : false
 
-        if (type === 'main' || type === 'lower') {
-          let contentBlocks = file.contentBlocks.filter(block => {
-            return block.type === type
-          })
+export const getFileJSON = async () => {
+  const { filePaths } = await dialog.showOpenDialog({
+    properties: ['openFile'],
+    filters: [{ extensions: ['json'] }],
+  })
 
-          let blockIndex =
-            type === 'main'
-              ? parseInt(value.substring(3, 4)) - 1
-              : value.substring(0, 1)
-
-          if (!contentBlocks[blockIndex]) return
-
-          let block = contentBlocks[blockIndex].content
-
-          let imageArr =
-            type === 'main' ? [block.image, block.mobile] : [block.image]
-
-          imageArr.forEach((x, i) => {
-            placeholderImage(x).then(placeholder => {
-              dispatch({
-                type: 'placeholderImage',
-                name: i === 0 ? 'image' : 'mobile',
-                index,
-                payload: placeholder
-              })
-            })
-          })
-          dispatch({ type: 'autoFill', payload: block, index })
-        } else if (type === 'sale') {
-          let saleContentBlocks = file.contentBlocks.filter(
-            block => block.type === type
-          )
-
-          let saleBlockIndex = value.substring(0, 1)
-
-          if (!saleContentBlocks[saleBlockIndex]) return
-
-          dispatch({
-            type: 'autoFill',
-            payload: saleContentBlocks[saleBlockIndex].content,
-            index
-          })
-        } else if (type.toLowerCase().includes('categories')) {
-          dispatch({
-            type: 'autoFillBlock',
-            payload: file[type],
-            blockName: type
-          })
-        }
-      }
-    }
-  )
+  if (filePaths) {
+    return JSON.parse(fs.readFileSync(filePaths[0], 'utf8'))
+  } else {
+    return null
+  }
 }
 
-let createBlock = (el, type) => {
+export const createDynamicBlock = (el, type) => {
   if (type === 'lower') {
     let subtitle = el.querySelector('.subtitle3')
     let title = el.querySelector('.title3')
@@ -127,7 +75,7 @@ let createBlock = (el, type) => {
       image: removeTransformations(el.querySelector('img').dataset.src),
       subtitle: subtitle ? subtitle.textContent : '',
       title: title ? title.textContent : '',
-      url: el.getAttribute('href')
+      url: el.getAttribute('href'),
     }
   } else if (type === 'main') {
     let srcSet = el.querySelector('source').dataset.srcset
@@ -145,286 +93,66 @@ let createBlock = (el, type) => {
       secondaryUrl: urls[1] ? urls[1].getAttribute('href') : '',
       subtitle: subtitle ? subtitle.textContent : '',
       svg: el.querySelector('svg').outerHTML,
-      title: title ? title.textContent : ''
+      title: title ? title.textContent : '',
     }
   } else if (type === 'sale') {
-    let ctas = Array.from(el.querySelectorAll('a')).map(cta => {
+    let ctas = Array.from(el.querySelectorAll('a')).map((cta) => {
       let url = cta.getAttribute('href')
       let text = cta.querySelector('button').textContent
 
       return {
         url,
-        text
+        text,
       }
     })
 
     return {
       title: el.querySelector('h2').textContent.trim(),
-      ctas
+      ctas,
     }
   }
 }
 
-let autoFillFromSite = async (
-  dispatch,
-  index,
-  value,
-  territory,
-  type,
-  selector
-) => {
-  if (value === 'default') return
+export const createStaticBlock = (allElements, blockName) => {
+  if (blockName === 'categories') {
+    return allElements.map((category) => {
+      let image = removeTransformations(
+        category.querySelector('.category-tile__image').dataset.src.trim()
+      )
+      let url = category.getAttribute('href').trim()
+      let title = category
+        .querySelector('.category-tile__heading')
+        .textContent.trim()
 
-  let { data } = await axios.get(territory.url)
-  let parser = new DOMParser()
-  let html = parser.parseFromString(data, 'text/html')
-
-  let el =
-    type === 'main'
-      ? html.querySelector(`.${value}`)
-      : html.querySelectorAll(selector)[value]
-
-  if (el === null) return
-
-  let block = createBlock(el, type)
-
-  if (type === 'main' || type === 'lower') {
-    trimWhiteSpace(block)
-
-    let imageArr = type === 'main' ? [block.image, block.mobile] : [block.image]
-
-    imageArr.forEach((x, i) => {
-      placeholderImage(x).then(placeholder => {
-        dispatch({
-          type: 'placeholderImage',
-          name: i === 0 ? 'image' : 'mobile',
-          index,
-          payload: placeholder
-        })
-      })
+      return {
+        image,
+        url,
+        title,
+      }
     })
-  }
-
-  dispatch({ type: 'autoFill', payload: block, index })
-}
-
-export const AutoFillContent = ({ index, type }) => {
-  const { territory } = useAppState()
-  let dispatch = useAppDispatch()
-
-  let mainPopulate = async (territory, index, e) => {
-    if (e.target.value === 'default') return
-
-    if (e.target.value.includes('file')) {
-      autoFillFromFile(dispatch, index, e.target.value, 'main')
-    } else {
-      autoFillFromSite(dispatch, index, e.target.value, territory, 'main')
-    }
-  }
-
-  let lowerPopulate = async (territory, index, e) => {
-    e.persist()
-
-    if (e.target.value.includes('file')) {
-      autoFillFromFile(dispatch, index, e.target.value, 'lower')
-    } else {
-      autoFillFromSite(
-        dispatch,
-        index,
-        e.target.value,
-        territory,
-        'lower',
-        '.slick-three > div > a'
-      )
-    }
-  }
-
-  let salePopulate = async (territory, index, e) => {
-    if (e.target.value === 'default') return
-
-    if (e.target.value.includes('file')) {
-      autoFillFromFile(dispatch, index, e.target.value, 'sale')
-    } else {
-      autoFillFromSite(
-        dispatch,
-        index,
-        e.target.value,
-        territory,
-        'sale',
-        '.categories-sale__container'
-      )
-    }
-  }
-
-  let selectSwitch = (e, type) => {
-    switch (type) {
-      case 'main':
-        return mainPopulate(territory, index, e)
-      case 'lower':
-        return lowerPopulate(territory, index, e)
-      case 'sale':
-        return salePopulate(territory, index, e)
-      default:
-        console.log('type not handled')
-    }
-  }
-
-  return (
-    <IconContent>
-      <select
-        name="autofill"
-        value="default"
-        onChange={e => selectSwitch(e, type)}
-      >
-        {type === 'main' && (
-          <>
-            <option value="default">No Row</option>
-            <option value="row1">Row 1</option>
-            <option value="row2">Row 2</option>
-            <option value="row3">Row 3</option>
-            <option value="row4">Row 4</option>
-            <option value="row1 file">Row 1 (from file)</option>
-            <option value="row2 file">Row 2 (from file)</option>
-            <option value="row3 file">Row 3 (from file)</option>
-            <option value="row4 file">Row 4 (from file)</option>
-          </>
-        )}
-        {type === 'lower' && (
-          <>
-            <option value="default">No Lower</option>
-            <option value="0">Lower 1</option>
-            <option value="1">Lower 2</option>
-            <option value="2">Lower 3</option>
-            <option value="3">Lower 4</option>
-            <option value="0 file">Lower 1 (from file)</option>
-            <option value="1 file">Lower 2 (from file)</option>
-            <option value="2 file">Lower 3 (from file)</option>
-            <option value="3 file">Lower 4 (from file)</option>
-          </>
-        )}
-        {type === 'sale' && (
-          <>
-            <option value="default">No Lower</option>
-            <option value="0">CTA's 1</option>
-            <option value="1">CTA's 2</option>
-            <option value="0 file">CTA's 1 (from file)</option>
-            <option value="1 file">CTA's 2 (from file)</option>
-          </>
-        )}
-      </select>
-    </IconContent>
-  )
-}
-
-const Icon = styled(AutoFillIcon)`
-  width: 28px;
-  height: 28px;
-  cursor: pointer;
-`
-
-export const AutoFillCategories = () => {
-  const dispatch = useAppDispatch()
-  const { territory } = useAppState()
-
-  const handleClick = async (territory, e) => {
-    if (e.target.value.includes('file')) {
-      autoFillFromFile(dispatch, null, e.target.value, 'categories')
-    } else {
-      let { data } = await axios.get(territory.url)
-      let parser = new DOMParser()
-      let html = parser.parseFromString(data, 'text/html')
-
-      let categoryTiles = Array.from(
-        html.querySelectorAll('.category-tile__link')
-      )
-
-      if (!categoryTiles.length) return
-
-      let categoriesArr = []
-
-      categoryTiles.forEach(category => {
-        let image = removeTransformations(
-          category.querySelector('.category-tile__image').dataset.src
-        )
-        let url = category.getAttribute('href')
-        let title = category.querySelector('.category-tile__heading')
-          .textContent
-
-        categoriesArr.push({
-          image,
-          url,
-          title
-        })
-
-        categoriesArr.forEach(x => {
-          trimWhiteSpace(x)
-        })
-
-        dispatch({
-          type: 'autoFillBlock',
-          payload: categoriesArr,
-          blockName: 'categories'
-        })
-      })
-    }
-  }
-
-  return (
-    <IconContent>
-      <select
-        name="autofill"
-        value="default"
-        className="categories"
-        onChange={e => handleClick(territory, e)}
-      >
-        <>
-          <option value="default">No categories</option>
-          <option value="0">From site</option>
-          <option value="0 file">From file</option>
-        </>
-      </select>
-    </IconContent>
-  )
-}
-
-export const AutoFillPromos = props => {
-  const dispatch = useAppDispatch()
-  const { territory } = useAppState()
-  const handleClick = async e => {
-    e.persist()
-
-    let { data } = await axios.get(territory.url)
-    let parser = new DOMParser()
-    let html = parser.parseFromString(data, 'text/html')
-
-    let promos = Array.from(html.querySelectorAll('.info'))
-
-    if (!promos.length) return
-
-    let promosArr = []
-
-    promos.forEach(promo => {
-      let url = promo.querySelector('a').getAttribute('href')
-      let title = promo.querySelector('h3').innerHTML
+  } else if (blockName === 'promoBlocks') {
+    return allElements.map((promo) => {
+      let url = promo.querySelector('a').getAttribute('href').trim()
+      let title = promo.querySelector('h3').innerHTML.trim()
 
       title = convertEmojis(title)
 
-      promosArr.push({
+      return {
         url,
-        title
-      })
+        title,
+      }
+    })
+  } else if (blockName === 'saleCategories') {
+    return allElements.map((category) => {
+      let image = removeTransformations(
+        category.querySelector('.category-tile__image').dataset.src
+      ).trim()
+      let url = category.getAttribute('href').trim()
 
-      promosArr.forEach(x => {
-        trimWhiteSpace(x)
-      })
-
-      dispatch({
-        type: 'autoFillBlock',
-        payload: promosArr,
-        blockName: 'promoBlocks'
-      })
+      return {
+        image,
+        url,
+      }
     })
   }
-
-  return <Icon onClick={handleClick} />
 }

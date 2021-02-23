@@ -1,4 +1,4 @@
-const MegaBannerWidget = territory => {
+const MegaBannerWidget = (territory) => {
   switch (territory.identifier) {
     case 'AU': {
       return `{{widget type="missguided_widget/widget_contentService" slot_id="4fe96810-f02c-44e7-a5d2-0d0b32df53eb"}}`

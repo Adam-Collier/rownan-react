@@ -1,8 +1,6 @@
 import React from 'react'
 import { ReactComponent as Switch } from '../../icons/switch.svg'
-import { ReactComponent as Territories } from '../../icons/territories.svg'
 import styled from 'styled-components'
-import { territoryTemplate } from '../../lib/territoryTemplate'
 
 import { useAppDispatch } from '../../context/state-context'
 
@@ -25,11 +23,10 @@ const Icons = styled.div`
   }
 `
 
-const ActionIcons = props => {
+const ActionIcons = (props) => {
   const dispatch = useAppDispatch()
   return (
     <Icons>
-      <Territories onClick={() => territoryTemplate()} />
       <Switch onClick={() => dispatch({ type: 'switchView' })} />
     </Icons>
   )

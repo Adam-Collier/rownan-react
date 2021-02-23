@@ -36,7 +36,7 @@ const SaleBlock = ({ cta, index, contentBlockIndex }) => {
       payload: e.target.value,
       name: e.target.name,
       index,
-      contentBlockIndex
+      contentBlockIndex,
     })
   }
 
@@ -48,14 +48,14 @@ const SaleBlock = ({ cta, index, contentBlockIndex }) => {
           name="text"
           placeholder="text"
           value={text}
-          onChange={e => handleChange(index, e)}
+          onChange={(e) => handleChange(index, e)}
         />
         <input
           type="text"
           placeholder="url"
           name="url"
           value={url.trim()}
-          onChange={e => handleChange(index, e)}
+          onChange={(e) => handleChange(index, e)}
         />
       </div>
       <CloseIcon

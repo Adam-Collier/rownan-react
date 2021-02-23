@@ -14,7 +14,7 @@ const PreviewPane = styled.div`
   overflow: scroll;
 `
 
-const Preview = props => {
+const Preview = (props) => {
   const { contentView } = useAppState()
   return (
     <PreviewPane>

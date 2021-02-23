@@ -1,33 +1,32 @@
 import React from 'react'
-import { useAppState, useAppDispatch } from '../../../context/state-context'
 
-import { IconContent } from '../index'
+import { useAppState, useAppDispatch } from '../../../context/state-context'
+import { IconContent, isFromFileCheck, getFileJSON } from '../index'
+
 import { autoFillFromFileStatic } from '../autoFillFromFile'
 import { autoFillFromSiteStatic } from '../autoFillFromSite'
-import { isFromFileCheck, getFileJSON } from '../index'
 
-const AutofillSaleCategories = () => {
+export const AutoFillCategories = () => {
   const dispatch = useAppDispatch()
   const { territory } = useAppState()
 
   const handleClick = async (territory, e) => {
     if (isFromFileCheck(e)) {
       let savedJSON = await getFileJSON()
+
       let options = {
         dispatch,
         savedJSON,
-        blockName: 'saleCategories',
+        blockName: 'categories',
       }
 
       autoFillFromFileStatic(options)
     } else {
-      e.persist()
-
       let options = {
         dispatch,
         territory,
-        blockName: 'saleCategories',
-        selector: '.categories-sale__grid a',
+        blockName: 'categories',
+        selector: '.category-tile__link',
       }
 
       autoFillFromSiteStatic(options)
@@ -54,4 +53,4 @@ const AutofillSaleCategories = () => {
   )
 }
 
-export default AutofillSaleCategories
+export default AutoFillCategories

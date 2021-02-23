@@ -23,6 +23,15 @@ const template = [
           var focusedWindow = BrowserWindow.getFocusedWindow()
           focusedWindow.webContents.send('save')
         }
+      },
+      {
+        label: 'Save As',
+        accelerator: 'CmdOrCtrl+Shift+S',
+        click: () => {
+          console.log('Save as')
+          var focusedWindow = BrowserWindow.getFocusedWindow()
+          focusedWindow.webContents.send('saveAs')
+        }
       }
     ]
   },

@@ -10,7 +10,7 @@ const CategoryBlock = ({ block, index }) => {
       type: 'addCategoryContent',
       payload: e.target.value,
       name: e.target.name,
-      index
+      index,
     })
   }
 
@@ -23,7 +23,7 @@ const CategoryBlock = ({ block, index }) => {
             type="text"
             name="url"
             value={url.trim()}
-            onChange={e => handleChange(index, e)}
+            onChange={(e) => handleChange(index, e)}
           />
         </div>
         <div>
@@ -32,7 +32,7 @@ const CategoryBlock = ({ block, index }) => {
             type="text"
             name="title"
             value={title}
-            onChange={e => handleChange(index, e)}
+            onChange={(e) => handleChange(index, e)}
           />
         </div>
       </section>
@@ -42,7 +42,7 @@ const CategoryBlock = ({ block, index }) => {
         name="image"
         value={image}
         className="image"
-        onChange={e => handleChange(index, e)}
+        onChange={(e) => handleChange(index, e)}
       />
     </>
   )

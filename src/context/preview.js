@@ -1,9 +1,11 @@
 import contentPreviewUpdate from '../lib/contentPreviewUpdate'
 
-export default {
-  updateContentPreview: state => {
+const preview = {
+  updateContentPreview: (state) => {
     contentPreviewUpdate(state.outputHTML)
     return { ...state }
   },
-  switchView: state => ({ ...state, contentView: !state.contentView })
+  switchView: (state) => ({ ...state, contentView: !state.contentView }),
 }
+
+export default preview

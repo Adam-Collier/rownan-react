@@ -32,40 +32,40 @@ let Territories = styled.ul`
 let territories = [
   {
     identifier: 'AU',
-    url: 'https://www.missguidedau.com'
+    url: 'https://www.missguidedau.com',
   },
   {
     identifier: 'DE',
-    url: 'https://www.missguided.com/de'
+    url: 'https://www.missguided.com/de',
   },
   {
     identifier: 'ES',
-    url: 'https://www.missguided.com/es'
+    url: 'https://www.missguided.com/es',
   },
   {
     identifier: 'EU',
-    url: 'https://www.missguided.eu'
+    url: 'https://www.missguided.eu',
   },
   {
     identifier: 'FR',
-    url: 'https://www.missguidedfr.fr'
+    url: 'https://www.missguidedfr.fr',
   },
   {
     identifier: 'IE',
-    url: 'https://www.missguided.com/ie'
+    url: 'https://www.missguided.com/ie',
   },
   {
     identifier: 'PL',
-    url: 'https://www.missguided.com/pl'
+    url: 'https://www.missguided.com/pl',
   },
   {
     identifier: 'UK',
-    url: 'https://www.missguided.co.uk/'
+    url: 'https://www.missguided.co.uk/',
   },
   {
     identifier: 'US',
-    url: 'https://www.missguidedus.com'
-  }
+    url: 'https://www.missguidedus.com',
+  },
 ]
 
 const TerritorySelection = () => {
@@ -76,7 +76,7 @@ const TerritorySelection = () => {
     dispatch({
       type: 'switchTerritory',
       identifier: e.target.value,
-      url: e.target.dataset.url
+      url: e.target.dataset.url,
     })
   }
 

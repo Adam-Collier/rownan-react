@@ -25,7 +25,7 @@ const IFrame = styled.iframe`
   -webkit-overflow-scrolling: touch;
 `
 
-const ContentPreview = props => {
+const ContentPreview = (props) => {
   const iframeEl = useRef(null)
 
   return (

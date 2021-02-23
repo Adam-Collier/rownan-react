@@ -14,6 +14,7 @@ const Button = styled.button`
   outline: none;
   border: 1px solid #a0a0a0;
   cursor: pointer;
+  font-size: 0.75rem;
 `
 
 const CopyButton = () => {
@@ -22,8 +23,8 @@ const CopyButton = () => {
 
   const [copied, setCopied] = useState(false)
 
-  const delay = duration =>
-    new Promise(resolve => setTimeout(resolve, duration))
+  const delay = (duration) =>
+    new Promise((resolve) => setTimeout(resolve, duration))
 
   // utilise useEffect to make sure we dont get a stale outputHTML prop
   useEffect(() => {

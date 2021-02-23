@@ -49,11 +49,12 @@ const AppDownloadBlock = () => {
 
   const { title, subtitle, link } = appDownload
 
-  const handleChange = e => {
+  const handleChange = (e) => {
     dispatch({
       type: 'appDownload',
       name: e.target.name,
-      payload: e.target.name === 'link' ? e.target.value.trim() : e.target.value
+      payload:
+        e.target.name === 'link' ? e.target.value.trim() : e.target.value,
     })
   }
 
@@ -68,21 +69,21 @@ const AppDownloadBlock = () => {
           type="text"
           name="link"
           value={link}
-          onChange={e => handleChange(e)}
+          onChange={(e) => handleChange(e)}
         />
         <label htmlFor="title">Title</label>
         <input
           type="text"
           name="title"
           value={title}
-          onChange={e => handleChange(e)}
+          onChange={(e) => handleChange(e)}
         />
         <label htmlFor="subtitle">Subtitle</label>
         <input
           type="text"
           name="subtitle"
           value={subtitle}
-          onChange={e => handleChange(e)}
+          onChange={(e) => handleChange(e)}
         />
       </div>
     </BlockWrapper>

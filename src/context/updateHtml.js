@@ -1,6 +1,3 @@
-import prettier from 'prettier/standalone'
-import html from 'prettier/parser-html'
-import css from 'prettier/parser-postcss'
 import InfoStripTemplate from '../Components/InfoStrip/InfoStripTemplate'
 import HeroTemplate from '../Components/Hero/HeroTemplate'
 import LowerTemplate from '../Components/Lower/LowerTemplate'
@@ -12,10 +9,10 @@ import CategoryTemplate from '../Components/Categories/CategoryTemplate'
 import addPlaceholderImageCSS from '../lib/addPlaceholderImageCSS'
 import { AppDownloadTemplate } from '../Components/AppDownload'
 
-const hasContent = state => {
+const hasContent = (state) => {
   if (Array.isArray(state)) {
-    let arr = state.filter(object => {
-      return Object.keys(object).every(function(key) {
+    let arr = state.filter((object) => {
+      return Object.keys(object).every(function (key) {
         return object[key] === ''
       })
         ? false
@@ -24,7 +21,7 @@ const hasContent = state => {
     return arr.length ? true : false
   } else {
     // assume if it isn't an array it is an object
-    return Object.keys(state).every(function(key) {
+    return Object.keys(state).every(function (key) {
       return state[key] === ''
     })
       ? false
@@ -32,13 +29,13 @@ const hasContent = state => {
   }
 }
 
-export default {
-  updateHTML: state => {
+const updateHTML = {
+  updateHTML: (state) => {
     let mainBlocks = [],
       lowerBlocks = [],
       saleBlocks = []
 
-    state.contentBlocks.map(block => {
+    state.contentBlocks.map((block) => {
       if (block.type === 'main') mainBlocks.push(block.content)
       if (block.type === 'lower') lowerBlocks.push(block.content)
       if (block.type === 'sale') saleBlocks.push(block.content)
@@ -79,11 +76,13 @@ export default {
   </div>`
     }
 
-    let output = prettier.format(outputHTML(), {
+    let output = window.prettier.format(outputHTML(), {
       parser: 'html',
-      plugins: [html, css]
+      plugins: window.prettierPlugins,
     })
 
     return { ...state, outputHTML: output }
-  }
+  },
 }
+
+export default updateHTML

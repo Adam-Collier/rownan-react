@@ -1,4 +1,4 @@
-const InfoStripTemplate = blocks => {
+const InfoStripTemplate = (blocks) => {
   return `
   <style>
     .info-strip {
@@ -54,7 +54,7 @@ const InfoStripTemplate = blocks => {
   </style>
   <div class="info-strip">${blocks
     .map(
-      block => `
+      (block) => `
     <div class="info">
       <a href="${block.url}">
         <h3 id="delivery-message">

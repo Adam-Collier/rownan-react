@@ -2,7 +2,7 @@ import cheerio from 'cheerio'
 let basePath = window.require('electron').remote.app.getPath('temp')
 const fs = window.require('fs')
 
-const contentPreviewUpdate = outputHTML => {
+const contentPreviewUpdate = (outputHTML) => {
   let currentHTML = fs.readFileSync(
     `${basePath}/template/content-preview.html`,
     'utf-8'
@@ -10,7 +10,7 @@ const contentPreviewUpdate = outputHTML => {
   // console.log(currentHTML)
   let $ = cheerio.load(currentHTML)
   $('.preview-wrapper').html(outputHTML)
-  fs.writeFile(`${basePath}/template/content-preview.html`, $.html(), err => {
+  fs.writeFile(`${basePath}/template/content-preview.html`, $.html(), (err) => {
     if (err) console.log(err)
     console.log('successfully wrote file')
     if (document.querySelector('iframe'))
