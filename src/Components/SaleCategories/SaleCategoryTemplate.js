@@ -10,7 +10,7 @@ const SaleCategoryTemplate = (categories, territory) => {
         return 'Kupuj według kategorii'
       }
       case 'FR': {
-        return 'parcourir les catégories'
+        return 'Soldes sur les catégorie'
       }
       case 'ES': {
         return 'Comprar por categoría'
@@ -53,7 +53,7 @@ const SaleCategoryTemplate = (categories, territory) => {
       <div class="categories-sale__grid">
         ${categories
           .map(
-            category => `
+            (category) => `
           <a href="${category.url}">
             <picture>
               <source type="image/webp" data-srcset="${addImageTransformations(

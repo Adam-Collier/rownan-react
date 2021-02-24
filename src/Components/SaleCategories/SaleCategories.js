@@ -1,11 +1,11 @@
 import React from 'react'
 import { useAppState } from '../../context/state-context'
-import AutofillSaleCategories from '../Autofill/AutofillSaleCategories/index'
+import AutofillSaleCategories from '../Autofill/AutofillSaleCategories'
 
 import DragDrop from '../DragDrop'
 import SaleCategoryBlock from './SaleCategoryBlock'
 
-const SaleCategories = props => {
+const SaleCategories = (props) => {
   const { saleCategories } = useAppState()
 
   return (

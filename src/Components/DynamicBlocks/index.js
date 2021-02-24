@@ -4,7 +4,7 @@ import DynamicBlock from './Block'
 
 import DragDrop from '../DragDrop'
 
-const ContentBlocks = props => {
+const ContentBlocks = (props) => {
   const { contentBlocks } = useAppState()
 
   return (

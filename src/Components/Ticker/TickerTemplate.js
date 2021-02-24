@@ -1,4 +1,4 @@
-const MegaBannerWidget = text => {
+const MegaBannerWidget = (text) => {
   return `
 <style>
   @keyframes marquee {

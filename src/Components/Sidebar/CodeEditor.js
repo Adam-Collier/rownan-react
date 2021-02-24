@@ -41,7 +41,7 @@ function Editor(props) {
       autoCloseBrackets: true,
       autoCloseTags: true,
       tabSize: 1,
-      keyMap: 'sublime'
+      keyMap: 'sublime',
     }
 
     let codeMirrorInstance = require('codemirror').fromTextArea(
@@ -49,7 +49,7 @@ function Editor(props) {
       options
     )
 
-    codeMirrorInstance.on('change', instance => {
+    codeMirrorInstance.on('change', (instance) => {
       let value = instance.getValue()
       dispatch({ type: 'editorCode', payload: value })
     })

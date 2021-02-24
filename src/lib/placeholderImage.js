@@ -5,7 +5,7 @@ const tempDirPath = window.require('electron').remote.app.getPath('temp')
 const fs = window.require('fs-extra')
 const sqip = window.require('sqip')
 
-export const placeholderImage = async image => {
+export const placeholderImage = async (image) => {
   try {
     if (
       image.match(/https:\/\/i1.adis.ws\/i\/missguided/) ||
@@ -17,13 +17,13 @@ export const placeholderImage = async image => {
 
       const response = await request.get({
         url: image,
-        encoding: 'binary'
+        encoding: 'binary',
       })
 
       await fs.outputFile(imagePath, response, { encoding: 'binary' })
 
       const options = {
-        input: imagePath
+        input: imagePath,
       }
 
       const result = await sqip.default({ ...options })

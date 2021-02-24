@@ -1,4 +1,4 @@
-export default (editorContent, contentBlocks) => {
+const addPlaceholderImageCSS = (editorContent, contentBlocks) => {
   let parser = new DOMParser()
   let editorCSS = parser.parseFromString(editorContent, 'text/html')
 
@@ -43,7 +43,7 @@ export default (editorContent, contentBlocks) => {
 
     let newStyleSheet = document.createElement('style')
 
-    styleRules.forEach(rule => {
+    styleRules.forEach((rule) => {
       newStyleSheet.innerHTML += rule.cssText
     })
 
@@ -51,3 +51,5 @@ export default (editorContent, contentBlocks) => {
   }
   return editorContent
 }
+
+export default addPlaceholderImageCSS

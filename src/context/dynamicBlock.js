@@ -1,7 +1,7 @@
-export default {
-  addDynamicBlock: state => ({
+const dynamicBlock = {
+  addDynamicBlock: (state) => ({
     ...state,
-    contentBlocks: [...state.contentBlocks, { type: 'select', content: {} }]
+    contentBlocks: [...state.contentBlocks, { type: 'select', content: {} }],
   }),
   addDynamicBlockContent: (state, action) => ({
     ...state,
@@ -11,10 +11,10 @@ export default {
         ...item,
         content: {
           ...item.content,
-          [action.name]: action.payload
-        }
+          [action.name]: action.payload,
+        },
       }
-    })
+    }),
   }),
   editDynamicBlock: (state, action) => ({
     ...state,
@@ -23,12 +23,14 @@ export default {
         return item
       }
       return { type: action.payload, content: action.initial }
-    })
+    }),
   }),
   removeDynamicBlock: (state, action) => {
     let newArr = state.contentBlocks.filter(
       (block, index) => index !== action.payload
     )
     return { ...state, contentBlocks: newArr }
-  }
+  },
 }
+
+export default dynamicBlock

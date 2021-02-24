@@ -1,10 +1,10 @@
 import defaultEditorCode from './defaultEditorCode'
 
-export default {
+const initialState = {
   appDownload: {
     link: '',
     title: '',
-    subtitle: ''
+    subtitle: '',
   },
   categories: Array(5).fill({ url: '', title: '', image: '' }),
   saleCategories: Array(4).fill({ url: '', image: '' }),
@@ -24,7 +24,10 @@ export default {
   promoBlocks: [],
   territory: {
     identifier: 'UK',
-    url: 'https://www.missguided.co.uk/'
+    url: 'https://www.missguided.co.uk/',
   },
-  tickerText: ''
+  tickerText: '',
+  savedFilePath: '',
 }
+
+export default initialState

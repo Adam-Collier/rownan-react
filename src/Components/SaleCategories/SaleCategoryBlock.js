@@ -10,7 +10,7 @@ const SaleCategoryBlock = ({ block, index }) => {
       type: 'addSaleCategoryContent',
       payload: e.target.value,
       name: e.target.name,
-      index
+      index,
     })
   }
 
@@ -23,7 +23,7 @@ const SaleCategoryBlock = ({ block, index }) => {
             type="text"
             name="url"
             value={url.trim()}
-            onChange={e => handleChange(index, e)}
+            onChange={(e) => handleChange(index, e)}
           />
         </div>
         <div>
@@ -33,7 +33,7 @@ const SaleCategoryBlock = ({ block, index }) => {
             name="image"
             value={image}
             className="image"
-            onChange={e => handleChange(index, e)}
+            onChange={(e) => handleChange(index, e)}
           />
         </div>
       </section>

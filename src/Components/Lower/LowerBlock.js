@@ -4,19 +4,19 @@ import { placeholderImage } from '../../lib/placeholderImage'
 
 import { BlockForm } from '../styles/ContentBlocks'
 
-const LowerForm = props => {
+const LowerForm = (props) => {
   const { index, block } = props
   const dispatch = useAppDispatch()
 
-  const handleChange = e => {
+  const handleChange = (e) => {
     if (e.target.name === 'image') {
       e.persist()
-      placeholderImage(e.target.value).then(placeholder => {
+      placeholderImage(e.target.value).then((placeholder) => {
         dispatch({
           type: 'placeholderImage',
           name: e.target.name,
           index,
-          payload: placeholder
+          payload: placeholder,
         })
       })
     }
@@ -25,7 +25,7 @@ const LowerForm = props => {
       type: 'addDynamicBlockContent',
       payload: e.target.value,
       name: e.target.name,
-      index
+      index,
     })
   }
 

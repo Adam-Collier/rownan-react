@@ -17,7 +17,7 @@ const StateContext = React.createContext()
 const DispatchContext = React.createContext()
 
 function stateReducer(state, action) {
-  let context = type => {
+  let context = (type) => {
     let actionSwitch = {
       addCategoryContent: () => ({
         ...state,
@@ -27,9 +27,9 @@ function stateReducer(state, action) {
           }
           return {
             ...category,
-            [action.name]: action.payload
+            [action.name]: action.payload,
           }
-        })
+        }),
       }),
       addSaleCategoryContent: () => ({
         ...state,
@@ -39,9 +39,9 @@ function stateReducer(state, action) {
           }
           return {
             ...saleCategory,
-            [action.name]: action.payload
+            [action.name]: action.payload,
           }
-        })
+        }),
       }),
       addSaleCta: () => ({
         ...state,
@@ -51,10 +51,10 @@ function stateReducer(state, action) {
             ...item,
             content: {
               ...item.content,
-              ctas: [...item.content.ctas, { text: '', url: '' }]
-            }
+              ctas: [...item.content.ctas, { text: '', url: '' }],
+            },
           }
-        })
+        }),
       }),
       addSaleCtaContent: () => {
         return {
@@ -69,12 +69,12 @@ function stateReducer(state, action) {
                   if (i !== action.index) return cta
                   return {
                     ...cta,
-                    [action.name]: action.payload
+                    [action.name]: action.payload,
                   }
-                })
-              }
+                }),
+              },
             }
-          })
+          }),
         }
       },
       removeSaleCta: () => {
@@ -88,24 +88,24 @@ function stateReducer(state, action) {
                 ...contentBlock.content,
                 ctas: contentBlock.content.ctas.filter(
                   (block, index) => index !== action.index
-                )
-              }
+                ),
+              },
             }
-          })
+          }),
         }
       },
       appDownload: () => ({
         ...state,
         appDownload: {
           ...state.appDownload,
-          [action.name]: action.payload
-        }
+          [action.name]: action.payload,
+        },
       }),
       editorCode: () => ({ ...state, editorCode: action.payload }),
       openFile: () => ({ ...state, ...action.savedState }),
       reorderBlocks: () => ({
         ...state,
-        [action.blockType]: [...action.reorderedBlocks]
+        [action.blockType]: [...action.reorderedBlocks],
       }),
       reorderNestedBlocks: () => ({
         ...state,
@@ -113,16 +113,16 @@ function stateReducer(state, action) {
           if (index !== action.index) return item
           return {
             ...item,
-            ctas: [...action.reorderedBlocks]
+            ctas: [...action.reorderedBlocks],
           }
-        })
+        }),
       }),
       switchTerritory: () => ({
         ...state,
         territory: {
           identifier: action.identifier,
-          url: action.url
-        }
+          url: action.url,
+        },
       }),
       ticker: () => ({ ...state, tickerText: action.payload }),
       ...autoFill,
@@ -134,7 +134,7 @@ function stateReducer(state, action) {
       ...updateVisualPreview,
       default: () => {
         throw new Error(`Unhandled action type: ${action.type}`)
-      }
+      },
     }
 
     return (actionSwitch[type] || actionSwitch['default'])(state, action)

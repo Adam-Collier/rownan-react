@@ -20,42 +20,50 @@ const AppContainer = styled.div`
 function App() {
   const dispatch = useAppDispatch()
 
-  ipcRenderer.on('generate', function() {
+  ipcRenderer.on('generate', function () {
     console.log('generate')
   })
-  ipcRenderer.on('images', function() {
+  ipcRenderer.on('images', function () {
     dispatch({ type: 'updateHTML' })
     dispatch({ type: 'updateContentPreview' })
   })
-  ipcRenderer.on('save', function() {
+  ipcRenderer.on('save', function () {
+    console.log('save')
     dispatch({ type: 'saveFile' })
   })
-  ipcRenderer.on('preview', function() {
+  ipcRenderer.on('saveAs', function () {
+    console.log('Save As')
+    dispatch({ type: 'saveAs' })
+  })
+  ipcRenderer.on('preview', function () {
     console.log('preview')
   })
-  ipcRenderer.on('mobileView', function() {
+  ipcRenderer.on('mobileView', function () {
     console.log('mobileView')
   })
-  ipcRenderer.on('openFile', function() {
-    dialog.showOpenDialog({ filters: [{ extensions: ['json'] }] }, function(
-      filePaths
-    ) {
-      if (filePaths) {
-        let savedState = JSON.parse(fs.readFileSync(filePaths[0], 'utf8'))
-
-        document
-          .querySelector('.CodeMirror')
-          .CodeMirror.setValue(savedState.editorCode)
-
-        dispatch({
-          type: 'openFile',
-          savedState
-        })
-        dispatch({
-          type: 'updateHTML'
-        })
-      }
+  ipcRenderer.on('openFile', async function () {
+    let result = await dialog.showOpenDialog({
+      filters: [{ extensions: ['json'] }],
+      properties: ['openFile'],
     })
+
+    let { filePaths } = result
+
+    if (filePaths) {
+      let savedState = JSON.parse(fs.readFileSync(filePaths[0], 'utf8'))
+
+      document
+        .querySelector('.CodeMirror')
+        .CodeMirror.setValue(savedState.editorCode)
+
+      dispatch({
+        type: 'openFile',
+        savedState,
+      })
+      dispatch({
+        type: 'updateHTML',
+      })
+    }
   })
   return (
     <AppContainer className="App">

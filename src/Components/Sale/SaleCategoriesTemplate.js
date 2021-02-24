@@ -1,4 +1,4 @@
-let SaleSwitch = territory => {
+let SaleSwitch = (territory) => {
   switch (territory.identifier) {
     case 'AU': {
       return /* html */ `<div class="categories-sale__by-category">
@@ -546,7 +546,7 @@ let SaleSwitch = territory => {
   }
 }
 
-let SaleCategoriesTemplate = territory => /*html*/ `<style>
+let SaleCategoriesTemplate = (territory) => /*html*/ `<style>
     .categories-sale__by-category {
       background: #f6dbde;
     }

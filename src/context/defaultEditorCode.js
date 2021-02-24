@@ -1,4 +1,4 @@
-export default `<style>
+const defaultEditorCode = `<style>
   .title1,
   .title3,
   .subtitle1,
@@ -38,3 +38,5 @@ export default `<style>
     }
   }
 </style>`
+
+export default defaultEditorCode

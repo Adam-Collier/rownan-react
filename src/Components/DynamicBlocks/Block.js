@@ -3,7 +3,7 @@ import { useAppDispatch } from '../../context/state-context'
 
 import { ReactComponent as DragIcon } from '../../icons/dragIcon.svg'
 
-import { AutoFillContent } from '../Autofill'
+import AutoFillDynamicBlocks from '../Autofill/AutoFillDynamicBlocks'
 import HeroBlock from '../Hero/HeroBlock'
 import LowerBlock from '../Lower/LowerBlock'
 import SaleContainer from '../Sale/SaleContainer'
@@ -18,7 +18,7 @@ const DynamicBlock = ({ block, index }) => {
     image: '',
     subtitle: '',
     title: '',
-    url: ''
+    url: '',
   }
 
   let heroInitial = {
@@ -30,15 +30,15 @@ const DynamicBlock = ({ block, index }) => {
     secondaryUrl: '',
     subtitle: '',
     svg: '',
-    title: ''
+    title: '',
   }
 
   let saleInitial = {
     title: '',
-    ctas: []
+    ctas: [],
   }
 
-  let getInitial = val => {
+  let getInitial = (val) => {
     switch (val) {
       case 'hero':
         return heroInitial
@@ -56,12 +56,12 @@ const DynamicBlock = ({ block, index }) => {
       <DropDown>
         <select
           value={block.type}
-          onChange={e => {
+          onChange={(e) => {
             dispatch({
               type: 'editDynamicBlock',
               payload: e.target.value,
               index,
-              initial: getInitial(e.target.value)
+              initial: getInitial(e.target.value),
             })
             dispatch({ type: 'updateHTML' })
           }}
@@ -79,7 +79,7 @@ const DynamicBlock = ({ block, index }) => {
         >
           Remove
         </Remove>
-        <AutoFillContent index={index} type={block.type} />
+        <AutoFillDynamicBlocks index={index} type={block.type} />
         <DragIcon />
       </DropDown>
       {block.type === 'main' && <HeroBlock index={index} block={block} />}
