@@ -16,6 +16,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.4/lodash.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/jquery.slick/1.6.0/slick.min.js"></script>
+    <link rel="stylesheet" href="https://use.typekit.net/auk4ild.css" />
   </head>
 
   <body style="padding-bottom: 80px">
@@ -604,8 +605,8 @@
       async=" "
     ></script>
     <script type="text/javascript">
-      ;(function($) {
-        $(document).ready(function() {
+      ;(function ($) {
+        $(document).ready(function () {
           $('#homeSlider').slick({
             infinite: true,
             adaptiveHeight: true,
@@ -621,14 +622,14 @@
                 breakpoint: 1000,
                 settings: {
                   slidesToShow: 1,
-                  slidesToScroll: 1
-                }
+                  slidesToScroll: 1,
+                },
               },
               {
                 breakpoint: 768,
-                settings: 'unslick'
-              }
-            ]
+                settings: 'unslick',
+              },
+            ],
           })
           $('.slick-three').slick({
             infinite: true,
@@ -645,21 +646,21 @@
                 breakpoint: 768,
                 settings: {
                   slidesToShow: 1,
-                  slidesToScroll: 1
+                  slidesToScroll: 1,
                 },
                 centerMode: true,
                 centerPadding: '50',
-                variableWidth: true
-              }
-            ]
+                variableWidth: true,
+              },
+            ],
           })
         })
-        $(window).on('resize orientationchange', function() {
+        $(window).on('resize orientationchange', function () {
           $('#homeSlider').slick('resize')
           $('.slick-three').slick('resize')
         })
         $(window).scroll(
-          _.debounce(function() {
+          _.debounce(function () {
             if ($(window).width() < 767) {
               var wScroll = $(this).scrollTop()
               console.log(wScroll)
@@ -668,7 +669,7 @@
                   'animation',
                   'swipe 1200ms ease-in-out forwards'
                 )
-                setTimeout(function() {
+                setTimeout(function () {
                   $('.blocker').css('display', 'none')
                 }, 1600)
               }
