@@ -1,4 +1,4 @@
-import writeSaveFile from './writeSaveFile'
+import writeSaveFile from './write-save-file'
 const { dialog } = window.require('electron').remote
 
 const saveWithDialog = (state) => {

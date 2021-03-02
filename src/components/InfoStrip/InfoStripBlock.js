@@ -1,7 +1,7 @@
 import React from 'react'
 import { useAppDispatch } from '../../context'
 import { ReactComponent as CloseIcon } from '../../icons/close.svg'
-import { convertEmojis } from '../../utils/emojiConvert'
+import { convertEmojis } from '../../utils/emoji-convert'
 
 import styled from 'styled-components'
 

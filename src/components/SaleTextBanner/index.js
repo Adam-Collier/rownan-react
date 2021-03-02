@@ -1,5 +1,5 @@
 import React from 'react'
-import removeEmptyLines from '../../utils/removeEmptyLines'
+import removeEmptyLines from '../../utils/remove-empty-lines'
 import { useAppState, useAppDispatch } from '../../context'
 import { BlockWrapper } from '../_styled/ContentBlocks'
 

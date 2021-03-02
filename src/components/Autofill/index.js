@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 import fillIcon from '../../icons/autoFill.svg'
-import { convertEmojis } from '../../utils/emojiConvert'
+import { convertEmojis } from '../../utils/emoji-convert'
 
 const fs = window.require('fs-extra')
 const { dialog } = window.require('electron').remote

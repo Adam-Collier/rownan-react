@@ -1,5 +1,5 @@
-import removeEmptyLines from '../../utils/removeEmptyLines'
-import addImageTransformations from '../../utils/addImageTransformations'
+import removeEmptyLines from '../../utils/remove-empty-lines'
+import addImageTransformations from '../../utils/add-image-transformations'
 
 const HeroTemplate = (blocks) =>
   blocks
