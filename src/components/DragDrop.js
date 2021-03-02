@@ -1,6 +1,6 @@
 import React from 'react'
 import { Droppable, Draggable } from 'react-beautiful-dnd'
-import { BlockWrapper, Block } from './styles/ContentBlocks'
+import { BlockWrapper, Block } from './_styled/ContentBlocks'
 
 const DragDrop = ({ id, stateItems, children }) => {
   let numberOfChildren = React.Children.count(children)

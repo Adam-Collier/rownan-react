@@ -8,7 +8,7 @@ import HeroBlock from '../Hero/HeroBlock'
 import LowerBlock from '../Lower/LowerBlock'
 import SaleContainer from '../Sale/SaleContainer'
 
-import { DropDown, Remove } from '../styles/ContentBlocks'
+import { DropDown, Remove } from '../_styled/ContentBlocks'
 
 const DynamicBlock = ({ block, index }) => {
   const dispatch = useAppDispatch()

@@ -10,7 +10,7 @@ import Territory from '../TerritorySelection'
 import Ticker from '../Ticker/TickerBlock'
 
 import { DragDropContext } from 'react-beautiful-dnd'
-import { FormButton } from '../styles/FormButton'
+import { FormButton } from '../_styled/FormButton'
 import { AppDownloadBlock } from '../AppDownload'
 import { SaleTextBannerBlock } from '../SaleTextBanner'
 

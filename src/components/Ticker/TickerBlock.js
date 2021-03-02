@@ -1,6 +1,6 @@
 import React from 'react'
 import { useAppState, useAppDispatch } from '../../context'
-import { BlockWrapper } from '../styles/ContentBlocks'
+import { BlockWrapper } from '../_styled/ContentBlocks'
 
 const TickerBlock = () => {
   const { tickerText } = useAppState()

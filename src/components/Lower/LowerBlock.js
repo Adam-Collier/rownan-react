@@ -2,7 +2,7 @@ import React from 'react'
 import { useAppDispatch } from '../../context'
 import { placeholderImage } from '../../lib/placeholderImage'
 
-import { BlockForm } from '../styles/ContentBlocks'
+import { BlockForm } from '../_styled/ContentBlocks'
 
 const LowerForm = (props) => {
   const { index, block } = props

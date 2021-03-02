@@ -1,7 +1,7 @@
 import React from 'react'
 import { useAppDispatch } from '../../context'
 
-import { BlockForm } from '../styles/ContentBlocks'
+import { BlockForm } from '../_styled/ContentBlocks'
 import { placeholderImage } from '../../lib/placeholderImage'
 
 const HeroForm = (props) => {

@@ -1,7 +1,7 @@
 import React from 'react'
 import removeEmptyLines from '../../lib/removeEmptyLines'
 import { useAppState, useAppDispatch } from '../../context'
-import { BlockWrapper } from '../styles/ContentBlocks'
+import { BlockWrapper } from '../_styled/ContentBlocks'
 
 const SaleTextBannerTemplate = ({ headline, tagline, link, terms, cta }) => {
   return removeEmptyLines`
