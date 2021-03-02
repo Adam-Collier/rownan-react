@@ -1,5 +1,5 @@
-import removeEmptyLines from '../../lib/removeEmptyLines'
-import addImageTransformations from '../../lib/addImageTransformations'
+import removeEmptyLines from '../../utils/removeEmptyLines'
+import addImageTransformations from '../../utils/addImageTransformations'
 
 const LowerTemplate = (blocks) => {
   return `<div class="blocker"></div>

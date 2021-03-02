@@ -1,4 +1,4 @@
-import addImageTransformations from '../../lib/addImageTransformations'
+import addImageTransformations from '../../utils/addImageTransformations'
 
 const CategoryTemplate = (categories, territory) => {
   let categoryTitle = () => {

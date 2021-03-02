@@ -1,6 +1,6 @@
 import React from 'react'
 import { useAppDispatch } from '../../context'
-import { placeholderImage } from '../../lib/placeholderImage'
+import { placeholderImage } from '../../utils/placeholderImage'
 
 import { BlockForm } from '../_styled/ContentBlocks'
 

@@ -6,7 +6,7 @@ import SaleCategoriesTemplate from '../../components/SaleCategories/SaleCategory
 import MegaBannerWidget from '../../components/MegaBanner'
 import TickerTemplate from '../../components/Ticker/TickerTemplate'
 import CategoryTemplate from '../../components/Categories/CategoryTemplate'
-import addPlaceholderImageCSS from '../../lib/addPlaceholderImageCSS'
+import addPlaceholderImageCSS from '../../utils/addPlaceholderImageCSS'
 import { AppDownloadTemplate } from '../../components/AppDownload'
 import { SaleTextBannerTemplate } from '../../components/SaleTextBanner'
 
