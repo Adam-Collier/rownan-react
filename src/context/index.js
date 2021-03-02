@@ -1,14 +1,14 @@
 import React from 'react'
 
-import defaultEditorCode from './actions/defaultEditorCode'
-import initialState from './actions/initialState'
+import defaultEditorCode from './actions/default-editor-code'
+import initialState from './actions/initial-state'
 
-import autoFill from './actions/autoFill'
-import dynamicBlock from './actions/dynamicBlock'
-import infoStrip from './actions/infoStrip'
-import placeholderImage from './actions/placeholderImage'
-import saveFile from './actions/saveFile'
-import updateHTML from './actions/updateHtml'
+import autoFill from './actions/auto-fill'
+import dynamicBlock from './actions/dynamic-block'
+import infoStrip from './actions/info-strip'
+import placeholderImage from './actions/placeholder-image'
+import saveFile from './actions/save-file'
+import updateHTML from './actions/update-html'
 import updateVisualPreview from './actions/preview'
 
 // https://kentcdodds.com/blog/how-to-use-react-context-effectively
