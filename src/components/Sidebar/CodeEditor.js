@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from 'react'
-import { useAppDispatch, useAppState } from '../../context/state-context'
+import { useAppDispatch, useAppState } from '../../context'
 import styled from 'styled-components'
 
 import '../../lib/CodeMirror/codemirror.css'

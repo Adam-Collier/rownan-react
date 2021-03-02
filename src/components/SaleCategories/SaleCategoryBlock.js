@@ -1,5 +1,5 @@
 import React from 'react'
-import { useAppDispatch } from '../../context/state-context'
+import { useAppDispatch } from '../../context'
 
 const SaleCategoryBlock = ({ block, index }) => {
   const { url, image } = block

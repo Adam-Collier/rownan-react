@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react'
 import styled from 'styled-components'
-import { useAppDispatch, useAppState } from '../../context/state-context'
+import { useAppDispatch, useAppState } from '../../context'
 
 let Territories = styled.ul`
   list-style-type: none;

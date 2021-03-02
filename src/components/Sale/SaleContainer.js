@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import { BlockForm } from '../styles/ContentBlocks'
-import { useAppDispatch } from '../../context/state-context'
+import { useAppDispatch } from '../../context'
 import { DragDropContext } from 'react-beautiful-dnd'
 import DragDrop from '../DragDrop'
 import SaleBlock from './SaleBlock'

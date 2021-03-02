@@ -6,7 +6,7 @@ import Preview from './components/Preview/Preview'
 import ActionIcons from './components/ActionIcons'
 import Titlebar from './components/Titlebar'
 
-import { useAppDispatch } from './context/state-context'
+import { useAppDispatch } from './context'
 
 const ipcRenderer = window.require('electron').ipcRenderer
 const { dialog } = window.require('electron').remote

@@ -1,5 +1,5 @@
 import React from 'react'
-import { useAppState } from '../../context/state-context'
+import { useAppState } from '../../context'
 import DynamicBlock from './Block'
 
 import DragDrop from '../DragDrop'

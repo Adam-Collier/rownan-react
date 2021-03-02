@@ -1,5 +1,5 @@
 import React from 'react'
-import { useAppDispatch } from '../../context/state-context'
+import { useAppDispatch } from '../../context'
 
 import { BlockForm } from '../styles/ContentBlocks'
 import { placeholderImage } from '../../lib/placeholderImage'

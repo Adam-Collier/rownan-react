@@ -1,6 +1,6 @@
 import React from 'react'
 import CopyButton from '../CopyButton'
-import { useAppState } from '../../context/state-context'
+import { useAppState } from '../../context'
 import styled from 'styled-components'
 
 import { PrismLight as SyntaxHighlighter } from 'react-syntax-highlighter'

@@ -2,7 +2,7 @@ import React from 'react'
 import { ReactComponent as Switch } from '../../icons/switch.svg'
 import styled from 'styled-components'
 
-import { useAppDispatch } from '../../context/state-context'
+import { useAppDispatch } from '../../context'
 
 const Icons = styled.div`
   position: fixed;

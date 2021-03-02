@@ -1,5 +1,5 @@
 import React from 'react'
-import { useAppDispatch } from '../../context/state-context'
+import { useAppDispatch } from '../../context'
 
 import { ReactComponent as DragIcon } from '../../icons/dragIcon.svg'
 

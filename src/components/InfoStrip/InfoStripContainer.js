@@ -3,7 +3,7 @@ import styled from 'styled-components'
 
 import { AutoFillInfoStrip } from '../Autofill/AutoFillInfoStrip'
 import InfoStripBlock from './InfoStripBlock'
-import { useAppDispatch, useAppState } from '../../context/state-context'
+import { useAppDispatch, useAppState } from '../../context'
 import DragDrop from '../DragDrop'
 
 const PromoButton = styled.input`

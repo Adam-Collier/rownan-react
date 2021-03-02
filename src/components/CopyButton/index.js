@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import styled from 'styled-components'
-import { useAppState, useAppDispatch } from '../../context/state-context'
+import { useAppState, useAppDispatch } from '../../context'
 
 const Button = styled.button`
   position: fixed;

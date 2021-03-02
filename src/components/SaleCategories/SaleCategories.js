@@ -1,5 +1,5 @@
 import React from 'react'
-import { useAppState } from '../../context/state-context'
+import { useAppState } from '../../context'
 import AutofillSaleCategories from '../Autofill/AutofillSaleCategories'
 
 import DragDrop from '../DragDrop'

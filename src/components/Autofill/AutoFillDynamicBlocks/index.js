@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { useAppState, useAppDispatch } from '../../../context/state-context'
+import { useAppState, useAppDispatch } from '../../../context'
 import { IconContent } from '../index'
 
 import { isFromFileCheck, getFileJSON } from '../index'
