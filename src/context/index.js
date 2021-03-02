@@ -1,15 +1,15 @@
 import React from 'react'
 
-import defaultEditorCode from './defaultEditorCode'
-import initialState from './initialState'
+import defaultEditorCode from './actions/defaultEditorCode'
+import initialState from './actions/initialState'
 
-import autoFill from './autoFill'
-import dynamicBlock from './dynamicBlock'
-import infoStrip from './infoStrip'
-import placeholderImage from './placeholderImage'
-import saveFile from './saveFile'
-import updateHTML from './updateHtml'
-import updateVisualPreview from './preview'
+import autoFill from './actions/autoFill'
+import dynamicBlock from './actions/dynamicBlock'
+import infoStrip from './actions/infoStrip'
+import placeholderImage from './actions/placeholderImage'
+import saveFile from './actions/saveFile'
+import updateHTML from './actions/updateHtml'
+import updateVisualPreview from './actions/preview'
 
 // https://kentcdodds.com/blog/how-to-use-react-context-effectively
 // https://daveceddia.com/react-redux-immutability-guide/

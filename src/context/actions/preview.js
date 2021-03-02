@@ -1,4 +1,4 @@
-import contentPreviewUpdate from '../lib/contentPreviewUpdate'
+import contentPreviewUpdate from '../../lib/contentPreviewUpdate'
 
 const preview = {
   updateContentPreview: (state) => {
