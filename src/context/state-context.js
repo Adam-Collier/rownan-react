@@ -94,6 +94,13 @@ function stateReducer(state, action) {
           }),
         }
       },
+      saleTextBanner: () => ({
+        ...state,
+        saleTextBanner: {
+          ...state.saleTextBanner,
+          [action.name]: action.payload,
+        },
+      }),
       appDownload: () => ({
         ...state,
         appDownload: {

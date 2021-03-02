@@ -12,6 +12,7 @@ import Ticker from '../Ticker/TickerBlock'
 import { DragDropContext } from 'react-beautiful-dnd'
 import { FormButton } from '../styles/FormButton'
 import { AppDownloadBlock } from '../AppDownload'
+import { SaleTextBannerBlock } from '../SaleTextBanner'
 
 const ContentContainer = styled.div`
   padding: 1rem;
@@ -64,6 +65,7 @@ const Content = (props) => {
         <DragDropContext onDragEnd={(e) => onDragEnd(e, categories)}>
           <Categories />
         </DragDropContext>
+        <SaleTextBannerBlock />
         <DragDropContext onDragEnd={(e) => onDragEnd(e, saleCategories)}>
           <SaleCategories />
         </DragDropContext>

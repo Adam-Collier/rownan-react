@@ -6,6 +6,13 @@ const initialState = {
     title: '',
     subtitle: '',
   },
+  saleTextBanner: {
+    link: '',
+    headline: '',
+    tagline: '',
+    cta: '',
+    terms: '',
+  },
   categories: Array(5).fill({ url: '', title: '', image: '' }),
   saleCategories: Array(4).fill({ url: '', image: '' }),
   contentBlocks: [],

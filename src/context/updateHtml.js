@@ -8,6 +8,7 @@ import TickerTemplate from '../Components/Ticker/TickerTemplate'
 import CategoryTemplate from '../Components/Categories/CategoryTemplate'
 import addPlaceholderImageCSS from '../lib/addPlaceholderImageCSS'
 import { AppDownloadTemplate } from '../Components/AppDownload'
+import { SaleTextBannerTemplate } from '../Components/SaleTextBanner'
 
 const hasContent = (state) => {
   if (Array.isArray(state)) {
@@ -53,6 +54,11 @@ const updateHTML = {
     <div id="homeSlider">
       ${HeroTemplate(mainBlocks)}
     </div>
+    ${
+      hasContent(state.saleTextBanner)
+        ? SaleTextBannerTemplate(state.saleTextBanner)
+        : ''
+    }
     ${SaleTemplate(saleBlocks)}
     ${
       hasContent(state.saleCategories)
