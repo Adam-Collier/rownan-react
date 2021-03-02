@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import Sidebar from './components/Sidebar'
-import Preview from './components/Preview/Preview'
+import Preview from './components/Preview'
 import ActionIcons from './components/ActionIcons'
 import Titlebar from './components/Titlebar'
 

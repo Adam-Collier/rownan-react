@@ -1,18 +1,18 @@
 import React, { memo } from 'react'
 import styled from 'styled-components'
-import { useAppDispatch, useAppState } from '../../context'
+import { useAppDispatch, useAppState } from '../../../context'
 
-import Categories from '../Categories/Categories'
-import SaleCategories from '../SaleCategories/SaleCategories'
-import DynamicBlocks from '../DynamicBlocks'
-import InfoStripContainer from '../InfoStrip/InfoStripContainer'
-import Territory from '../TerritorySelection'
-import Ticker from '../Ticker/TickerBlock'
+import Categories from '../../Categories/Categories'
+import SaleCategories from '../../SaleCategories/SaleCategories'
+import DynamicBlocks from '../../DynamicBlocks'
+import InfoStripContainer from '../../InfoStrip/InfoStripContainer'
+import Territory from '../../TerritorySelection'
+import Ticker from '../../Ticker/TickerBlock'
 
 import { DragDropContext } from 'react-beautiful-dnd'
-import { FormButton } from '../_styled/FormButton'
-import { AppDownloadBlock } from '../AppDownload'
-import { SaleTextBannerBlock } from '../SaleTextBanner'
+import { FormButton } from '../../_styled/FormButton'
+import { AppDownloadBlock } from '../../AppDownload'
+import { SaleTextBannerBlock } from '../../SaleTextBanner'
 
 const ContentContainer = styled.div`
   padding: 1rem;
