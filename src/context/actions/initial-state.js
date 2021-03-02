@@ -1,4 +1,4 @@
-import defaultEditorCode from './defaultEditorCode'
+import defaultEditorCode from './default-editor-code'
 
 const initialState = {
   appDownload: {
