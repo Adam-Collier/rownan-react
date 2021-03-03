@@ -1,12 +1,11 @@
 import React from 'react'
-import './App.css'
 import styled from 'styled-components'
-import Sidebar from './Components/Sidebar'
-import Preview from './Components/Preview/Preview'
-import ActionIcons from './Components/ActionIcons'
-import Titlebar from './Components/Titlebar'
+import Sidebar from './components/Sidebar'
+import Preview from './components/Preview'
+import ActionIcons from './components/ActionIcons'
+import Titlebar from './components/Titlebar'
 
-import { useAppDispatch } from './context/state-context'
+import { useAppDispatch } from './context'
 
 const ipcRenderer = window.require('electron').ipcRenderer
 const { dialog } = window.require('electron').remote

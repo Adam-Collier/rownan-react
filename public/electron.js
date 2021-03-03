@@ -1,7 +1,9 @@
 // Modules to control application life and create native browser window
-const { app, BrowserWindow, Menu } = require('electron')
+const { app, BrowserWindow, Menu, session } = require('electron')
 const fs = require('fs-extra')
 const menuTemplate = require('./menuTemplate')
+const path = require('path')
+const os = require('os')
 
 const appPath = require('electron').app.getAppPath()
 const tempDirPath = require('electron').app.getPath('temp')
@@ -40,23 +42,16 @@ function createWindow() {
   Menu.setApplicationMenu(menu)
 }
 
-app.whenReady().then(createWindow)
-// currently breaks the window when opening
-// could be because electron-devtools-installer isnt installing the latest react devtools?
+// TODO: make this into a function that auto grabs the installed dev tools version
+const reactDevToolsPath = path.join(
+  os.homedir(),
+  '/Library/Application Support/Google/Chrome/Default/Extensions/fmkadmapgofadopljbjfkapdkoienihi/4.10.1_0'
+)
 
-// .then(() => {
-//   if (process.env.ELECTRON_START_URL) {
-//     const {
-//       default: installExtension,
-//       REACT_DEVELOPER_TOOLS,
-//     } = require('electron-devtools-installer')
-
-//     installExtension(REACT_DEVELOPER_TOOLS)
-//       .then((name) => console.log(`Added Extension:  ${name}`))
-//       .catch((err) => console.log('An error occurred: ', err))
-//   }
-//   return
-// })
+app.whenReady().then(async () => {
+  await session.defaultSession.loadExtension(reactDevToolsPath)
+  createWindow()
+})
 
 // Quit when all windows are closed.
 app.on('window-all-closed', function () {
