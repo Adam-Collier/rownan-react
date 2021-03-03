@@ -3,7 +3,6 @@ import request from 'request-promise-native'
 
 const tempDirPath = window.require('electron').remote.app.getPath('temp')
 const fs = window.require('fs-extra')
-const sqip = window.require('sqip')
 
 export const placeholderImage = async (image) => {
   try {
@@ -22,12 +21,7 @@ export const placeholderImage = async (image) => {
 
       await fs.outputFile(imagePath, response, { encoding: 'binary' })
 
-      const options = {
-        input: imagePath,
-      }
-
-      const result = await sqip.default({ ...options })
-      return result.metadata.dataURIBase64
+      return ''
     }
     return ''
   } catch (err) {
