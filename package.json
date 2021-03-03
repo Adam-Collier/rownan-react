@@ -1,5 +1,6 @@
 {
   "name": "rownan-react",
+  "productName": "Rownan",
   "author": "Adam Collier",
   "version": "0.1.8",
   "private": true,
@@ -16,11 +17,6 @@
     "react-syntax-highlighter": "^10.3.0",
     "request-promise-native": "^1.0.7",
     "shortid": "^2.2.14",
-    "sqip": "^1.0.0-alpha.26",
-    "sqip-plugin-blur": "^1.0.0-alpha.22",
-    "sqip-plugin-data-uri": "^1.0.0-alpha.27",
-    "sqip-plugin-primitive": "^1.0.0-alpha.27",
-    "sqip-plugin-svgo": "^1.0.0-alpha.27",
     "styled-components": "^4.2.0"
   },
   "devDependencies": {
@@ -30,7 +26,6 @@
     "@electron-forge/maker-squirrel": "^6.0.0-beta.54",
     "@electron-forge/maker-zip": "^6.0.0-beta.54",
     "electron": "^11.2.0",
-    "electron-rebuild": "^1.8.5",
     "eslint-config-prettier": "^7.0.0",
     "eslint-plugin-html": "^6.1.1",
     "eslint-plugin-prettier": "^3.2.0",
@@ -43,19 +38,15 @@
     "webpack-bundle-analyzer": "^3.3.2"
   },
   "scripts": {
-    "analyze": "node analyze.js",
-    "start": "electron-forge start",
-    "react-start": "BROWSER=none react-scripts start",
     "dev": "nf start",
-    "electron": "electron .",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "npm-rebuild": "electron-rebuild",
-    "package": "electron-forge package",
+    "build": "npm run react:build && electron-forge make",
+    "react:start": "BROWSER=none react-scripts start",
+    "react:build": "react-scripts build",
+    "electron:start": "electron .",
+    "electron:package": "electron-forge package",
     "lint": "eslint src/",
     "lint:fix": "eslint --fix 'src/**/*.js'",
-    "make": "npm run build && electron-forge make"
+    "analyze": "node analyze.js"
   },
   "eslintConfig": {
     "extends": [
@@ -80,7 +71,7 @@
   "config": {
     "forge": {
       "packagerConfig": {
-        "icon": "./assets/icon.icns",
+        "icon": "./public/icon.icns",
         "prune": true
       },
       "makers": [
