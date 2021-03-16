@@ -32,12 +32,12 @@ const hasContent = (state) => {
 
 const updateHTML = {
   updateHTML: (state) => {
-    let mainBlocks = [],
+    let heroBlocks = [],
       lowerBlocks = [],
       saleBlocks = []
 
     state.contentBlocks.map((block) => {
-      if (block.type === 'main') mainBlocks.push(block.content)
+      if (block.type === 'hero') heroBlocks.push(block.content)
       if (block.type === 'lower') lowerBlocks.push(block.content)
       if (block.type === 'sale') saleBlocks.push(block.content)
       return null
@@ -52,7 +52,7 @@ const updateHTML = {
     ${MegaBannerWidget(state.territory)}
     ${state.tickerText ? TickerTemplate(state.tickerText) : ''}
     <div id="homeSlider">
-      ${HeroTemplate(mainBlocks)}
+      ${HeroTemplate(heroBlocks)}
     </div>
     ${
       hasContent(state.saleTextBanner)

@@ -21,7 +21,7 @@ const addPlaceholderImageCSS = (editorContent, contentBlocks) => {
     if (mediaQueryIndexes.length < 2) return editorContent
 
     contentBlocks.forEach(({ content: block, type }, i) => {
-      if (block.placeholderImage && type === 'main') {
+      if (block.placeholderImage && type === 'hero') {
         styleRules[mediaQueryIndexes[0]].insertRule(
           `.row${i + 1} { background: url("${
             block.placeholderImage

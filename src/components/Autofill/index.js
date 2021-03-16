@@ -77,7 +77,7 @@ export const createDynamicBlock = (el, type) => {
       title: title ? title.textContent : '',
       url: el.getAttribute('href'),
     }
-  } else if (type === 'main') {
+  } else if (type === 'hero') {
     let srcSet = el.querySelector('source').dataset.srcset
     let urls = el.querySelectorAll('a')
     let buttons = el.querySelectorAll('button')

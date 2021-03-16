@@ -11,7 +11,7 @@ import { autoFillFromSiteDynamic } from '../autoFillFromSite'
 
 let getSelector = (type) => {
   switch (type) {
-    case 'main':
+    case 'hero':
       return '.row'
     case 'lower':
       return '.slick-three > div > a'
@@ -74,7 +74,7 @@ const AutoFillDynamicBlocks = ({ index, type }) => {
         value="default"
         onChange={(e) => selectSwitch(e, type)}
       >
-        {type === 'main' && (
+        {type === 'hero' && (
           <>
             <option value="default">No Row</option>
             <option value="0">Row 1</option>

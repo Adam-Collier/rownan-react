@@ -21,7 +21,7 @@ export const autoFillFromSiteDynamic = async ({
 
   let block = createDynamicBlock(el, blockType)
 
-  if (blockType === 'main' || blockType === 'lower') {
+  if (blockType === 'hero' || blockType === 'lower') {
     trimWhiteSpace(block)
   }
 

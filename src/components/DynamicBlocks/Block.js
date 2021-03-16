@@ -67,8 +67,8 @@ const DynamicBlock = ({ block, index }) => {
           }}
         >
           <option value="select">Please Select</option>
-          <option value="main">Home Slider</option>
-          <option value="lower">Three Slider</option>
+          <option value="hero">Hero Slot</option>
+          <option value="lower">Lower Slot</option>
           <option value="sale">Sale</option>
         </select>
         <Remove
@@ -82,7 +82,7 @@ const DynamicBlock = ({ block, index }) => {
         <AutoFillDynamicBlocks index={index} type={block.type} />
         <DragIcon />
       </DropDown>
-      {block.type === 'main' && <HeroBlock index={index} block={block} />}
+      {block.type === 'hero' && <HeroBlock index={index} block={block} />}
       {block.type === 'lower' && <LowerBlock index={index} block={block} />}
       {block.type === 'sale' && <SaleContainer index={index} block={block} />}
     </>
