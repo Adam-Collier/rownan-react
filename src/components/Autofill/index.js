@@ -96,6 +96,12 @@ export const createDynamicBlock = (el, type) => {
       title: title?.textContent || '',
     }
   } else if (type === 'sale') {
+    if (!el)
+      return {
+        title: '',
+        ctas: [],
+      }
+
     let ctas = Array.from(el.querySelectorAll('a')).map((cta) => {
       let url = cta.getAttribute('href')
       let text = cta.querySelector('button').textContent
