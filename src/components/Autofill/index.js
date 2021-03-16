@@ -87,13 +87,13 @@ export const createDynamicBlock = (el, type) => {
     return {
       image: removeTransformations(el.querySelector('img').dataset.src),
       mobile: removeTransformations(srcSet.match(/^https:[^ ]+/gi)[0]),
-      primaryCta: buttons[0].textContent,
-      primaryUrl: urls[0].getAttribute('href'),
-      secondaryCta: buttons[1] ? buttons[1].textContent : '',
-      secondaryUrl: urls[1] ? urls[1].getAttribute('href') : '',
-      subtitle: subtitle ? subtitle.textContent : '',
-      svg: el.querySelector('svg').outerHTML,
-      title: title ? title.textContent : '',
+      primaryCta: buttons[0]?.textContent || '',
+      primaryUrl: urls[0]?.getAttribute('href') || '',
+      secondaryCta: buttons[1]?.textContent || '',
+      secondaryUrl: urls[1]?.getAttribute('href') || '',
+      subtitle: subtitle?.textContent || '',
+      svg: el.querySelector('svg')?.outerHTML || '',
+      title: title?.textContent || '',
     }
   } else if (type === 'sale') {
     let ctas = Array.from(el.querySelectorAll('a')).map((cta) => {
