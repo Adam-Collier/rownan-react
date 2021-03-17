@@ -1,8 +1,9 @@
 import React from 'react'
-import { ReactComponent as Switch } from '../../icons/switch.svg'
+import { ReactComponent as CodeIcon } from '../../icons/code.svg'
+import { ReactComponent as EyeIcon } from '../../icons/eye.svg'
 import styled from 'styled-components'
 
-import { useAppDispatch } from '../../context'
+import { useAppDispatch, useAppState } from '../../context'
 
 const Icons = styled.div`
   position: fixed;
@@ -10,24 +11,24 @@ const Icons = styled.div`
   right: 20px;
   cursor: pointer;
   z-index: 2;
+  font-size: 0;
+
   svg {
-    width: 30px;
-    height: auto;
-    fill: #a0a0a0;
-  }
-  .territories {
-    position: relative;
-    display: inline-block;
-    margin-right: 20px;
-    top: 3px;
+    stroke: #a0a0a0;
   }
 `
 
-const ActionIcons = (props) => {
+const Icon = ({ Icon }) => {
   const dispatch = useAppDispatch()
+  return <Icon size={24} onClick={() => dispatch({ type: 'switchView' })} />
+}
+
+const ActionIcons = () => {
+  const { contentView } = useAppState()
+
   return (
     <Icons>
-      <Switch onClick={() => dispatch({ type: 'switchView' })} />
+      {contentView ? <Icon Icon={CodeIcon} /> : <Icon Icon={EyeIcon} />}
     </Icons>
   )
 }
