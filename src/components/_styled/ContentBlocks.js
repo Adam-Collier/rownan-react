@@ -105,6 +105,13 @@ export const DropDown = styled.div`
     background-color: #292d2f;
   }
 
+  > div {
+    display: flex;
+    align-items: center;
+    flex-grow: 1;
+    justify-content: space-between;
+  }
+
   > select {
     -webkit-appearance: none;
     -moz-appearance: none;
@@ -122,16 +129,6 @@ export const DropDown = styled.div`
     padding: 8px 35px 6px 16px;
     cursor: pointer;
   }
-
-  .handle {
-    width: 20px;
-    position: absolute;
-    right: 0px;
-    top: calc(50% - 4px);
-    transform: translateY(-50%);
-    cursor: -webkit-grab;
-    padding-left: 10px;
-  }
 `
 
 export const Remove = styled.p`
@@ -141,6 +138,5 @@ export const Remove = styled.p`
   color: #ffffff;
   text-decoration: none;
   padding-left: 15px;
-  padding-top: 3px;
   font-weight: 400;
 `

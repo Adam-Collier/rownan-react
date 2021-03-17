@@ -1,8 +1,6 @@
 import React from 'react'
 import { useAppDispatch } from '../../context'
 
-import { ReactComponent as DragIcon } from '../../icons/dragIcon.svg'
-
 import AutoFillDynamicBlocks from '../Autofill/AutoFillDynamicBlocks'
 import HeroBlock from '../Hero/HeroBlock'
 import LowerBlock from '../Lower/LowerBlock'
@@ -71,16 +69,17 @@ const DynamicBlock = ({ block, index }) => {
           <option value="lower">Lower Slot</option>
           <option value="sale">Sale</option>
         </select>
-        <Remove
-          onClick={() => {
-            dispatch({ type: 'removeDynamicBlock', payload: index })
-            dispatch({ type: 'updateHTML' })
-          }}
-        >
-          Remove
-        </Remove>
-        <AutoFillDynamicBlocks index={index} type={block.type} />
-        <DragIcon />
+        <div>
+          <Remove
+            onClick={() => {
+              dispatch({ type: 'removeDynamicBlock', payload: index })
+              dispatch({ type: 'updateHTML' })
+            }}
+          >
+            Remove
+          </Remove>
+          <AutoFillDynamicBlocks index={index} type={block.type} />
+        </div>
       </DropDown>
       {block.type === 'hero' && <HeroBlock index={index} block={block} />}
       {block.type === 'lower' && <LowerBlock index={index} block={block} />}
