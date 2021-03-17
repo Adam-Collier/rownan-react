@@ -6,21 +6,23 @@ const fs = window.require('fs-extra')
 const { dialog } = window.require('electron').remote
 
 export const IconContent = styled.div`
+  position: relative;
+  width: 18px;
+  height: 18px;
+
   > select {
     appearance: none;
     background: url(${fillIcon});
+    background-size: cover;
     border: none;
     color: transparent;
     position: absolute;
-    right: 32px;
-    width: 26px;
-    height: 26px;
-    top: calc(46% - 7px);
-    transform: translateY(-50%);
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
     cursor: pointer;
-  }
-  .categories {
-    right: 0;
+    display: block;
   }
 `
 
@@ -160,5 +162,12 @@ export const createStaticBlock = (allElements, blockName) => {
         url,
       }
     })
+  } else if (blockName === 'appDownload') {
+    let block = allElements[0]
+    return {
+      title: block.querySelector('a')?.href || '',
+      subtitle: block.querySelector('p')?.textContent || '',
+      link: block.querySelector('h3')?.textContent || '',
+    }
   }
 }

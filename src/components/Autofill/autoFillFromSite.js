@@ -44,8 +44,6 @@ export const autoFillFromSiteStatic = async ({
 
   let block = createStaticBlock(allElements, blockName)
 
-  console.log(block)
-
   dispatch({
     type: 'autoFillBlock',
     payload: block,
