@@ -73,6 +73,11 @@ export const BlockWrapper = styled.div`
     align-items: center;
     position: relative;
 
+    > div {
+      display: flex;
+      align-items: center;
+    }
+
     h3 {
       padding-left: 20px;
     }
