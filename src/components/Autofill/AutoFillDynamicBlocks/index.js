@@ -36,6 +36,8 @@ const AutoFillDynamicBlocks = ({ index, type }) => {
     if (isFromFileCheck(e)) {
       let savedJSON = await getFileJSON()
 
+      if (!savedJSON) return
+
       let filteredBlocks = savedJSON.contentBlocks.filter(
         (block) => block.type === type
       )

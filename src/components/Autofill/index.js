@@ -60,6 +60,8 @@ export const getFileJSON = async () => {
     filters: [{ extensions: ['json'] }],
   })
 
+  if (filePaths.length === 0) return null
+
   if (filePaths) {
     return JSON.parse(fs.readFileSync(filePaths[0], 'utf8'))
   } else {

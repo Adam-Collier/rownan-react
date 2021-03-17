@@ -14,6 +14,8 @@ export const AutoFillStaticBlock = ({ blockName, selector }) => {
     if (isFromFileCheck(e)) {
       let savedJSON = await getFileJSON()
 
+      if (!savedJSON) return
+
       let options = {
         dispatch,
         savedJSON,
