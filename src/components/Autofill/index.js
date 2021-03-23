@@ -167,9 +167,9 @@ export const createStaticBlock = (allElements, blockName) => {
   } else if (blockName === 'appDownload') {
     let block = allElements[0]
     return {
-      title: block.querySelector('a')?.href || '',
+      link: block.querySelector('a')?.href || '',
       subtitle: block.querySelector('p')?.textContent || '',
-      link: block.querySelector('h3')?.textContent || '',
+      title: block.querySelector('h3')?.textContent || '',
     }
   }
 }
