@@ -7,6 +7,8 @@ import Titlebar from './components/Titlebar'
 
 import { useAppDispatch } from './context'
 
+import { createGlobalStyle } from 'styled-components'
+
 const ipcRenderer = window.require('electron').ipcRenderer
 const { dialog } = window.require('electron').remote
 const fs = window.require('fs')
@@ -14,6 +16,14 @@ const fs = window.require('fs')
 const AppContainer = styled.div`
   display: grid;
   grid-template-columns: 400px 1fr;
+`
+
+const GlobalStyle = createGlobalStyle`
+  :root {
+     --primary-black: #141414;
+     --primary-white: #FFFFFF;
+     --border-radius: 3px;
+  }
 `
 
 function App() {
@@ -64,6 +74,7 @@ function App() {
   })
   return (
     <AppContainer className="App">
+      <GlobalStyle />
       <Titlebar />
       <Sidebar />
       <Preview />
