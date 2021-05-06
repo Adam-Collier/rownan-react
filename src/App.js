@@ -20,26 +20,22 @@ function App() {
   const dispatch = useAppDispatch()
 
   ipcRenderer.on('generate', function () {
-    console.log('generate')
-  })
-  ipcRenderer.on('images', function () {
     dispatch({ type: 'updateHTML' })
     dispatch({ type: 'updateContentPreview' })
   })
+
   ipcRenderer.on('save', function () {
-    console.log('save')
     dispatch({ type: 'saveFile' })
   })
+
   ipcRenderer.on('saveAs', function () {
-    console.log('Save As')
     dispatch({ type: 'saveAs' })
   })
+
   ipcRenderer.on('preview', function () {
-    console.log('preview')
+    dispatch({ type: 'switchView' })
   })
-  ipcRenderer.on('mobileView', function () {
-    console.log('mobileView')
-  })
+
   ipcRenderer.on('openFile', async function () {
     let result = await dialog.showOpenDialog({
       filters: [{ extensions: ['json'] }],
