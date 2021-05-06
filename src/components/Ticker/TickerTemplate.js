@@ -9,10 +9,10 @@ const MegaBannerWidget = (text) => {
       transform: translate(-100%, 0);
     }
   }
-  .friday-ticker {
+  .promo-ticker {
     background: #101111;
     position: relative;
-    height: 72px;
+    height: 56px;
     color: #FFD4CA;
     font-family: titling-gothic-fb-wide, missguided, sans-serif;
     font-weight: 600;
@@ -21,35 +21,41 @@ const MegaBannerWidget = (text) => {
     padding: 0.5rem 0;
     overflow: hidden;
   }
-  .friday-ticker div {
+  .promo-ticker div {
     margin: 0 auto;
     white-space: nowrap;
     overflow: hidden;
     position: absolute;
     top: 50%;
     transform: translatey(-50%);
+    display: flex;
   }
-  .friday-ticker div > span {
+  .promo-ticker div > span {
     margin-bottom: 0;
-    display: inline-block;
     animation: marquee 15s linear infinite;
     will-change: transform;
+    display: flex;
+    align-items: center;
+  }
+  .promo-ticker svg {
+    height: 38px;
+    padding: 0 4rem;
   }
 
-  .friday-ticker span > span {
+  .promo-ticker span > span {
     font-weight: 400;
   }
 </style>
-<div class="friday-ticker">
+<div class="promo-ticker">
   <div>
     <span>
-      ${text} &#xa0; - &#xa0; ${text} &#xa0; - &#xa0; ${text} &#xa0; - &#xa0;
+      ${text}  &#xa0; ${text}  &#xa0; ${text}  &#xa0;
     </span>
     <span>
-      ${text} &#xa0; - &#xa0; ${text} &#xa0; - &#xa0; ${text} &#xa0; - &#xa0;
+      ${text}  &#xa0; ${text}  &#xa0; ${text}  &#xa0;
     </span>
     <span>
-      ${text} &#xa0; - &#xa0; ${text} &#xa0; - &#xa0; ${text} &#xa0; - &#xa0;
+      ${text}  &#xa0; ${text}  &#xa0; ${text}  &#xa0;
     </span>
   </div>
 </div>
