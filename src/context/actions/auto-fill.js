@@ -16,9 +16,7 @@ const autoFill = {
   autoFillBlock: (state, action) => {
     return {
       ...state,
-      [action.blockName]: Array.isArray(action.payload)
-        ? [...action.payload]
-        : { ...action.payload },
+      [action.blockName]: action.payload,
     }
   },
 }

@@ -171,5 +171,8 @@ export const createStaticBlock = (allElements, blockName) => {
       subtitle: block.querySelector('p')?.textContent || '',
       title: block.querySelector('h3')?.textContent || '',
     }
+  } else if (blockName === 'ticker') {
+    let block = allElements[0]
+    return block.querySelector('span').innerHTML
   }
 }
