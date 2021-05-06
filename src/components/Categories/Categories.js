@@ -8,8 +8,6 @@ import CategoryBlock from './CategoryBlock'
 const Categories = (props) => {
   const { categories } = useAppState()
 
-  console.log(categories, 'these are the cats')
-
   return (
     <DragDrop stateItems={categories} id="categories">
       <section>
