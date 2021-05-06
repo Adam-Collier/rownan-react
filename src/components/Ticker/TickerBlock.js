@@ -1,5 +1,6 @@
 import React from 'react'
 import { useAppState, useAppDispatch } from '../../context'
+import AutoFillStaticBlock from '../Autofill/AutoFillStaticBlock/index'
 import { BlockWrapper } from '../_styled/ContentBlocks'
 
 const TickerBlock = () => {
@@ -17,6 +18,7 @@ const TickerBlock = () => {
     <BlockWrapper>
       <section>
         <h3>Ticker</h3>
+        <AutoFillStaticBlock blockName="tickerText" selector=".promo-ticker" />
       </section>
       <div>
         <label htmlFor="tickerText">Text</label>

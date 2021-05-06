@@ -16,7 +16,7 @@ const autoFill = {
   autoFillBlock: (state, action) => {
     return {
       ...state,
-      [action.blockName]: [...action.payload],
+      [action.blockName]: action.payload,
     }
   },
 }

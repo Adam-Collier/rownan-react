@@ -36,6 +36,9 @@ const defaultEditorCode = `<style>
     .row svg {
       display: none;
     }
+    .row .banner_content {
+      top: auto;
+    }
   }
 </style>`
 

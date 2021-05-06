@@ -2,6 +2,7 @@ import React from 'react'
 import removeEmptyLines from '../../utils/remove-empty-lines'
 import { useAppState, useAppDispatch } from '../../context'
 import { BlockWrapper } from '../_styled/ContentBlocks'
+import AutoFillStaticBlock from '../Autofill/AutoFillStaticBlock'
 
 const AppDownloadTemplate = ({ title, subtitle, link }) => {
   return removeEmptyLines`
@@ -62,6 +63,12 @@ const AppDownloadBlock = () => {
     <BlockWrapper>
       <section>
         <h3>App Download</h3>
+        <div>
+          <AutoFillStaticBlock
+            blockName="appDownload"
+            selector=".app-download-strip"
+          />
+        </div>
       </section>
       <div>
         <label htmlFor="link">Link</label>

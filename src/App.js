@@ -48,6 +48,8 @@ function App() {
 
     let { filePaths } = result
 
+    if (filePaths.length === 0) return
+
     if (filePaths) {
       let savedState = JSON.parse(fs.readFileSync(filePaths[0], 'utf8'))
 

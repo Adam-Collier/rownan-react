@@ -1,19 +1,25 @@
 import React, { memo } from 'react'
 import styled from 'styled-components'
 
-import { AutoFillInfoStrip } from '../Autofill/AutoFillInfoStrip'
 import InfoStripBlock from './InfoStripBlock'
 import { useAppDispatch, useAppState } from '../../context'
 import DragDrop from '../DragDrop'
+import AutoFillStaticBlock from '../Autofill/AutoFillStaticBlock/index'
+import { ReactComponent as PlusIcon } from '../../icons/plus.svg'
 
-const PromoButton = styled.input`
+const PromoButton = styled.button`
   background: none;
   color: #ffffff;
-  font-size: 30px;
   border: none;
   padding: 0;
-  width: 30px;
+  margin-left: 0.5rem;
   cursor: pointer;
+  font-size: 0;
+
+  svg {
+    width: 20px;
+    height: 20px;
+  }
 `
 
 function InfoStripContainer() {
@@ -25,12 +31,14 @@ function InfoStripContainer() {
       <section>
         <h3>Info Strip</h3>
         <div>
-          <AutoFillInfoStrip />
+          <AutoFillStaticBlock blockName="promoBlocks" selector=".info" />
           <PromoButton
             type="button"
             value="+"
             onClick={() => dispatch({ type: 'addInfoStrip' })}
-          />
+          >
+            <PlusIcon />
+          </PromoButton>
         </div>
       </section>
       {(block, index) => <InfoStripBlock block={block} index={index} />}

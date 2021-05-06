@@ -50,7 +50,7 @@ const HeroTemplate = (blocks) =>
                 return `${addImageTransformations(
                   block.image,
                   width,
-                  'main',
+                  'hero',
                   true
                 )} ${width}w`
               })

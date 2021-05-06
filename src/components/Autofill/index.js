@@ -6,21 +6,23 @@ const fs = window.require('fs-extra')
 const { dialog } = window.require('electron').remote
 
 export const IconContent = styled.div`
+  position: relative;
+  width: 18px;
+  height: 18px;
+
   > select {
     appearance: none;
     background: url(${fillIcon});
+    background-size: cover;
     border: none;
     color: transparent;
     position: absolute;
-    right: 32px;
-    width: 26px;
-    height: 26px;
-    top: calc(46% - 7px);
-    transform: translateY(-50%);
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
     cursor: pointer;
-  }
-  .categories {
-    right: 0;
+    display: block;
   }
 `
 
@@ -58,6 +60,8 @@ export const getFileJSON = async () => {
     filters: [{ extensions: ['json'] }],
   })
 
+  if (filePaths.length === 0) return null
+
   if (filePaths) {
     return JSON.parse(fs.readFileSync(filePaths[0], 'utf8'))
   } else {
@@ -77,7 +81,7 @@ export const createDynamicBlock = (el, type) => {
       title: title ? title.textContent : '',
       url: el.getAttribute('href'),
     }
-  } else if (type === 'main') {
+  } else if (type === 'hero') {
     let srcSet = el.querySelector('source').dataset.srcset
     let urls = el.querySelectorAll('a')
     let buttons = el.querySelectorAll('button')
@@ -87,15 +91,21 @@ export const createDynamicBlock = (el, type) => {
     return {
       image: removeTransformations(el.querySelector('img').dataset.src),
       mobile: removeTransformations(srcSet.match(/^https:[^ ]+/gi)[0]),
-      primaryCta: buttons[0].textContent,
-      primaryUrl: urls[0].getAttribute('href'),
-      secondaryCta: buttons[1] ? buttons[1].textContent : '',
-      secondaryUrl: urls[1] ? urls[1].getAttribute('href') : '',
-      subtitle: subtitle ? subtitle.textContent : '',
-      svg: el.querySelector('svg').outerHTML,
-      title: title ? title.textContent : '',
+      primaryCta: buttons[0]?.textContent || '',
+      primaryUrl: urls[0]?.getAttribute('href') || '',
+      secondaryCta: buttons[1]?.textContent || '',
+      secondaryUrl: urls[1]?.getAttribute('href') || '',
+      subtitle: subtitle?.textContent || '',
+      svg: el.querySelector('svg')?.outerHTML || '',
+      title: title?.textContent || '',
     }
   } else if (type === 'sale') {
+    if (!el)
+      return {
+        title: '',
+        ctas: [],
+      }
+
     let ctas = Array.from(el.querySelectorAll('a')).map((cta) => {
       let url = cta.getAttribute('href')
       let text = cta.querySelector('button').textContent
@@ -154,5 +164,15 @@ export const createStaticBlock = (allElements, blockName) => {
         url,
       }
     })
+  } else if (blockName === 'appDownload') {
+    let block = allElements[0]
+    return {
+      link: block.querySelector('a')?.href || '',
+      subtitle: block.querySelector('p')?.textContent || '',
+      title: block.querySelector('h3')?.textContent || '',
+    }
+  } else if (blockName === 'ticker') {
+    let block = allElements[0]
+    return block.querySelector('span').innerHTML
   }
 }

@@ -11,7 +11,7 @@ import { autoFillFromSiteDynamic } from '../autoFillFromSite'
 
 let getSelector = (type) => {
   switch (type) {
-    case 'main':
+    case 'hero':
       return '.row'
     case 'lower':
       return '.slick-three > div > a'
@@ -35,6 +35,8 @@ const AutoFillDynamicBlocks = ({ index, type }) => {
 
     if (isFromFileCheck(e)) {
       let savedJSON = await getFileJSON()
+
+      if (!savedJSON) return
 
       let filteredBlocks = savedJSON.contentBlocks.filter(
         (block) => block.type === type
@@ -74,7 +76,7 @@ const AutoFillDynamicBlocks = ({ index, type }) => {
         value="default"
         onChange={(e) => selectSwitch(e, type)}
       >
-        {type === 'main' && (
+        {type === 'hero' && (
           <>
             <option value="default">No Row</option>
             <option value="0">Row 1</option>
