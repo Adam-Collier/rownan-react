@@ -2,7 +2,7 @@ import React from 'react'
 import { useAppDispatch } from '../../context'
 
 const SaleCategoryBlock = ({ block, index }) => {
-  const { url, image } = block
+  const { url, image, title } = block
   const dispatch = useAppDispatch()
 
   const handleChange = (index, e) => {
@@ -27,16 +27,26 @@ const SaleCategoryBlock = ({ block, index }) => {
           />
         </div>
         <div>
-          <label>Image</label>
+          <label>Title</label>
           <input
             type="text"
-            name="image"
-            value={image}
-            className="image"
+            name="title"
+            value={title}
+            className="title"
             onChange={(e) => handleChange(index, e)}
           />
         </div>
       </section>
+      <div>
+        <label>Image</label>
+        <input
+          type="text"
+          name="image"
+          value={image}
+          className="image"
+          onChange={(e) => handleChange(index, e)}
+        />
+      </div>
     </>
   )
 }

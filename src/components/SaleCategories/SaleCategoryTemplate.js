@@ -23,8 +23,8 @@ const SaleCategoryTemplate = (categories, territory) => {
 
   let saleCategoryStyles = () => /*html*/ `
     <style>
-    .categories-sale__by-category {
-      background: #f6dbde;
+    .categories-sale__by-category{
+      padding-top: 2rem;
     }
     .categories-sale__grid {
       max-width: 1060px;
@@ -32,7 +32,7 @@ const SaleCategoryTemplate = (categories, territory) => {
       display: grid;
       grid-template-columns: 1fr 1fr 1fr 1fr;
       grid-gap: 1rem;
-      padding: 2rem 1rem 3rem;
+      padding: 2rem 1rem 0rem;
       justify-content: center;
     }
     .categories-sale__grid img {
@@ -41,6 +41,9 @@ const SaleCategoryTemplate = (categories, territory) => {
     @media (max-width: 767px) {
       .categories-sale__grid {
         grid-template-columns: 1fr 1fr;
+      }
+      .categories-sale__by-category{
+        padding-bottom: 3rem;
       }
     }
   </style>
@@ -74,6 +77,10 @@ const SaleCategoryTemplate = (categories, territory) => {
                 'category'
               )}" />
             </picture>
+            ${
+              category.title &&
+              `<h3 class="category-tile__heading" style="padding-top: 0.5rem">${category.title}</h3>`
+            }
           </a>
         `
           )
