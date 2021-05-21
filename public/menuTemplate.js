@@ -53,6 +53,15 @@ const template = [
         },
       },
       {
+        label: 'Copy Code',
+        accelerator: 'CmdOrCtrl+Shift+C',
+        click: () => {
+          console.log('copy clicked')
+          var focusedWindow = BrowserWindow.getFocusedWindow()
+          focusedWindow.webContents.send('copy-code')
+        },
+      },
+      {
         label: 'Toggle Preview',
         accelerator: 'CmdOrCtrl+p',
         click: () => {

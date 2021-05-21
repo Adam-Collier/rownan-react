@@ -46,6 +46,25 @@ function App() {
     dispatch({ type: 'switchView' })
   })
 
+  ipcRenderer.on('copy-code', function () {
+    // https://stackoverflow.com/questions/40091000/simulate-click-event-on-react-element
+    const mouseClickEvents = ['mousedown', 'click', 'mouseup']
+    function simulateMouseClick(element) {
+      mouseClickEvents.forEach((mouseEventType) =>
+        element.dispatchEvent(
+          new MouseEvent(mouseEventType, {
+            view: window,
+            bubbles: true,
+            cancelable: true,
+            buttons: 1,
+          })
+        )
+      )
+    }
+    var element = document.querySelector('.copy-button')
+    simulateMouseClick(element)
+  })
+
   ipcRenderer.on('openFile', async function () {
     let result = await dialog.showOpenDialog({
       filters: [{ extensions: ['json'] }],

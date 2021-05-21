@@ -6,6 +6,10 @@ const defaultEditorCode = `<style>
   .container .button {
     text-transform: none;
   }
+  .row button.button {
+    margin-left: 0.5rem;
+    margin-right: 0.5rem;
+  }
   @media (min-width: 768px) {
     .row button.button {
       background: rgb(255, 255, 255);

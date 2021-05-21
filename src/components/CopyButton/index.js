@@ -77,7 +77,7 @@ const CopyButton = () => {
   return (
     <Container>
       <Notification copied={copied}>Copied!</Notification>
-      <CopyIcon onClick={copyToClipboard} />
+      <CopyIcon onClick={copyToClipboard} className="copy-button" />
     </Container>
   )
 }
