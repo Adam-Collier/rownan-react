@@ -1,13 +1,19 @@
-const defaultEditorCode = `<style>
-  .row-placeholder {
+const defaultEditorCode = /*CSS*/ `<style>
+  .img-placeholder {
     position: relative;
     overflow: hidden;
     height: 0;
     width: 100%;
     background-color: #ECECF2;
+  }
+  .row .img-placeholder {
     padding-top: 44.79%;
   }
-  .row img {
+  .lower-slot .img-placeholder {
+    padding-top: 100%;
+    margin-bottom: 1rem;
+  }
+  .row img, .lower-slot img {
       position: absolute;
       top: 0;
       left: 0;
@@ -20,7 +26,7 @@ const defaultEditorCode = `<style>
       will-change: opacity;
   }
   @media(max-width: 767px){
-      .row-placeholder {
+      .row .img-placeholder {
           padding-top: 100%;
       }
   }
@@ -67,6 +73,9 @@ const defaultEditorCode = `<style>
     }
     .row .banner_content {
       top: auto;
+    }
+    .lower-slot {
+      padding: 0 12.5vw;
     }
   }
 </style>`

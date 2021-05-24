@@ -1,4 +1,4 @@
-import addImageTransformations from '../../utils/add-image-transformations'
+import createPictureElement from '../../utils/createPictureElement'
 
 const CategoryTemplate = (categories, territory) => {
   let categoryTitle = () => {
@@ -21,7 +21,7 @@ const CategoryTemplate = (categories, territory) => {
     }
   }
 
-  return `
+  return /*HTML*/ `
   <style>
     .categories-container--mobile {
       display: block;
@@ -119,36 +119,25 @@ const CategoryTemplate = (categories, territory) => {
       }
     }
   </style>
-  <div class="categories-container categories-container-- modifier">
+  <div class="categories-container">
     <h2 class="categories-container__heading">${categoryTitle()}</h2>
     <div class="categories-carousel">
       ${categories
         .map(
           (category) =>
             `<a class="category-tile__link" href="${category.url}">
-          <div class="category-tile">
-            <picture>
-              <source type="image/webp" data-srcset="${addImageTransformations(
-                category.image,
-                '200',
-                'category',
-                true
-              )}" >
-              <source data-srcset="${addImageTransformations(
-                category.image,
-                '200',
-                'category',
-                false
-              )}" >
-              <img class="category-tile__image lazyload" data-src="${addImageTransformations(
-                category.image,
-                '100',
-                'category'
-              )}" />
-            </picture>
-            <h3 class="category-tile__heading">${category.title}</h3>
-          </div>
-        </a>`
+                <div class="category-tile">
+                  ${
+                    category.image &&
+                    createPictureElement({
+                      src: category.image,
+                      breakpoints: [121, 142, 157, 180, 184, 276, 368],
+                      alt: 'category image',
+                    })
+                  }
+                  <h3 class="category-tile__heading">${category.title}</h3>
+                </div>
+              </a>`
         )
         .join('')} 
     </div>
