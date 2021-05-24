@@ -16,27 +16,42 @@ const createPictureElement = ({
   }
 
   let imageTypes = ['webp', 'jpeg']
+
+  let addTransformation = (size, type) => {
+    let quality = 70
+
+    if (type === 'jpeg') {
+      return `w=${size}&qlt=${quality}&fmt.jpeg.interlaced=true&upscale=false`
+    } else if (type === 'webp') {
+      return `w=${size}&qlt=${quality}`
+    }
+  }
+
   return /*HTML*/ `
-    <div class="row-placeholder">
+    <div class="img-placeholder">
         <picture>
             ${
-              isArtDirected &&
-              artDirectedImages.map(({ src, breakpoints }) => {
-                return imageTypes
-                  .map(
-                    (type) => `
+              isArtDirected
+                ? artDirectedImages.map(({ src, breakpoints }) => {
+                    return imageTypes
+                      .map(
+                        (type) => `
                 <source
                 type="image/${type}"
                 data-srcset="${breakpoints
-                  .map((size) => `${src}.${type}?w=${size}&qlt=70 ${size}w`)
+                  .map(
+                    (size) =>
+                      `${src}.${type}?${addTransformation(size, type)} ${size}w`
+                  )
                   .join(',')}"
                 sizes="${sizes}"
                 media="(max-width: 767px)"
                 />
             `
-                  )
-                  .join('')
-              })
+                      )
+                      .join('')
+                  })
+                : ''
             }
 
             ${imageTypes
@@ -47,7 +62,10 @@ const createPictureElement = ({
                 data-srcset="${breakpoints
                   .map(
                     (size) =>
-                      `${defaultImage}.${type}?w=${size}&qlt=70 ${size}w`
+                      `${defaultImage}.${type}?${addTransformation(
+                        size,
+                        type
+                      )} ${size}w`
                   )
                   .join(',')}"
                 sizes="${sizes}"
