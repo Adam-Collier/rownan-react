@@ -1,6 +1,7 @@
 import React from 'react'
 import { ReactComponent as CodeIcon } from '../../icons/code.svg'
 import { ReactComponent as EyeIcon } from '../../icons/eye.svg'
+import EditorButton from '../EditorButton'
 import CopyButton from '../CopyButton/index'
 import { useAppDispatch, useAppState } from '../../context'
 
@@ -30,10 +31,13 @@ const Icon = ({ Icon }) => {
 }
 
 const ActionIcons = () => {
-  const { contentView } = useAppState()
+  const { contentView, savedFilePath } = useAppState()
+
+  console.log(savedFilePath)
 
   return (
     <Icons>
+      {savedFilePath && <EditorButton path={savedFilePath} />}
       <CopyButton />
       {contentView ? <Icon Icon={CodeIcon} /> : <Icon Icon={EyeIcon} />}
     </Icons>
