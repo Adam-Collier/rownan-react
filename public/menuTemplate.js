@@ -10,92 +10,87 @@ const template = [
         label: 'Open',
         accelerator: 'CmdOrCtrl+o',
         click: () => {
-          console.log('Opened')
           var focusedWindow = BrowserWindow.getFocusedWindow()
           focusedWindow.webContents.send('openFile')
-        }
+        },
       },
       {
         label: 'Save',
         accelerator: 'CmdOrCtrl+s',
         click: () => {
-          console.log('Saved')
           var focusedWindow = BrowserWindow.getFocusedWindow()
           focusedWindow.webContents.send('save')
-        }
+        },
       },
       {
         label: 'Save As',
         accelerator: 'CmdOrCtrl+Shift+S',
         click: () => {
-          console.log('Save as')
           var focusedWindow = BrowserWindow.getFocusedWindow()
           focusedWindow.webContents.send('saveAs')
-        }
-      }
-    ]
+        },
+      },
+    ],
   },
   {
     label: 'Edit',
     submenu: [
       {
-        role: 'undo'
+        role: 'undo',
       },
       {
-        role: 'redo'
+        role: 'redo',
       },
       {
-        type: 'separator'
+        type: 'separator',
       },
       {
         label: 'Generate',
-        accelerator: 'CmdOrCtrl+enter',
-        click: () => {
-          var focusedWindow = BrowserWindow.getFocusedWindow()
-          focusedWindow.webContents.send('generate')
-          console.log('Generated')
-        }
-      },
-      {
-        label: 'Image Generate',
         accelerator: 'CmdOrCtrl+\\',
         click: () => {
           var focusedWindow = BrowserWindow.getFocusedWindow()
-          focusedWindow.webContents.send('images')
-          console.log('handling image request')
-        }
+          focusedWindow.webContents.send('generate')
+        },
       },
       {
-        label: 'Preview',
+        label: 'Copy Code',
+        accelerator: 'CmdOrCtrl+Shift+C',
+        click: () => {
+          console.log('copy clicked')
+          var focusedWindow = BrowserWindow.getFocusedWindow()
+          focusedWindow.webContents.send('copy-code')
+        },
+      },
+      {
+        label: 'Toggle Preview',
         accelerator: 'CmdOrCtrl+p',
         click: () => {
-          console.log('Preview')
           var focusedWindow = BrowserWindow.getFocusedWindow()
           focusedWindow.webContents.send('preview')
-        }
+        },
       },
       {
-        type: 'separator'
+        type: 'separator',
       },
       {
-        role: 'cut'
+        role: 'cut',
       },
       {
-        role: 'copy'
+        role: 'copy',
       },
       {
-        role: 'paste'
+        role: 'paste',
       },
       {
-        role: 'pasteandmatchstyle'
+        role: 'pasteandmatchstyle',
       },
       {
-        role: 'delete'
+        role: 'delete',
       },
       {
-        role: 'selectall'
-      }
-    ]
+        role: 'selectall',
+      },
+    ],
   },
   {
     label: 'View',
@@ -105,7 +100,7 @@ const template = [
         accelerator: 'CmdOrCtrl+R',
         click(item, focusedWindow) {
           if (focusedWindow) focusedWindow.reload()
-        }
+        },
       },
       {
         label: 'Toggle Developer Tools',
@@ -113,10 +108,10 @@ const template = [
           process.platform === 'darwin' ? 'Alt+Command+I' : 'Ctrl+Shift+I',
         click(item, focusedWindow) {
           if (focusedWindow) focusedWindow.webContents.toggleDevTools()
-        }
+        },
       },
       {
-        type: 'separator'
+        type: 'separator',
       },
       {
         label: 'Mobile View',
@@ -125,35 +120,35 @@ const template = [
           console.log('Mobile View')
           var focusedWindow = BrowserWindow.getFocusedWindow()
           focusedWindow.webContents.send('mobileView')
-        }
+        },
       },
       {
-        role: 'resetzoom'
+        role: 'resetzoom',
       },
       {
-        role: 'zoomin'
+        role: 'zoomin',
       },
       {
-        role: 'zoomout'
+        role: 'zoomout',
       },
       {
-        type: 'separator'
+        type: 'separator',
       },
       {
-        role: 'togglefullscreen'
-      }
-    ]
+        role: 'togglefullscreen',
+      },
+    ],
   },
   {
     role: 'window',
     submenu: [
       {
-        role: 'minimize'
+        role: 'minimize',
       },
       {
-        role: 'close'
-      }
-    ]
+        role: 'close',
+      },
+    ],
   },
   {
     role: 'help',
@@ -162,10 +157,10 @@ const template = [
         label: 'Learn More',
         click() {
           require('electron').shell.openExternal('http://electron.atom.io')
-        }
-      }
-    ]
-  }
+        },
+      },
+    ],
+  },
 ]
 
 if (process.platform === 'darwin') {
@@ -174,50 +169,50 @@ if (process.platform === 'darwin') {
     label: name,
     submenu: [
       {
-        role: 'about'
+        role: 'about',
       },
       {
-        type: 'separator'
+        type: 'separator',
       },
       {
         role: 'services',
-        submenu: []
+        submenu: [],
       },
       {
-        type: 'separator'
+        type: 'separator',
       },
       {
-        role: 'hide'
+        role: 'hide',
       },
       {
-        role: 'hideothers'
+        role: 'hideothers',
       },
       {
-        role: 'unhide'
+        role: 'unhide',
       },
       {
-        type: 'separator'
+        type: 'separator',
       },
       {
-        role: 'quit'
-      }
-    ]
+        role: 'quit',
+      },
+    ],
   })
   // Edit menu.
   template[2].submenu.push(
     {
-      type: 'separator'
+      type: 'separator',
     },
     {
       label: 'Speech',
       submenu: [
         {
-          role: 'startspeaking'
+          role: 'startspeaking',
         },
         {
-          role: 'stopspeaking'
-        }
-      ]
+          role: 'stopspeaking',
+        },
+      ],
     }
   )
   // Window menu.
@@ -225,24 +220,24 @@ if (process.platform === 'darwin') {
     {
       label: 'Close',
       accelerator: 'CmdOrCtrl+W',
-      role: 'close'
+      role: 'close',
     },
     {
       label: 'Minimize',
       accelerator: 'CmdOrCtrl+M',
-      role: 'minimize'
+      role: 'minimize',
     },
     {
       label: 'Zoom',
-      role: 'zoom'
+      role: 'zoom',
     },
     {
-      type: 'separator'
+      type: 'separator',
     },
     {
       label: 'Bring All to Front',
-      role: 'front'
-    }
+      role: 'front',
+    },
   ]
 }
 

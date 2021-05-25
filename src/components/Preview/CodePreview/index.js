@@ -1,5 +1,4 @@
 import React from 'react'
-import CopyButton from '../../CopyButton'
 import { useAppState } from '../../../context'
 import styled from 'styled-components'
 
@@ -32,7 +31,6 @@ const CodePreview = () => {
 
   return (
     <CodeEditor className="CodeMirror">
-      <CopyButton />
       <SyntaxHighlighter language="html" style={prism}>
         {outputHTML}
       </SyntaxHighlighter>

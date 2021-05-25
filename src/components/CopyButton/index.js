@@ -1,20 +1,41 @@
 import React, { useState, useEffect } from 'react'
-import styled from 'styled-components'
 import { useAppState, useAppDispatch } from '../../context'
+import { ReactComponent as CopyIcon } from '../../icons/copy.svg'
 
-const Button = styled.button`
-  position: fixed;
-  top: 1.5rem;
-  right: 1.5rem;
-  z-index: 3;
-  width: 160px;
-  padding: 0.75rem 1rem;
-  border-radius: 3px;
-  background: var(--primary-white);
-  outline: none;
-  border: 1px solid #a0a0a0;
-  cursor: pointer;
+import styled from 'styled-components'
+
+const Notification = styled.p`
+  padding: 0.5rem 0.75rem;
+  background: var(--primary-black);
   font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--primary-white);
+  border-radius: var(--border-radius);
+  position: absolute;
+  right: 0;
+  bottom: 100%;
+
+  opacity: ${(props) => (props.copied ? 1 : 0)};
+  transform: ${(props) => (props.copied ? 'translateY(0)' : 'translateY(3px)')};
+  transition: 0.2s all ease-in-out;
+
+  &:after {
+    --width: 10px;
+    content: '';
+    top: calc(100% - (var(--width) / 2) - 2px);
+    display: block;
+    position: absolute;
+    right: var(--width);
+    height: var(--width);
+    width: var(--width);
+    transform: rotate(45deg);
+    border-radius: 3px;
+    background: var(--primary-black);
+  }
+`
+
+const Container = styled.div`
+  position: relative;
 `
 
 const CopyButton = () => {
@@ -54,9 +75,10 @@ const CopyButton = () => {
   }
 
   return (
-    <Button onClick={copyToClipboard}>
-      {copied ? 'Copied!' : 'Copy Code to clipboard'}
-    </Button>
+    <Container>
+      <Notification copied={copied}>Copied!</Notification>
+      <CopyIcon onClick={copyToClipboard} className="copy-button" />
+    </Container>
   )
 }
 
