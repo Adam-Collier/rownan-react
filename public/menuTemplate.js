@@ -62,6 +62,14 @@ const template = [
         },
       },
       {
+        label: 'Open in Editor',
+        accelerator: 'CmdOrCtrl+Shift+O',
+        click: () => {
+          var focusedWindow = BrowserWindow.getFocusedWindow()
+          focusedWindow.webContents.send('open-editor')
+        },
+      },
+      {
         label: 'Toggle Preview',
         accelerator: 'CmdOrCtrl+p',
         click: () => {
