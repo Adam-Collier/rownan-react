@@ -26,6 +26,21 @@ const GlobalStyle = createGlobalStyle`
   }
 `
 
+function simulateMouseClick(element) {
+  // https://stackoverflow.com/questions/40091000/simulate-click-event-on-react-element
+  const mouseClickEvents = ['mousedown', 'click', 'mouseup']
+  mouseClickEvents.forEach((mouseEventType) =>
+    element.dispatchEvent(
+      new MouseEvent(mouseEventType, {
+        view: window,
+        bubbles: true,
+        cancelable: true,
+        buttons: 1,
+      })
+    )
+  )
+}
+
 function App() {
   const dispatch = useAppDispatch()
 
@@ -47,21 +62,12 @@ function App() {
   })
 
   ipcRenderer.on('copy-code', function () {
-    // https://stackoverflow.com/questions/40091000/simulate-click-event-on-react-element
-    const mouseClickEvents = ['mousedown', 'click', 'mouseup']
-    function simulateMouseClick(element) {
-      mouseClickEvents.forEach((mouseEventType) =>
-        element.dispatchEvent(
-          new MouseEvent(mouseEventType, {
-            view: window,
-            bubbles: true,
-            cancelable: true,
-            buttons: 1,
-          })
-        )
-      )
-    }
     var element = document.querySelector('.copy-button')
+    simulateMouseClick(element)
+  })
+
+  ipcRenderer.on('open-editor', function () {
+    var element = document.querySelector('.editor-button')
     simulateMouseClick(element)
   })
 
