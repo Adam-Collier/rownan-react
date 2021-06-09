@@ -28,7 +28,7 @@ const createPictureElement = ({
   }
 
   return /*HTML*/ `
-    <div class="img-placeholder">
+    <div class="img-placeholder ${className || ''} ">
         <picture>
             ${
               isArtDirected
@@ -73,9 +73,7 @@ const createPictureElement = ({
             `
               )
               .join('')}
-            <img class="${
-              className || ''
-            } lazyload" data-src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=" alt="backup">
+            <img class="lazyload" data-src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=" alt="backup">
         </picture>
     </div>
     `
