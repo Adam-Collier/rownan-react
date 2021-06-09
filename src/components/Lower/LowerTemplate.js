@@ -13,6 +13,7 @@ const LowerTemplate = (blocks) => {
                 src: block.image,
                 breakpoints: [224, 281, 294, 310, 350, 441, 588],
                 alt: 'lower image',
+                sizes: '(max-width: 767px) 75vw, 294px',
               })
             }
             <div class="title-below">

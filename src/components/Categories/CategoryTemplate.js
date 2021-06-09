@@ -133,6 +133,8 @@ const CategoryTemplate = (categories, territory) => {
                       src: category.image,
                       breakpoints: [121, 142, 157, 180, 184, 276, 368],
                       alt: 'category image',
+                      className: 'category-tile__image',
+                      sizes: '(max-width: 767px) 38vw, 184px',
                     })
                   }
                   <h3 class="category-tile__heading">${category.title}</h3>
