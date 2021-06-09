@@ -1,8 +1,7 @@
 import React from 'react'
 import { useAppDispatch } from '../../context'
-
+import { optimize, extendDefaultPlugins } from 'svgo'
 import { BlockForm } from '../_styled/ContentBlocks'
-import { placeholderImage } from '../../utils/placeholder-image'
 
 const HeroForm = (props) => {
   const { index, block } = props
@@ -10,24 +9,40 @@ const HeroForm = (props) => {
   const dispatch = useAppDispatch()
 
   const handleChange = (e) => {
-    if (e.target.name === 'image' || e.target.name === 'mobile') {
-      e.persist()
-      placeholderImage(e.target.value).then((placeholder) => {
-        dispatch({
-          type: 'placeholderImage',
-          name: e.target.name,
-          index,
-          payload: placeholder,
-        })
-      })
-    }
-
     dispatch({
       type: 'addDynamicBlockContent',
       payload: e.target.value,
       name: e.target.name,
       index,
     })
+  }
+
+  const handleSVG = (e) => {
+    if (e.target.value) {
+      const result = optimize(e.target.value, {
+        multipass: true,
+        plugins: extendDefaultPlugins([
+          {
+            name: 'removeViewBox',
+            active: false,
+          },
+          'removeDimensions',
+          'cleanupListOfValues',
+          'reusePaths',
+          'sortAttrs',
+          'removeStyleElement',
+          'removeScriptElement',
+        ]),
+      })
+
+      const optimizedSvgString = result.data
+        ? result.data
+        : 'error: please use a valid SVG'
+
+      e.target.value = optimizedSvgString
+    }
+
+    handleChange(e)
   }
 
   return (
@@ -76,7 +91,7 @@ const HeroForm = (props) => {
         name="svg"
         value={block.content.svg}
         className="svg"
-        onChange={handleChange}
+        onChange={handleSVG}
       />
       <label>Title</label>
       <input
