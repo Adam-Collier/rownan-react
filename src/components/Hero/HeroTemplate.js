@@ -5,7 +5,7 @@ const HeroTemplate = (blocks) =>
   blocks
     .map((block, index) => {
       return removeEmptyLines/*HTML*/ `
-    <div class="row fullwidth row${index + 1}">
+    <div class="hero-banner row fullwidth row${index + 1}">
       <a href="${block.primaryUrl}">
         ${
           block.image &&
