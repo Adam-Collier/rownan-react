@@ -1,6 +1,7 @@
 import styled from 'styled-components'
 import fillIcon from '../../icons/autoFill.svg'
 import { convertEmojis } from '../../utils/emoji-convert'
+import getImageUrl from '../../utils/get-image-url-from-source'
 
 const fs = window.require('fs-extra')
 const { dialog } = window.require('electron').remote
@@ -32,25 +33,6 @@ export const trimWhiteSpace = (obj) => {
   })
 }
 
-export const removeTransformations = (url) => {
-  if (url.includes('https://media.missguided.co.uk')) {
-    let arr = url.split('/')
-
-    if (arr[5].includes('w_')) {
-      arr.splice(5, 1)
-      return arr.join('/')
-    }
-
-    return arr.join('/')
-  }
-  if (
-    url.includes('https://i1.adis.ws/i/missguided') ||
-    url.includes('https://media.missguided.com/i/missguided')
-  ) {
-    return url.split('?')[0]
-  }
-}
-
 export const isFromFileCheck = (e) =>
   e.target[e.target.selectedIndex].getAttribute('data-file') ? true : false
 
@@ -71,26 +53,27 @@ export const getFileJSON = async () => {
 
 export const createDynamicBlock = (el, type) => {
   if (type === 'lower') {
-    let subtitle = el.querySelector('.subtitle3')
-    let title = el.querySelector('.title3')
+    let subtitle = el.querySelector('.subtitle3')?.textContent || ''
+    let title = el.querySelector('.title3')?.textContent || ''
+    let url = el.getAttribute('href')
+    let cta = el.querySelector('button').textContent
 
     return {
-      cta: el.querySelector('button').textContent,
-      image: removeTransformations(el.querySelector('img').dataset.src),
-      subtitle: subtitle ? subtitle.textContent : '',
-      title: title ? title.textContent : '',
-      url: el.getAttribute('href'),
+      cta,
+      image: getImageUrl(el),
+      subtitle,
+      title,
+      url,
     }
   } else if (type === 'hero') {
-    let srcSet = el.querySelector('source').dataset.srcset
     let urls = el.querySelectorAll('a')
     let buttons = el.querySelectorAll('button')
     let subtitle = el.querySelector('.subtitle1')
     let title = el.querySelector('.title1')
 
     return {
-      image: removeTransformations(el.querySelector('img').dataset.src),
-      mobile: removeTransformations(srcSet.match(/^https:[^ ]+/gi)[0]),
+      image: getImageUrl(el, 3),
+      mobile: getImageUrl(el),
       primaryCta: buttons[0]?.textContent || '',
       primaryUrl: urls[0]?.getAttribute('href') || '',
       secondaryCta: buttons[1]?.textContent || '',
@@ -126,9 +109,7 @@ export const createDynamicBlock = (el, type) => {
 export const createStaticBlock = (allElements, blockName) => {
   if (blockName === 'categories') {
     return allElements.map((category) => {
-      let image = removeTransformations(
-        category.querySelector('.category-tile__image').dataset.src.trim()
-      )
+      let image = getImageUrl(category)
       let url = category.getAttribute('href').trim()
       let title = category
         .querySelector('.category-tile__heading')
@@ -154,9 +135,7 @@ export const createStaticBlock = (allElements, blockName) => {
     })
   } else if (blockName === 'saleCategories') {
     return allElements.map((category) => {
-      let image = removeTransformations(
-        category.querySelector('.category-tile__image').dataset.src
-      ).trim()
+      let image = getImageUrl(category)
       let url = category.getAttribute('href').trim()
 
       return {
@@ -166,10 +145,14 @@ export const createStaticBlock = (allElements, blockName) => {
     })
   } else if (blockName === 'appDownload') {
     let block = allElements[0]
+    let link = block.querySelector('a')?.href || ''
+    let subtitle = block.querySelector('p')?.textContent || ''
+    let title = block.querySelector('h3')?.textContent || ''
+
     return {
-      link: block.querySelector('a')?.href || '',
-      subtitle: block.querySelector('p')?.textContent || '',
-      title: block.querySelector('h3')?.textContent || '',
+      link,
+      subtitle,
+      title,
     }
   } else if (blockName === 'ticker') {
     let block = allElements[0]
