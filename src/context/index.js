@@ -6,7 +6,6 @@ import initialState from './actions/initial-state'
 import autoFill from './actions/auto-fill'
 import dynamicBlock from './actions/dynamic-block'
 import infoStrip from './actions/info-strip'
-import placeholderImage from './actions/placeholder-image'
 import saveFile from './actions/save-file'
 import updateHTML from './actions/update-html'
 import updateVisualPreview from './actions/preview'
@@ -135,7 +134,6 @@ function stateReducer(state, action) {
       ...autoFill,
       ...dynamicBlock,
       ...infoStrip,
-      ...placeholderImage,
       ...saveFile,
       ...updateHTML,
       ...updateVisualPreview,

@@ -6,7 +6,6 @@ import SaleCategoriesTemplate from '../../components/SaleCategories/SaleCategory
 import MegaBannerWidget from '../../components/MegaBanner'
 import TickerTemplate from '../../components/Ticker/TickerTemplate'
 import CategoryTemplate from '../../components/Categories/CategoryTemplate'
-import addPlaceholderImageCSS from '../../utils/add-placeholder-image-css'
 import { AppDownloadTemplate } from '../../components/AppDownload'
 import { SaleTextBannerTemplate } from '../../components/SaleTextBanner'
 
@@ -43,11 +42,9 @@ const updateHTML = {
       return null
     })
 
-    let styles = addPlaceholderImageCSS(state.editorCode, state.contentBlocks)
-
     let outputHTML = () => {
       return `
-  ${styles}
+  ${state.editorCode}
   <div class="container">
     ${MegaBannerWidget(state.territory)}
     ${state.tickerText ? TickerTemplate(state.tickerText) : ''}

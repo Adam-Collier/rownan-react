@@ -1,6 +1,5 @@
 import React from 'react'
 import { useAppDispatch } from '../../context'
-import { placeholderImage } from '../../utils/placeholder-image'
 
 import { BlockForm } from '../_styled/ContentBlocks'
 
@@ -9,18 +8,6 @@ const LowerForm = (props) => {
   const dispatch = useAppDispatch()
 
   const handleChange = (e) => {
-    if (e.target.name === 'image') {
-      e.persist()
-      placeholderImage(e.target.value).then((placeholder) => {
-        dispatch({
-          type: 'placeholderImage',
-          name: e.target.name,
-          index,
-          payload: placeholder,
-        })
-      })
-    }
-
     dispatch({
       type: 'addDynamicBlockContent',
       payload: e.target.value,
