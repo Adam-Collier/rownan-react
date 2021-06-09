@@ -6,14 +6,17 @@ const defaultEditorCode = /*CSS*/ `<style>
     width: 100%;
     background-color: #ECECF2;
   }
-  .row .img-placeholder {
+  .hero-banner .img-placeholder {
     padding-top: 44.79%;
   }
   .lower-slot .img-placeholder {
     padding-top: 100%;
     margin-bottom: 1rem;
   }
-  .row img, .lower-slot img {
+  .categories-container .img-placeholder {
+    padding-top: 145%;
+  }
+  .hero-banner img, .lower-slot img, .categories-container img {
       position: absolute;
       top: 0;
       left: 0;
@@ -24,11 +27,6 @@ const defaultEditorCode = /*CSS*/ `<style>
       transform: translateZ(0);
       transition: opacity 0.5s linear;
       will-change: opacity;
-  }
-  @media(max-width: 767px){
-      .row .img-placeholder {
-          padding-top: 100%;
-      }
   }
   .title1,
   .title3,
@@ -68,6 +66,9 @@ const defaultEditorCode = /*CSS*/ `<style>
     }
   }
   @media (max-width: 767px) {
+    .hero-banner .img-placeholder {
+      padding-top: 100%;
+    }
     .row svg {
       display: none;
     }
