@@ -43,9 +43,14 @@ function createWindow() {
 }
 
 // TODO: make this into a function that auto grabs the installed dev tools version
+let currentReactDevToolsVersion = fs.readdirSync(
+  `${os.homedir()}/Library/Application Support/Google/Chrome/Default/Extensions/fmkadmapgofadopljbjfkapdkoienihi`,
+  'utf-8'
+)[0]
+
 const reactDevToolsPath = path.join(
   os.homedir(),
-  '/Library/Application Support/Google/Chrome/Default/Extensions/fmkadmapgofadopljbjfkapdkoienihi/4.13.1_0'
+  `/Library/Application Support/Google/Chrome/Default/Extensions/fmkadmapgofadopljbjfkapdkoienihi/${currentReactDevToolsVersion}`
 )
 
 app.whenReady().then(async () => {
