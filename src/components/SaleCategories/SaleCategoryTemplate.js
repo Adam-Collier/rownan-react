@@ -24,7 +24,7 @@ const SaleCategoryTemplate = (categories, territory) => {
   let saleCategoryStyles = () => /*html*/ `
     <style>
     .categories-sale__by-category{
-      padding-top: 2rem;
+      padding-bottom: 3rem;
     }
     .categories-sale__grid {
       max-width: 1060px;
@@ -78,8 +78,9 @@ const SaleCategoryTemplate = (categories, territory) => {
               )}" />
             </picture>
             ${
-              category.title &&
-              `<h3 class="category-tile__heading" style="padding-top: 0.5rem">${category.title}</h3>`
+              category.title
+                ? `<h3 class="category-tile__heading" style="padding-top: 0.5rem">${category.title}</h3>`
+                : ``
             }
           </a>
         `
