@@ -1,6 +1,4 @@
 import React from 'react'
-
-import defaultEditorCode from './actions/default-editor-code'
 import initialState from './actions/initial-state'
 
 import autoFill from './actions/auto-fill'
@@ -175,4 +173,4 @@ function useAppDispatch() {
   return context
 }
 
-export { StateProvider, useAppState, useAppDispatch, defaultEditorCode }
+export { StateProvider, useAppState, useAppDispatch }
