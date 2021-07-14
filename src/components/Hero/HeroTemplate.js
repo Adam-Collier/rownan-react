@@ -52,6 +52,7 @@ const HeroTemplate = (blocks) =>
             </div>`
           }
         </div>
+        ${block.terms && `<p class="hero-terms">${block.terms}</p>`}
       </a>
     </div>`
     })

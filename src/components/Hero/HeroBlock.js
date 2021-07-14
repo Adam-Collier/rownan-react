@@ -29,9 +29,9 @@ const HeroForm = (props) => {
           'removeDimensions',
           'cleanupListOfValues',
           'reusePaths',
-          'sortAttrs',
           'removeStyleElement',
           'removeScriptElement',
+          'removeAttrs',
         ]),
       })
 
@@ -107,6 +107,14 @@ const HeroForm = (props) => {
         name="subtitle"
         value={block.content.subtitle}
         className="subtitle"
+        onChange={handleChange}
+      />
+      <label>Terms</label>
+      <input
+        type="text"
+        name="terms"
+        value={block.content.terms}
+        className="terms"
         onChange={handleChange}
       />
       <section className="inline">

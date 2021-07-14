@@ -29,6 +29,7 @@ const DynamicBlock = ({ block, index }) => {
     subtitle: '',
     svg: '',
     title: '',
+    terms: '',
   }
 
   let saleInitial = {
