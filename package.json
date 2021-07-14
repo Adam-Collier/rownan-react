@@ -11,6 +11,7 @@
     "cheerio": "^1.0.0-rc.6",
     "codemirror": "^5.61.0",
     "electron-squirrel-startup": "^1.0.0",
+    "fix-path": "^3.0.0",
     "fs-extra": "^8.0.1",
     "portscanner": "^2.2.0",
     "react-beautiful-dnd": "^11.0.4",
