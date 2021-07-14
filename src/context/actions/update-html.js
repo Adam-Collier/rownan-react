@@ -8,6 +8,7 @@ import TickerTemplate from '../../components/Ticker/TickerTemplate'
 import CategoryTemplate from '../../components/Categories/CategoryTemplate'
 import { AppDownloadTemplate } from '../../components/AppDownload'
 import { SaleTextBannerTemplate } from '../../components/SaleTextBanner'
+import globalStyles from '../../styles/global'
 
 const hasContent = (state) => {
   if (Array.isArray(state)) {
@@ -42,41 +43,64 @@ const updateHTML = {
       return null
     })
 
+    console.log(state.editorCode.length)
+
     let outputHTML = () => {
       return `
-  ${state.editorCode}
-  <div class="container">
-    ${MegaBannerWidget(state.territory)}
-    ${state.tickerText ? TickerTemplate(state.tickerText) : ''}
-    <div id="homeSlider">
-      ${HeroTemplate(heroBlocks)}
-    </div>
-    ${
-      hasContent(state.saleTextBanner)
-        ? SaleTextBannerTemplate(state.saleTextBanner)
-        : ''
-    }
-    ${SaleTemplate(saleBlocks)}
-    ${
-      hasContent(state.saleCategories)
-        ? SaleCategoriesTemplate(state.saleCategories, state.territory)
-        : ''
-    }
-    ${hasContent(state.promoBlocks) ? InfoStripTemplate(state.promoBlocks) : ''}
-    ${
-      hasContent(state.categories)
-        ? CategoryTemplate(state.categories, state.territory)
-        : ''
-    }
-    <div class="slick-three">
-      ${LowerTemplate(lowerBlocks)}
-    </div>
-    ${
-      hasContent(state.appDownload)
-        ? AppDownloadTemplate(state.appDownload)
-        : ''
-    }
-  </div>`
+        ${globalStyles()}
+
+        ${
+          state.editorCode &&
+          (state.editorCode.includes('<style>')
+            ? state.editorCode
+            : `<style>${state.editorCode}</style>`)
+        }
+        
+        <div class="container">
+          ${MegaBannerWidget(state.territory)}
+
+          ${state.tickerText ? TickerTemplate(state.tickerText) : ''}
+
+          <div id="homeSlider">
+            ${HeroTemplate(heroBlocks)}
+          </div>
+
+          ${
+            hasContent(state.saleTextBanner)
+              ? SaleTextBannerTemplate(state.saleTextBanner)
+              : ''
+          }
+
+          ${SaleTemplate(saleBlocks)}
+
+          ${
+            hasContent(state.saleCategories)
+              ? SaleCategoriesTemplate(state.saleCategories, state.territory)
+              : ''
+          }
+
+          ${
+            hasContent(state.promoBlocks)
+              ? InfoStripTemplate(state.promoBlocks)
+              : ''
+          }
+
+          ${
+            hasContent(state.categories)
+              ? CategoryTemplate(state.categories, state.territory)
+              : ''
+          }
+
+          <div class="slick-three">
+            ${LowerTemplate(lowerBlocks)}
+          </div>
+          
+          ${
+            hasContent(state.appDownload)
+              ? AppDownloadTemplate(state.appDownload)
+              : ''
+          }
+        </div>`
     }
 
     let output = window.prettier.format(outputHTML(), {

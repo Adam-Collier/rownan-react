@@ -1,4 +1,4 @@
-import defaultEditorCode from './default-editor-code'
+import globalStyles from '../../styles/global'
 
 const initialState = {
   appDownload: {
@@ -17,8 +17,8 @@ const initialState = {
   saleCategories: Array(4).fill({ url: '', image: '' }),
   contentBlocks: [],
   contentView: true,
-  editorCode: defaultEditorCode,
-  outputHTML: `${defaultEditorCode}
+  editorCode: '',
+  outputHTML: `${globalStyles()}
 <div class="container">
   <div id="homeSlider">
   </div>
