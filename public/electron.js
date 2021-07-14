@@ -42,19 +42,26 @@ function createWindow() {
   Menu.setApplicationMenu(menu)
 }
 
-// TODO: make this into a function that auto grabs the installed dev tools version
-let currentReactDevToolsVersion = fs.readdirSync(
-  `${os.homedir()}/Library/Application Support/Google/Chrome/Default/Extensions/fmkadmapgofadopljbjfkapdkoienihi`,
-  'utf-8'
-)[0]
+let reactDevToolsPath
 
-const reactDevToolsPath = path.join(
-  os.homedir(),
-  `/Library/Application Support/Google/Chrome/Default/Extensions/fmkadmapgofadopljbjfkapdkoienihi/${currentReactDevToolsVersion}`
-)
+// if the app is in development get the react dev tools extension
+if (!app.isPackaged) {
+  // TODO: make this into a function that auto grabs the installed dev tools version
+  let currentReactDevToolsVersion = fs.readdirSync(
+    `${os.homedir()}/Library/Application Support/Google/Chrome/Default/Extensions/fmkadmapgofadopljbjfkapdkoienihi`,
+    'utf-8'
+  )[0]
+
+  reactDevToolsPath = path.join(
+    os.homedir(),
+    `/Library/Application Support/Google/Chrome/Default/Extensions/fmkadmapgofadopljbjfkapdkoienihi/${currentReactDevToolsVersion}`
+  )
+}
 
 app.whenReady().then(async () => {
-  await session.defaultSession.loadExtension(reactDevToolsPath)
+  // if in development load the react dev tools extension
+  if (!app.isPackaged)
+    await session.defaultSession.loadExtension(reactDevToolsPath)
   createWindow()
 })
 
