@@ -33,8 +33,6 @@ const Icon = ({ Icon }) => {
 const ActionIcons = () => {
   const { contentView, savedFilePath } = useAppState()
 
-  console.log(savedFilePath)
-
   return (
     <Icons>
       {savedFilePath && <EditorButton path={savedFilePath} />}
