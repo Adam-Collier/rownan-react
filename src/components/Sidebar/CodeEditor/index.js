@@ -5,19 +5,21 @@ import styled from 'styled-components'
 import './styles/codemirror.css'
 import './styles/one-dark.css'
 
-import 'codemirror/mode/javascript/javascript'
-import 'codemirror/mode/xml/xml'
 import 'codemirror/mode/css/css'
-import 'codemirror/mode/htmlmixed/htmlmixed'
 
 import 'codemirror/addon/edit/closebrackets'
 import 'codemirror/addon/edit/closetag'
 import 'codemirror/addon/search/searchcursor'
 import 'codemirror/keymap/sublime'
+import 'codemirror/addon/display/placeholder.js'
 
 const CodeEditor = styled.div`
+  height: 100%;
+  overflow: hidden;
+
   .CodeMirror {
     line-height: 1.4;
+    height: 100%;
   }
 
   .cm-s-one-dark.CodeMirror,
@@ -36,7 +38,7 @@ function Editor(props) {
   useEffect(() => {
     let options = {
       lineNumbers: false,
-      mode: 'htmlmixed',
+      mode: 'css',
       theme: 'one-dark',
       autoCloseBrackets: true,
       autoCloseTags: true,
@@ -59,7 +61,7 @@ function Editor(props) {
 
   return (
     <CodeEditor>
-      <textarea ref={editor} />
+      <textarea ref={editor} placeholder="Add your custom styles here..." />
     </CodeEditor>
   )
 }
