@@ -2,6 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 import CodeEditor from './CodeEditor'
 import Blocks from './Blocks'
+import Resizeable from '../Resizeable'
 
 const Container = styled.div`
   height: 100vh;
@@ -12,7 +13,9 @@ const Container = styled.div`
 
 const Sidebar = () => (
   <Container>
-    <CodeEditor />
+    <Resizeable directions={['bottom']} initialHeight={250}>
+      <CodeEditor />
+    </Resizeable>
     <Blocks />
   </Container>
 )
