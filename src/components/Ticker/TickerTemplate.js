@@ -1,4 +1,4 @@
-const MegaBannerWidget = (text) => {
+const MegaBannerWidget = ({ link, duration, text }) => {
   return `
 <style>
   @keyframes marquee {
@@ -21,7 +21,7 @@ const MegaBannerWidget = (text) => {
     padding: 0.5rem 0;
     overflow: hidden;
   }
-  .promo-ticker div {
+  .promo-ticker > div {
     margin: 0 auto;
     white-space: nowrap;
     overflow: hidden;
@@ -30,9 +30,9 @@ const MegaBannerWidget = (text) => {
     transform: translatey(-50%);
     display: flex;
   }
-  .promo-ticker div > span {
+  .promo-ticker > div > span {
     margin-bottom: 0;
-    animation: marquee 15s linear infinite;
+    animation: marquee ${duration || 15}s linear infinite;
     will-change: transform;
     display: flex;
     align-items: center;
@@ -42,23 +42,25 @@ const MegaBannerWidget = (text) => {
     padding: 0 4rem;
   }
 
-  .promo-ticker span > span {
+  .promo-ticker > span > span {
     font-weight: 400;
   }
 </style>
-<div class="promo-ticker">
-  <div>
-    <span>
-      ${text}  &#xa0; ${text}  &#xa0; ${text}  &#xa0;
-    </span>
-    <span>
-      ${text}  &#xa0; ${text}  &#xa0; ${text}  &#xa0;
-    </span>
-    <span>
-      ${text}  &#xa0; ${text}  &#xa0; ${text}  &#xa0;
-    </span>
+${link && `<a href="${link}">`}
+  <div class="promo-ticker">
+    <div>
+      <span>
+        ${text}  &#xa0; ${text}  &#xa0; ${text}  &#xa0;
+      </span>
+      <span>
+        ${text}  &#xa0; ${text}  &#xa0; ${text}  &#xa0;
+      </span>
+      <span>
+        ${text}  &#xa0; ${text}  &#xa0; ${text}  &#xa0;
+      </span>
+    </div>
   </div>
-</div>
+${link && `</a>`}
   `
 }
 

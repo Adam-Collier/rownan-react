@@ -33,7 +33,11 @@ const initialState = {
     identifier: 'UK',
     url: 'https://www.missguided.co.uk/',
   },
-  tickerText: '',
+  tickerText: {
+    link: '',
+    duration: '',
+    text: '',
+  },
   savedFilePath: '',
 }
 

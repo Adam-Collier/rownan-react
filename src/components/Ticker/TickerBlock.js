@@ -7,9 +7,12 @@ const TickerBlock = () => {
   const { tickerText } = useAppState()
   const dispatch = useAppDispatch()
 
+  const { link, duration, text } = tickerText
+
   const handleChange = (e) => {
     dispatch({
       type: 'ticker',
+      name: e.target.name,
       payload: e.target.value,
     })
   }
@@ -21,11 +24,31 @@ const TickerBlock = () => {
         <AutoFillStaticBlock blockName="tickerText" selector=".promo-ticker" />
       </section>
       <div>
-        <label htmlFor="tickerText">Text</label>
+        <section className="inline">
+          <div>
+            <label htmlFor="link">Link</label>
+            <input
+              type="text"
+              name="link"
+              value={link}
+              onChange={(e) => handleChange(e)}
+            />
+          </div>
+          <div>
+            <label htmlFor="duration">Duration</label>
+            <input
+              type="text"
+              name="duration"
+              value={duration}
+              onChange={(e) => handleChange(e)}
+            />
+          </div>
+        </section>
+        <label htmlFor="text">Text</label>
         <input
           type="text"
-          name="tickerText"
-          value={tickerText}
+          name="text"
+          value={text}
           onChange={(e) => handleChange(e)}
         />
       </div>

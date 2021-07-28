@@ -59,7 +59,9 @@ const updateHTML = {
         <div class="container">
           ${MegaBannerWidget(state.territory)}
 
-          ${state.tickerText ? TickerTemplate(state.tickerText) : ''}
+          ${
+            hasContent(state.tickerText) ? TickerTemplate(state.tickerText) : ''
+          }
 
           <div id="homeSlider">
             ${HeroTemplate(heroBlocks)}

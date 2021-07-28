@@ -128,7 +128,13 @@ function stateReducer(state, action) {
           url: action.url,
         },
       }),
-      ticker: () => ({ ...state, tickerText: action.payload }),
+      ticker: () => ({
+        ...state,
+        tickerText: {
+          ...state.tickerText,
+          [action.name]: action.payload,
+        },
+      }),
       ...autoFill,
       ...dynamicBlock,
       ...infoStrip,
