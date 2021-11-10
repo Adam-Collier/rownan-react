@@ -73,13 +73,13 @@ const updateHTML = {
               : ''
           }
 
-          ${SaleTemplate(saleBlocks)}
-
           ${
             hasContent(state.saleCategories)
               ? SaleCategoriesTemplate(state.saleCategories, state.territory)
               : ''
           }
+
+          ${SaleTemplate(saleBlocks)}
 
           ${
             hasContent(state.promoBlocks)
