@@ -97,8 +97,8 @@
         }
       }
       @media only screen and (max-width: 767px) {
-        .row {
-          margin-bottom: 18vw;
+        .row + .row {
+          margin-top: 18vw;
         }
         #homeSlider {
           display: -webkit-box;
@@ -127,9 +127,6 @@
         #homeSlider-nav:not(:empty) a:not(:empty) {
           padding-bottom: 6px;
           display: block;
-        }
-        #homeSlider-nav:not(:empty) a:not(:empty):nth-last-child() {
-          margin-bottom: 18vw;
         }
         .row img,
         .row picture {
