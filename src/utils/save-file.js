@@ -1,5 +1,6 @@
 import writeSaveFile from './write-save-file'
 const { dialog } = window.require('electron').remote
+const fs = window.require('fs')
 
 const saveWithDialog = (state) => {
   // open the save dialog
@@ -30,8 +31,15 @@ const saveNoDialog = (state) => {
 
 // the commands
 const save = (state) => {
+  // check if the state.savedFilePath exists
   if (state.savedFilePath) {
-    return saveNoDialog(state)
+    // check whether the file/folder exists on their machine
+    try {
+      fs.accessSync(state.savedFilePath, fs.constants.W_OK | fs.constants.R_OK)
+      return saveNoDialog(state)
+    } catch (e) {
+      return saveWithDialog(state)
+    }
   } else {
     return saveWithDialog(state)
   }
