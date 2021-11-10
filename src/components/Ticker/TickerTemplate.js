@@ -34,8 +34,7 @@ const MegaBannerWidget = ({ link, duration, text }) => {
     margin-bottom: 0;
     animation: marquee ${duration || 15}s linear infinite;
     will-change: transform;
-    display: flex;
-    align-items: center;
+    display: inline-block;
   }
   .promo-ticker svg {
     height: 38px;
@@ -50,13 +49,13 @@ ${link && `<a href="${link}">`}
   <div class="promo-ticker">
     <div>
       <span>
-        ${text}  &#xa0; ${text}  &#xa0; ${text}  &#xa0;
+        ${text} ${text} ${text}
       </span>
       <span>
-        ${text}  &#xa0; ${text}  &#xa0; ${text}  &#xa0;
+        ${text} ${text} ${text}
       </span>
       <span>
-        ${text}  &#xa0; ${text}  &#xa0; ${text}  &#xa0;
+        ${text} ${text} ${text}
       </span>
     </div>
   </div>
