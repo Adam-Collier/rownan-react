@@ -66,8 +66,8 @@ const Resizeable = ({ directions, children, initialHeight }) => {
       ref={wrapper}
       style={{ position: 'relative', height: `${initialHeight}px` }}
     >
-      {directions.map((direction) => {
-        return <Handle dir={direction} onMouseDown={initResize} />
+      {directions.map((direction, index) => {
+        return <Handle dir={direction} key={index} onMouseDown={initResize} />
       })}
       {children}
     </div>
