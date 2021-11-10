@@ -10,7 +10,7 @@ const SaleCategoryTemplate = (categories, territory) => {
         return 'Kupuj według kategorii'
       }
       case 'FR': {
-        return 'Soldes sur les catégorie'
+        return 'Promos par catégorie'
       }
       case 'ES': {
         return 'Comprar por categoría'
@@ -24,7 +24,8 @@ const SaleCategoryTemplate = (categories, territory) => {
   let saleCategoryStyles = () => /*html*/ `
     <style>
     .categories-sale__by-category{
-      padding-bottom: 3rem;
+      padding-top: 3rem;
+      background: #F7DBDE;
     }
     .categories-sale__grid {
       max-width: 1060px;
@@ -41,9 +42,6 @@ const SaleCategoryTemplate = (categories, territory) => {
     @media (max-width: 767px) {
       .categories-sale__grid {
         grid-template-columns: 1fr 1fr;
-      }
-      .categories-sale__by-category{
-        padding-bottom: 3rem;
       }
     }
   </style>
