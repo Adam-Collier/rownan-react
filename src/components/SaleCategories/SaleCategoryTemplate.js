@@ -59,13 +59,13 @@ const SaleCategoryTemplate = (categories, territory) => {
             <picture>
               <source type="image/webp" data-srcset="${addImageTransformations(
                 category.image,
-                '200',
+                '300',
                 'category',
                 true
               )}" >
               <source data-srcset="${addImageTransformations(
                 category.image,
-                '200',
+                '300',
                 'category',
                 false
               )}" >

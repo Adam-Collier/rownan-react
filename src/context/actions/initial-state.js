@@ -17,7 +17,12 @@ const initialState = {
   saleCategories: Array(4).fill({ url: '', image: '' }),
   contentBlocks: [],
   contentView: true,
-  editorCode: '',
+  editorCode: `@media(min-width: 768px) {
+  .subtitle1 {
+    display: none;
+  }
+}
+  `,
   outputHTML: `${globalStyles()}
 <div class="container">
   <div id="homeSlider">

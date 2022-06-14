@@ -61,7 +61,7 @@ function Editor(props) {
 
   return (
     <CodeEditor>
-      <textarea ref={editor} placeholder="Add your custom styles here..." />
+      <textarea ref={editor} />
     </CodeEditor>
   )
 }

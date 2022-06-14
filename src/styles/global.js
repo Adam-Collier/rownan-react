@@ -19,7 +19,7 @@ const globalStyles = () => /*HTML*/ `
   }
 
   .hero-banner .img-placeholder {
-    padding-top: 44.79%;
+    padding-top: 44.861%;
   }
 
   .lower-slot .img-placeholder {

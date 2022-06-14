@@ -27,6 +27,23 @@ const createPictureElement = ({
     }
   }
 
+  // IS ART DIRECTED AND STATIC... AKA A GIF
+  // CHECK IF THE IMAGE IS A GIF
+  let renderSrcSet = ({ breakpoints, src, type }) => {
+    if (breakpoints) {
+      return `
+            data-srcset="${breakpoints
+              .map(
+                (size) =>
+                  `${src}.${type}?${addTransformation(size, type)} ${size}w`
+              )
+              .join(',')}"
+    `
+    } else {
+      return `data-srcset="${src}"`
+    }
+  }
+
   return /*HTML*/ `
     <div class="img-placeholder ${className || ''} ">
         <picture>
@@ -38,12 +55,7 @@ const createPictureElement = ({
                         (type) => `
                 <source
                 type="image/${type}"
-                data-srcset="${breakpoints
-                  .map(
-                    (size) =>
-                      `${src}.${type}?${addTransformation(size, type)} ${size}w`
-                  )
-                  .join(',')}"
+                ${renderSrcSet({ src, breakpoints, type })}
                 sizes="${sizes}"
                 media="(max-width: 767px)"
                 />
@@ -59,15 +71,7 @@ const createPictureElement = ({
                 (type) => `
                 <source
                 type="image/${type}"
-                data-srcset="${breakpoints
-                  .map(
-                    (size) =>
-                      `${defaultImage}.${type}?${addTransformation(
-                        size,
-                        type
-                      )} ${size}w`
-                  )
-                  .join(',')}"
+                ${renderSrcSet({ src: defaultImage, breakpoints, type })}
                 sizes="${sizes}"
                 />
             `

@@ -24,7 +24,7 @@ const AppDownloadTemplate = ({ title, subtitle, link }) => {
     .app-download-strip h3,
     .app-download-strip p {
       color: #ffffff;
-      font-family: 'titling-gothic-fb-wide', missguided, arial, sans-serif;
+      font-family: missguided, arial, sans-serif;
       font-weight: 700;
       text-transform: none;
       margin: 0;

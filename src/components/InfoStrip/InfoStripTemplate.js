@@ -2,7 +2,6 @@ const InfoStripTemplate = (blocks) => {
   return `
   <style>
     .info-strip {
-      height: 48px;
       margin-bottom: 2em;
     }
 
@@ -13,6 +12,7 @@ const InfoStripTemplate = (blocks) => {
       display: flex;
       justify-content: center;
       align-items: center;
+      height: auto;
     }
 
     .info-strip .info a {

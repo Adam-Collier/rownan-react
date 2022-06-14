@@ -43,8 +43,6 @@ const updateHTML = {
       return null
     })
 
-    console.log(state.editorCode.length)
-
     let outputHTML = () => {
       return `
         ${globalStyles()}
@@ -73,17 +71,28 @@ const updateHTML = {
               : ''
           }
 
+          ${SaleTemplate(saleBlocks)}
+
           ${
             hasContent(state.saleCategories)
               ? SaleCategoriesTemplate(state.saleCategories, state.territory)
               : ''
           }
 
-          ${SaleTemplate(saleBlocks)}
-
           ${
             hasContent(state.promoBlocks)
               ? InfoStripTemplate(state.promoBlocks)
+              : ''
+          }
+
+          ${
+            state.territory.identifier === 'UK'
+              ? `{{widget type="missguided_richrelevance/widget_carousel" element_id="rr-newin"}}`
+              : ''
+          }
+          ${
+            state.territory.identifier === 'US'
+              ? `{{widget type="missguided_richrelevance/widget_carousel" element_id="rr-newin"}}`
               : ''
           }
 
@@ -93,9 +102,13 @@ const updateHTML = {
               : ''
           }
 
-          <div class="slick-three">
-            ${LowerTemplate(lowerBlocks)}
-          </div>
+          ${
+            lowerBlocks.length
+              ? `<div class="slick-three">
+                  ${LowerTemplate(lowerBlocks)}
+                </div>`
+              : ''
+          }
           
           ${
             hasContent(state.appDownload)
